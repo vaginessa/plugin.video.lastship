@@ -1,0 +1,17 @@
+[B]1.1.0[/B]
+- Remove unfunctional english providers; add new ones (Thx petemei)
+- Update german translation
+- Remove all non-DE/EN-sources 
+- Lift German Providers to Top in Settings 
+
+[B]1.0.0[/B]
+- Update English Providers
+- Add German Providers (proxer, streamdream, view4u)
+- Update German Providers
+- Update Modules
+- Update Indexers
+- Fix tata
+
+[B]0.0.9[/B]
+- Anpassung an das Github Repo, keine Technischen Änderungen
+

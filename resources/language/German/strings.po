@@ -1,5 +1,5 @@
 # Addon Name: lastship
-# Addon id: plugin.video.exodus
+# Addon id: plugin.video.lastship
 # Addon Provider: lastship
 # Translators:
 # Translators:

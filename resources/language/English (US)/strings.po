@@ -1,6 +1,6 @@
-# Addon Name: lastship
-# Addon id: plugin.video.lastship
-# Addon Provider: lastship
+# Addon Name: Exodus
+# Addon id: plugin.video.exodus
+# Addon Provider: Exodus
 # Translators:
 # Translators:
 # Translators:
@@ -22,11 +22,11 @@
 # Fred B, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: lastship\n"
+"Project-Id-Version: Exodus\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: 2017-05-30 09:11+0000\n"
 "Last-Translator: Viper2k4\n"
-"Language-Team: English (United States) (http://www.transifex.com/tv-addons/lastship/language/en_US/)\n"
+"Language-Team: English (United States) (http://www.transifex.com/tv-addons/exodus/language/en_US/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -222,24 +222,24 @@ msgid "[B]SETTINGS[/B] : Providers"
 msgstr "[B]SETTINGS[/B] : Providers"
 
 msgctxt "#32048"
-msgid "[B]lastship[/B] : Downloads"
-msgstr "[B]lastship[/B] : Downloads"
+msgid "[B]EXODUS[/B] : Downloads"
+msgstr "[B]EXODUS[/B] : Downloads"
 
 msgctxt "#32049"
-msgid "[B]lastship[/B] : Viewtypes"
-msgstr "[B]lastship[/B] : Viewtypes"
+msgid "[B]EXODUS[/B] : Viewtypes"
+msgstr "[B]EXODUS[/B] : Viewtypes"
 
 msgctxt "#32050"
-msgid "[B]lastship[/B] : Clear providers..."
-msgstr "[B]lastship[/B] : Clear providers..."
+msgid "[B]EXODUS[/B] : Clear providers..."
+msgstr "[B]EXODUS[/B] : Clear providers..."
 
 msgctxt "#32051"
-msgid "[B]lastship[/B] : Clear metadata..."
-msgstr "[B]lastship[/B] : Clear metadata..."
+msgid "[B]EXODUS[/B] : Clear metadata..."
+msgstr "[B]EXODUS[/B] : Clear metadata..."
 
 msgctxt "#32052"
-msgid "[B]lastship[/B] : Clear cache..."
-msgstr "[B]lastship[/B] : Clear cache..."
+msgid "[B]EXODUS[/B] : Clear cache..."
+msgstr "[B]EXODUS[/B] : Clear cache..."
 
 msgctxt "#32053"
 msgid "[I]Next Page[/I]"
@@ -295,12 +295,12 @@ msgid "Queue item"
 msgstr "Queue Item"
 
 msgctxt "#32066"
-msgid "Watched in lastship"
-msgstr "Watched in lastship"
+msgid "Watched in Exodus"
+msgstr "Watched in Exodus"
 
 msgctxt "#32067"
-msgid "Unwatched in lastship"
-msgstr "Unwatched in lastship"
+msgid "Unwatched in Exodus"
+msgstr "Unwatched in Exodus"
 
 msgctxt "#32068"
 msgid "Watched in Trakt"
@@ -575,8 +575,8 @@ msgid "No stream available"
 msgstr "No stream available"
 
 msgctxt "#32402"
-msgid "Playback outside lastship is not allowed"
-msgstr "Playback outside lastship is not allowed"
+msgid "Playback outside Exodus is not allowed"
+msgstr "Playback outside Exodus is not allowed"
 
 msgctxt "#32403"
 msgid "Download"
@@ -708,9 +708,9 @@ msgstr "Library"
 
 msgctxt "#32542"
 msgid ""
-"lastship folders will be imported to library if they are added to media "
+"Exodus folders will be imported to library if they are added to media "
 "sources."
-msgstr "lastship folders will be imported to library if they are added to media sources."
+msgstr "Exodus folders will be imported to library if they are added to media sources."
 
 msgctxt "#32543"
 msgid "Movies"
@@ -765,24 +765,24 @@ msgid "Are you sure?"
 msgstr "Are you sure?"
 
 msgctxt "#32556"
-msgid "[B]lastship[/B] : Library"
-msgstr "[B]lastship[/B] : Library"
+msgid "[B]EXODUS[/B] : Library"
+msgstr "[B]EXODUS[/B] : Library"
 
 msgctxt "#32557"
 msgid "[B]LIBRARY[/B] : Settings"
 msgstr "[B]LIBRARY[/B] : Settings"
 
 msgctxt "#32558"
-msgid "[B]lastship[/B] : Update library..."
-msgstr "[B]lastship[/B] : Update library..."
+msgid "[B]EXODUS[/B] : Update library..."
+msgstr "[B]EXODUS[/B] : Update library..."
 
 msgctxt "#32559"
-msgid "[B]lastship[/B] : Movie folder..."
-msgstr "[B]lastship[/B] : Movie folder..."
+msgid "[B]EXODUS[/B] : Movie folder..."
+msgstr "[B]EXODUS[/B] : Movie folder..."
 
 msgctxt "#32560"
-msgid "[B]lastship[/B] : TV folder..."
-msgstr "[B]lastship[/B] : TV folder..."
+msgid "[B]EXODUS[/B] : TV folder..."
+msgstr "[B]EXODUS[/B] : TV folder..."
 
 msgctxt "#32561"
 msgid "[B]TRAKT[/B] : Import Collection..."
@@ -804,3 +804,6 @@ msgctxt "#32565"
 msgid "Include episodes with unknown air dates"
 msgstr "Include episodes with unknown air dates"
 
+msgctxt "#32570"
+msgid "Show unaired seasons/episodes"
+msgstr ""

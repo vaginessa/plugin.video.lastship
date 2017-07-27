@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <settings>
 	<category label="32310">
-		<setting id="appearance.alt" type="action" label="32311" default="-" option="close" action="RunPlugin(plugin://plugin.video.lastship/?action=artwork)" visible="!System.HasAddon(script.lastship.artwork)" />
-		<setting id="appearance.1" type="select" label="32311" values="-|Exuary|lastship|Genesis" default="lastship" visible="System.HasAddon(script.lastship.artwork)" />
+		<setting id="appearance.alt" type="action" label="32311" default="-" option="close" action="RunPlugin(plugin://plugin.video.exodus/?action=artwork)" visible="!System.HasAddon(script.exodus.artwork)" />
+		<setting id="appearance.1" type="select" label="32311" values="-|Exuary|Exodus|Genesis" default="Exodus" visible="System.HasAddon(script.exodus.artwork)" />
 		<setting id="scrapers.timeout.1" type="slider" label="32312" default="20" range="10,60" option="int" />
 		<setting id="trakt.user" type="text" default="" visible="false" />
 		<setting id="indicators.alt" type="enum" label="32313" lvalues="32314|32315" default="1" visible="!eq(-1,)" />
@@ -11,6 +11,7 @@
 		<setting id="providers.lang" type="select" label="32360" values="English|German|German+English" default="German" />
 		<setting id="flatten.tvshows" type="bool" label="32317" default="false" />
 		<setting id="fanart" type="bool" label="32318" default="true" />
+		<setting id="showunaired" type="bool" label="32570" default="true"/>
 		<setting type="lsep" label="32319" />
 		<setting id="movie.widget" type="enum" label="32320" lvalues="32302|32321|32322|32323|32324" default="1" />
 		<setting id="tv.widget.alt" type="enum" label="32325" lvalues="32302|32326|32327|32328" default="2" visible="!eq(-9,)+eq(-8,1)" />
@@ -141,7 +142,7 @@
 		<setting id="tm.user" type="text" option="hidden" label="32309" default="" />
 		<setting type="sep" />
 		<setting type="lsep" label="Trakt" />
-		<setting id="trakt.user" type="action" label="32306" option="close" action="RunPlugin(plugin://plugin.video.lastship/?action=authTrakt)" />
+		<setting id="trakt.user" type="action" label="32306" option="close" action="RunPlugin(plugin://plugin.video.exodus/?action=authTrakt)" />
 		<setting id="trakt.token" type="text" option="hidden" visible="false" label="" default="" />
 		<setting id="trakt.refresh" type="text" option="hidden" visible="false" label="" default="" />
 		<setting type="sep" />
@@ -150,7 +151,7 @@
 		<setting type="sep" />
 		<setting type="lsep" label="32538" />
 		<setting type="lsep" label="32539" />
-		<setting id="open_smu_settings" type="action" label="32540" enable="true" option="close" action="RunPlugin(plugin://plugin.video.lastship/?action=smuSettings)" />
+		<setting id="open_smu_settings" type="action" label="32540" enable="true" option="close" action="RunPlugin(plugin://plugin.video.exodus/?action=smuSettings)" />
 		<setting type="sep" />
 		<setting type="lsep" label="Moviesplanet.is" />
 		<setting id="moviesplanet.user" type="text" label="32303" default="" />
@@ -169,8 +170,8 @@
 		<setting id="seriesever.pass" type="text" option="hidden" label="32307" default="" />
 	</category>
 	<category label="32541">
-		<setting id="library.movie" type="folder" label="32543" default="special://userdata/addon_data/plugin.video.lastship/Movies" />
-		<setting id="library.tv" type="folder" label="32544" default="special://userdata/addon_data/plugin.video.lastship/TVShows" />
+		<setting id="library.movie" type="folder" label="32543" default="special://userdata/addon_data/plugin.video.exodus/Movies" />
+		<setting id="library.tv" type="folder" label="32544" default="special://userdata/addon_data/plugin.video.exodus/TVShows" />
 		<setting type="lsep" label="32542" />
 		<setting type="sep" />
 		<setting id="library.service.update" type="bool" label="32545" default="true" />

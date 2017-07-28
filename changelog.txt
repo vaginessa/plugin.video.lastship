@@ -1,4 +1,4 @@
-[B][I]nightly[/I][/B]
+[B]1.1.1[/B]
 - Fix pubfilm.to
 - Add option to show unaired (future) seasons and episodes
 - Change addon name to "Lastship" (uppercase)

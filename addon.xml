@@ -26,8 +26,8 @@
 			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
 			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
-		<news>- Remove unfunctional english providers; add new ones (Thx petemei)
-- Update german translation
-- Remove all non-DE/EN-sources</news>
+		<news>- Add option to show unaired TV show seasons and episodes
+- fix pubfilm.to
+- Rename addon to uppercase [I][B]L[/B]astship[/I]</news>
 	</extension>
 </addon>

@@ -1,6 +1,6 @@
-# Addon Name: lastship
+# Addon Name: Lastship
 # Addon id: plugin.video.lastship
-# Addon Provider: lastship
+# Addon Provider: Lastship
 # Translators:
 # Translators:
 # Translators:
@@ -25,7 +25,7 @@
 # lambda81, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: lastship\n"
+"Project-Id-Version: Lastship\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: 2017-05-30 13:23+0000\n"
 "Last-Translator: Kr1ss\n"
@@ -298,12 +298,12 @@ msgid "Queue item"
 msgstr "Eintrag zur Warteschlange hinzufügen"
 
 msgctxt "#32066"
-msgid "Watched in lastship"
-msgstr "In lastship [I]Gesehen[/I]" 
+msgid "Watched in Lastship"
+msgstr "In Lastship [I]Gesehen[/I]" 
  
 msgctxt "#32067"
-msgid "Unwatched in lastship"
-msgstr "In lastship [I]Ungesehen[/I]"
+msgid "Unwatched in Lastship"
+msgstr "In Lastship [I]Ungesehen[/I]"
 
 msgctxt "#32068"
 msgid "Watched in Trakt"
@@ -578,8 +578,8 @@ msgid "No stream available"
 msgstr "Keine Streams gefunden"
 
 msgctxt "#32402"
-msgid "Playback outside lastship is not allowed"
-msgstr "Die Wiedergabe ausserhalb von lastship ist nicht erlaubt"
+msgid "Playback outside Lastship is not allowed"
+msgstr "Die Wiedergabe ausserhalb von Lastship ist nicht erlaubt"
 
 msgctxt "#32403"
 msgid "Download"
@@ -711,9 +711,9 @@ msgstr "Bibliothek"
 
 msgctxt "#32542"
 msgid ""
-"lastship folders will be imported to library if they are added to media "
+"Lastship folders will be imported to library if they are added to media "
 "sources."
-msgstr "lastship-Ordner werden in die Bibliothek importiert, wenn sie zu Videoquellen hinzugefügt werden."
+msgstr "Lastship-Ordner werden in die Bibliothek importiert, wenn sie zu Videoquellen hinzugefügt werden."
 
 msgctxt "#32543"
 msgid "Movies"

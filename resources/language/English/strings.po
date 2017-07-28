@@ -1,6 +1,6 @@
-# Addon Name: lastship
+# Addon Name: Lastship
 # Addon id: plugin.video.lastship
-# Addon Provider: lastship
+# Addon Provider: Lastship
 # Translators:
 # Translators:
 # Translators:
@@ -19,7 +19,7 @@
 # Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: lastship\n"
+"Project-Id-Version: Lastship\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: 2016-08-01 02:03+0000\n"
 "Last-Translator: lambda81\n"
@@ -292,11 +292,11 @@ msgid "Queue item"
 msgstr ""
 
 msgctxt "#32066"
-msgid "Watched in lastship"
+msgid "Watched in Lastship"
 msgstr ""
 
 msgctxt "#32067"
-msgid "Unwatched in lastship"
+msgid "Unwatched in Lastship"
 msgstr ""
 
 msgctxt "#32068"
@@ -572,7 +572,7 @@ msgid "No stream available"
 msgstr ""
 
 msgctxt "#32402"
-msgid "Playback outside lastship is not allowed"
+msgid "Playback outside Lastship is not allowed"
 msgstr ""
 
 msgctxt "#32403"
@@ -704,7 +704,7 @@ msgid "Library"
 msgstr ""
 
 msgctxt "#32542"
-msgid "lastship folders will be imported to library if they are added to media sources."
+msgid "Lastship folders will be imported to library if they are added to media sources."
 msgstr ""
 
 msgctxt "#32543"

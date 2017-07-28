@@ -17,7 +17,7 @@
 		<description lang="de">>Wir suchen Entwickler. Bitte besuche [COLOR blue]http://lastship.square7.ch/forum/forumdisplay.php?fid=5[/COLOR] für Unterstützung und Fragen zu Lastship! Lastship FAQ bitte lesen.  Beachte dabei, dass Lastship nicht offizieller Teil des Media Players ist den du gerade verwendest und daher nicht von dem offiziellen Support-Kanäle abgedeckt wird, dieses Addon hat nichts zu tun mit dem Media-Player selbst, noch ist es dafür beabsichtigt, es handelt sich hierbei lediglich um ein Drittanbieter-Anwendung die dem System hinzugefügt wurde.</description>
 		<disclaimer lang="de">Die von diesem Addon dargestellten Inhalte werden von den Erstellern des Addons weder gehostet oder verbreitet, noch stehen die Ersteller in irgendeiner Beziehung zu den Content-Anbietern.</disclaimer>
 		<platform>all</platform>
-		<forum>http://xstream-addon.square7.ch/forumdisplay.php?fid=11</forum>
+		<forum>http://lastship.square7.ch/forum/forumdisplay.php?fid=28</forum>
 	        <source>https://github.com/lastship/plugin.video.lastship</source>
 		<assets>
 			<icon>icon.png</icon>

@@ -432,8 +432,11 @@ class seasons:
         for i in items:
             try:
                 label = '%s %s' % (labelMenu, i['season'])
-                if i['unaired'] == 'true':
-                    label = '[COLOR darkred][I]%s[/I][/COLOR]' % label
+                try:
+                    if i['unaired'] == 'true':
+                        label = '[COLOR darkred][I]%s[/I][/COLOR]' % label
+                except:
+                    pass
                 systitle = sysname = urllib.quote_plus(i['tvshowtitle'])
 
                 imdb, tvdb, year, season = i['imdb'], i['tvdb'], i['year'], i['season']
@@ -1400,9 +1403,12 @@ class episodes:
                     label = '%sx%02d . %s' % (i['season'], int(i['episode']), i['label'])
                 if multi == True:
                     label = '%s - %s' % (i['tvshowtitle'], label)
-
-                if i['unaired'] == 'true':
-                    label = '[COLOR darkred][I]%s[/I][/COLOR]' % label
+                
+                try:
+                    if i['unaired'] == 'true':
+                        label = '[COLOR darkred][I]%s[/I][/COLOR]' % label
+                except:
+                    pass
 
                 imdb, tvdb, year, season, episode = i['imdb'], i['tvdb'], i['year'], i['season'], i['episode']
 

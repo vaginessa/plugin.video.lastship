@@ -320,7 +320,7 @@ msgid "Refresh"
 msgstr ""
 
 msgctxt "#32073"
-msgid "[B]HELP[/B] : www.tvaddons.ag"
+msgid "[B]HELP[/B] : http://lastship.square7.ch/forum/forumdisplay.php?fid=28"
 msgstr ""
 
 msgctxt "#32074"

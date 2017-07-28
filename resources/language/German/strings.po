@@ -326,8 +326,8 @@ msgid "Refresh"
 msgstr "Aktualisieren"
 
 msgctxt "#32073"
-msgid "[B]HELP[/B] : www.tvaddons.ag"
-msgstr "[B]HILFE[/B] http://lastship.square7.ch/forum/forumdisplay.php?fid=28"
+msgid "[B]HELP[/B] : http://lastship.square7.ch/forum/forumdisplay.php?fid=28"
+msgstr "[B]HILFE[/B] : http://lastship.square7.ch/forum/forumdisplay.php?fid=28"
 
 msgctxt "#32074"
 msgid "[B]HELP[/B]"

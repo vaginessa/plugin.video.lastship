@@ -136,10 +136,10 @@
 		<setting type="lsep" label="FANART.TV" />
 		<setting type="lsep" label="Personal API keys provide quicker API responses." />
 		<setting type="lsep" label="Become a VIP member for many benefits at: https://fanart.tv/vip" />
-		<setting id="fanart.tv.user" type="text" option="hidden" label="32309" default="" />
+		<setting id="fanart.tv.user" type="text" option="hidden" label="32309" default="d7be5b5497fd05597df96c98e044a795" />
 		<setting type="sep" />
 		<setting type="lsep" label="TMDb" />
-		<setting id="tm.user" type="text" option="hidden" label="32309" default="" />
+		<setting id="tm.user" type="text" option="hidden" label="32309" default="926382ad3235fda5e1f00f132e278af8" />
 		<setting type="sep" />
 		<setting type="lsep" label="Trakt" />
 		<setting id="trakt.user" type="action" label="32306" option="close" action="RunPlugin(plugin://plugin.video.lastship/?action=authTrakt)" />

@@ -1,3 +1,6 @@
+[B]1.1.2[/B]
+- New API keys for fanart.tv and TMDB
+
 [B]1.1.1[/B]
 - Fix pubfilm.to
 - Add option to show unaired (future) seasons and episodes

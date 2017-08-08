@@ -190,7 +190,7 @@ msgstr "Episoden"
 
 msgctxt "#32039"
 msgid "Movie Lists"
-msgstr "Film-Listen" 
+msgstr "Film-Listen"
 
 msgctxt "#32040"
 msgid "TV Show Lists"

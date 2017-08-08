@@ -810,3 +810,7 @@ msgstr "Episoden mit unbekanntem Sendedatum einbeziehen"
 msgctxt "#32570"
 msgid "Show unaired seasons/episodes"
 msgstr "Noch nicht gesendete Staffeln/Folgen anzeigen"
+
+msgctxt "#32571"
+msgid "Hide movies in cinema"
+msgstr "Nur Filme anzeigen, die älter als 90 Tage sind"

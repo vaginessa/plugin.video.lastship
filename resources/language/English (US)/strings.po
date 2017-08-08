@@ -807,3 +807,7 @@ msgstr "Include episodes with unknown air dates"
 msgctxt "#32570"
 msgid "Show unaired seasons/episodes"
 msgstr ""
+
+msgctxt "#32571"
+msgid "Hide movies in cinema"
+msgstr ""

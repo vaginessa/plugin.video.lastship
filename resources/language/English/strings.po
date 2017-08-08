@@ -802,3 +802,7 @@ msgstr ""
 msgctxt "#32570"
 msgid "Show unaired seasons/episodes"
 msgstr ""
+
+msgctxt "#32571"
+msgid "Hide movies in cinema"
+msgstr ""

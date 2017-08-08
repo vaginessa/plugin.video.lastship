@@ -1,4 +1,6 @@
 [B]1.1.3[/B]
+- Dayt update
+- Onseries, Kingmovies fixed
 - New setting to exclude movies released within the last 90 days (except in Lists, In Theatres and Search)
 
 [B]1.1.2[/B]

@@ -26,6 +26,8 @@
 			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
 			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
-		<news>- New setting: only show movies older than 90 days</news>
+		<news>- New setting: only show movies older than 90 days
+- Dayt provider updated
+- Kingmovies and Onseries fixed</news>
 	</extension>
 </addon>

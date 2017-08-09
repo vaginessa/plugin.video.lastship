@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 '''
-    lastship Add-on
-    Copyright (C) 2016 lastship
+    Lastship Add-on (C) 2017
+    Credits to Exodus and Covenant; our thanks go to their creators
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -253,8 +253,7 @@ class source:
  
             u, p, h = url.split('|')
             r = urlparse.parse_qs(h)['Referer'][0]
-            #u += '&app_id=lastship'
-
+            
             c = self.request(r, output='cookie', close=False)
             result = self.request(u, post=p, referer=r, cookie=c)
 

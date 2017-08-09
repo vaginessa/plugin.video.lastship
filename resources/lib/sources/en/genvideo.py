@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 '''
-    lastship Add-on
-    Copyright (C) 2016 lastship
+    Lastship Add-on (C) 2017
+    Credits to Exodus and Covenant; our thanks go to their creators
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

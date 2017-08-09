@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.lastship" version="1.1.0" name="lastship" provider-name="lastship">
+<addon id="plugin.video.lastship" version="1.1.3" name="Lastship" provider-name="Lastship">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0" />
 		<import addon="repository.lastship" version="1.0.0" />
@@ -14,10 +14,10 @@
 	<extension point="xbmc.service" library="service.py" start="startup" />
 	<extension point="xbmc.addon.metadata">
 		<summary lang="en">Lastship</summary>
-		<description lang="de">>Wir suchen Entwickler. Bitte besuche [COLOR blue]http://lastship.square7.ch/forum/forumdisplay.php?fid=5[/COLOR] für Unterstützung und Fragen zu lastship! lastship FAQ bitte lesen.  Beachte dabei, dass lastship nicht offizieller Teil des Media Players ist den du gerade verwendest und daher nicht von dem offiziellen Support-Kanäle abgedeckt wird, dieses Addon hat nichts zu tun mit dem Media-Player selbst, noch ist es dafür beabsichtigt, es handelt sich hierbei lediglich um ein Drittanbieter-Anwendung die dem System hinzugefügt wurde.</description>
+		<description lang="de">>Wir suchen Entwickler. Bitte besuche [COLOR blue]http://lastship.square7.ch/forum/forumdisplay.php?fid=5[/COLOR] für Unterstützung und Fragen zu Lastship! Lastship FAQ bitte lesen.  Beachte dabei, dass Lastship nicht offizieller Teil des Media Players ist den du gerade verwendest und daher nicht von dem offiziellen Support-Kanäle abgedeckt wird, dieses Addon hat nichts zu tun mit dem Media-Player selbst, noch ist es dafür beabsichtigt, es handelt sich hierbei lediglich um ein Drittanbieter-Anwendung die dem System hinzugefügt wurde.</description>
 		<disclaimer lang="de">Die von diesem Addon dargestellten Inhalte werden von den Erstellern des Addons weder gehostet oder verbreitet, noch stehen die Ersteller in irgendeiner Beziehung zu den Content-Anbietern.</disclaimer>
 		<platform>all</platform>
-		<forum>http://xstream-addon.square7.ch/forumdisplay.php?fid=11</forum>
+		<forum>http://lastship.square7.ch/forum/forumdisplay.php?fid=28</forum>
 	        <source>https://github.com/lastship/plugin.video.lastship</source>
 		<assets>
 			<icon>icon.png</icon>
@@ -26,8 +26,8 @@
 			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
 			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
-		<news>- Remove unfunctional english providers; add new ones (Thx petemei)
-- Update german translation
-- Remove all non-DE/EN-sources</news>
+		<news>- New setting: only show movies older than 90 days
+- Dayt provider updated
+- Kingmovies and Onseries fixed</news>
 	</extension>
 </addon>

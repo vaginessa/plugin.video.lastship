@@ -2,7 +2,7 @@
 <settings>
 	<category label="32310">
 		<setting id="appearance.alt" type="action" label="32311" default="-" option="close" action="RunPlugin(plugin://plugin.video.lastship/?action=artwork)" visible="!System.HasAddon(script.lastship.artwork)" />
-		<setting id="appearance.1" type="select" label="32311" values="-|Exuary|lastship|Genesis" default="lastship" visible="System.HasAddon(script.lastship.artwork)" />
+		<setting id="appearance.1" type="select" label="32311" values="-|Exuary|Lastship|Genesis" default="Lastship" visible="System.HasAddon(script.lastship.artwork)" />
 		<setting id="scrapers.timeout.1" type="slider" label="32312" default="20" range="10,60" option="int" />
 		<setting id="trakt.user" type="text" default="" visible="false" />
 		<setting id="indicators.alt" type="enum" label="32313" lvalues="32314|32315" default="1" visible="!eq(-1,)" />
@@ -11,6 +11,8 @@
 		<setting id="providers.lang" type="select" label="32360" values="English|German|German+English" default="German" />
 		<setting id="flatten.tvshows" type="bool" label="32317" default="false" />
 		<setting id="fanart" type="bool" label="32318" default="true" />
+		<setting id="showunaired" type="bool" label="32570" default="true"/>																	  
+		<setting id="hidecinema" type="bool" label="32571" default="false"/>
 		<setting type="lsep" label="32319" />
 		<setting id="movie.widget" type="enum" label="32320" lvalues="32302|32321|32322|32323|32324" default="1" />
 		<setting id="tv.widget.alt" type="enum" label="32325" lvalues="32302|32326|32327|32328" default="2" visible="!eq(-9,)+eq(-8,1)" />
@@ -135,10 +137,10 @@
 		<setting type="lsep" label="FANART.TV" />
 		<setting type="lsep" label="Personal API keys provide quicker API responses." />
 		<setting type="lsep" label="Become a VIP member for many benefits at: https://fanart.tv/vip" />
-		<setting id="fanart.tv.user" type="text" option="hidden" label="32309" default="" />
+		<setting id="fanart.tv.user" type="text" option="hidden" label="32309" default="d7be5b5497fd05597df96c98e044a795" />
 		<setting type="sep" />
 		<setting type="lsep" label="TMDb" />
-		<setting id="tm.user" type="text" option="hidden" label="32309" default="" />
+		<setting id="tm.user" type="text" option="hidden" label="32309" default="926382ad3235fda5e1f00f132e278af8" />
 		<setting type="sep" />
 		<setting type="lsep" label="Trakt" />
 		<setting id="trakt.user" type="action" label="32306" option="close" action="RunPlugin(plugin://plugin.video.lastship/?action=authTrakt)" />

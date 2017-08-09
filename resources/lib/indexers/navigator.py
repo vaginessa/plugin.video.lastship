@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 '''
-    lastship Add-on
-    Copyright (C) 2016 lastship
+    Lastship Add-on (C) 2017
+    Credits to Exodus and Covenant; our thanks go to their creators
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -281,7 +281,7 @@ class navigator:
 
     def infoCheck(self, version):
         try:
-            control.infoDialog('', control.lang(32074).encode('utf-8'), time=5000, sound=False)
+            control.infoDialog('lastship.square7.ch/forum/', control.lang(32074).encode('utf-8'), time=5000, sound=False)
             return '1'
         except:
             return '1'

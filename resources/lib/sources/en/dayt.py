@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 '''
-    lastship Add-on
-    Copyright (C) 2016 lastship
+    Lastship Add-on (C) 2017
+    Credits to Exodus and Covenant; our thanks go to their creators
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,14 +23,15 @@ import re,urllib,urlparse
 
 from resources.lib.modules import client
 from resources.lib.modules import directstream
+from resources.lib.modules import source_utils
 
 
 class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
-        self.domains = ['dayt.se', 'cyro.se']
-        self.base_link = 'http://cyro.se'
+        self.domains = ['dayt.se', 'cyro.se', 'xpau.se']
+        self.base_link = 'http://xpau.se'
         self.watch_link = '/watch/%s'
         self.watch_series_link = '/watch/%s/s%s/e%s'
 
@@ -136,17 +137,18 @@ class source:
                         break
 
                 if not 'google' in r: raise Exception()
-                r = directstream.google(r)
 
-                for i in r:
-                    try:
-                        links += [{'source': 'gvideo', 'url': i['url'], 'quality': i['quality'], 'direct': True}]
-                    except:
-                        pass
+                valid, hoster = source_utils.is_host_valid(r, hostDict)
+                links, host, direct = source_utils.check_directstreams(r, hoster)
+						 
             except:
                 pass
 
             for i in links:
+                if 'google' in i['url']:
+                    i['source'] = 'gvideo'
+                    i['direct'] = False
+                    
                 sources.append({'source': i['source'], 'quality': i['quality'], 'language': 'en', 'url': i['url'], 'direct': i['direct'], 'debridonly': False})
 
             return sources
@@ -154,4 +156,7 @@ class source:
             return sources
 
     def resolve(self, url):
-        return url
+        if 'google' in url:
+            return directstream.googlepass(url)
+        else:
+            return url

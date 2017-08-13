@@ -31,9 +31,12 @@
 		<setting id="bookmarks" type="bool" label="32344" default="true" />
 	</category>
 	<category label="32345">
+	    <setting id="provider.library" type="bool" label="32361" default="true" />
+		<setting type="sep" />
 		<setting label="German" type="lsep" />
 		<setting id="provider.1kino" type="bool" label="1KINO" default="true" />
-		<setting id="provider.animebase" type="bool" label="ANIMEBASE" default="true" />
+		<setting id="provider.alluc-de" type="bool" label="ALLUC" default="false" />
+        <setting id="provider.animebase" type="bool" label="ANIMEBASE" default="true" />
 		<setting id="provider.animeloads" type="bool" label="ANIMELOADS" default="true" />
 		<setting id="provider.bs" type="bool" label="BS" default="true" />
 		<setting id="provider.cine" type="bool" label="CINE" default="true" />
@@ -62,11 +65,13 @@
 		<setting id="provider.streamkiste" type="bool" label="STREAMKISTE" default="true" />
 		<setting id="provider.tata" type="bool" label="TATA" default="true" />
 		<setting id="provider.video4k" type="bool" label="VIDEO4K" default="true" />
-		<setting id="provider.view4u" type="bool" label="VIEW4U" default="true" />		
+		<setting id="provider.view4u" type="bool" label="VIEW4U" default="true" />
+        <setting type="sep" />		
 		<setting label="English" type="lsep" />
 		<setting id="provider.1movies" type="bool" label="1MOVIES" default="true" />
 		<setting id="provider.afdah" type="bool" label="AFDAH" default="true" />
-		<setting id="provider.animeultima" type="bool" label="ANIMEULTIMA" default="true" />
+		<setting id="provider.alluc-en" type="bool" label="ALLUC" default="false" />
+        <setting id="provider.animeultima" type="bool" label="ANIMEULTIMA" default="true" />
 		<setting id="provider.bmoviez" type="bool" label="BMOVIEZ" default="true" />
 		<setting id="provider.bobby" type="bool" label="BOBBY" default="true" />
 		<setting id="provider.crazy" type="bool" label="CRAZY" default="true" />
@@ -82,7 +87,6 @@
 		<setting id="provider.gogoanime" type="bool" label="GOGOANIME" default="true" />
 		<setting id="provider.hevcfilm" type="bool" label="HEVCFILM" default="true" />
 		<setting id="provider.kingmovies" type="bool" label="KINGMOVIES" default="true" />
-		<setting id="provider.library" type="bool" label="LIBRARY" default="true" />
 		<setting id="provider.miradetodo" type="bool" label="MIRADETODO" default="true" />
 		<setting id="provider.movie25" type="bool" label="MOVIE25" default="true" />
 		<setting id="provider.movies14" type="bool" label="MOVIES14" default="true" />
@@ -153,14 +157,14 @@
 		<setting type="lsep" label="32538" />
 		<setting type="lsep" label="32539" />
 		<setting id="open_smu_settings" type="action" label="32540" enable="true" option="close" action="RunPlugin(plugin://plugin.video.lastship/?action=smuSettings)" />
+        <setting type="sep" />
+        <setting type="lsep" label="ALLUC" />
+        <setting id="alluc.api" type="text" option="hidden" label="32309" default="" />
+        <setting id="alluc.download" type="bool" label="32009" default="false" />
 		<setting type="sep" />
 		<setting type="lsep" label="Moviesplanet.is" />
 		<setting id="moviesplanet.user" type="text" label="32303" default="" />
 		<setting id="moviesplanet.pass" type="text" option="hidden" label="32307" default="" />
-		<setting type="sep" />
-		<setting type="lsep" label="Streamlord.com" />
-		<setting id="streamlord.user" type="text" label="32303" default="" />
-		<setting id="streamlord.pass" type="text" option="hidden" label="32307" default="" />
 		<setting type="sep" />
 		<setting type="lsep" label="Ororo.tv" />
 		<setting id="ororo.user" type="text" label="32304" option="hidden" default="" />
@@ -169,6 +173,10 @@
 		<setting type="lsep" label="Seriesever.net" />
 		<setting id="seriesever.user" type="text" label="32303" default="" />
 		<setting id="seriesever.pass" type="text" option="hidden" label="32307" default="" />
+		<setting type="sep" />
+		<setting type="lsep" label="Streamlord.com" />
+		<setting id="streamlord.user" type="text" label="32303" default="" />
+		<setting id="streamlord.pass" type="text" option="hidden" label="32307" default="" />
 	</category>
 	<category label="32541">
 		<setting id="library.movie" type="folder" label="32543" default="special://userdata/addon_data/plugin.video.lastship/Movies" />
@@ -184,7 +192,7 @@
 		<setting id="library.check_movie" type="bool" label="32549" default="false" />
 		<setting id="library.check_episode" type="bool" label="32550" default="false" />
 		<setting id="library.include_unknown" type="bool" label="32565" default="true" />
-	</category>
+	    </category>
 	<category label="32347">
 		<setting id="downloads" type="bool" label="32348" default="false" />
 		<setting type="sep" />

@@ -1,3 +1,8 @@
+[B]1.1.4[/B]
+- Add multi-scraper "alluc.ee" for german and english sources
+  (API-key from http://accounts.alluc.com/ is required and can be entered in the "accounts" settings tab)
+- Some tweaks on the settings display
+
 [B]1.1.3[/B]
 - Dayt update
 - Onseries, Kingmovies fixed

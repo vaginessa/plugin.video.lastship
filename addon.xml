@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.lastship" version="1.1.3" name="Lastship" provider-name="Lastship">
+<addon id="plugin.video.lastship" version="1.1.4" name="Lastship" provider-name="Lastship">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0" />
 		<import addon="repository.lastship" version="1.0.0" />
@@ -26,8 +26,8 @@
 			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
 			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
-		<news>- New setting: only show movies older than 90 days
-- Dayt provider updated
-- Kingmovies and Onseries fixed</news>
+		<news>- new (multi-)scraper "Alluc" for english [B]and[/B] german sources
+  (get an API-key from http://accounts.alluc.com/; enter it in the addon settings)
+- some settings reordered</news>
 	</extension>
 </addon>

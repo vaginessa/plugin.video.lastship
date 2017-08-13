@@ -2,6 +2,8 @@
 - Add multi-scraper "alluc.ee" for german and english sources
   (API-key from http://accounts.alluc.com/ is required and can be entered in the "accounts" settings tab)
 - Some tweaks on the settings display
+- Move Library scaper option out of the "english" section & add german translation
+- Fix HDFilme.tv
 
 [B]1.1.3[/B]
 - Dayt update

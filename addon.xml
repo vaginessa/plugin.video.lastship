@@ -28,6 +28,7 @@
 		</assets>
 		<news>- new (multi-)scraper "Alluc" for english [B]and[/B] german sources
   (get an API-key from http://accounts.alluc.com/; enter it in the addon settings)
-- some settings reordered</news>
+- some settings reordered (esp. Library scraper incl. german translation)
+-Fix for HDFilme.tv</news>
 	</extension>
 </addon>

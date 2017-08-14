@@ -24,6 +24,7 @@ import re,urllib,urlparse
 from resources.lib.modules import control
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
+from resources.lib.modules import jsunpack
 
 
 class source:
@@ -74,17 +75,19 @@ class source:
 
             if url == None: return sources
 
-            if (self.user == '' or self.password == ''): raise Exception()
+            if (self.user != '' and self.password != ''): #raise Exception()
 
-            login = urlparse.urljoin(self.base_link, '/login.html')
+                login = urlparse.urljoin(self.base_link, '/login.html')
 
-            post = urllib.urlencode({'username': self.user, 'password': self.password, 'submit': 'Login'})
+                post = urllib.urlencode({'username': self.user, 'password': self.password, 'submit': 'Login'})
 
-            cookie = client.request(login, post=post, output='cookie', close=False)
+                cookie = client.request(login, post=post, output='cookie', close=False)
 
-            r = client.request(login, post=post, cookie=cookie, output='extended')
+                r = client.request(login, post=post, cookie=cookie, output='extended')
 
-            headers = {'User-Agent': r[3]['User-Agent'], 'Cookie': r[4]}
+                headers = {'User-Agent': r[3]['User-Agent'], 'Cookie': r[4]}
+            else:
+                headers = {}
 
 
             if not str(url).startswith('http'):
@@ -134,19 +137,22 @@ class source:
 
             quality = 'HD' if '-movie-' in r else 'SD'
 
+            try:
+                f = re.findall('''["']sources['"]\s*:\s*\[(.*?)\]''', r)[0]
+                f = re.findall('''['"]*file['"]*\s*:\s*([^\(]+)''', f)[0]
 
-            f = re.findall('''["']sources['"]\s*:\s*\[(.*?)\]''', r)[0]
-            f = re.findall('''['"]*file['"]*\s*:\s*([^\(]+)''', f)[0]
+                u = re.findall('function\s+%s[^{]+{\s*([^}]+)' % f, r)[0]
+                u = re.findall('\[([^\]]+)[^+]+\+\s*([^.]+).*?getElementById\("([^"]+)', u)[0]
 
-            u = re.findall('function\s+%s[^{]+{\s*([^}]+)' % f, r)[0]
-            u = re.findall('\[([^\]]+)[^+]+\+\s*([^.]+).*?getElementById\("([^"]+)', u)[0]
+                a = re.findall('var\s+%s\s*=\s*\[([^\]]+)' % u[1], r)[0]
+                b = client.parseDOM(r, 'span', {'id': u[2]})[0]
 
-            a = re.findall('var\s+%s\s*=\s*\[([^\]]+)' % u[1], r)[0]
-            b = client.parseDOM(r, 'span', {'id': u[2]})[0]
-
-            url = u[0] + a + b
-            url = url.replace('"', '').replace(',', '').replace('\/', '/')
-            url += '|' + urllib.urlencode(headers)   
+                url = u[0] + a + b
+                url = url.replace('"', '').replace(',', '').replace('\/', '/')
+                url += '|' + urllib.urlencode(headers)
+            except:
+                url =  r = jsunpack.unpack(r)
+                url = url.replace('"', '')
 
 
             sources.append({'source': 'cdn', 'quality': quality, 'language': 'en', 'url': url, 'direct': True, 'debridonly': False, 'autoplay': True})

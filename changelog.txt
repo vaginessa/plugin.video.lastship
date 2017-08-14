@@ -1,3 +1,7 @@
+- Fix dizigold, seriesonline, streamlord
+- New TheTVDB.com & fanart.tv project API keys
+- Make passwords and user-keys visible in settings and virtual keyboard
+
 [B]1.1.4[/B]
 - Add multi-scraper "alluc.ee" for german and english sources
   (API-key from http://accounts.alluc.com/ is required and can be entered in the "accounts" settings tab)

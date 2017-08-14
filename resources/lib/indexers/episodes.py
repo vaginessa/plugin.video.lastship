@@ -47,7 +47,7 @@ class seasons:
         self.showunaired = control.setting('showunaired') or 'true'
         self.datetime = (datetime.datetime.utcnow() - datetime.timedelta(hours = 5))
         self.today_date = (self.datetime).strftime('%Y-%m-%d')
-        self.tvdb_key = 'MUQ2MkYyRjkwMDMwQzQ0NA=='
+        self.tvdb_key = 'QzE1NTNERTM4MTcwNUE0Mw=='
 
         self.tvdb_info_link = 'http://thetvdb.com/api/%s/series/%s/all/%s.zip' % (self.tvdb_key.decode('base64'), '%s', '%s')
         self.tvdb_by_imdb = 'http://thetvdb.com/api/GetSeriesByRemoteID.php?imdbid=%s'
@@ -531,7 +531,7 @@ class episodes:
 
         self.trakt_link = 'http://api.trakt.tv'
         self.tvmaze_link = 'http://api.tvmaze.com'
-        self.tvdb_key = 'MUQ2MkYyRjkwMDMwQzQ0NA=='
+        self.tvdb_key = 'QzE1NTNERTM4MTcwNUE0Mw=='
         self.datetime = (datetime.datetime.utcnow() - datetime.timedelta(hours = 5))
         self.systime = (self.datetime).strftime('%Y%m%d%H%M%S%f')
         self.today_date = (self.datetime).strftime('%Y-%m-%d')

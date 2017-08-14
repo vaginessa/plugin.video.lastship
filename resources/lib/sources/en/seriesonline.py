@@ -31,7 +31,7 @@ class source:
         self.priority = 1
         self.language = ['en']
         self.domains = ['seriesonline.io']
-        self.base_link = 'https://seriesonline.io'
+        self.base_link = 'http://theseriesonline.com'
         self.search_link = '/movie/search/%s'
 
     def matchAlias(self, title, aliases):
@@ -123,8 +123,9 @@ class source:
             headers = {}
 
             if 'tvshowtitle' in data:
-                url = '%s/film/%s-season-%01d/watching.html' % (self.base_link, cleantitle.geturl(data['tvshowtitle']), int(data['season']))
-                url = client.request(url, headers=headers, timeout='10', output='geturl')
+                ep = data['episode']
+                url = '%s/film/%s-season-%01d/watching.html?ep=%s' % (self.base_link, cleantitle.geturl(data['tvshowtitle']), int(data['season']), ep)
+                r = client.request(url, headers=headers, timeout='10', output='geturl')
 
                 if url == None:
                     url = self.searchShow(data['tvshowtitle'], data['season'], aliases, headers)

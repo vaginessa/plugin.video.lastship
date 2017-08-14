@@ -26,9 +26,8 @@
 			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
 			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
-		<news>- new (multi-)scraper "Alluc" for english [B]and[/B] german sources
-  (get an API-key from http://accounts.alluc.com/; enter it in the addon settings)
-- some settings reordered (esp. Library scraper incl. german translation)
--Fix for HDFilme.tv</news>
+		<news>- Fix dizigold, seriesonline, streamlord
+- New project API keys for TheTVDB.com and fanart.tv
+- Make passwords and user-keys visible in settings and virtual keyboard</news>
 	</extension>
 </addon>

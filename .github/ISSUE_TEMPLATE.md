@@ -1,0 +1,22 @@
+### EXPECTED BEHAVIOR
+
+
+
+### ACTUAL BEHAVIOR
+
+
+
+### STEPS TO REPRODUCE
+
+
+
+##### ADDITIONAL INFORMATION
+
+
+###### DEVICE, KODI-VERSION, ADDON-VERSION
+
+###### ENVIRONMENT
+
+###### NETWORK SETUP
+
+###### LINK TO [*DEBUG LOG*](http://kodi.wiki/view/Log_file)

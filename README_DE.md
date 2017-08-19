@@ -39,18 +39,20 @@ Dieses Addon erweitert Kodi um einen Multi-Scraper für verschiedene Video-Index
 ## Beteiligung
 
 Bitte reichen Sie einen `Pull Request` zu unserem `nightly`-Branch ein, wenn Sie Programmcode einreichen möchten; für Fehlerberichte oder Informationen anderer Art bitte ein `Issue` öffnen
+Wo immer möglich, folgen Sie bitte den [Richtlinien](.github/CONTRINUTING.md), und benutzen Sie die [Schablone](.github/ISSUE_TEMPLATE.md) beim Öffnen eines `Issue`'s.
 
 
 ## Support
 
-[Offizielles Lastship-Forum](http://lastship.square7.ch/forum/forumdisplay.php?fid=28)
+* Offizielles [Lastship-Forum](http://lastship.square7.ch/forum/forumdisplay.php?fid=28)
+* Öffentliche [*Lastship* Gitter-Community](https://gitter.im/Lastship_Chat/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
 
 
 ## Lizenz
 
 Dieses Projekt unterliegt der **GNU GENERAL PUBLIC LICENSE Version 3**
 
-Näheres finden Sie in der [LICENSE.txt](LICENSE.txt)-Datei
+Näheres finden Sie in der [LICENSE.txt](LICENSE.txt)-Datei, die in jeder Installation enthalten sein sollte.
 
 
 ## Danksagung

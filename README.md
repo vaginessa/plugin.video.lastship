@@ -37,19 +37,21 @@ This addon extends Kodi to be used as a scraper for multiple video link index si
 
 ## Contributing
 
-Please submit a `Pull Request` to our `nightly` branch if you want to contribute code, or open an `Issue` to provide bug reports or other kinds of information
+Please submit a `Pull Request` to our `nightly` branch if you want to contribute code, or open an `Issue` to provide bug reports or other kinds of information.
+Be so kind and follow the [guidelines](.github/CONTRINUTING.md) where possible, and use the [template](.github/ISSUE_TEMPLATE.md) when you open an `Issue`.
 
 
 ## Support
 
-[Official Lastship Forum](http://lastship.square7.ch/forum/forumdisplay.php?fid=28)
+* Official [*Lastship* Forum](http://lastship.square7.ch/forum/forumdisplay.php?fid=28)
+* Public [*Lastship* Gitter Community](https://gitter.im/Lastship_Chat/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
 
 
 ## License
 
 This project is licensed under the **GNU GENERAL PUBLIC LICENSE Version 3**
 
-see the [LICENSE.txt](LICENSE.txt) file for details
+See the [LICENSE.txt](LICENSE.txt) file for details, which should be included in every installation copy.
 
 
 ## Credits

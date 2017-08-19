@@ -1,22 +1,25 @@
-### EXPECTED BEHAVIOR
+### Expected Behavior :
 
 
 
-### ACTUAL BEHAVIOR
+### Actual Behavior :
 
 
 
-### STEPS TO REPRODUCE
+### Steps to Reproduce :
 
 
 
-##### ADDITIONAL INFORMATION
+##### Additional Information :
 
 
-###### DEVICE, KODI-VERSION, ADDON-VERSION
+###### Device, Kodi Version, Lastship Version :
 
-###### ENVIRONMENT
+###### Environment (Hardware, OS, ...) :
 
-###### NETWORK SETUP
+###### Network Setup :
 
-###### LINK TO [*DEBUG LOG*](http://kodi.wiki/view/Log_file)
+###### **Link to** [**Debug-Logfile**](http://kodi.wiki/view/Log_file) :
+
+
+- - -

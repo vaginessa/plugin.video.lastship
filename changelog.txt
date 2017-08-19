@@ -1,3 +1,6 @@
+[B]1.1.6[/B]
+- Tweak Alluc scraper
+
 [B]1.1.5[/B]
 - Fix dizigold, seriesonline, streamlord
 - New TheTVDB.com & fanart.tv project API keys

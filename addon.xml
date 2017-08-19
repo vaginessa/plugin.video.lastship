@@ -26,8 +26,6 @@
 			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
 			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
-		<news>- Fix dizigold, seriesonline, streamlord
-- New project API keys for TheTVDB.com and fanart.tv
-- Make passwords and user-keys visible in settings and virtual keyboard</news>
+		<news>-Tweak Alluc scraper</news>
 	</extension>
 </addon>

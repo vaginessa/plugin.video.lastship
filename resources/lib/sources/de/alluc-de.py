@@ -18,6 +18,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
+
 import re,urllib,urlparse,json
 from resources.lib.modules import client
 from resources.lib.modules import control
@@ -36,8 +37,7 @@ class source:
         self.api = control.setting('alluc.api')
         self.debrid = control.setting('alluc.download')
         if self.debrid == 'true': self.types = ['stream', 'download']
-        self.extensions = ['mp4', 'mpg', 'mpeg', 'mp2', 'm4v', 'm2v', 'mkv', 'avi', 'flv', 'asf', '3gp', '3g2', 'wmv', 'mov', 'qt', 'webm', 'vob']
-
+        self.extensions = ['mp4', 'mpg', 'mpeg', 'mp2', 'm4v', 'm2v', 'mkv', 'avi', 'flv', 'asf', '3gp', '3g2', 'wmv', 'mov', 'qt', 'webm', 'vob', '']
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
@@ -101,7 +101,7 @@ class source:
 
             seen_urls = set()
             for type in self.types:
-                searchFrom = 1
+                searchFrom = 0
                 searchCount = self.streamIncrease
                 for offset in range(iterations):
                     if iterations == offset + 1: searchCount = last
@@ -110,7 +110,7 @@ class source:
 
                     results = client.request(urlNew)
                     results = json.loads(results)
-                    
+
                     apistatus  = results['status']
                     if apistatus != 'success': break
 
@@ -125,11 +125,12 @@ class source:
                         jsonHoster = result['hostername'].lower()
                         jsonLink = result['hosterurls'][0]['url']
 
+                        if jsonLink in seen_urls: continue
+                        seen_urls.add(jsonLink)
+
                         if not jsonHoster in hostDict: continue
 
                         if not self.extensionValid(jsonExtension): continue
-
-                        if jsonLink in seen_urls: continue
 
                         quality, info = source_utils.get_release_quality(jsonName)
                         info.append(self.formatSize(jsonSize))
@@ -138,7 +139,6 @@ class source:
 
                         sources.append({'source' : jsonHoster, 'quality':  quality, 'language' : jsonLanguage, 'url' : jsonLink, 'info': info, 'direct' : False, 'debridonly' : False})
                         added = True
-                        seen_urls.add(jsonLink)
 
                     if not added:
                         break
@@ -160,7 +160,7 @@ class source:
         if size > 2000:
             size = size / 1024
             unit = 'GB'
-        else :
+        else:
             unit = 'MB'
-        size = "[%s %s]" % (size, unit)
+        size = '[B][%s %s][/B]' % (size, unit)
         return size

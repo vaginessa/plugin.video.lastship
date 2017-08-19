@@ -21,8 +21,8 @@ Dieses Addon erweitert Kodi um einen Multi-Scraper für verschiedene Video-Index
 
 ### Vorbereitung
 
-- Laden Sie die für Ihr System compilierte Version von Kodi herunter und installieren sie sie. Kodi ist [hier](https://kodi.tv/download) verfügbar.
-- Laden Sie das Lastship Kodi-Repository von [hier](https://github.com/lastship/Lastship-Repo/raw/master/zips/repository.lastship/repository.lastship-1.0.1.zip) auf Ihr Gerät herunter.
+- Laden Sie die Kodi-Version für Ihr System herunter und installieren sie sie. Kodi ist [hier](https://kodi.tv/download) verfügbar.
+- Laden Sie das Lastship Addon-Repository von [hier](https://github.com/lastship/Lastship-Repo/raw/master/zips/repository.lastship/repository.lastship-1.0.1.zip) auf Ihr Gerät herunter.
 
 ### In Kodi
 
@@ -39,7 +39,7 @@ Dieses Addon erweitert Kodi um einen Multi-Scraper für verschiedene Video-Index
 ## Beteiligung
 
 Bitte reichen Sie einen `Pull Request` zu unserem `nightly`-Branch ein, wenn Sie Programmcode einreichen möchten; für Fehlerberichte oder Informationen anderer Art bitte ein `Issue` öffnen
-Wo immer möglich, folgen Sie bitte den [Richtlinien](.github/CONTRINUTING.md), und benutzen Sie die [Schablone](.github/ISSUE_TEMPLATE.md) beim Öffnen eines `Issue`'s.
+Wo immer möglich, folgen Sie bitte den [Richtlinien](.github/CONTRIBUTING.md), und benutzen Sie die [Schablone](.github/ISSUE_TEMPLATE.md) beim Öffnen eines `Issue`'s.
 
 
 ## Support

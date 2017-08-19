@@ -22,8 +22,8 @@ This addon extends Kodi to be used as a scraper for multiple video link index si
 
 ### Prerequisites
 
-- Download and install the Kodi Media Center build for your device. Kodi can be downloaded from [here](https://kodi.tv/download).
-- Download the Lastship Kodi repository from [here](https://github.com/lastship/Lastship-Repo/raw/master/zips/repository.lastship/repository.lastship-1.0.1.zip).
+- Download and install the Kodi Media Center build for your device. Kodi can be downloaded [here](https://kodi.tv/download).
+- Get the Lastship addon repository from [here](https://github.com/lastship/Lastship-Repo/raw/master/zips/repository.lastship/repository.lastship-1.0.1.zip).
 
 ### In Kodi
 
@@ -38,7 +38,7 @@ This addon extends Kodi to be used as a scraper for multiple video link index si
 ## Contributing
 
 Please submit a `Pull Request` to our `nightly` branch if you want to contribute code, or open an `Issue` to provide bug reports or other kinds of information.
-Be so kind and follow the [guidelines](.github/CONTRINUTING.md) where possible, and use the [template](.github/ISSUE_TEMPLATE.md) when you open an `Issue`.
+Be so kind and follow the [guidelines](.github/CONTRIBUTING.md) where possible, and use the [template](.github/ISSUE_TEMPLATE.md) when you open an `Issue`.
 
 
 ## Support

@@ -18,7 +18,7 @@
 		<disclaimer lang="de">Die von diesem Addon dargestellten Inhalte werden von den Erstellern des Addons weder gehostet oder verbreitet, noch stehen die Ersteller in irgendeiner Beziehung zu den Content-Anbietern.</disclaimer>
 		<platform>all</platform>
 		<forum>http://lastship.square7.ch/forum/forumdisplay.php?fid=28</forum>
-	        <source>https://github.com/lastship/plugin.video.lastship</source>
+		<source>https://github.com/lastship/plugin.video.lastship</source>
 		<assets>
 			<icon>icon.png</icon>
 			<fanart>fanart.jpg</fanart>
@@ -26,6 +26,8 @@
 			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
 			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
-		<news>-Add gostream provider</news>
+		<news>-Add gostream provider
+- Improve watched states sync to Trakt
+- Tweak fanart.tv calls for movie artwork</news>
 	</extension>
 </addon>

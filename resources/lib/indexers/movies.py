@@ -745,10 +745,15 @@ class movies:
             except:
                 pass
 
-            artmeta = True
-            art = client.request(self.fanart_tv_art_link % imdb, headers=self.fanart_tv_headers, timeout='10', error=True)
-            try: art = json.loads(art)
-            except: artmeta = False
+            try:
+                artmeta = True
+                if self.fanart_tv_user == '': raise Exception()
+
+                art = client.request(self.fanart_tv_art_link % imdb, headers=self.fanart_tv_headers, timeout='10', error=True)
+                try: art = json.loads(art)
+                except: artmeta = False
+            except:
+                pass
 
             try:
                 poster2 = art['movieposter']

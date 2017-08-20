@@ -1,4 +1,5 @@
 - Add gostream provider
+- Improve Trakt watched states sync
 
 [B]1.1.6[/B]
 - Tweak Alluc scraper

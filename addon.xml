@@ -26,6 +26,6 @@
 			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
 			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
-		<news>-Tweak Alluc scraper</news>
+		<news>-Add gostream provider</news>
 	</extension>
 </addon>

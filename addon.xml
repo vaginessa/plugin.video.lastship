@@ -26,8 +26,6 @@
 			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
 			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
-		<news>-Add gostream provider
-- Improve watched states sync to Trakt
-- Tweak fanart.tv calls for movie artwork</news>
+		<news>- Remove provider pmovies and watch5s</news>
 	</extension>
 </addon>

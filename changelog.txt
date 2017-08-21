@@ -1,3 +1,5 @@
+- Remove provider pmovies and watch5s
+
 [B]1.1.7.1[/B]
 - Add gostream provider
 - Improve Trakt watched states sync

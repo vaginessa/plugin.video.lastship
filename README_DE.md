@@ -1,8 +1,9 @@
 <p align="center">
     <img src=".github/banner.jpg" alt="Logo"/>
-    <br>
+</p>
+<hr />
+<p align="center">
     <img src=".github/animation.gif" alt="Animation"/>
-    <br>
 </p>
 
 
@@ -40,8 +41,9 @@ Dieses Addon erweitert Kodi um einen Multi-Scraper für verschiedene Video-Index
 
 ## Mitarbeit
 
-Bitte reichen Sie einen `Pull Request` zu unserem `nightly`-Branch ein, wenn Sie Programmcode einreichen möchten; für Fehlerberichte oder Informationen anderer Art bitte ein `Issue` öffnen
-Wo immer möglich, folgen Sie bitte den [Richtlinien](.github/CONTRIBUTING.md), und benutzen Sie die [Schablone](.github/ISSUE_TEMPLATE.md) beim Öffnen eines `Issue`'s.   
+Bitte erzeugen Sie einen [Fork](https://help.github.com/articles/fork-a-repo/) des GitHub-Repositories und reichen Sie einen [Pull Request](https://help.github.com/articles/creating-a-pull-request-from-a-fork/) zu unserem `nightly`-Branch ein, wenn Sie Programmcode einreichen möchten.
+Für Fehlerberichte oder Informationen anderer Art öffnen Sie bitte ein [Issue](https://help.github.com/articles/creating-an-issue/).
+Wenn Sie sich beteiligen möchten, bitten wir darum, dass Sie den [Richtlinien](.github/CONTRIBUTING.md) folgen wo immer es möglich ist, und beim Öffnen eines `Issue`'s die dafür vorgesehene [Schablone](.github/ISSUE_TEMPLATE.md) benutzen.   
 
 
 ## Support
@@ -52,23 +54,23 @@ Wo immer möglich, folgen Sie bitte den [Richtlinien](.github/CONTRIBUTING.md), 
 
 ## Lizenz
 
-Dieses Projekt unterliegt der **GNU GENERAL PUBLIC LICENSE Version 3**
-Näheres finden Sie in der [LICENSE.txt](LICENSE.txt)-Datei, die in jeder Installation enthalten sein sollte.   
+Dieses Projekt unterliegt der **GNU GENERAL PUBLIC LICENSE Version 3**.
+Näheres finden Sie in der [LICENSE.txt](LICENSE.txt)-Datei, die Teil einer jeder Installation ist.   
 
 
 ## Danksagung
 
-#### Dies ist ein Fork des Kodi-Addons **Covenant**
+#### Dies ist ein Fork des Kodi-Addons **"*Covenant*"**
 
-* Kompliment und vielen Dank an die Entwickler von **Covenant** und **Exodus**, deren Arbeit wir sehr schätzen und hoch anerkennen
+* Kompliment und vielen Dank an die Entwickler von **Covenant** und **Exodus**, deren Arbeit wir hoch anerkennen
 * Kompliment und vielen Dank an weekendsource für die Veröffentlichung des Scraper-Moduls für Alluc
-* Kompliment und vielen Dank an Eldorado, TKNorris und JSergio für die Module **URLresolver** und **Metahandler**
+* Kompliment und vielen Dank an Eldorado, TKNorris und JSergio123 für die Module **URLresolver** und **Metahandler**
 * Kompliment und vielen Dank an alle ungenannt gebliebenen, deren Code und/oder Ideen wir verwenden
 * Und nicht zu vergessen, viele Grüße an die **Lastship**-Gemeinde
 
 - - -   
 
 <p align="center">
-    <br>
+    <br />
     <img src="icon.png" alt="Icon"/>
 </p>

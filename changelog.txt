@@ -1,4 +1,7 @@
+[B]1.1.8[/B]
 - Remove provider pmovies and watch5s
+- Fix Kongmovies
+- Fix Streamlord
 
 [B]1.1.7.1[/B]
 - Add gostream provider

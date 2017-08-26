@@ -26,8 +26,8 @@
 			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
 			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
-		<news>- Remove pmovies and watch5s
-- Kingmovies fixed
-- Streamlord fixed</news>
+		<news>- Provider Sezonlukdizi fixed
+- Removed MeinKino
+- Bugfix for "New Episodes" setting being invisible</news>
 	</extension>
 </addon>

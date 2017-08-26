@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-'''
+"""
     Lastship Add-on (C) 2017
     Credits to Exodus and Covenant; our thanks go to their creators
 
@@ -16,16 +16,18 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-'''
+"""
 
 import re
 import urlparse
+import unicodedata
 
 from resources.lib.modules import cache
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
 from resources.lib.modules import dom_parser
 from resources.lib.modules import source_utils
+from resources.lib.modules import directstream
 
 
 class source:
@@ -64,11 +66,15 @@ class source:
             result = [(re.findall('u\s*:\s*(?:\'|\")(.+?)(?:\'|\")', i), re.findall('d\s*:\s*(?:\'|\")(.+?)(?:\',|\")', i)) for i in result]
             result = [(i[0][0], i[1][0]) for i in result if len(i[0]) > 0 and len(i[1]) > 0]
             result = [(re.compile('/diziler(/.+?)(?://|\.|$)').findall(i[0]), re.sub('&#\d*;', '', i[1])) for i in result]
-            result = [(i[0][0] + '/', cleantitle.query(i[1])) for i in result if len(i[0]) > 0]
+            result = [(i[0][0] + '/', cleantitle.query(self.lat2asc(i[1]))) for i in result if len(i[0]) > 0]
 
             return result
         except:
             return []
+
+    def lat2asc(self, title):
+        title = title.decode('iso8859-1')
+        return unicodedata.normalize('NFKD', title).encode('ascii', 'ignore')
 
     def episode(self, url, imdb, tvdb, title, premiered, season, episode):
         try:
@@ -88,8 +94,9 @@ class source:
                 return sources
 
             url = urlparse.urljoin(self.base_link, url)
-
+            c = client.request(url, output='cookie')
             result = client.request(url)
+
             result = re.sub(r'[^\x00-\x7F]+', ' ', result)
 
             pages = dom_parser.parse_dom(result, 'div', attrs={'class': 'item'}, req='data-id')
@@ -99,7 +106,7 @@ class source:
                 try:
                     url = urlparse.urljoin(self.base_link, self.video_link)
 
-                    result = client.request(url, post={'id': page})
+                    result = client.request(url, post={'id': page}, cookie=c)
                     if not result: continue
 
                     url = dom_parser.parse_dom(result, 'iframe', req='src')[0].attrs['src']
@@ -111,7 +118,18 @@ class source:
 
                     if '.asp' not in url: continue
 
-                    result = client.request(url)
+                    result = client.request(url, cookie=c)
+
+                    try:
+                        url = dom_parser.parse_dom(result, 'iframe', req='src')[0].attrs['src']
+                        url = url.replace('https://href.li/?', '')
+                        valid, host = source_utils.is_host_valid(url, hostDict)
+                        if valid:
+                            if host == 'gvideo':
+                                ginfo = directstream.google(url)
+                                for g in ginfo: sources.append({'source': host, 'quality': g['quality'], 'language': 'en', 'url': g['url'], 'direct': True, 'debridonly': False})
+                            else: sources.append({'source': host, 'quality': 'HD', 'language': 'en', 'url': url, 'direct': False, 'debridonly': False})
+                    except: pass
 
                     captions = re.search('kind\s*:\s*(?:\'|\")captions(?:\'|\")', result)
                     if not captions: continue
@@ -137,5 +155,3 @@ class source:
             return url
         except:
             pass
-
-

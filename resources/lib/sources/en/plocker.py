@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-'''
+"""
     Lastship Add-on (C) 2017
     Credits to Exodus and Covenant; our thanks go to their creators
 
@@ -17,7 +17,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-'''
+"""
 import re
 import urllib
 import urlparse
@@ -28,10 +28,10 @@ from resources.lib.modules import client, cleantitle, directstream
 
 class source:
     def __init__(self):
-        '''
+        """
         Constructor defines instances variables
 
-        '''
+        """
         self.priority = 1
         self.language = ['en']
         self.domains = ['putlocker.rs']
@@ -45,7 +45,7 @@ class source:
         self.grabber_path = '/grabber-api/?ts=%s&id=%s&token=%s&mobile=0'
 
     def movie(self, imdb, title, localtitle, aliases, year):
-        '''
+        """
         Takes movie information and returns a set name value pairs, encoded as
         url params. These params include ts
         (a unqiue identifier, used to grab sources) and list of source ids
@@ -61,7 +61,7 @@ class source:
 
         url -- string - url encoded params
 
-        '''
+        """
         try:
             clean_title = cleantitle.geturl(title)
             query = (self.movie_search_path % (clean_title, year))
@@ -104,7 +104,7 @@ class source:
             return
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
-        '''
+        """
         Takes TV show information, encodes it as name value pairs, and returns
         a string of url params
 
@@ -120,7 +120,7 @@ class source:
 
         url -- string - url encoded params
 
-        '''
+        """
         try:
             data = {
                 'imdb': imdb,
@@ -136,7 +136,7 @@ class source:
             return
 
     def episode(self, url, imdb, tvdb, title, premiered, season, episode):
-        '''
+        """
         Takes episode information, finds the ts and list sources, encodes it as
         name value pairs, and returns a string of url params
 
@@ -154,7 +154,7 @@ class source:
 
         url -- string - url encoded params
 
-        '''
+        """
         try:
             data = urlparse.parse_qs(url)
             data = dict((i, data[i][0]) for i in data)
@@ -222,7 +222,7 @@ class source:
             return
 
     def sources(self, url, hostDict, hostprDict):
-        '''
+        """
         Loops over site sources and returns a dictionary with corresponding
         file locker sources and information
 
@@ -234,7 +234,7 @@ class source:
 
         sources -- string - a dictionary of source information
 
-        '''
+        """
 
         sources = []
 
@@ -280,7 +280,7 @@ class source:
             return sources
 
     def resolve(self, url):
-        '''
+        """
         Takes a scraped url and returns a properly formatted url
 
         Keyword arguments:
@@ -291,7 +291,7 @@ class source:
 
         url -- string - a properly formatted url
 
-        '''
+        """
         try:
             if not url.startswith('http'):
                 url = 'http:' + url
@@ -308,7 +308,7 @@ class source:
             return
 
     def __token(self, d):
-        '''
+        """
         Takes a dictionary containing id, update, and ts, then returns a
         token which is used by info_path to retrieve grabber api
         information
@@ -321,7 +321,7 @@ class source:
 
         token -- integer - a unique integer
 
-        '''
+        """
         try:
             token = 0
 

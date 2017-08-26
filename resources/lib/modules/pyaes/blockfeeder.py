@@ -106,9 +106,9 @@ AESStreamModeOfOperation._final_decrypt = _stream_final_decrypt
 
 
 class BlockFeeder(object):
-    '''The super-class for objects to handle chunking a stream of bytes
+    """The super-class for objects to handle chunking a stream of bytes
        into the appropriate block size for the underlying mode of operation
-       and applying (or stripping) padding, as necessary.'''
+       and applying (or stripping) padding, as necessary."""
 
     def __init__(self, mode, feed, final):
         self._mode = mode
@@ -117,12 +117,12 @@ class BlockFeeder(object):
         self._buffer = to_bufferable("")
 
     def feed(self, data = None):
-        '''Provide bytes to encrypt (or decrypt), returning any bytes
+        """Provide bytes to encrypt (or decrypt), returning any bytes
            possible from this or any previous calls to feed.
 
            Call with None or an empty string to flush the mode of
            operation and return any final bytes; no further calls to
-           feed may be made.'''
+           feed may be made."""
 
         if self._buffer is None:
             raise ValueError('already finished feeder')

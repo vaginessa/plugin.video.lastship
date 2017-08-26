@@ -15,8 +15,8 @@
 		<setting id="hidecinema" type="bool" label="32571" default="false"/>
 		<setting type="lsep" label="32319" />
 		<setting id="movie.widget" type="enum" label="32320" lvalues="32302|32321|32322|32323|32324" default="1" />
-		<setting id="tv.widget.alt" type="enum" label="32325" lvalues="32302|32326|32327|32328" default="2" visible="!eq(-9,)+eq(-8,1)" />
-		<setting id="tv.widget" type="enum" label="32325" lvalues="32302|32326" default="1" visible="eq(-10,)|eq(-9,0)" />
+		<setting id="tv.widget.alt" type="enum" label="32325" lvalues="32302|32326|32327|32328" default="2" visible="!eq(-11,)" />
+		<setting id="tv.widget" type="enum" label="32325" lvalues="32302|32326" default="1" visible="eq(-12,)" />
 		<setting id="lists.widget" type="enum" label="32329" lvalues="32302|32301" default="1" />
 	</category>
 	<category label="32330">
@@ -51,7 +51,6 @@
 		<setting id="provider.kinodogs" type="bool" label="KINODOGS" default="true" />
 		<setting id="provider.kinow" type="bool" label="KINOW" default="true" />
 		<setting id="provider.kinox" type="bool" label="KINOX" default="true" />
-		<setting id="provider.meinkino" type="bool" label="MEINKINO" default="true" />
 		<setting id="provider.movie4k" type="bool" label="MOVIE4K" default="true" />
 		<setting id="provider.moviesever" type="bool" label="MOVIESEVER" default="true" />
 		<setting id="provider.netzkino" type="bool" label="NETZKINO" default="true" />
@@ -118,8 +117,8 @@
 		<setting id="provider.scenedown" type="bool" label="SCENEDOWN" default="true" />
 		<setting id="provider.sceper" type="bool" label="SCEPER" default="true" />
 		<setting id="provider.scnrls" type="bool" label="SCNRLS" default="true" />
-		<setting id="provider.sezonlukdizi" type="bool" label="SEZONLUKDIZI" default="true" />
 		<setting id="provider.seriesonline" type="bool" label="SERIESONLINE" default="true" />
+		<setting id="provider.sezonlukdizi" type="bool" label="SEZONLUKDIZI" default="true" />
 		<setting id="provider.solarmovie" type="bool" label="SOLARMOVIE" default="true" />
 		<setting id="provider.streamlord" type="bool" label="STREAMLORD" default="true" />
 		<setting id="provider.tinydl" type="bool" label="TINYDL" default="true" />
@@ -127,12 +126,12 @@
 		<setting id="provider.tvbox" type="bool" label="TVBOX" default="true" />
 		<setting id="provider.tvbmoviez" type="bool" label="TVBMOVIEZ" default="true" />
 		<setting id="provider.twoddl" type="bool" label="TWODDL" default="true" />
+		<setting id="provider.videoscraper" type="bool" label="VIDEOSCRAPER" default="true" />
 		<setting id="provider.watch32" type="bool" label="WATCH32" default="true" />
 		<setting id="provider.watchfree" type="bool" label="WATCHFREE" default="true" />
 		<setting id="provider.watchonline" type="bool" label="WATCHONLINE" default="true" />
 		<setting id="provider.watchseries" type="bool" label="WATCHSERIES" default="true" />
 		<setting id="provider.wrzcraft" type="bool" label="WRZCRAFT" default="true" />
-		<setting id="provider.videoscraper" type="bool" label="VIDEOSCRAPER" default="true" />
 		<setting id="provider.xmovies" type="bool" label="XMOVIES" default="true" />
 		<setting id="provider.ymovies" type="bool" label="YMOVIES" default="true" />
 	</category>

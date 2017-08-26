@@ -1,25 +1,25 @@
-### Expected Behavior :
+### Expected Behavior / Erwartetes Verhalten :
 
 
 
-### Actual Behavior :
+### Actual Behavior / Tatsächliches Verhalten :
 
 
 
-### Steps to Reproduce :
+### Steps to Reproduce / Schritte zur Reproduktion :
 
 
 
-##### Additional Information :
+#### Additional Information / Weitere Informationen :
 
 
-###### Device, Kodi Version, Lastship Version :
+###### Hardware, Kodi Version, Lastship Version :
 
-###### Environment (Hardware, OS, ...) :
+###### Environment (additional Hardware, OS, ...) / Umgebung (zusätzl. Hardware, Betriebssystem, ...) :
 
-###### Network Setup :
+###### Network Setup / Netzwerk-Konfiguration :
 
-###### **Link to** [**Debug-Logfile**](http://kodi.wiki/view/Log_file) :
+##### **(Link to / Link zum) Debug-Logfile** :
 
 
 - - -

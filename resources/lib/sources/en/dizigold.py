@@ -2,7 +2,7 @@
 
 # -*- coding: utf-8 -*-
 
-'''
+"""
     Lastship Add-on (C) 2017
     Credits to Exodus and Covenant; our thanks go to their creators
 
@@ -18,7 +18,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-'''
+"""
 
 
 import re,urlparse

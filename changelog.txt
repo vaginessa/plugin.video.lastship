@@ -1,5 +1,7 @@
+[B]1.1.9[/B]
 - Fix Sezonlukdizi (credits to weekendsource)
 - Fix german translation
+- Fix alphabetical sort order in EN provider settings
 - Provider MeinKino removed
 - Bugfix in settings ("New Episodes" wasn't visible)
 

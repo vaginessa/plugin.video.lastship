@@ -49,10 +49,12 @@
 		<setting id="provider.horrorkino" type="bool" label="HORRORKINO" default="true" />
 		<setting id="provider.iload" type="bool" label="ILOAD" default="true" />
 		<setting id="provider.kinodogs" type="bool" label="KINODOGS" default="true" />
+		<setting id="provider.kinoking" type="bool" label="KINOKING" default="true" />
 		<setting id="provider.kinow" type="bool" label="KINOW" default="true" />
 		<setting id="provider.kinox" type="bool" label="KINOX" default="true" />
 		<setting id="provider.movie4k" type="bool" label="MOVIE4K" default="true" />
 		<setting id="provider.moviesever" type="bool" label="MOVIESEVER" default="true" />
+		<setting id="provider.movietown" type="bool" label="MOVIETOWN" default="true" />
 		<setting id="provider.netzkino" type="bool" label="NETZKINO" default="true" />
 		<setting id="provider.proxer" type="bool" label="PROXER" default="true" />
 		<setting id="provider.pureanime" type="bool" label="PUREANIME" default="true" />

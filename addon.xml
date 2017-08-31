@@ -27,6 +27,7 @@
 			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
 		<news>- Add provider Movie2k.ag
--Add provider Movie2k.ac</news>
+- Add provider Movie2k.ac
+- Fix broken Movies/Language section</news>
 	</extension>
 </addon>

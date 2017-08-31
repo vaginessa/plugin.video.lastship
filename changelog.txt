@@ -1,5 +1,6 @@
 - Add Movie2k.ag
 - Add Movie2k.ac
+- Fix Movies/Language section
 
 [B]1.1.10[/B]
 - Fix foxx

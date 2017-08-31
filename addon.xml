@@ -26,8 +26,7 @@
 			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
 			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
-		<news>- fix foxx
-- add movietown
-- add kinoking</news>
+		<news>- Add provider Movie2k.ag
+-Add provider Movie2k.ac</news>
 	</extension>
 </addon>

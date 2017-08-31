@@ -1,7 +1,10 @@
+- Add Movie2k.ag
+- Add Movie2k.ac
+
 [B]1.1.10[/B]
-- fix foxx
-- add movietown
-- add kinoking
+- Fix foxx
+- Add movietown
+- Add kinoking
 
 [B]1.1.9[/B]
 - Fix Sezonlukdizi (credits to weekendsource)

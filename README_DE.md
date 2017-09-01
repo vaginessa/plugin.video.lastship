@@ -44,10 +44,10 @@ Dieses Addon erweitert Kodi um einen Multi-Scraper für verschiedene Video-Index
 Bitte erzeugen Sie einen [Fork](https://help.github.com/articles/fork-a-repo/) des GitHub-Repositories und reichen Sie einen [Pull Request](https://help.github.com/articles/creating-a-pull-request-from-a-fork/) zu unserem `nightly`-Branch ein, wenn Sie Programmcode einreichen möchten.
 Für Fehlerberichte oder Informationen anderer Art öffnen Sie bitte ein [Issue](https://help.github.com/articles/creating-an-issue/).
 Wenn Sie sich beteiligen möchten, bitten wir darum, dass Sie den [Richtlinien](.github/CONTRIBUTING.md) folgen wo immer es möglich ist, und beim Öffnen eines `Issue`'s die dafür vorgesehene [Schablone](.github/ISSUE_TEMPLATE.md) benutzen.   
-
+Alle Diskussionen in diesem Repository können sowohl auf deutsch als auch auf englisch geführt werden
 
 ## Support
-
+.
 * Offizielles [Lastship-Forum](http://lastship.square7.ch/forum/forumdisplay.php?fid=28)
 * Öffentliche [*Lastship* Gitter-Community](https://gitter.im/Lastship_Chat/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)   
 

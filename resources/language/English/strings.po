@@ -571,6 +571,14 @@ msgctxt "#32361"
 msgid "LOCAL FILES (LIBRARY)"
 msgstr ""
 
+msgctxt "#32372"
+msgid "When playback ends..."
+msgstr ""
+
+msgctxt "#32373"
+msgid "Force container refresh"
+msgstr ""
+
 msgctxt "#32401"
 msgid "No stream available"
 msgstr ""

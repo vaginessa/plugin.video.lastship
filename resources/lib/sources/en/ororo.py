@@ -42,7 +42,7 @@ class source:
         self.password = control.setting('ororo.pass')
         self.headers = {
         'Authorization': 'Basic %s' % base64.b64encode('%s:%s' % (self.user, self.password)),
-        'User-Agent': 'Lastship for Kodi'
+        'User-Agent': 'Exodus for Kodi'
         }
 
 

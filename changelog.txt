@@ -1,6 +1,17 @@
+[B]1.1.11[/B]
 - Add Movie2k.ag
 - Add Movie2k.ac
 - Fix Movies/Language section
+- Fix providers : Primewire
+-                 ProjectFree
+-                 Pubfilm
+-                 Watchfree
+-                 SceneDown
+-                 PutLocker
+-                 SeriesOnline
+- Add JuicyCodes support
+- Add Imdark provider
+- New option for container refresh after playback (default off)
 
 [B]1.1.10[/B]
 - Fix foxx

@@ -29,6 +29,8 @@
 		<setting id="hosts.sort.provider" type="bool" label="32342" default="false" />
 		<setting type="lsep" label="32343" />
 		<setting id="bookmarks" type="bool" label="32344" default="true" />
+		<setting type="lsep" label="32372" />
+		<setting id="crefresh" type="bool" label="32373" default="false" />
 	</category>
 	<category label="32345">
 		<setting id="provider.library" type="bool" label="32361" default="true" />
@@ -90,6 +92,7 @@
 		<setting id="provider.gogoanime" type="bool" label="GOGOANIME" default="true" />
 		<setting id="provider.gostream" type="bool" label="GOSTREAM" default="true"/>
 		<setting id="provider.hevcfilm" type="bool" label="HEVCFILM" default="true" />
+		<setting id="provider.imdark" type="bool" label="IMDARK" default="true" />
 		<setting id="provider.kingmovies" type="bool" label="KINGMOVIES" default="true" />
 		<setting id="provider.miradetodo" type="bool" label="MIRADETODO" default="true" />
 		<setting id="provider.movie25" type="bool" label="MOVIE25" default="true" />
@@ -127,8 +130,8 @@
 		<setting id="provider.streamlord" type="bool" label="STREAMLORD" default="true" />
 		<setting id="provider.tinydl" type="bool" label="TINYDL" default="true" />
 		<setting id="provider.tunemovie" type="bool" label="TUNEMOVIE" default="true" />
-		<setting id="provider.tvbox" type="bool" label="TVBOX" default="true" />
 		<setting id="provider.tvbmoviez" type="bool" label="TVBMOVIEZ" default="true" />
+		<setting id="provider.tvbox" type="bool" label="TVBOX" default="true" />
 		<setting id="provider.twoddl" type="bool" label="TWODDL" default="true" />
 		<setting id="provider.videoscraper" type="bool" label="VIDEOSCRAPER" default="true" />
 		<setting id="provider.watch32" type="bool" label="WATCH32" default="true" />

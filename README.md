@@ -44,7 +44,7 @@ This addon extends Kodi to be used as a scraper for multiple video link index si
 Please [fork](https://help.github.com/articles/fork-a-repo/) the GitHub repository and submit a [Pull Request](https://help.github.com/articles/creating-a-pull-request-from-a-fork/) to our `nightly` branch if you want to contribute code. 
 To provide bug reports or other kinds of information, please open an [Issue](https://help.github.com/articles/creating-an-issue/).
 If you want to contribute, we kindly ask you to follow the [guidelines](.github/CONTRIBUTING.md) where possible, and to use the [template](.github/ISSUE_TEMPLATE.md) when you open an `Issue`.   
-
+Discussions in this repository can be conducted in german as well as in english
 
 ## Support
 

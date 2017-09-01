@@ -10,7 +10,7 @@
 *.po text
 *.xml text
 
-#Treat as binary files :
+# Treat as binary files :
 *.pyc binary
 *.pyo binary
 *.pyd binary
@@ -26,6 +26,13 @@
 *.gif binary
 
 
+# Plain text diffs
+.gitattributes diff=astextplain
+.gitignore astextplain
+*.txt astextplain
+*.md astextplain
+*.po astextplain
+*.xml astextplain
+
 # Language specific diffs
 *.py diff=python
-

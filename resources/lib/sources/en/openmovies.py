@@ -30,7 +30,7 @@ class source:
         self.priority = 1
         self.language = ['en']
         self.domains = ['openloadstream.net', 'openloadmovies.tv', 'openloadmovies.org', 'openloadmovies.co']
-        self.base_link = 'http://openloadmovies.org'
+        self.base_link = 'http://openloadstream.net'
         self.search_link = '/?s=%s'
 
     def movie(self, imdb, title, localtitle, aliases, year):

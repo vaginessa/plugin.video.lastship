@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-'''
+"""
     Lastship Add-on (C) 2017
     Credits to Exodus and Covenant; our thanks go to their creators
 
@@ -16,7 +16,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-'''
+"""
 
 import base64
 import json
@@ -126,15 +126,15 @@ class source:
                             try: i += jsunpack.unpack(x).replace('\\', '')
                             except: pass
 
-                        i = re.search('(?<=window\.open\(\")(.*?)(?=\")', i).group()
-                        i = client.request(i, headers=headers, referer=url)
-                        i = dom_parser.parse_dom(i, 'div', attrs={'class': 'download_links'})
-
-                        links = [(match[0], match[1]) for match in re.findall('''href['"]?=['"]([^'"]+)['"][^}]*?span>([^<]*)''', i[0][1], re.DOTALL)]
+                        links = [(match[0], match[1]) for match in re.findall('''['"]?file['"]?\s*:\s*['"]([^'"]+)['"][^}]*['"]?label['"]?\s*:\s*['"]([^'"]*)''', i, re.DOTALL)]
                         links = [(x[0].replace('\/', '/'), source_utils.label_to_quality(x[1])) for x in links if '/no-video.mp4' not in x[0]]
 
+                        doc_links = [directstream.google('https://drive.google.com/file/d/%s/view' % match) for match in re.findall('''file:\s*["'](?:[^"']+youtu.be/([^"']+))''', i, re.DOTALL)]
+                        doc_links = [(u['url'], u['quality']) for x in doc_links if x for u in x]
+                        links += doc_links
+
                         for url, quality in links:
-                            sources.append({'source': 'gvideo', 'quality': quality, 'language': 'de', 'url': url + '|Referer=' + self.base_link, 'direct': True, 'debridonly': False})
+                            sources.append({'source': 'gvideo', 'quality': quality, 'language': 'de', 'url': url, 'direct': True, 'debridonly': False})
                     else:
                         try:
                             # as long as URLResolver get no Update for this URL (So just a Temp-Solution)
@@ -184,4 +184,3 @@ class source:
         try: n = re.findall('nonce"?\s*:\s*"?([0-9a-zA-Z]+)', n)[0]
         except: n = '5d12d0fa54'
         return n
-

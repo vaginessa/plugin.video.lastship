@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.lastship" version="1.1.11" name="Lastship" provider-name="Lastship">
+<addon id="plugin.video.lastship" version="1.1.12" name="Lastship" provider-name="Lastship">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0" />
 		<import addon="repository.lastship" version="1.0.0" />
@@ -26,14 +26,11 @@
 			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
 			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
-		<news>- Add provider Movie2k.ag
-- Add provider Movie2k.ac
-- Fix broken Movies/Language section
-- Fix providers Primewire, ProjectFree, Pubfilm,
-      Watchfree, SceneDown, PutLocker and SeriesOnline
-- JuicyCodes support
-- Add provider Imdark
-- New option for container refresh after playback
-      (defaults to off)</news>
+		<news>- Fix SeriesEver not pulling all links
+- Sort Trakt Progress by recently watched (rather than air date)
+- Add provider movie2z
+- Add account settings for Serienstream and show notification on access w/o acc
+- Fix provider Foxx
+- Fix provider Afdah, RlsBB, WatchFree, Onemovies, TuneMovie, OpenMovies</news>
 	</extension>
 </addon>

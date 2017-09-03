@@ -25,6 +25,7 @@ import urlparse
 
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
+from resources.lib.modules import control
 from resources.lib.modules import source_utils
 from resources.lib.modules import dom_parser
 
@@ -36,6 +37,10 @@ class source:
         self.domains = ['serienstream.to']
         self.base_link = 'https://serienstream.to'
         self.search_link = '/ajax/search'
+        self.login = control.setting('serienstream.user')
+        self.password = control.setting('serienstream.pass')
+        self.cookie = ''
+        self.user_agent = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36'
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
@@ -97,10 +102,21 @@ class source:
             if self.base_link not in url:
                 return url
 
-            r = client.request(url)
+            header = {'User-Agent': self.user_agent, 'Accept': 'text/html'}
+            
+            self.__login()
+            cookie = self.cookie
 
-            r = dom_parser.parse_dom(r, 'div', attrs={'class': 'container'})
-            return dom_parser.parse_dom(r, 'iframe', req='src')[0].attrs['src']
+            try:
+                res = client.request(url, headers=header, cookie=cookie, redirect=False, output='geturl')
+                if self.base_link not in res:
+                    url = res
+                else:
+                    control.infoDialog(control.lang(32572).encode('utf-8'), sound=True, icon='WARNING')
+            except:
+                return
+
+            return url
         except:
             return
 
@@ -125,3 +141,21 @@ class source:
         except:
             return
 
+    def __login(self):
+        try:
+            if (self.login == '' or self.password == ''):
+                return
+
+            url = urlparse.urljoin(self.base_link, '/login')
+            post = urllib.urlencode({'email': self.login, 'password': self.password, 'autoLogin': 'on'})
+            header = {'User-Agent': self.user_agent, 'Accept': 'text/html'}
+            cookie = client.request(url, headers=header, referer=url, post=post, output='cookie')
+            data = client.request(url, cookie=cookie, output='extended')
+
+            if '/home/logout' in data[0]:
+                self.cookie = cookie
+                return
+
+            return
+        except:
+            return

@@ -1,3 +1,16 @@
+[B]1.1.12[/B]
+- Fix for SeriesEver not pulling all links
+- Sort Trakt Progress by recently watched rather than airdate
+- Add provider movie2z
+- Add account settings for Serienstream and show notification on access w/o acc
+- Fix providers : Foxx
+-                 Afdah
+-                 RlsBB
+-                 WatchFree
+-                 OneMovies
+-                 TuneMovie
+-                 OpenMovies
+
 [B]1.1.11[/B]
 - Add Movie2k.ag
 - Add Movie2k.ac

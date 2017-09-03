@@ -823,3 +823,7 @@ msgstr ""
 msgctxt "#32571"
 msgid "Hide movies in cinema"
 msgstr ""
+
+msgctxt "#32572"
+msgid "Protected Link. Please enter account credentials in the settings."
+msgstr ""

@@ -1,3 +1,4 @@
+[B]1.1.14[/B]
 - KinoW, Movie2k.ac and Movie2k.ag search fixed
 - Add search for GVideo directstreams on KinoW
 - Include streaming of GVideo download links to KinoW
@@ -5,6 +6,7 @@
 - Added provider Lichtspielhaus.stream
 - Provider Foxx fixed
 - Improved stream quality classification for Movie2k.ac
+- Default value for provider timeout reset to 30s
 
 [B]1.1.13[/B]
 - Fix Kinoking search

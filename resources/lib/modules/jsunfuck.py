@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """
-    SALTS XBMC Addon
+    Lastship Add-on (C) 2017
     Copyright (C) 2016 tknorris
 
     This program is free software: you can redistribute it and/or modify

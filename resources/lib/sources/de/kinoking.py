@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-'''
+"""
     Lastship Add-on (C) 2017
     Credits to Exodus and Covenant; our thanks go to their creators
 
@@ -16,7 +16,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-'''
+"""
 
 import re
 import urllib
@@ -41,6 +41,29 @@ class source:
         try:
             url = self.__search([localtitle] + source_utils.aliases_to_array(aliases))
             if not url and title != localtitle: url = self.__search([title] + source_utils.aliases_to_array(aliases))
+            return url
+        except:
+            return
+
+    def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
+        try:
+            url = self.__search([localtvshowtitle] + source_utils.aliases_to_array(aliases))
+            if not url and tvshowtitle != localtvshowtitle: url = self.__search([tvshowtitle] + source_utils.aliases_to_array(aliases))
+            return url
+        except:
+            return
+
+    def episode(self, url, imdb, tvdb, title, premiered, season, episode):
+        try:
+            if not url:
+                return
+
+            s = '-%sx%s/' % (season, episode)
+
+            url = url.rstrip('/')
+            url = url + s
+            url = urlparse.urljoin(self.base_link, url)
+
             return url
         except:
             return
@@ -103,13 +126,14 @@ class source:
             r = dom_parser.parse_dom(r, 'div', attrs={'class': 'title'})
             r = dom_parser.parse_dom(r, 'a', req='href')
 
-            title = r[0][1]
-            title = cleantitle.get(title)
+            for i in r:
+                title = client.replaceHTMLCodes(r[0][1])
+                title = cleantitle.get(title)
 
-            if title in t:
-                return source_utils.strip_domain(r[0][0]['href'])
-            else:
-                return
+                if title in t:
+                    return source_utils.strip_domain(i[0]['href'])
+            
+            return
         except:
             return
 

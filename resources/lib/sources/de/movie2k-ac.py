@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-'''
+"""
     Lastship Add-on (C) 2017
     Credits to Exodus and Covenant; our thanks go to their creators
 
@@ -16,7 +16,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-'''
+"""
 
 import re
 import urllib
@@ -63,12 +63,13 @@ class source:
                     hoster = re.search('(?<=">)(\n.*?)(?=<\/a>)', i[1]).group().strip()
                     link = re.search('(?<=href=\")(.*?)(?=\")', i[1]).group()
                     rel = re.search('(?<=oddCell qualityCell">)(\n.*?)(?=<\/td>)', i[1]).group().strip()
-                    quality, info = source_utils.get_release_quality(rel)
-                    if not quality:
-                        quality = 'SD'
 
                     valid, hoster = source_utils.is_host_valid(hoster, hostDict)
                     if not valid: continue
+
+                    quality = 'SD'
+                    if hoster.lower() == 'openload':
+                        quality, info = source_utils.get_release_quality(rel) 
 
                     sources.append({'source': hoster, 'quality': quality, 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
 
@@ -93,12 +94,12 @@ class source:
             r = dom_parser.parse_dom(r, 'span', attrs={'class': 'name'})
             r = dom_parser.parse_dom(r, 'a')
 
-            title = r[0][1]
-            title = cleantitle.get(title)
-
-            if title in t:
-                return source_utils.strip_domain(r[0][0]['href'])
-            else:
-                return
+            for i in r:
+                title = i[1]
+                title = cleantitle.get(title)
+                if title in t:
+                    return source_utils.strip_domain(i[0]['href'])
+                else:
+                    return
         except:
             return

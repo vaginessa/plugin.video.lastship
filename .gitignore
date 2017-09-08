@@ -1,7 +1,12 @@
+##Python
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
+
+# Installer logs
+pip-log.txt
 
 # C extensions
 *.so
@@ -30,3 +35,17 @@ coverage.xml
 
 # mkdocs documentation
 /site
+
+## Windows junk
+# image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle bin on file shares
+$RECYCLE.BIN/
+
+## Mac crap
+.DS_Store

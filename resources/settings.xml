@@ -3,7 +3,7 @@
 	<category label="32310">
 		<setting id="appearance.alt" type="action" label="32311" default="-" option="close" action="RunPlugin(plugin://plugin.video.lastship/?action=artwork)" visible="!System.HasAddon(script.lastship.artwork)" />
 		<setting id="appearance.1" type="select" label="32311" values="-|Exuary|Lastship|Genesis" default="Lastship" visible="System.HasAddon(script.lastship.artwork)" />
-		<setting id="scrapers.timeout.1" type="slider" label="32312" default="20" range="10,60" option="int" />
+		<setting id="scrapers.timeout.1" type="slider" label="32312" default="30" range="10,60" option="int" />
 		<setting id="trakt.user" type="text" default="" visible="false" />
 		<setting id="indicators.alt" type="enum" label="32313" lvalues="32314|32315" default="1" visible="!eq(-1,)" />
 		<setting id="indicators" type="enum" label="32313" lvalues="32314" default="0" visible="eq(-2,)" />
@@ -36,7 +36,6 @@
 		<setting id="provider.library" type="bool" label="32361" default="true" />
 		<setting type="sep" />
 		<setting label="German" type="lsep" />
-		<setting id="provider.1kino" type="bool" label="1KINO" default="true" />
 		<setting id="provider.alluc-de" type="bool" label="ALLUC" default="false" />
 		<setting id="provider.animebase" type="bool" label="ANIMEBASE" default="true" />
 		<setting id="provider.animeloads" type="bool" label="ANIMELOADS" default="true" />
@@ -54,6 +53,7 @@
 		<setting id="provider.kinoking" type="bool" label="KINOKING" default="true" />
 		<setting id="provider.kinow" type="bool" label="KINOW" default="true" />
 		<setting id="provider.kinox" type="bool" label="KINOX" default="true" />
+		<setting id="provider.lichtspielhaus" type="bool" label="LICHTSPIELHAUS" default="true" />
 		<setting id="provider.movie2k-ac" type="bool" label="MOVIE2K-AC" default="true" />
 		<setting id="provider.movie2k-ag" type="bool" label="MOVIE2K-AG" default="true" />
 		<setting id="provider.movie2z" type="bool" label="MOVIE2Z" default="true" />
@@ -68,7 +68,6 @@
 		<setting id="provider.streamdream" type="bool" label="STREAMDREAM" default="true" />
 		<setting id="provider.streamflix" type="bool" label="STREAMFLIX" default="true" />
 		<setting id="provider.streamit" type="bool" label="STREAMIT" default="true" />
-		<setting id="provider.streamkiste" type="bool" label="STREAMKISTE" default="true" />
 		<setting id="provider.tata" type="bool" label="TATA" default="true" />
 		<setting id="provider.video4k" type="bool" label="VIDEO4K" default="true" />
 		<setting id="provider.view4u" type="bool" label="VIEW4U" default="true" />

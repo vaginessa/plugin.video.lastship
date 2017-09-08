@@ -1,3 +1,20 @@
+- KinoW, Movie2k.ac and Movie2k.ag search fixed
+- Add search for GVideo directstreams on KinoW
+- Include streaming of GVideo download links to KinoW
+- 1Kino removed (for now)
+- Added provider Lichtspielhaus.stream
+- Provider Foxx fixed
+- Improved stream quality classification for Movie2k.ac
+
+[B]1.1.13[/B]
+- Fix Kinoking search
+- Fix MovieTown search
+- Add KinoKing TV shows
+- Fix KinoW
+- Add MovieTown TV shows
+- Check stream quality in MovieTown scraper
+
+
 [B]1.1.12[/B]
 - Fix for SeriesEver not pulling all links
 - Sort Trakt Progress by recently watched rather than airdate

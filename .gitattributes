@@ -28,11 +28,11 @@
 
 # Plain text diffs
 .gitattributes diff=astextplain
-.gitignore astextplain
-*.txt astextplain
-*.md astextplain
-*.po astextplain
-*.xml astextplain
+.gitignore diff=astextplain
+*.txt diff=astextplain
+*.md diff=astextplain
+*.po diff=astextplain
+*.xml diff=astextplain
 
 # Language specific diffs
 *.py diff=python

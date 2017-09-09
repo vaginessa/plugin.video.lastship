@@ -26,12 +26,9 @@
 			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
 			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
-		<news>- KinoW, Movie2k.ac and Movie2k.ag search fixed
-- Added search for GVideo directstreams on KinoW
-- Include streaming of GVideo download links to KinoW
-- Provider 1Kino removed (for now)
-- New provider : Lichtspielhaus.stream
+		<news>- Added Vidzella to HQ hosters
 - Provider Foxx fixed
-- Stream quality classification for Movie2k.ac tweaked</news>
+- Provider Movie2k-ac stream quality check improved
+- SerienStream search fixed</news>
 	</extension>
 </addon>

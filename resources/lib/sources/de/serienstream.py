@@ -122,8 +122,11 @@ class source:
 
     def __search(self, titles, year):
         try:
-            r = urllib.urlencode({'keyword': cleantitle.query(titles[0])})
+            r = urllib.urlencode({'keyword': titles[0]})
             r = client.request(urlparse.urljoin(self.base_link, self.search_link), XHR=True, post=r)
+            if r is None:
+                r = urllib.urlencode({'keyword': cleantitle.query(titles[0])})
+                r = client.request(urlparse.urljoin(self.base_link, self.search_link), XHR=True, post=r)
 
             t = [cleantitle.get(i) for i in set(titles) if i]
             y = ['%s' % str(year), '%s' % str(int(year) + 1), '%s' % str(int(year) - 1), '0']

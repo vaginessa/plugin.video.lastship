@@ -67,11 +67,12 @@ class source:
                     valid, hoster = source_utils.is_host_valid(hoster, hostDict)
                     if not valid: continue
 
-                    quality = 'SD'
-                    if hoster.lower() == 'openload':
-                        quality, info = source_utils.get_release_quality(rel) 
-
-                    sources.append({'source': hoster, 'quality': quality, 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
+                    try:
+                        quality, info = source_utils.get_release_quality(rel)
+                    except:
+                        quality = 'SD'
+                    
+                    sources.append({'source': hoster, 'quality': quality, 'language': 'de', 'url': link, 'direct': False, 'debridonly': False, 'checkquality': True})
 
             return sources
         except:

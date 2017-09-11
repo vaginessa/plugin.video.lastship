@@ -1,3 +1,8 @@
+- Add Vidzella to HQ hosters
+- Fix Foxx
+- Tweak Movie2k-ac stream quality check
+- Fix search on SerienStream
+
 [B]1.1.14[/B]
 - KinoW, Movie2k.ac and Movie2k.ag search fixed
 - Add search for GVideo directstreams on KinoW
@@ -15,7 +20,6 @@
 - Fix KinoW
 - Add MovieTown TV shows
 - Check stream quality in MovieTown scraper
-
 
 [B]1.1.12[/B]
 - Fix for SeriesEver not pulling all links

@@ -1,3 +1,4 @@
+[B]1.1.15[/B]
 - Add Vidzella to HQ hosters
 - Fix Foxx
 - Tweak Movie2k-ac stream quality check

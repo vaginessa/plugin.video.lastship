@@ -31,7 +31,7 @@ This addon extends Kodi to be used as a scraper for multiple video link index si
 
 ### In Kodi
 
-- Go to **Addons** and select the dropbox icon on the top right
+- Go to **Addons** and select the dropbox icon on the top left
 - Click or tap **Install from ZIP file**; a dialogue will pop up
 - Choose **Settings**; the **System** settings will open, focus on **Addons**
 - Click or tap **Unknown Sources**; a disclaimer will be opened; comfirm with **Yes** and press the back button on your remote or tap back

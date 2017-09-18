@@ -1,3 +1,19 @@
+Nightly Update
+- Update MoviesHD
+- Fix KingMovies
+- Fix Movie25
+- Update MyDDL
+- Add CMovies (en)
+- New setting : limit number of Alluc links
+- Minimize number of Alluc API calls
+- Update WatchSeries
+- Re-add provider Watch5s
+- Update XMovies
+- Fix OpenMovies
+- Fix GoStream
+- New network logos for TV shows
+- Tweak Trakt API calls for TV show calendar
+
 [B]1.1.15[/B]
 - Add Vidzella to HQ hosters
 - Fix Foxx

@@ -17,7 +17,7 @@
 		<setting id="movie.widget" type="enum" label="32320" lvalues="32302|32321|32322|32323|32324" default="1" />
 		<setting id="tv.widget.alt" type="enum" label="32325" lvalues="32302|32326|32327|32328" default="2" visible="!eq(-11,)" />
 		<setting id="tv.widget" type="enum" label="32325" lvalues="32302|32326" default="1" visible="eq(-12,)" />
-		<setting id="lists.widget" type="enum" label="32329" lvalues="32302|32301" default="1" />
+		<setting id="lists.widget" type="bool" label="32329" default="true" />
 	</category>
 	<category label="32330">
 		<setting id="hosts.mode" type="enum" label="32331" lvalues="32332|32333|32334" default="1" />
@@ -79,6 +79,7 @@
 		<setting id="provider.animeultima" type="bool" label="ANIMEULTIMA" default="true" />
 		<setting id="provider.bmoviez" type="bool" label="BMOVIEZ" default="true" />
 		<setting id="provider.bobby" type="bool" label="BOBBY" default="true" />
+		<setting id="provider.cmovies" type="bool" label="CMOVIES" default="true" />
 		<setting id="provider.crazy" type="bool" label="CRAZY" default="true" />
 		<setting id="provider.dailyrls" type="bool" label="DAILYRLS" default="true" />
 		<setting id="provider.dayt" type="bool" label="DAYT" default="true" />
@@ -135,6 +136,7 @@
 		<setting id="provider.twoddl" type="bool" label="TWODDL" default="true" />
 		<setting id="provider.videoscraper" type="bool" label="VIDEOSCRAPER" default="true" />
 		<setting id="provider.watch32" type="bool" label="WATCH32" default="true" />
+		<setting id="provider.watch5s" type="bool" label="WATCH5S" default="true" />
 		<setting id="provider.watchfree" type="bool" label="WATCHFREE" default="true" />
 		<setting id="provider.watchonline" type="bool" label="WATCHONLINE" default="true" />
 		<setting id="provider.watchseries" type="bool" label="WATCHSERIES" default="true" />
@@ -165,7 +167,8 @@
 		<setting type="sep" />
 		<setting type="lsep" label="ALLUC" />
 		<setting id="alluc.api" type="text" label="32309" default="" />
-		<setting id="alluc.download" type="bool" label="32009" default="false" />
+		<setting id="alluc.limit" type="labelenum" label="32581" default="100" values="10|25|50|75|100|150|200"/>
+		<setting id="alluc.download" type="bool" label="32580" default="true" />
 		<setting type="sep" />
 		<setting type="lsep" label="Moviesplanet.is" />
 		<setting id="moviesplanet.user" type="text" label="32303" default="" />

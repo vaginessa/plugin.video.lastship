@@ -156,15 +156,15 @@ msgid "Discover"
 msgstr ""
 
 msgctxt "#32032"
-msgid "Collection"
+msgid "[B]Trakt[/B] Collection"
 msgstr ""
 
 msgctxt "#32033"
-msgid "Watchlist"
+msgid "[B]Trakt[/B] Watchlist"
 msgstr ""
 
 msgctxt "#32034"
-msgid "IMDb"
+msgid "[B]IMDb[/B] Watchlist"
 msgstr ""
 
 msgctxt "#32035"
@@ -336,7 +336,7 @@ msgid "Disabled"
 msgstr ""
 
 msgctxt "#32303"
-msgid "User"
+msgid "User ID"
 msgstr ""
 
 msgctxt "#32304"
@@ -821,4 +821,12 @@ msgstr ""
 
 msgctxt "#32572"
 msgid "Protected Link. Please enter account credentials in the settings."
+msgstr ""
+
+msgctxt "#32580"
+msgid "Also find download links"
+msgstr ""
+
+msgctxt "#32581"
+msgid "Max number of links"
 msgstr ""

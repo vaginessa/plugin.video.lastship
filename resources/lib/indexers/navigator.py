@@ -43,7 +43,7 @@ class navigator:
         self.addDirectoryItem(32001, 'movieNavigator', 'movies.png', 'DefaultMovies.png')
         self.addDirectoryItem(32002, 'tvNavigator', 'tvshows.png', 'DefaultTVShows.png')
 
-        if not control.setting('lists.widget') == '0':
+        if control.setting('lists.widget') == 'true':
             self.addDirectoryItem(32003, 'mymovieNavigator', 'mymovies.png', 'DefaultVideoPlaylists.png')
             self.addDirectoryItem(32004, 'mytvNavigator', 'mytvshows.png', 'DefaultVideoPlaylists.png')
 
@@ -81,7 +81,7 @@ class navigator:
         self.addDirectoryItem(32005, 'movies&url=featured', 'latest-movies.png', 'DefaultRecentlyAddedMovies.png')
 
         if lite == False:
-            if not control.setting('lists.widget') == '0':
+            if control.setting('lists.widget') == 'true':
                 self.addDirectoryItem(32003, 'mymovieliteNavigator', 'mymovies.png', 'DefaultVideoPlaylists.png')
 
             self.addDirectoryItem(32028, 'moviePerson', 'people-search.png', 'DefaultMovies.png')
@@ -141,7 +141,7 @@ class navigator:
         self.addDirectoryItem(32027, 'calendars', 'calendar.png', 'DefaultRecentlyAddedEpisodes.png')
 
         if lite == False:
-            if not control.setting('lists.widget') == '0':
+            if control.setting('lists.widget') == 'true':
                 self.addDirectoryItem(32004, 'mytvliteNavigator', 'mytvshows.png', 'DefaultVideoPlaylists.png')
 
             self.addDirectoryItem(32028, 'tvPerson', 'people-search.png', 'DefaultTVShows.png')

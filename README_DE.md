@@ -29,7 +29,7 @@ Dieses Addon erweitert Kodi um einen Multi-Scraper für verschiedene Video-Index
 
 ### In Kodi
 
-- Klicken oder tippen Sie auf das Zahnrad-Symbol oben rechts; im sich öffnenden Einstellungs-Browser gehen Sie zu **Interface**, dann auf **Regional** und **Language**
+- Klicken oder tippen Sie auf das Zahnrad-Symbol oben links; im sich öffnenden Einstellungs-Browser gehen Sie zu **Interface**, dann auf **Regional** und **Language**
 - Aus der Liste der verfügbaren Sprachen wählen Sie **German**; drücken Sie zweimal die Zurück-Taste Ihrer Fernbedienung oder tippen Sie zweimal auf das Zurück-Symbol
 - Gehen Sie zu **Addons** und dort auf das Dropbox-Icon oben rechts
 - Klicken oder tippen Sie auf **Aus ZIP-Datei installieren**; eine Dialogbox öffnet sich
@@ -48,7 +48,7 @@ Alle Diskussionen in diesem Repository können sowohl auf deutsch als auch auf e
 
 ## Support
 .
-* Offizielles [Lastship-Forum](http://lastship.square7.ch/forum/forumdisplay.php?fid=28)
+* Offizielles [*Lastship*-Forum](http://lastship.square7.ch/forum/forumdisplay.php?fid=28)
 * Öffentliche [*Lastship* Gitter-Community](https://gitter.im/Lastship_Chat/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)   
 
 

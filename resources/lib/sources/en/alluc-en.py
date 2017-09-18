@@ -32,7 +32,7 @@ class source:
         self.base_link = 'https://www.alluc.ee'
         self.search_link = '/api/search/%s/?apikey=%s&getmeta=0&query=%s&count=%d&from=%d'
         self.types = ['stream']
-        self.streamLimit = 200
+        self.streamLimit = int(control.setting('alluc.limit'))
         self.streamIncrease = 100
         self.api = control.setting('alluc.api')
         self.debrid = control.setting('alluc.download')

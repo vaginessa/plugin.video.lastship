@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.lastship" version="1.1.16" name="Lastship" provider-name="Lastship">
+<addon id="plugin.video.lastship" version="1.2.0" name="Lastship" provider-name="Lastship">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0" />
 		<import addon="repository.lastship" version="1.0.1" />
@@ -31,12 +31,16 @@
 - Neues Addon-Fanart
 - Problem mit der Einstellung "Meine Listen" repariert
 - Provider Flimmerstube/Horrorkino gefixt
-- Provider-Settings umbenannt</news>
+- Provider-Settings umbenannt
+- Einige Texte aktualisiert
+- Neues Artwork eingebunden !</news>
 		<news lang="en">- New provider : Stream.to
 - Updated provider Sezonlukdizi
 - New fanart background
 - Fix issue with "My Lists" setting
 - Fix provider Flimmerstube/Horrorkino
-- Relabelled provider settings</news>
+- Relabelled provider settings
+- Updated some strings
+- Integrated new artwork set !</news>
 	</extension>
 </addon>

@@ -130,6 +130,7 @@
 		<setting id="provider.sezonlukdizi" type="bool" label="SEZONLUKDIZI.NET" default="true" />
 		<setting id="provider.solarmovie" type="bool" label="SOLARMOVIEZ.TO" default="true" />
 		<setting id="provider.streamlord" type="bool" label="STREAMLORD.COM" default="true" />
+		<setting id="provider.tinklepad" type="bool" label="TINKLEPAD.AT" default="true" />
 		<setting id="provider.tinydl" type="bool" label="TINYDL.COM" default="true" />
 		<setting id="provider.tunemovie" type="bool" label="TUNEMOVIE.COM" default="true" />
 		<setting id="provider.tvbox" type="bool" label="TVBOX.AG" default="true" />

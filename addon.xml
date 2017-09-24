@@ -26,21 +26,7 @@
 			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
 			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
-		<news lang="de">- Neuer Provider : Stream.to
-- Provider Sezonlukdizi aktualisiert
-- Neues Addon-Fanart
-- Problem mit der Einstellung "Meine Listen" repariert
-- Provider Flimmerstube/Horrorkino gefixt
-- Provider-Settings umbenannt
-- Einige Texte aktualisiert
-- Neues Artwork eingebunden !</news>
-		<news lang="en">- New provider : Stream.to
-- Updated provider Sezonlukdizi
-- New fanart background
-- Fix issue with "My Lists" setting
-- Fix provider Flimmerstube/Horrorkino
-- Relabelled provider settings
-- Updated some strings
-- Integrated new artwork set !</news>
+		<news lang="de">- Neuer Provider : Tinklepad.at</news>
+		<news lang="en">- New provider : Tinklepad.at</news>
 	</extension>
 </addon>

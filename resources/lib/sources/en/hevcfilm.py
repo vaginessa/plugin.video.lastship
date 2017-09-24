@@ -30,7 +30,7 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
-        self.domains = ['300mbmoviesdl.com', 'hevcbluray.com']
+        self.domains = ['300mbmoviesdl.com', 'hevcbluray.info']
         self.base_link = 'http://www.300mbmoviesdl.com'
         self.search_link = '/search/%s/feed/rss2/'
 

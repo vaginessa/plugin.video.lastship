@@ -528,11 +528,11 @@ msgid "TV"
 msgstr ""
 
 msgctxt "#32351"
-msgid "Downloading features are disabled by default."
+msgid "[I]Downloading features are disabled by default.[/I]"
 msgstr ""
 
 msgctxt "#32352"
-msgid "Set up your download folders in order to enable them."
+msgid "[I]Set up your download folders in order to enable them.[/I]"
 msgstr ""
 
 msgctxt "#32353"
@@ -700,7 +700,7 @@ msgid "Nothing found to play"
 msgstr ""
 
 msgctxt "#32538"
-msgid "DEBRID-SERVICE"
+msgid "Debrid-Services"
 msgstr ""
 
 msgctxt "#32539"
@@ -716,7 +716,7 @@ msgid "Library"
 msgstr ""
 
 msgctxt "#32542"
-msgid "Lastship folders will be imported to library if they are added to media sources."
+msgid "[I]Folders will be imported to library if they are added to media sources.[/I]"
 msgstr ""
 
 msgctxt "#32543"
@@ -821,6 +821,18 @@ msgstr ""
 
 msgctxt "#32572"
 msgid "Protected Link. Please enter account credentials in the settings."
+msgstr ""
+
+msgctxt "#32573"
+msgid "[I]Personal API keys provide quicker API responses.[/I]"
+msgstr ""
+
+msgctxt "#32574"
+msgid "[I]Become a VIP member at[/I] https://fanart.tv/vip [I]for many benefits.[/I]"
+msgstr ""
+
+msgctxt "#32575"
+msgid "[I]App must be installed on local device.[/I]"
 msgstr ""
 
 msgctxt "#32580"

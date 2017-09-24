@@ -1,3 +1,11 @@
+[B]Nightly Update[/B]
+- Add stream.to
+- Update Sezonlukdizi
+- New Fanart Background
+- Fix for "My Lists" setting
+- Fix provider Flimmerstube (Horrokino)
+- Provider-Einstellungen neu benannt
+
 [B]1.1.16[/B]
 - Update MoviesHD
 - Fix KingMovies

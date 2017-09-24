@@ -26,21 +26,17 @@
 			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
 			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
-		<news lang="de">- Neuer Provider : CMovies (en)
-- Provider Watch5s wieder integriert
-- Provider MoviesHD, MyDDL, XMovies und WatchSeries aktualisiert
-- Provider KingMovies, GoStream, OpenMovies und Movie25 gefixt
-- Neue Option zur Limitierung der Anzahl gesuchter Alluc-Links
-- Anzahl der Alluc API-Calls auf Minimum reduziert
-- Trakt-API-Aufrufe für den TV-Sendekalender optimiert
-- Neue Senderlogos</news>
-		<news lang="en">- New provider : CMovies (en)
-- Provider Watch5s integrated again
-- Provider MoviesHD, MyDDL and WatchSeries updated
-- Provider KingMovies, GoStream, OpenMovies and Movie25 fixed
-- New setting to limit the number of Alluc links getting searched
-- Number of Alluc API-calls minimized
-- Optimized Trakt Api calls for the TV calendar
-- New TV network logos</news>
+		<news lang="de">- Neuer Provider : Stream.to
+- Provider Sezonlukdizi aktualisiert
+- Neues Addon-Fanart
+- Problem mit der Einstellung "Meine Listen" repariert
+- Provider Flimmerstube/Horrorkino gefixt
+- Provider-Settings umbenannt</news>
+		<news lang="en">- New provider : Stream.to
+- Updated provider Sezonlukdizi
+- New fanart background
+- Fix issue with "My Lists" setting
+- Fix provider Flimmerstube/Horrorkino
+- Relabelled provider settings</news>
 	</extension>
 </addon>

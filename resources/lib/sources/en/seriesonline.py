@@ -30,7 +30,7 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
-        self.domains = ['seriesonline.io']
+        self.domains = ['seriesonline8.com', 'series9.io', 'seriesonline.to']
         self.base_link = 'https://seriesonline8.com'
         self.search_link = '/movie/search/%s'
 

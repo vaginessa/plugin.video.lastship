@@ -32,8 +32,8 @@ class source:
         self.priority = 1
         self.language = ['de']
         self.genre_filter = ['horror']
-        self.domains = ['horrorkino.do.am']
-        self.base_link = 'http://horrorkino.do.am/'
+        self.domains = ['flimmerstube.com', 'horrorkino.do.am']
+        self.base_link = 'http://flimmerstube.com'
         self.search_link = 'video/shv'
 
     def movie(self, imdb, title, localtitle, aliases, year):

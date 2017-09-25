@@ -1,8 +1,8 @@
-### Expected Behavior / Erwartetes Verhalten :
+## Expected Behavior / Erwartetes Verhalten :
 
 
 
-### Actual Behavior / Tatsächliches Verhalten :
+## Actual Behavior / Tatsächliches Verhalten :
 
 
 
@@ -10,16 +10,15 @@
 
 
 
-#### Additional Information / Weitere Informationen :
+### Additional Information / Weitere Informationen :
 
 
-###### Hardware, Kodi Version, Lastship Version :
+#### Hardware, Kodi Version, Lastship Version :
 
-###### Environment (additional Hardware, OS, ...) / Umgebung (zusätzl. Hardware, Betriebssystem, ...) :
+#### Environment (additional Hardware, OS, ...) / Umgebung (zusätzl. Hardware, Betriebssystem, ...) :
 
-###### Network Setup / Netzwerk-Konfiguration :
+##### Network Setup / Netzwerk-Konfiguration :
 
-##### **(Link to / Link zum) Debug-Logfile** :
+### **(Link to / Link zum) Debug-Logfile** :
 
 
-- - -

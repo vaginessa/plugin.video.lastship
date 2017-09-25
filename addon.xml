@@ -26,7 +26,9 @@
 			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
 			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
-		<news lang="de">- Neuer Provider : Tinklepad.at</news>
-		<news lang="en">- New provider : Tinklepad.at</news>
+		<news lang="de">- Neuer Provider : Tinklepad.at
+- Aufrufe der Trakt-API verschlüsselt</news>
+		<news lang="en">- New provider : Tinklepad.at
+- Trakt API calls encrypted</news>
 	</extension>
 </addon>

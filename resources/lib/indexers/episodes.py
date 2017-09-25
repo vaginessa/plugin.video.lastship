@@ -529,7 +529,7 @@ class episodes:
     def __init__(self):
         self.list = []
 
-        self.trakt_link = 'http://api.trakt.tv'
+        self.trakt_link = 'https://api.trakt.tv'
         self.tvmaze_link = 'http://api.tvmaze.com'
         self.tvdb_key = 'QzE1NTNERTM4MTcwNUE0Mw=='
         self.datetime = (datetime.datetime.utcnow() - datetime.timedelta(hours = 5))
@@ -544,16 +544,16 @@ class episodes:
         self.tvdb_poster = 'http://thetvdb.com/banners/_cache/'
 
         self.added_link = 'http://api.tvmaze.com/schedule'
-        #self.mycalendar_link = 'http://api.trakt.tv/calendars/my/shows/date[29]/60/'
-        self.mycalendar_link = 'http://api.trakt.tv/calendars/my/shows/date[30]/30/' #go back 30 and show all shows aired until today
-        self.trakthistory_link = 'http://api.trakt.tv/users/me/history/shows?limit=300'
-        self.progress_link = 'http://api.trakt.tv/users/me/watched/shows'
-        self.hiddenprogress_link = 'http://api.trakt.tv/users/hidden/progress_watched?limit=1000&type=show'
+        #self.mycalendar_link = 'https://api.trakt.tv/calendars/my/shows/date[29]/60/'
+        self.mycalendar_link = 'https://api.trakt.tv/calendars/my/shows/date[30]/30/' #go back 30 and show all shows aired until today
+        self.trakthistory_link = 'https://api.trakt.tv/users/me/history/shows?limit=300'
+        self.progress_link = 'https://api.trakt.tv/users/me/watched/shows'
+        self.hiddenprogress_link = 'https://api.trakt.tv/users/hidden/progress_watched?limit=1000&type=show'
         self.calendar_link = 'http://api.tvmaze.com/schedule?date=%s'
 
-        self.traktlists_link = 'http://api.trakt.tv/users/me/lists'
-        self.traktlikedlists_link = 'http://api.trakt.tv/users/likes/lists?limit=1000000'
-        self.traktlist_link = 'http://api.trakt.tv/users/%s/lists/%s/items'
+        self.traktlists_link = 'https://api.trakt.tv/users/me/lists'
+        self.traktlikedlists_link = 'https://api.trakt.tv/users/likes/lists?limit=1000000'
+        self.traktlist_link = 'https://api.trakt.tv/users/%s/lists/%s/items'
 
 
     def get(self, tvshowtitle, year, imdb, tvdb, season=None, episode=None, idx=True, create_directory=True):

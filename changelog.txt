@@ -1,6 +1,8 @@
 [B]Nightly[/B]
 - Add provider Tinklepad
 - Encrypt Trakt API calls via SSL/TLS
+- Update strings and translation
+- Update provider PrimeWire
 
 [B]1.2.0[/B]
 - Add stream.to

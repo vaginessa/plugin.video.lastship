@@ -85,16 +85,16 @@ msgid "Year"
 msgstr "Jahr"
 
 msgctxt "#32013"
-msgid "People"
-msgstr "Personen"
+msgid "Actors / Crew"
+msgstr "Darsteller / Crew"
 
 msgctxt "#32014"
 msgid "Languages"
 msgstr "Sprachen"
 
 msgctxt "#32015"
-msgid "Certificates"
-msgstr "Zertifikate"
+msgid "Ratings (MPAA)"
+msgstr "Freigabe (US/MPAA)"
 
 msgctxt "#32016"
 msgid "Networks"
@@ -110,11 +110,11 @@ msgstr "Am populärsten"
 
 msgctxt "#32019"
 msgid "Most Voted"
-msgstr "Die meisten Votes"
+msgstr "Meist bewertet"
 
 msgctxt "#32020"
 msgid "Box Office"
-msgstr "Box Office"
+msgstr "Bestes Einspielergebnis"
 
 msgctxt "#32021"
 msgid "Oscar Winners"
@@ -126,7 +126,7 @@ msgstr "In den Kinos"
 
 msgctxt "#32023"
 msgid "Highly Rated"
-msgstr "Hoch bewertet"
+msgstr "Am besten bewertet"
 
 msgctxt "#32024"
 msgid "Airing today"
@@ -142,19 +142,19 @@ msgstr "Neue TV-Serien"
 
 msgctxt "#32027"
 msgid "TV Calendar"
-msgstr "TV-Kalender"
+msgstr "Serien-Kalender"
 
 msgctxt "#32028"
-msgid "People Search"
-msgstr "Suche nach Personen"
+msgid "Actors/Crew Search"
+msgstr "Suche nach Darstellern/Crew"
 
 msgctxt "#32029"
-msgid "People (Movies)"
-msgstr "Personen (Filme)"
+msgid "Actors/Crew (Movies)"
+msgstr "Darsteller/Crew (Filme)"
 
 msgctxt "#32030"
-msgid "People (TV)"
-msgstr "Personen (TV)"
+msgid "Actors/Crew (TV)"
+msgstr "Darsteller/Crew (Serien)"
 
 msgctxt "#32031"
 msgid "Discover"
@@ -185,8 +185,8 @@ msgid "Progress"
 msgstr "Fortschritt"
 
 msgctxt "#32038"
-msgid "Episodes"
-msgstr "Episoden"
+msgid "Most recent Episodes"
+msgstr "Meine neuesten Folgen"
 
 msgctxt "#32039"
 msgid "Movie Lists"
@@ -257,7 +257,7 @@ msgid "Season"
 msgstr "Staffel"
 
 msgctxt "#32056"
-msgid "Are you sure?"
+msgid "Are you sure ?"
 msgstr "Sind Sie sicher ?"
 
 msgctxt "#32057"
@@ -265,7 +265,7 @@ msgid "Process Complete"
 msgstr "Vorgang abgeschlossen"
 
 msgctxt "#32058"
-msgid "This will slow down things until they are re-cached!"
+msgid "This will slow down things until they are re-cached."
 msgstr "Bis zur Aktualisierung des Caches wird das System langsamer sein."
 
 msgctxt "#32059"
@@ -273,8 +273,7 @@ msgid "CLICK HERE TO SAVE VIEW"
 msgstr "HIER KLICKEN, UM ANSICHT ZU SPEICHERN"
 
 msgctxt "#32060"
-msgid ""
-"January|February|March|April|May|June|July|August|September|October|November|December"
+msgid "January|February|March|April|May|June|July|August|September|October|November|December"
 msgstr "Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember"
 
 msgctxt "#32061"
@@ -286,8 +285,8 @@ msgid "[B]%s[/B] : %s"
 msgstr "[B]%s[/B] : %s"
 
 msgctxt "#32063"
-msgid "Play using..."
-msgstr "Abspielen mit..."
+msgid "Pick stream..."
+msgstr "Stream aussuchen..."
 
 msgctxt "#32064"
 msgid "Auto Play"
@@ -295,31 +294,31 @@ msgstr "Auto-Play"
 
 msgctxt "#32065"
 msgid "Queue item"
-msgstr "Eintrag zur Warteschlange hinzufügen"
+msgstr "Anschließend abspielen"
 
 msgctxt "#32066"
-msgid "Watched in Lastship"
+msgid "[I]Watched[/I] in Lastship"
 msgstr "In Lastship [I]Gesehen[/I]"
 
 msgctxt "#32067"
-msgid "Unwatched in Lastship"
+msgid "[I]Unwatched[/I] in Lastship"
 msgstr "In Lastship [I]Ungesehen[/I]"
 
 msgctxt "#32068"
-msgid "Watched in Trakt"
+msgid "[I]Watched[/I] in Trakt"
 msgstr "In Trakt [I]Gesehen[/I]"
 
 msgctxt "#32069"
-msgid "Unwatched in Trakt"
+msgid "[I]Unwatched[/I] in Trakt"
 msgstr "In Trakt [I]Ungesehen[/I]"
 
 msgctxt "#32070"
-msgid "Trakt Manager"
-msgstr "Trakt-Manager"
+msgid "[B]Trakt Manager[/B]"
+msgstr "[B]Trakt-Manager[/B]"
 
 msgctxt "#32071"
 msgid "Browse Series"
-msgstr "Durchsuche TV-Serien"
+msgstr "Staffel-Übersicht"
 
 msgctxt "#32072"
 msgid "Refresh"
@@ -366,8 +365,8 @@ msgid "PIN"
 msgstr "PIN"
 
 msgctxt "#32309"
-msgid "API"
-msgstr "API"
+msgid "Personal API key"
+msgstr "Persönlicher API-Key"
 
 msgctxt "#32310"
 msgid "General"
@@ -395,7 +394,7 @@ msgstr "Trakt"
 
 msgctxt "#32316"
 msgid "Info Language"
-msgstr "Sprache für Infos"
+msgstr "Sprache für Informationen"
 
 msgctxt "#32317"
 msgid "Flatten TV seasons"
@@ -438,24 +437,24 @@ msgid "Recently aired"
 msgstr "Kürzlich gesendet"
 
 msgctxt "#32327"
-msgid "Trakt Progress"
+msgid "Trakt: Progress"
 msgstr "Trakt: Fortschritt"
 
 msgctxt "#32328"
-msgid "Trakt New Episodes"
-msgstr "Trakt: Neue Episoden"
+msgid "Trakt: Most recent Episodes"
+msgstr "Trakt: Meine neuesten Folgen"
 
 msgctxt "#32329"
-msgid "My Lists"
-msgstr "Meine Listen"
+msgid "My Movies / TV Shows (Trakt/IMDb)"
+msgstr "Meine Filme/TV-Serien (Trakt/IMDb)"
 
 msgctxt "#32330"
 msgid "Playback"
 msgstr "Wiedergabe"
 
 msgctxt "#32331"
-msgid "Default action"
-msgstr "Standard-Aktion"
+msgid "On [I]Select[/I] open :"
+msgstr "Bei [I]Auswahl[/I] öffnen :"
 
 msgctxt "#32332"
 msgid "Dialog"
@@ -482,19 +481,19 @@ msgid "Background"
 msgstr "Hintergrund"
 
 msgctxt "#32338"
-msgid "File Hosting Filters"
-msgstr "Dateianbieter-Filter"
+msgid "Optional filters"
+msgstr "Filter-Optionen"
 
 msgctxt "#32339"
 msgid "Max Quality"
 msgstr "Höchste Qualität"
 
 msgctxt "#32340"
-msgid "SD Hosters in Auto Play"
+msgid "Only SD streams in Auto Play"
 msgstr "Auto-Play nur in SD"
 
 msgctxt "#32341"
-msgid "Hosters with captchas"
+msgid "Include hosters with pairing"
 msgstr "Dateianbieter mit Pairing"
 
 msgctxt "#32342"
@@ -503,7 +502,7 @@ msgstr "Nach Indexseiten sortieren"
 
 msgctxt "#32343"
 msgid "When playback starts..."
-msgstr "Wenn Wiedergabe startet..."
+msgstr "Bei Wiedergabe-Start..."
 
 msgctxt "#32344"
 msgid "Resume Playback"
@@ -530,7 +529,7 @@ msgid "Movies"
 msgstr "Filme"
 
 msgctxt "#32350"
-msgid "TV"
+msgid "TV shows"
 msgstr "TV-Serien"
 
 msgctxt "#32351"
@@ -539,7 +538,7 @@ msgstr "[I]Download ist standardmässig deaktiviert.[/I]"
 
 msgctxt "#32352"
 msgid "[I]Set up your download folders in order to enable them.[/I]"
-msgstr "[I]Zum Aktivieren bitte die Download-Ordner angeben.[/I]"
+msgstr "[I]Zum Aktivieren bitte die Download-Ordner eintragen.[/I]"
 
 msgctxt "#32353"
 msgid "Subtitles"
@@ -562,16 +561,16 @@ msgid "Secondary Language"
 msgstr "Zweitsprache"
 
 msgctxt "#32358"
-msgid "Subtitles could be unavailable or out of sync."
+msgid "[I]Subtitles could be unavailable or out of sync.[/I]"
 msgstr "[I]Falls keine verfügbar bzw. nicht synchron,[/I]"
 
 msgctxt "#32359"
-msgid "In that case use your own subtitles."
+msgid "[I]In that case use your own subtitles.[/I]"
 msgstr "[I]bitte eigene Untertitel verwenden.[/I]"
 
 msgctxt "#32360"
-msgid "Providers Language"
-msgstr "Indexseiten-Sprache"
+msgid "Provider Language(s)"
+msgstr "Indexseiten-Sprache(n)"
 
 msgctxt "#32361"
 msgid "LOCAL FILES (LIBRARY)"
@@ -582,16 +581,16 @@ msgid "When playback ends..."
 msgstr "Nach der Wiedergabe..."
 
 msgctxt "#32373"
-msgid "Force container refresh"
-msgstr "Container-Aktualisierung erzwingen"
+msgid "Force directory update"
+msgstr "Verzeichnis neu laden"
 
 msgctxt "#32401"
 msgid "No stream available"
-msgstr "Keine Streams gefunden"
+msgstr "Kein Stream gefunden"
 
 msgctxt "#32402"
-msgid "Playback outside Lastship is not allowed"
-msgstr "Die Wiedergabe ausserhalb von Lastship ist nicht erlaubt"
+msgid "Playback outside Lastship is not allowed."
+msgstr "Wiedergabe ausserhalb von Lastship ist nicht erlaubt."
 
 msgctxt "#32403"
 msgid "Download"
@@ -606,16 +605,16 @@ msgid "%s seconds"
 msgstr "%s Sekunden"
 
 msgctxt "#32406"
-msgid "Remaining providers: %s"
-msgstr "Verbleibende Indexseiten: %s"
+msgid "Remaining providers : %s"
+msgstr "Restliche Provider : %s"
 
 msgctxt "#32407"
-msgid "Are you sure?"
+msgid "Are you sure ?"
 msgstr "Sind Sie sicher ?"
 
 msgctxt "#32408"
-msgid "Process Complete"
-msgstr "[B]Fertig.[/B]"
+msgid "[B]Process Complete[/B]"
+msgstr "[B]Fertig[/B]"
 
 msgctxt "#32501"
 msgid "Start from beginning"
@@ -634,7 +633,7 @@ msgid "An account already exists."
 msgstr "Es ist schon ein Konto verbunden."
 
 msgctxt "#32512"
-msgid "Do you want to reset?"
+msgid "Do you want to reset ?"
 msgstr "Möchten Sie es zurücksetzen ?"
 
 msgctxt "#32513"
@@ -646,8 +645,8 @@ msgid "2) When prompted enter : [COLOR skyblue]%s[/COLOR]"
 msgstr "2) Auf Nachfrage Folgendes eingeben : [COLOR skyblue]%s[/COLOR]"
 
 msgctxt "#32515"
-msgid "Trakt Manager"
-msgstr "Trakt - Manager"
+msgid "[B]Trakt Manager[/B]"
+msgstr "[B]Trakt - Manager[/B]"
 
 msgctxt "#32516"
 msgid "Add to [B]Collection[/B]"
@@ -666,12 +665,12 @@ msgid "Remove from [B]Watchlist[/B]"
 msgstr "Aus [B]Merkliste[/B] entfernen"
 
 msgctxt "#32520"
-msgid "Add to [B]new List[/B]"
-msgstr "In  [I][B]Neue Liste[/B][/I] eintragen"
+msgid "Add to [I][B]new List[/B][/I]"
+msgstr "In eine [I][B]Neue Liste[/B][/I] eintragen"
 
 msgctxt "#32521"
 msgid "Add to [B]%s[/B]"
-msgstr "Zu  [B]%s[/B] hinzufügen"
+msgstr "Zu [B]%s[/B] hinzufügen"
 
 msgctxt "#32522"
 msgid "Remove from [B]%s[/B]"
@@ -682,7 +681,7 @@ msgid "An account already exists."
 msgstr "Es ist schon ein Konto verbunden."
 
 msgctxt "#32532"
-msgid "Do you want to reset?"
+msgid "Do you want to reset ?"
 msgstr "Möchten Sie es zurücksetzen ?"
 
 msgctxt "#32533"
@@ -691,7 +690,7 @@ msgstr "1) Rufen Sie [COLOR skyblue]%s[/COLOR] auf."
 
 msgctxt "#32534"
 msgid "2) When prompted enter : [COLOR skyblue]%s[/COLOR]"
-msgstr "2) Auf Nachfrage Folgendes eingeben : [COLOR skyblue]%s[/COLOR]"
+msgstr "2) Auf Nachfrage bitte eingeben : [COLOR skyblue]%s[/COLOR]"
 
 msgctxt "#32535"
 msgid "Play Random"
@@ -710,7 +709,7 @@ msgid "Debrid-Services"
 msgstr "Debrid-Dienste"
 
 msgctxt "#32539"
-msgid "Configure Debrid Services in URLResolver Settings."
+msgid "[I]Configure Debrid Services in URLResolver Settings.[/I]"
 msgstr "[I]Debrid-Dienste in den Einstellungen des URLResolver konfigurieren.[/I]"
 
 msgctxt "#32540"
@@ -743,11 +742,11 @@ msgstr "Bei Updates benachrichtigen"
 
 msgctxt "#32547"
 msgid "Update library after adding content"
-msgstr "Bibliothek nach dem Hinzufügen von Inhalten aktualisieren"
+msgstr "Nach Hinzufügen von Inhalten die Bibliothek aktualisieren"
 
 msgctxt "#32548"
 msgid "Avoid creating duplicate content"
-msgstr "Doppelte Einträge verhindern"
+msgstr "Doppelte Einträge vermeiden"
 
 msgctxt "#32549"
 msgid "Check movie before adding it"
@@ -770,11 +769,11 @@ msgid "Updating TV shows..."
 msgstr "Suche neue Episoden..."
 
 msgctxt "#32554"
-msgid "Process Complete"
+msgid "[B]Process Complete.[/B]"
 msgstr "[B]Fertig.[/B]"
 
 msgctxt "#32555"
-msgid "Are you sure?"
+msgid "Are you sure ?"
 msgstr "Sicher ?"
 
 msgctxt "#32556"
@@ -795,23 +794,23 @@ msgstr "[B]LASTSHIP[/B] : Film-Ordner..."
 
 msgctxt "#32560"
 msgid "[B]LASTSHIP[/B] : TV folder..."
-msgstr "[B]LASTSHIP[/B] : TV-Serien-Ordner..."
+msgstr "[B]LASTSHIP[/B] : Serien-Ordner..."
 
 msgctxt "#32561"
-msgid "[B]TRAKT[/B] : Import Collection..."
+msgid "[B]TRAKT[/B] : Import Movie Collection..."
 msgstr "[B]TRAKT[/B] : Film-Sammlung importieren..."
 
 msgctxt "#32562"
-msgid "[B]TRAKT[/B] : Import Watchlist..."
+msgid "[B]TRAKT[/B] : Import Movie Watchlist..."
 msgstr "[B]TRAKT[/B] : Film-Merkliste importieren..."
 
 msgctxt "#32563"
 msgid "[B]TRAKT[/B] : Import TV Collection..."
-msgstr "[B]TRAKT[/B] : TV-Sammlung importieren..."
+msgstr "[B]TRAKT[/B] : Serien-Sammlung importieren..."
 
 msgctxt "#32564"
 msgid "[B]TRAKT[/B] : Import TV Watchlist..."
-msgstr "[B]TRAKT[/B] : TV-Merkliste importieren..."
+msgstr "[B]TRAKT[/B] : Serien-Merkliste importieren..."
 
 msgctxt "#32565"
 msgid "Include episodes with unknown air dates"
@@ -822,7 +821,7 @@ msgid "Show unaired seasons/episodes"
 msgstr "Noch nicht gesendete Staffeln/Folgen anzeigen"
 
 msgctxt "#32571"
-msgid "Hide movies in cinema"
+msgid "Only show movies older than 90 days"
 msgstr "Nur Filme anzeigen, die älter als 90 Tage sind"
 
 msgctxt "#32572"
@@ -835,7 +834,7 @@ msgstr "[I]Persönliche API-Keys ermöglichen kürzere Antwortzeiten.[/I]"
 
 msgctxt "#32574"
 msgid "[I]Become a VIP member at[/I] https://fanart.tv/vip [I]for many benefits.[/I]"
-msgstr "[I]Unter[/I] https://fanart.tv/vip [I]können Sie sich als VIP-Mitglied registrieren.[/I]"
+msgstr "[I]Bei[/I] https://fanart.tv/vip [I]können Sie sich als VIP-Mitglied registrieren.[/I]"
 
 msgctxt "#32575"
 msgid "[I]App must be installed on local device.[/I]"

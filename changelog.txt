@@ -1,5 +1,5 @@
 [B]Nightly[/B]
-- Add provider Tinklepad
+- Add providers Tinklepad, AllRls
 - Encrypt Trakt API calls via SSL/TLS
 - Update strings and translation
 - Update provider PrimeWire

@@ -4,6 +4,7 @@
 - Update strings and translation
 - Update provider PrimeWire
 - Fix provider Sezonlokdizi
+- Fix TV shows premiere date
 
 [B]1.2.0[/B]
 - Add stream.to

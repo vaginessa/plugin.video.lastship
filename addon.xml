@@ -30,11 +30,14 @@
 - Aufrufe der Trakt-API verschlüsselt
 - Texte und Übersetzung überarbeitet
 - Provider PrimeWire aktualisiert
-- Provider Sezonlukdizi repariert</news>
+- Provider Sezonlukdizi repariert
+- Premieren-Termin für Serien repariert</news>
 		<news lang="en">- New provider : Tinklepad.at
 - Trakt API calls encrypted
 - Updated Strings and translation
 - Provider PrimeWire updated
-- Fixed provider Sezonlukdizi</news>
+- Fixed provider Sezonlukdizi
+- Fixed premiere date for TV shows
+</news>
 	</extension>
 </addon>

@@ -29,10 +29,12 @@
 		<news lang="de">- Neuer Provider : Tinklepad.at
 - Aufrufe der Trakt-API verschlüsselt
 - Texte und Übersetzung überarbeitet
-- Provider PrimeWire aktualisiert</news>
+- Provider PrimeWire aktualisiert
+- Provider Sezonlukdizi repariert</news>
 		<news lang="en">- New provider : Tinklepad.at
 - Trakt API calls encrypted
 - Updated Strings and translation
-- Provider PrimeWire updated</news>
+- Provider PrimeWire updated
+- Fixed provider Sezonlukdizi</news>
 	</extension>
 </addon>

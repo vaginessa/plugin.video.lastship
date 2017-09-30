@@ -545,7 +545,7 @@ class episodes:
 
         self.added_link = 'http://api.tvmaze.com/schedule'
         #self.mycalendar_link = 'https://api.trakt.tv/calendars/my/shows/date[29]/60/'
-        self.mycalendar_link = 'https://api.trakt.tv/calendars/my/shows/date[30]/30/' #go back 30 and show all shows aired until today
+        self.mycalendar_link = 'https://api.trakt.tv/calendars/my/shows/date[30]/31/' #go back 30 and show all shows aired until tomorrow
         self.trakthistory_link = 'https://api.trakt.tv/users/me/history/shows?limit=300'
         self.progress_link = 'https://api.trakt.tv/users/me/watched/shows'
         self.hiddenprogress_link = 'https://api.trakt.tv/users/hidden/progress_watched?limit=1000&type=show'

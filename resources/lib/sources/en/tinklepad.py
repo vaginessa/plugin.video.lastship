@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-'''
-    Covenant Add-on
+"""
+    Lastship Add-on (C) 2017
+    Credits to Exodus and Covenant; our thanks go to their creators
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,7 +16,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-'''
+"""
 
 
 import re,urllib,urlparse,json,base64,time
@@ -81,7 +82,10 @@ class source:
                     else:
                         valid, hoster = source_utils.is_host_valid(url, hostDict)
                         if not valid: continue
-                        q = 'HD' if '720p' in url or 'x720' in url else 'SD' 
+                        q = 'SD'
+                        if '1080p' in url or 'x1080' in url: q = '1080p'
+                        elif '720p' in url or 'x720' in url: q = 'HD'
+                        
                         sources.append({'source': hoster, 'quality': q, 'language': 'en', 'url': url, 'direct': False, 'debridonly': False})
                     i+=1
 

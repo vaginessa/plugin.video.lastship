@@ -32,13 +32,13 @@
 - Aufrufe der Trakt-API verschlüsselt
 - Texte und Übersetzung überarbeitet
 - Provider PLocker und PrimeWire aktualisiert
-- Provider Sezonlukdizi, PubFilm und DirectDL repariert
+- Provider Sezonlukdizi, OpenMovies, PubFilm und DirectDL repariert
 - Premieren-Termin für Serien repariert</news>
 		<news lang="en">- New providers : Tinklepad and AllRls
 - Trakt API calls encrypted
 - Updated Strings and translation
 - Providers PLocker and PrimeWire updated
-- Fixed provider Sezonlukdizi, PubFilm and DirectDL
+- Fixed provider Sezonlukdizi, OpenMovies, PubFilm and DirectDL
 - Fixed premiere date for TV shows</news>
 	</extension>
 </addon>

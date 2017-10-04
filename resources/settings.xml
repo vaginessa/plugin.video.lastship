@@ -111,7 +111,7 @@
 		<setting id="provider.myvideolink" type="bool" label="NEWMYVIDEOLINK.XYZ" default="true" />
 		<setting id="provider.onlinedizi" type="bool" label="ONLINEDIZI.COM" default="true" />
 		<setting id="provider.onlinemoviesis" type="bool" label="ONLINEMOVIES.IS" default="true" />
-		<setting id="provider.openmovies" type="bool" label="OPENLOADMOVIES.ORG" default="true" />
+		<setting id="provider.openmovies" type="bool" label="OPENLOADMOVIES.NET" default="true" />
 		<setting id="provider.ororo" type="bool" label="ORORO.TV" default="true" />
 		<setting id="provider.pelispedia" type="bool" label="PELISPEDIA.TV" default="true" />
 		<setting id="provider.phdmovies" type="bool" label="PERFECTHDMOVIES.PW" default="true" />

@@ -2,7 +2,7 @@
 - Add providers Tinklepad, AllRls
 - Encrypt Trakt API calls via SSL/TLS
 - Update strings and translation
-- Update providers PLocker and PrimeWire
+- Update providers CMovies, PLocker and PrimeWire
 - Fix providers Sezonlukdizi, OnlineDizi, OpenMovies, PubFilm and DirectDL
 - Fix TV shows premiere date
 

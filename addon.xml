@@ -33,12 +33,14 @@
 - Texte und Übersetzung überarbeitet
 - Provider CMovies, PLocker und PrimeWire aktualisiert
 - Provider Sezonlukdizi, OnlineDizi, OpenMovies, PubFilm und DirectDL repariert
-- Premieren-Termin für Serien repariert</news>
+- Premieren-Termin für Serien repariert
+- Multi-Provider Alluc überarbeitet</news>
 		<news lang="en">- New providers : Tinklepad and AllRls
 - Trakt API calls encrypted
 - Updated Strings and translation
 - Providers CMovies, PLocker and PrimeWire updated
 - Fixed provider Sezonlukdizi, OnlineDizi, OpenMovies, PubFilm and DirectDL
-- Fixed premiere date for TV shows</news>
+- Fixed premiere date for TV shows
+- Tweaked multi provider Alluc</news>
 	</extension>
 </addon>

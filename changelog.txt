@@ -1,6 +1,6 @@
 [B]Nightly[/B]
 - Add providers Tinklepad, AllRls
-- Encrypt Trakt API calls via SSL/TLS
+- Encrypt calls to YouTube and Trakt API by SSL/TLS
 - Update strings and translation
 - Update providers CMovies, PLocker and PrimeWire
 - Fix providers Sezonlukdizi, OnlineDizi, OpenMovies, PubFilm and DirectDL

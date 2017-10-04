@@ -6,6 +6,7 @@
 - Fix providers Sezonlukdizi, OnlineDizi, OpenMovies, PubFilm and DirectDL
 - Fix TV shows premiere date
 - Tweak multi provider Alluc
+- Tweak logging
 
 [B]1.2.0[/B]
 - Add stream.to

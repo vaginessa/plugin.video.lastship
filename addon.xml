@@ -29,14 +29,14 @@
 			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
 		<news lang="de">- Neue Provider : Tinklepad und AllRls
-- Aufrufe der Trakt-API verschlüsselt
+- Aufrufe der Trakt-API verschlüsselt und Logging erweitert
 - Texte und Übersetzung überarbeitet
 - Provider CMovies, PLocker und PrimeWire aktualisiert
 - Provider Sezonlukdizi, OnlineDizi, OpenMovies, PubFilm und DirectDL repariert
 - Premieren-Termin für Serien repariert
 - Multi-Provider Alluc überarbeitet</news>
 		<news lang="en">- New providers : Tinklepad and AllRls
-- Trakt API calls encrypted
+- Trakt API calls encrypted and logging extended
 - Updated Strings and translation
 - Providers CMovies, PLocker and PrimeWire updated
 - Fixed provider Sezonlukdizi, OnlineDizi, OpenMovies, PubFilm and DirectDL

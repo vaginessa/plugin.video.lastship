@@ -34,15 +34,17 @@
 - Provider CMovies, PLocker und PrimeWire aktualisiert
 - Provider Sezonlukdizi, OnlineDizi, OpenMovies, PubFilm und DirectDL repariert
 - Premieren-Termin für Serien repariert
-- Multi-Provider Alluc überarbeitet
+- Neue Sprachenlisten für Filme und Serien in Balkan-Sprachen
 - Neue Hauptmenü-Option "Neue deutsche Filme"</news>
+- Multi-Provider Alluc überarbeitet
 		<news lang="en">- New providers : Tinklepad and AllRls
 - Encrypted YouTube and Trakt API calls and logging extended
 - Updated Strings and translation
 - Providers CMovies, PLocker and PrimeWire updated
 - Fixed provider Sezonlukdizi, OnlineDizi, OpenMovies, PubFilm and DirectDL
 - Fixed premiere date for TV shows
-- Tweaked multi provider Alluc
+- Added TV show/movie lists for Balkan languages
 - New main menu shortcut option : "Latest German movies"</news>
+- Tweaked multi provider Alluc
 	</extension>
 </addon>

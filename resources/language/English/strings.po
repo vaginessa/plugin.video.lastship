@@ -823,6 +823,10 @@ msgctxt "#32572"
 msgid "Protected Link. Please enter account credentials in the settings."
 msgstr ""
 
+msgctxt "#32573"
+msgid "Latest movies in German"
+msgstr ""
+
 msgctxt "#32575"
 msgid "[I]App must be installed on local device.[/I]"
 msgstr ""

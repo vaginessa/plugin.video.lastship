@@ -160,7 +160,7 @@ class sources:
                 item.setArt({'icon': thumb, 'thumb': thumb, 'poster': poster, 'banner': banner})
 
                 item.setProperty('Fanart_Image', fanart)
-                
+
                 video_streaminfo = {'codec': 'h264'}
                 item.addStreamInfo('video', video_streaminfo)
 
@@ -561,6 +561,7 @@ class sources:
         if quality == '': quality = '0'
 
         captcha = control.setting('hosts.captcha')
+        if captcha == '': captcha = 'true'
 
         random.shuffle(self.sources)
 
@@ -568,7 +569,7 @@ class sources:
             self.sources = sorted(self.sources, key=lambda k: k['provider'])
 
         for i in self.sources:
-            if 'checkquality' in i and i['checkquality'] == True: 
+            if 'checkquality' in i and i['checkquality'] == True:
                 if not i['source'].lower() in self.hosthqDict and i['quality'] not in ['SD', 'SCR', 'CAM']: i.update({'quality': 'SD'})
 
         local = [i for i in self.sources if 'local' in i and i['local'] == True]

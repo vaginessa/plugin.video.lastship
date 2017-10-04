@@ -14,7 +14,7 @@
 		<setting id="showunaired" type="bool" label="32570" default="true"/>
 		<setting id="hidecinema" type="bool" label="32571" default="false"/>
 		<setting type="lsep" label="32319" />
-		<setting id="movie.widget" type="enum" label="32320" lvalues="32302|32321|32322|32323|32324" default="1" />
+		<setting id="movie.widget" type="enum" label="32320" lvalues="32302|32321|32322|32323|32324|32573" default="1" />
 		<setting id="tv.widget.alt" type="enum" label="32325" lvalues="32302|32326|32327|32328" default="2" visible="!eq(-11,)" />
 		<setting id="tv.widget" type="enum" label="32325" lvalues="32302|32326" default="1" visible="eq(-12,)" />
 		<setting id="mylists.widget" type="bool" label="32329" default="true" />

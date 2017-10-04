@@ -828,6 +828,10 @@ msgctxt "#32572"
 msgid "Protected Link. Please enter account credentials in the settings."
 msgstr "Geschützter Link. Bitte Account-Daten in den Einstellungen eintragen."
 
+msgctxt "#32573"
+msgid "Latest movies in German"
+msgstr "Neue Filme in Deutsch"
+
 msgctxt "#32575"
 msgid "[I]App must be installed on local device.[/I]"
 msgstr "[I]Die App muss auf dem Gerät installiert sein.[/I]"

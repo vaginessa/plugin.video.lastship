@@ -14,8 +14,10 @@
 	<extension point="xbmc.service" library="service.py" start="startup" />
 	<extension point="xbmc.addon.metadata">
 		<summary lang="en">Lastship</summary>
-		<description lang="de">Wir suchen Entwickler. Bitte besuche [COLOR blue]http://lastship.square7.ch/forum/forumdisplay.php?fid=5[/COLOR] für Unterstützung und Fragen zu Lastship. Lastship FAQ bitte lesen. Beachte dabei, dass Lastship kein offizieller Teil des Media Players ist, den Du gerade verwendest und daher nicht von den offiziellen Support-Kanälen abgedeckt wird. Dieses Addon hat nichts zu tun mit dem Media-Player selbst, noch ist es dafür beabsichtigt. Es handelt sich hierbei lediglich um eine Drittanbieter-Anwendung, die dem System hinzugefügt wurde.</description>
-		<disclaimer lang="de">Die von diesem Addon dargestellten Inhalte werden von den Erstellern des Addons weder gehostet oder verbreitet, noch stehen die Ersteller in irgendeiner Beziehung zu den Content-Anbietern.</disclaimer>
+		<description lang="de">Wir suchen Entwickler. Bitte besuche das Forum [COLOR blue]http://lastship.square7.ch/forum/forumdisplay.php?fid=5[/COLOR] oder unseren Chatroom [COLOR blue]https://gitter.im/Lastship_Chat/Lobby[/COLOR] für Unterstützung und Fragen zu Lastship. Lastship FAQ bitte lesen. Beachte, dass Lastship kein offizieller Teil des verwendeten Media Players ist, und daher nicht von den offiziellen Support-Kanälen abgedeckt wird. Es handelt sich lediglich um eine Drittanbieter-Erweiterung, die dem System hinzugefügt wurde.</description>
+		<description lang="en">We're looking for developers. For support or questions about Lastship, please visit the forums [COLOR blue]http://lastship.square7.ch/forum/forumdisplay.php?fid=5[/COLOR] or our chat room [COLOR blue]https://gitter.im/Lastship_Chat/Lobby[/COLOR]. Please read the Lastship FAQs. Keep in mind that Lastship is not an official part of the media player it runs on, thhus it will not be supported via the official channels. It is just a third-party extension, which has been integrated into the system.</description>
+		<disclaimer lang="de">Die von diesem Addon dargestellten Inhalte werden von den Erstellern der Software weder gehostet oder verbreitet, noch stehen die Ersteller in irgendeiner Beziehung zu den Content-Anbietern.</disclaimer>
+		<disclaimer lang="en">The contents ahich are displayed by this addon are neither hosted nor distributed by the software developers, nor do the creators have any kind of relationship to the content providers.</disclaimer>
 		<platform>all</platform>
 		<forum>http://lastship.square7.ch/forum/forumdisplay.php?fid=28</forum>
 		<source>https://github.com/lastship/plugin.video.lastship</source>
@@ -37,7 +39,6 @@
 - Updated Strings and translation
 - Provider PrimeWire updated
 - Fixed provider Sezonlukdizi and DirectDL
-- Fixed premiere date for TV shows
-</news>
+- Fixed premiere date for TV shows</news>
 	</extension>
 </addon>

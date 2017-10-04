@@ -28,17 +28,17 @@
 			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
 			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
-		<news lang="de">- Neue Provider : Tinklepad.at und AllRls
+		<news lang="de">- Neue Provider : Tinklepad und AllRls
 - Aufrufe der Trakt-API verschlüsselt
 - Texte und Übersetzung überarbeitet
 - Provider PrimeWire aktualisiert
-- Provider Sezonlukdizi und DirectDL repariert
+- Provider Sezonlukdizi, PubFilm und DirectDL repariert
 - Premieren-Termin für Serien repariert</news>
-		<news lang="en">- New providers : Tinklepad.at and AllRls
+		<news lang="en">- New providers : Tinklepad and AllRls
 - Trakt API calls encrypted
 - Updated Strings and translation
 - Provider PrimeWire updated
-- Fixed provider Sezonlukdizi and DirectDL
+- Fixed provider Sezonlukdizi, PubFilm and DirectDL
 - Fixed premiere date for TV shows</news>
 	</extension>
 </addon>

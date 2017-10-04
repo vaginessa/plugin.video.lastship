@@ -152,8 +152,8 @@
 	</category>
 	<category label="32346">
 		<setting type="lsep" label="fanart.tv" />
-		<setting type="lsep" label="32573" />
-		<setting type="lsep" label="32574" />
+		<setting type="lsep" label="32582" />
+		<setting type="lsep" label="32583" />
 		<setting id="fanart.tv.user" type="text" label="32309" default="" />
 		<setting type="sep" />
 		<setting type="lsep" label="TMDB" />

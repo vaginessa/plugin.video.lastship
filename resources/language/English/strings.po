@@ -823,14 +823,6 @@ msgctxt "#32572"
 msgid "Protected Link. Please enter account credentials in the settings."
 msgstr ""
 
-msgctxt "#32573"
-msgid "[I]Personal API keys provide quicker API responses.[/I]"
-msgstr ""
-
-msgctxt "#32574"
-msgid "[I]Become a VIP member at[/I] https://fanart.tv/vip [I]for many benefits.[/I]"
-msgstr ""
-
 msgctxt "#32575"
 msgid "[I]App must be installed on local device.[/I]"
 msgstr ""
@@ -841,4 +833,12 @@ msgstr ""
 
 msgctxt "#32581"
 msgid "Max number of links"
+msgstr ""
+
+msgctxt "#32582"
+msgid "[I]Personal API keys provide quicker API responses.[/I]"
+msgstr ""
+
+msgctxt "#32583"
+msgid "[I]Become a VIP member at[/I] https://fanart.tv/vip [I]for many benefits.[/I]"
 msgstr ""

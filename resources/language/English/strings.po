@@ -448,7 +448,7 @@ msgid "Playback"
 msgstr ""
 
 msgctxt "#32331"
-msgid "On [I]Select[/I] open :"
+msgid "On [B]Select[/B] open :"
 msgstr ""
 
 msgctxt "#32332"
@@ -564,7 +564,7 @@ msgid "[I]In that case use your own subtitles.[/I]"
 msgstr ""
 
 msgctxt "#32360"
-msgid "Providers Language(s)"
+msgid "Provider Language(s)"
 msgstr ""
 
 msgctxt "#32361"
@@ -592,7 +592,7 @@ msgid "Download"
 msgstr ""
 
 msgctxt "#32404"
-msgid "Time elapsed: %s seconds"
+msgid "Time elapsed : %s seconds"
 msgstr ""
 
 msgctxt "#32405"
@@ -844,5 +844,5 @@ msgid "[I]Personal API keys provide quicker API responses.[/I]"
 msgstr ""
 
 msgctxt "#32583"
-msgid "[I]Become a VIP member at[/I] https://fanart.tv/vip [I]for many benefits.[/I]"
+msgid "[I]Become a VIP member at [/I] https://fanart.tv/vip [I]for many benefits.[/I]"
 msgstr ""

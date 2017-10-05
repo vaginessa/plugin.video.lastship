@@ -453,8 +453,8 @@ msgid "Playback"
 msgstr "Wiedergabe"
 
 msgctxt "#32331"
-msgid "On [I]Select[/I] open :"
-msgstr "Bei [I]Auswahl[/I] öffnen :"
+msgid "On [B]Select[/B] open :"
+msgstr "Bei [B]Auswahl[/B] öffnen :"
 
 msgctxt "#32332"
 msgid "Dialog"
@@ -562,11 +562,11 @@ msgstr "Zweitsprache"
 
 msgctxt "#32358"
 msgid "[I]Subtitles could be unavailable or out of sync.[/I]"
-msgstr "[I]Falls keine verfügbar bzw. nicht synchron,[/I]"
+msgstr "[I]Falls keine Untertitel verfügbar bzw. nicht[/I]"
 
 msgctxt "#32359"
 msgid "[I]In that case use your own subtitles.[/I]"
-msgstr "[I]bitte eigene Untertitel verwenden.[/I]"
+msgstr "[I]synchron, bitte eigene verwenden.[/I]"
 
 msgctxt "#32360"
 msgid "Provider Language(s)"
@@ -590,15 +590,15 @@ msgstr "Kein Stream gefunden"
 
 msgctxt "#32402"
 msgid "Playback outside Lastship is not allowed."
-msgstr "Wiedergabe ausserhalb von Lastship ist nicht erlaubt."
+msgstr "Wiedergabe außerhalb von Lastship ist nicht erlaubt."
 
 msgctxt "#32403"
 msgid "Download"
 msgstr "Download"
 
 msgctxt "#32404"
-msgid "Time elapsed: %s seconds"
-msgstr "Gemessene Zeit: %s Sekunden"
+msgid "Time elapsed : %s seconds"
+msgstr "Gemessene Zeit : %s Sekunden"
 
 msgctxt "#32405"
 msgid "%s seconds"
@@ -849,5 +849,5 @@ msgid "[I]Personal API keys provide quicker API responses.[/I]"
 msgstr "[I]Persönliche API-Keys ermöglichen kürzere Antwortzeiten.[/I]"
 
 msgctxt "#32583"
-msgid "[I]Become a VIP member at[/I] https://fanart.tv/vip [I]for many benefits.[/I]"
-msgstr "[I]Bei[/I] https://fanart.tv/vip [I]können Sie sich als VIP-Mitglied registrieren.[/I]"
+msgid "[I]Become a VIP member at [/I] https://fanart.tv/vip [I]for many benefits.[/I]"
+msgstr "[I]Bei [/I] https://fanart.tv/vip [I]können Sie sich als VIP-Mitglied registrieren.[/I]"

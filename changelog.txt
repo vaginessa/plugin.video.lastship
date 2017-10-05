@@ -1,3 +1,15 @@
+[B]Nightly[/B]
+- Add providers Tinklepad, AllRls
+- Encrypt calls to YouTube and Trakt API by SSL/TLS
+- Update strings and translation
+- Update providers CMovies, PLocker and PrimeWire
+- Fix providers Sezonlukdizi, OnlineDizi, OpenMovies, PubFilm and DirectDL
+- Fix TV shows premiere date
+- Tweak logging
+- Add new TV show / movie lists for Balkan languages
+- New main menu option ("New Movies" shortcut) : "Latest German movies"
+- Tweak multi provider Alluc
+
 [B]1.2.0[/B]
 - Add stream.to
 - Update Sezonlukdizi

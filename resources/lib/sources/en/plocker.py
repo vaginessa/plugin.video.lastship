@@ -25,7 +25,6 @@ import json
 
 from resources.lib.modules import client, cleantitle, directstream
 
-
 class source:
     def __init__(self):
         """
@@ -35,9 +34,8 @@ class source:
         self.priority = 1
         self.language = ['en']
         self.domains = ['putlocker.rs']
-        self.base_link = 'https://putlocker.rs'
-        self.movie_search_path = ('/filter?keyword=%s&sort=post_date:Adesc'
-                                  '&type[]=movie&release[]=%s')
+        self.base_link = 'https://putlocker.sk'
+        self.movie_search_path = ('search?keyword=%s')
         self.episode_search_path = ('/filter?keyword=%s&sort=post_date:Adesc'
                                     '&type[]=series')
         self.film_path = '/watch/%s'
@@ -64,7 +62,7 @@ class source:
         """
         try:
             clean_title = cleantitle.geturl(title)
-            query = (self.movie_search_path % (clean_title, year))
+            query = (self.movie_search_path % (clean_title))
             url = urlparse.urljoin(self.base_link, query)
 
             search_response = client.request(url)
@@ -248,31 +246,43 @@ class source:
                     {'id': i, 'update': 0, 'ts': data['ts']}))
                 query = (self.info_path % (data['ts'], token, i))
                 url = urlparse.urljoin(self.base_link, query)
-
                 info_response = client.request(url, XHR=True)
-
                 grabber_dict = json.loads(info_response)
 
-                if grabber_dict['type'] == 'direct':
-                    token64 = grabber_dict['params']['token']
-                    query = (self.grabber_path % (data['ts'], i, token64))
-                    url = urlparse.urljoin(self.base_link, query)
+                try:
+                    if grabber_dict['type'] == 'direct':
+                        token64 = grabber_dict['params']['token']
+                        query = (self.grabber_path % (data['ts'], i, token64))
+                        url = urlparse.urljoin(self.base_link, query)
 
-                    response = client.request(url, XHR=True)
+                        response = client.request(url, XHR=True)
 
-                    sources_list = json.loads(response)['data']
+                        sources_list = json.loads(response)['data']
 
-                    for j in sources_list:
-                        source = directstream.googletag(j['file'])[0]
-
+                        for j in sources_list:
+                            quality = j['label'] if not j['label'] == '' else 'SD'
+                            quality = 'HD' if quality in ['720p','1080p'] else 'SD'
+                            source = directstream.googlepass(j['file'])
+                            sources.append({
+                                'source': 'gvideo',
+                                'quality': 'HD',
+                                'language': 'en',
+                                'url': source,
+                                'direct': True,
+                                'debridonly': False
+                            })
+                    elif not grabber_dict['target'] == '':
+                        url = 'https:' + grabber_dict['target'] if not grabber_dict['target'].startswith('http') else grabber_dict['target']
+                        host = re.findall('([\w]+[.][\w]+)$', urlparse.urlparse(url.strip().lower()).netloc)[0]
                         sources.append({
-                            'source': 'gvideo',
-                            'quality': source['quality'],
+                            'source': host,
+                            'quality': 'SD',
                             'language': 'en',
-                            'url': source['url'],
-                            'direct': True,
+                            'url': url.replace('\/','/'),
+                            'direct': False,
                             'debridonly': False
                         })
+                except: pass
 
             return sources
 

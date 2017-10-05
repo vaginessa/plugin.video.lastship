@@ -80,7 +80,7 @@ msgid "Year"
 msgstr ""
 
 msgctxt "#32013"
-msgid "People"
+msgid "Actors / Crew"
 msgstr ""
 
 msgctxt "#32014"
@@ -88,7 +88,7 @@ msgid "Languages"
 msgstr ""
 
 msgctxt "#32015"
-msgid "Certificates"
+msgid "Ratings (MPAA)"
 msgstr ""
 
 msgctxt "#32016"
@@ -140,15 +140,15 @@ msgid "TV Calendar"
 msgstr ""
 
 msgctxt "#32028"
-msgid "People Search"
+msgid "Actors/Crew Search"
 msgstr ""
 
 msgctxt "#32029"
-msgid "People (Movies)"
+msgid "Actors/Crew (Movies)"
 msgstr ""
 
 msgctxt "#32030"
-msgid "People (TV)"
+msgid "Actors/Crew (TV)"
 msgstr ""
 
 msgctxt "#32031"
@@ -180,7 +180,7 @@ msgid "Progress"
 msgstr ""
 
 msgctxt "#32038"
-msgid "Episodes"
+msgid "Most recent Episodes"
 msgstr ""
 
 msgctxt "#32039"
@@ -252,7 +252,7 @@ msgid "Season"
 msgstr ""
 
 msgctxt "#32056"
-msgid "Are you sure?"
+msgid "Are you sure ?"
 msgstr ""
 
 msgctxt "#32057"
@@ -260,7 +260,7 @@ msgid "Process Complete"
 msgstr ""
 
 msgctxt "#32058"
-msgid "This will slow down things until they are re-cached!"
+msgid "This will slow down things until they are re-cached."
 msgstr ""
 
 msgctxt "#32059"
@@ -280,7 +280,7 @@ msgid "[B]%s[/B] : %s"
 msgstr ""
 
 msgctxt "#32063"
-msgid "Play using..."
+msgid "Pick stream..."
 msgstr ""
 
 msgctxt "#32064"
@@ -292,23 +292,23 @@ msgid "Queue item"
 msgstr ""
 
 msgctxt "#32066"
-msgid "Watched in Lastship"
+msgid "[I]Watched[/I] in Lastship"
 msgstr ""
 
 msgctxt "#32067"
-msgid "Unwatched in Lastship"
+msgid "[I]Unwatched[/I] in Lastship"
 msgstr ""
 
 msgctxt "#32068"
-msgid "Watched in Trakt"
+msgid "[I]Watched[/I] in Trakt"
 msgstr ""
 
 msgctxt "#32069"
-msgid "Unwatched in Trakt"
+msgid "[I]Unwatched[/I] in Trakt"
 msgstr ""
 
 msgctxt "#32070"
-msgid "Trakt Manager"
+msgid "[B]Trakt Manager[/B]"
 msgstr ""
 
 msgctxt "#32071"
@@ -360,7 +360,7 @@ msgid "PIN"
 msgstr ""
 
 msgctxt "#32309"
-msgid "API"
+msgid "Personal API key"
 msgstr ""
 
 msgctxt "#32310"
@@ -432,15 +432,15 @@ msgid "Recently aired"
 msgstr ""
 
 msgctxt "#32327"
-msgid "Trakt Progress"
+msgid "Trakt: Progress"
 msgstr ""
 
 msgctxt "#32328"
-msgid "Trakt New Episodes"
+msgid "Trakt: Most recent Episodes"
 msgstr ""
 
 msgctxt "#32329"
-msgid "My Lists"
+msgid "My Movies / TV Shows (Trakt/IMDb)"
 msgstr ""
 
 msgctxt "#32330"
@@ -448,7 +448,7 @@ msgid "Playback"
 msgstr ""
 
 msgctxt "#32331"
-msgid "Default action"
+msgid "On [B]Select[/B] open :"
 msgstr ""
 
 msgctxt "#32332"
@@ -476,7 +476,7 @@ msgid "Background"
 msgstr ""
 
 msgctxt "#32338"
-msgid "File Hosting Filters"
+msgid "Optional filters"
 msgstr ""
 
 msgctxt "#32339"
@@ -484,11 +484,11 @@ msgid "Max Quality"
 msgstr ""
 
 msgctxt "#32340"
-msgid "SD Hosters in Auto Play"
+msgid "Only SD streams in Auto Play"
 msgstr ""
 
 msgctxt "#32341"
-msgid "Hosters with captchas"
+msgid "Include hosters with pairing"
 msgstr ""
 
 msgctxt "#32342"
@@ -524,7 +524,7 @@ msgid "Movies"
 msgstr ""
 
 msgctxt "#32350"
-msgid "TV"
+msgid "TV shows"
 msgstr ""
 
 msgctxt "#32351"
@@ -556,15 +556,15 @@ msgid "Secondary Language"
 msgstr ""
 
 msgctxt "#32358"
-msgid "Subtitles could be unavailable or out of sync."
+msgid "[I]Subtitles could be unavailable or out of sync.[/I]"
 msgstr ""
 
 msgctxt "#32359"
-msgid "In that case use your own subtitles."
+msgid "[I]In that case use your own subtitles.[/I]"
 msgstr ""
 
 msgctxt "#32360"
-msgid "Providers Language"
+msgid "Provider Language(s)"
 msgstr ""
 
 msgctxt "#32361"
@@ -576,7 +576,7 @@ msgid "When playback ends..."
 msgstr ""
 
 msgctxt "#32373"
-msgid "Force container refresh"
+msgid "Force directory update"
 msgstr ""
 
 msgctxt "#32401"
@@ -592,7 +592,7 @@ msgid "Download"
 msgstr ""
 
 msgctxt "#32404"
-msgid "Time elapsed: %s seconds"
+msgid "Time elapsed : %s seconds"
 msgstr ""
 
 msgctxt "#32405"
@@ -600,15 +600,15 @@ msgid "%s seconds"
 msgstr ""
 
 msgctxt "#32406"
-msgid "Remaining providers: %s"
+msgid "Remaining providers : %s"
 msgstr ""
 
 msgctxt "#32407"
-msgid "Are you sure?"
+msgid "Are you sure ?"
 msgstr ""
 
 msgctxt "#32408"
-msgid "Process Complete"
+msgid "[B]Process Complete[/B]"
 msgstr ""
 
 msgctxt "#32501"
@@ -628,7 +628,7 @@ msgid "An account already exists."
 msgstr ""
 
 msgctxt "#32512"
-msgid "Do you want to reset?"
+msgid "Do you want to reset ?"
 msgstr ""
 
 msgctxt "#32513"
@@ -640,7 +640,7 @@ msgid "2) When prompted enter : [COLOR skyblue]%s[/COLOR]"
 msgstr ""
 
 msgctxt "#32515"
-msgid "Trakt Manager"
+msgid "[B]Trakt Manager[/B]"
 msgstr ""
 
 msgctxt "#32516"
@@ -660,7 +660,7 @@ msgid "Remove from [B]Watchlist[/B]"
 msgstr ""
 
 msgctxt "#32520"
-msgid "Add to [B]new List[/B]"
+msgid "Add to [I][B]new List[/B][/I]"
 msgstr ""
 
 msgctxt "#32521"
@@ -676,7 +676,7 @@ msgid "An account already exists."
 msgstr ""
 
 msgctxt "#32532"
-msgid "Do you want to reset?"
+msgid "Do you want to reset ?"
 msgstr ""
 
 msgctxt "#32533"
@@ -704,7 +704,7 @@ msgid "Debrid-Services"
 msgstr ""
 
 msgctxt "#32539"
-msgid "Configure Debrid Services in URLResolver Settings."
+msgid "[I]Configure Debrid Services in URLResolver Settings.[/I]"
 msgstr ""
 
 msgctxt "#32540"
@@ -764,11 +764,11 @@ msgid "Updating TV shows..."
 msgstr ""
 
 msgctxt "#32554"
-msgid "Process Complete"
+msgid "[B]Process Complete.[/B]"
 msgstr ""
 
 msgctxt "#32555"
-msgid "Are you sure?"
+msgid "Are you sure ?"
 msgstr ""
 
 msgctxt "#32556"
@@ -792,11 +792,11 @@ msgid "[B]LASTSHIP[/B] : TV folder..."
 msgstr ""
 
 msgctxt "#32561"
-msgid "[B]TRAKT[/B] : Import Collection..."
+msgid "[B]TRAKT[/B] : Import Movie Collection..."
 msgstr ""
 
 msgctxt "#32562"
-msgid "[B]TRAKT[/B] : Import Watchlist..."
+msgid "[B]TRAKT[/B] : Import Movie Watchlist..."
 msgstr ""
 
 msgctxt "#32563"
@@ -816,7 +816,7 @@ msgid "Show unaired seasons/episodes"
 msgstr ""
 
 msgctxt "#32571"
-msgid "Hide movies in cinema"
+msgid "Only show movies older than 90 days"
 msgstr ""
 
 msgctxt "#32572"
@@ -824,11 +824,7 @@ msgid "Protected Link. Please enter account credentials in the settings."
 msgstr ""
 
 msgctxt "#32573"
-msgid "[I]Personal API keys provide quicker API responses.[/I]"
-msgstr ""
-
-msgctxt "#32574"
-msgid "[I]Become a VIP member at[/I] https://fanart.tv/vip [I]for many benefits.[/I]"
+msgid "Latest movies in German"
 msgstr ""
 
 msgctxt "#32575"
@@ -841,4 +837,12 @@ msgstr ""
 
 msgctxt "#32581"
 msgid "Max number of links"
+msgstr ""
+
+msgctxt "#32582"
+msgid "[I]Personal API keys provide quicker API responses.[/I]"
+msgstr ""
+
+msgctxt "#32583"
+msgid "[I]Become a VIP member at [/I] https://fanart.tv/vip [I]for many benefits.[/I]"
 msgstr ""

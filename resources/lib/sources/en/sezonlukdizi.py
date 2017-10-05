@@ -29,7 +29,6 @@ from resources.lib.modules import dom_parser
 from resources.lib.modules import source_utils
 from resources.lib.modules import directstream
 
-
 class source:
     def __init__(self):
         self.priority = 1

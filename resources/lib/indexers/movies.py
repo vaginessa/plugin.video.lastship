@@ -45,9 +45,11 @@ class movies:
         self.list = []
 
         self.imdb_link = 'http://www.imdb.com'
-        self.trakt_link = 'http://api.trakt.tv'
+        self.trakt_link = 'https://api.trakt.tv'
         self.datetime = (datetime.datetime.utcnow() - datetime.timedelta(hours = 5))
         self.systime = (self.datetime).strftime('%Y%m%d%H%M%S%f')
+        self.year_date = (self.datetime - datetime.timedelta(days = 365)).strftime('%Y-%m-%d')
+        self.today_date = (self.datetime).strftime('%Y-%m-%d')
         self.trakt_user = control.setting('trakt.user').strip()
         self.imdb_user = control.setting('imdb.user').replace('ur', '')
         self.tm_user = control.setting('tm.user')
@@ -56,7 +58,7 @@ class movies:
         self.lang = control.apiLanguage()['trakt']
         self.hidecinema = control.setting('hidecinema')
 
-        self.search_link = 'http://api.trakt.tv/search/movie?limit=20&page=1&query='
+        self.search_link = 'https://api.trakt.tv/search/movie?limit=20&page=1&query='
         self.fanart_tv_art_link = 'http://webservice.fanart.tv/v3/movies/%s'
         self.fanart_tv_level_link = 'http://webservice.fanart.tv/v3/level'
         self.tm_art_link = 'http://api.themoviedb.org/3/movie/%s/images?api_key=%s&language=en-US&include_image_language=en,%s,null' % ('%s', self.tm_user, self.lang)
@@ -87,14 +89,15 @@ class movies:
             self.certification_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&num_votes=100,&production_status=released&certificates=us:%s&sort=moviemeter,asc&count=40&start=1'
             self.boxoffice_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&production_status=released&sort=boxoffice_gross_us,desc&count=40&start=1'
 
-        self.trending_link = 'http://api.trakt.tv/movies/trending?limit=40&page=1'
-        self.traktlists_link = 'http://api.trakt.tv/users/me/lists'
-        self.traktlikedlists_link = 'http://api.trakt.tv/users/likes/lists?limit=1000000'
-        self.traktlist_link = 'http://api.trakt.tv/users/%s/lists/%s/items'
-        self.traktcollection_link = 'http://api.trakt.tv/users/me/collection/movies'
-        self.traktwatchlist_link = 'http://api.trakt.tv/users/me/watchlist/movies'
-        self.traktfeatured_link = 'http://api.trakt.tv/recommendations/movies?limit=40'
-        self.trakthistory_link = 'http://api.trakt.tv/users/me/history/movies?limit=40&page=1'
+        self.added_link  = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&languages=de&num_votes=250,&production_status=released&release_date=%s,%s&sort=release_date,desc&count=40&start=1' % (self.year_date, self.today_date)
+        self.trending_link = 'https://api.trakt.tv/movies/trending?limit=40&page=1'
+        self.traktlists_link = 'https://api.trakt.tv/users/me/lists'
+        self.traktlikedlists_link = 'https://api.trakt.tv/users/likes/lists?limit=1000000'
+        self.traktlist_link = 'https://api.trakt.tv/users/%s/lists/%s/items'
+        self.traktcollection_link = 'https://api.trakt.tv/users/me/collection/movies'
+        self.traktwatchlist_link = 'https://api.trakt.tv/users/me/watchlist/movies'
+        self.traktfeatured_link = 'https://api.trakt.tv/recommendations/movies?limit=40'
+        self.trakthistory_link = 'https://api.trakt.tv/users/me/history/movies?limit=40&page=1'
         self.imdblists_link = 'http://www.imdb.com/user/ur%s/lists?tab=all&sort=modified:desc&filter=titles' % self.imdb_user
         self.imdblist_link = 'http://www.imdb.com/list/%s/?view=detail&sort=title:asc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
         self.imdblist2_link = 'http://www.imdb.com/list/%s/?view=detail&sort=created:desc&title_type=feature,short,tv_movie,tv_special,video,documentary,game&start=1'
@@ -158,6 +161,8 @@ class movies:
             self.get(self.popular_link)
         elif setting == '4':
             self.get(self.theaters_link)
+        elif setting == '5':
+            self.get(self.added_link)
         else:
             self.get(self.featured_link)
 
@@ -237,6 +242,7 @@ class movies:
     def languages(self):
         languages = [
             ('Arabic', 'ar'),
+            ('Bosnian', 'bs'),
             ('Bulgarian', 'bg'),
             ('Chinese', 'zh'),
             ('Croatian', 'hr'),
@@ -253,6 +259,7 @@ class movies:
             ('Italian', 'it'),
             ('Japanese', 'ja'),
             ('Korean', 'ko'),
+            ('Macedonian', 'mk'),
             ('Norwegian', 'no'),
             ('Persian', 'fa'),
             ('Polish', 'pl'),
@@ -260,6 +267,8 @@ class movies:
             ('Punjabi', 'pa'),
             ('Romanian', 'ro'),
             ('Russian', 'ru'),
+            ('Serbian', 'sr'),
+            ('Slovenian', 'sl'),
             ('Spanish', 'es'),
             ('Swedish', 'sv'),
             ('Turkish', 'tr'),

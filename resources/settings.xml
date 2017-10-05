@@ -14,7 +14,7 @@
 		<setting id="showunaired" type="bool" label="32570" default="true"/>
 		<setting id="hidecinema" type="bool" label="32571" default="false"/>
 		<setting type="lsep" label="32319" />
-		<setting id="movie.widget" type="enum" label="32320" lvalues="32302|32321|32322|32323|32324" default="1" />
+		<setting id="movie.widget" type="enum" label="32320" lvalues="32302|32321|32322|32323|32324|32573" default="5" />
 		<setting id="tv.widget.alt" type="enum" label="32325" lvalues="32302|32326|32327|32328" default="2" visible="!eq(-11,)" />
 		<setting id="tv.widget" type="enum" label="32325" lvalues="32302|32326" default="1" visible="eq(-12,)" />
 		<setting id="mylists.widget" type="bool" label="32329" default="true" />
@@ -78,6 +78,7 @@
 		<setting id="provider.1movies" type="bool" label="1MOVIES.TV" default="true" />
 		<setting id="provider.movie25" type="bool" label="5MOVIES.TO" default="true" />
 		<setting id="provider.afdah" type="bool" label="AFDAH.TO" default="true" />
+		<setting id="provider.allrls" type="bool" label="ALLRLS.ME" default="true" />
 		<setting id="provider.alluc-en" type="bool" label="ALLUC.EE" default="false" />
 		<setting id="provider.animeultima" type="bool" label="ANIMEULTIMA.IO" default="true" />
 		<setting id="provider.bmoviez" type="bool" label="BEST-MOVIEZ.WS" default="true" />
@@ -110,7 +111,7 @@
 		<setting id="provider.myvideolink" type="bool" label="NEWMYVIDEOLINK.XYZ" default="true" />
 		<setting id="provider.onlinedizi" type="bool" label="ONLINEDIZI.COM" default="true" />
 		<setting id="provider.onlinemoviesis" type="bool" label="ONLINEMOVIES.IS" default="true" />
-		<setting id="provider.openmovies" type="bool" label="OPENLOADMOVIES.ORG" default="true" />
+		<setting id="provider.openmovies" type="bool" label="OPENLOADMOVIES.NET" default="true" />
 		<setting id="provider.ororo" type="bool" label="ORORO.TV" default="true" />
 		<setting id="provider.pelispedia" type="bool" label="PELISPEDIA.TV" default="true" />
 		<setting id="provider.phdmovies" type="bool" label="PERFECTHDMOVIES.PW" default="true" />
@@ -130,6 +131,7 @@
 		<setting id="provider.sezonlukdizi" type="bool" label="SEZONLUKDIZI.NET" default="true" />
 		<setting id="provider.solarmovie" type="bool" label="SOLARMOVIEZ.TO" default="true" />
 		<setting id="provider.streamlord" type="bool" label="STREAMLORD.COM" default="true" />
+		<setting id="provider.tinklepad" type="bool" label="TINKLEPAD.AT" default="true" />
 		<setting id="provider.tinydl" type="bool" label="TINYDL.COM" default="true" />
 		<setting id="provider.tunemovie" type="bool" label="TUNEMOVIE.COM" default="true" />
 		<setting id="provider.tvbox" type="bool" label="TVBOX.AG" default="true" />
@@ -150,8 +152,8 @@
 	</category>
 	<category label="32346">
 		<setting type="lsep" label="fanart.tv" />
-		<setting type="lsep" label="32573" />
-		<setting type="lsep" label="32574" />
+		<setting type="lsep" label="32582" />
+		<setting type="lsep" label="32583" />
 		<setting id="fanart.tv.user" type="text" label="32309" default="" />
 		<setting type="sep" />
 		<setting type="lsep" label="TMDB" />

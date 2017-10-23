@@ -1,8 +1,7 @@
-[B]1.2.2~beta10[/B]
+[B]1.2.2[/B]
 - Film Trailer werden jetzt in Deutsch abgespielt, wenn Deutsch als Info-Sprache eingestellt ist; Danke an nokodemus
 - Provider PLocker, MyVideoLink, CMovies und PubFilmTo repariert
-- Neu: theXem-Integration
-- Provider Foxx verbessert; Danke an Mnk3y
+- Neu: theXem-Integration; Danke Homik
 - Neue Einstellung für Sortierung des Trakt-Fortschritts
 - Provider ReleaseBB aktualisiert
 - Anzeige der Ergebnisliste verbessert

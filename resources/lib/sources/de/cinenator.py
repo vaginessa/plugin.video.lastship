@@ -33,7 +33,7 @@ class source:
         self.priority = 1
         self.language = ['de']
         self.domains = ['cinenator.com']
-        self.base_link = 'http://www.cinenator.com'
+        self.base_link = 'https://www.cinenator.com'
         self.search_link = '/?s=%s'
 
     def movie(self, imdb, title, localtitle, aliases, year):

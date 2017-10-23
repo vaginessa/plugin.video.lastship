@@ -24,6 +24,7 @@ import urlparse
 import json
 
 from resources.lib.modules import client, cleantitle, directstream
+from resources.lib.modules import source_utils
 
 class source:
     def __init__(self):
@@ -158,7 +159,7 @@ class source:
             data = dict((i, data[i][0]) for i in data)
 
             clean_title = cleantitle.geturl(data['tvshowtitle'])
-            query = (self.episode_search_path % clean_title)
+            query = (self.movie_search_path % clean_title)
             url = urlparse.urljoin(self.base_link, query)
 
             search_response = client.request(url)
@@ -260,25 +261,39 @@ class source:
                         sources_list = json.loads(response)['data']
 
                         for j in sources_list:
+
                             quality = j['label'] if not j['label'] == '' else 'SD'
-                            quality = 'HD' if quality in ['720p','1080p'] else 'SD'
-                            source = directstream.googlepass(j['file'])
-                            sources.append({
-                                'source': 'gvideo',
-                                'quality': 'HD',
-                                'language': 'en',
-                                'url': source,
-                                'direct': True,
-                                'debridonly': False
-                            })
+                            #quality = 'HD' if quality in ['720p','1080p'] else 'SD'
+                            quality = source_utils.label_to_quality(quality)
+
+                            if 'googleapis' in j['file']:
+                                sources.append({'source': 'GVIDEO', 'quality': quality, 'language': 'en', 'url': j['file'], 'direct': True, 'debridonly': False})
+                                continue
+
+                            #source = directstream.googlepass(j['file'])
+                            valid, hoster = source_utils.is_host_valid(j['file'], hostDict)
+                            urls, host, direct = source_utils.check_directstreams(j['file'], hoster)
+                            for x in urls:
+                                sources.append({
+                                    'source': 'gvideo',
+                                    'quality': quality,
+                                    'language': 'en',
+                                    'url': x['url'],
+                                    'direct': True,
+                                    'debridonly': False
+                                })
+
                     elif not grabber_dict['target'] == '':
                         url = 'https:' + grabber_dict['target'] if not grabber_dict['target'].startswith('http') else grabber_dict['target']
-                        host = re.findall('([\w]+[.][\w]+)$', urlparse.urlparse(url.strip().lower()).netloc)[0]
+                        #host = re.findall('([\w]+[.][\w]+)$', urlparse.urlparse(url.strip().lower()).netloc)[0]
+                        valid, hoster = source_utils.is_host_valid(url, hostDict)
+                        if not valid: continue
+                        urls, host, direct = source_utils.check_directstreams(url, hoster)
                         sources.append({
-                            'source': host,
-                            'quality': 'SD',
+                            'source': hoster,
+                            'quality': urls[0]['quality'],
                             'language': 'en',
-                            'url': url.replace('\/','/'),
+                            'url': urls[0]['url'], #url.replace('\/','/'),
                             'direct': False,
                             'debridonly': False
                         })
@@ -307,7 +322,8 @@ class source:
                 url = 'http:' + url
 
             for i in range(3):
-                url = directstream.googlepass(url)
+                if 'google' in url and not 'googleapis' in url:
+                    url = directstream.googlepass(url)
 
                 if url:
                     break

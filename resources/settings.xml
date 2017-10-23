@@ -13,10 +13,15 @@
 		<setting id="fanart" type="bool" label="32318" default="true" />
 		<setting id="showunaired" type="bool" label="32570" default="true"/>
 		<setting id="hidecinema" type="bool" label="32571" default="false"/>
+		<setting id="filter.movies.byyear" type="bool" label="32587" default="false" />
+		<setting type="lsep" label="32588" visible="eq(-1,true)" />
+		<setting id="movies.byyear.from" type="slider" label="32589" default="1980" range="1900,2017" option="int" visible="eq(-2,true)" />
+		<setting id="movies.byyear.to" type="slider" label="32590" default="2017" range="1900,2018" option="int" visible="eq(-3,true)" />
 		<setting type="lsep" label="32319" />
 		<setting id="movie.widget" type="enum" label="32320" lvalues="32302|32321|32322|32323|32324|32573" default="5" />
 		<setting id="tv.widget.alt" type="enum" label="32325" lvalues="32302|32326|32327|32328" default="2" visible="!eq(-11,)" />
 		<setting id="tv.widget" type="enum" label="32325" lvalues="32302|32326" default="1" visible="eq(-12,)" />
+		<setting id="prog.sortorder" type="enum" label="32584" lvalues="32585|32586" default="1" visible="!eq(-13,)"/>
 		<setting id="mylists.widget" type="bool" label="32329" default="true" />
 	</category>
 	<category label="32330">

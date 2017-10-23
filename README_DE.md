@@ -4,6 +4,8 @@
 <hr />
 <p align="center">
     <img src=".github/animation.gif" alt="Animation"/>
+    <br />
+    <b><a href="https://github.com/lastship/FAQ/blob/master/Lastship_Exodus_Covenant_FAQ.md">Anleitung / FAQ</a></b>
 </p>
 
 

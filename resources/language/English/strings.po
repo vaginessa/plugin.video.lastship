@@ -584,7 +584,7 @@ msgid "No stream available"
 msgstr ""
 
 msgctxt "#32402"
-msgid "Playback outside Lastship is not allowed"
+msgid "Playback outside of Lastship is not allowed."
 msgstr ""
 
 msgctxt "#32403"
@@ -845,4 +845,32 @@ msgstr ""
 
 msgctxt "#32583"
 msgid "[I]Become a VIP member at [/I] https://fanart.tv/vip [I]for many benefits.[/I]"
+msgstr ""
+
+msgctxt "#32584"
+msgid "Sort order for Trakt Watched Progress"
+msgstr ""
+
+msgctxt "#32585"
+msgid "Recently aired"
+msgstr ""
+
+msgctxt "#32586"
+msgid "Recently watched"
+msgstr ""
+
+msgctxt "#32587"
+msgid "Filter movies by year"
+msgstr ""
+
+msgctxt "#32588"
+msgid "[I]Includes Oscar Winners, Box Office, Genres and Most Popular :[/I]"
+msgstr ""
+
+msgctxt "#32589"
+msgid "From"
+msgstr ""
+
+msgctxt "#32590"
+msgid "To"
 msgstr ""

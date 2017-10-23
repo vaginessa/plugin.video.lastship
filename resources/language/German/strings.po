@@ -589,7 +589,7 @@ msgid "No stream available"
 msgstr "Kein Stream gefunden"
 
 msgctxt "#32402"
-msgid "Playback outside Lastship is not allowed."
+msgid "Playback outside of Lastship is not allowed."
 msgstr "Wiedergabe außerhalb von Lastship ist nicht erlaubt."
 
 msgctxt "#32403"
@@ -851,3 +851,31 @@ msgstr "[I]Persönliche API-Keys ermöglichen kürzere Antwortzeiten.[/I]"
 msgctxt "#32583"
 msgid "[I]Become a VIP member at [/I] https://fanart.tv/vip [I]for many benefits.[/I]"
 msgstr "[I]Bei [/I] https://fanart.tv/vip [I]können Sie sich als VIP-Mitglied registrieren.[/I]"
+
+msgctxt "#32584"
+msgid "Sort order for Trakt Watched Progress"
+msgstr "Trakt-Fortschritt sortieren nach"
+
+msgctxt "#32585"
+msgid "Recently aired"
+msgstr "Kürzlich gesendet"
+
+msgctxt "#32586"
+msgid "Recently watched"
+msgstr "Zuletzt gesehen"
+
+msgctxt "#32587"
+msgid "Filter movies by year"
+msgstr "Filme nach Jahrgang filtern"
+
+msgctxt "#32588"
+msgid "[I]Includes Oscar Winners, Box Office, Genres and Most Popular :[/I]"
+msgstr "[I]Oscar-Sieger, Beste Einspieler, Genres und Am populärsten :[/I]"
+
+msgctxt "#32589"
+msgid "From"
+msgstr "Von"
+
+msgctxt "#32590"
+msgid "To"
+msgstr "Bis"

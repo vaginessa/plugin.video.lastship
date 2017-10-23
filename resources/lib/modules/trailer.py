@@ -67,13 +67,17 @@ class trailer:
             else:
                 raise Exception()
         except:
-            query = name + ' trailer'
+            # Explicitely search for german trailers on infoLang "de"
+            if control.apiLanguage()['youtube'] == 'de':
+                query = name + ' trailer deutsch'
+            else:
+                query = name + ' trailer'
             query = self.search_link % urllib.quote_plus(query)
             return self.search(query)
 
     def search(self, url):
         try:
-            apiLang = control.apiLanguage().get('youtube', 'en')
+            apiLang = control.apiLanguage().get('youtube', 'de')
 
             if apiLang != 'en':
                 url += "&relevanceLanguage=%s" % apiLang

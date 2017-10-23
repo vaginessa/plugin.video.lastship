@@ -1,3 +1,17 @@
+[B]1.2.2~beta10[/B]
+- Film Trailer werden jetzt in Deutsch abgespielt, wenn Deutsch als Info-Sprache eingestellt ist; Danke an nokodemus
+- Provider PLocker, MyVideoLink, CMovies und PubFilmTo repariert
+- Neu: theXem-Integration
+- Provider Foxx verbessert; Danke an Mnk3y
+- Neue Einstellung für Sortierung des Trakt-Fortschritts
+- Provider ReleaseBB aktualisiert
+- Anzeige der Ergebnisliste verbessert
+- Neue Einstellung zum Filtern von Filmen nach Jahr; Danke an Fire-Hawk
+- Cinenator-Provider repariert; Danke an  Philps
+- "als gesehen markiert" (bei 90% gesehen) wenn Filme/Serien zur lokalen Datenbank hinzugefügt werden; Danke an noahf1
+- VShare.eu zu den Pairing-Hostern hinzugefügt
+- Changelog ab jetzt auf deutsch
+
 [B]1.2.1[/B]
 - Add providers Tinklepad, AllRls
 - Encrypt calls to YouTube and Trakt API by SSL/TLS

@@ -29,6 +29,7 @@ from resources.lib.modules import cleantitle
 from resources.lib.modules import client
 from resources.lib.modules import debrid
 from resources.lib.modules import workers
+from resources.lib.modules import thexem
 
 try: from sqlite3 import dbapi2 as database
 except: from pysqlite2 import dbapi2 as database
@@ -334,6 +335,7 @@ class sources:
             tvshowtitle = self.getTitle(tvshowtitle)
             localtvshowtitle = self.getLocalTitle(tvshowtitle, imdb, tvdb, content)
             aliases = self.getAliasTitles(imdb, localtvshowtitle, content)
+            season, episode = thexem.get_scene_episode_number(tvdb, season, episode)
             for i in sourceDict: threads.append(workers.Thread(self.getEpisodeSource, title, year, imdb, tvdb, season, episode, tvshowtitle, localtvshowtitle, aliases, premiered, i[0], i[1]))
 
         s = [i[0] + (i[1],) for i in zip(sourceDict, threads)]
@@ -556,7 +558,7 @@ class sources:
 
     def sourcesFilter(self):
         provider = control.setting('hosts.sort.provider')
-
+        if provider == '': provider = 'false'
         quality = control.setting('hosts.quality')
         if quality == '': quality = '0'
 
@@ -647,11 +649,11 @@ class sources:
             try: d = self.sources[i]['debrid']
             except: d = self.sources[i]['debrid'] = ''
 
-            if not d == '': label = '%02d | [B]%s[/B] | ' % (int(i+1), d)
-            #if not d == '': label = '%02d | [B]%s[/B] | [B]%s[/B] | ' % (int(i+1), p, d)
-            else: label = '%02d | [B]%s[/B] | ' % (int(i+1), p)
+            #if not d == '': label = '%02d | [B]%s[/B] | ' % (int(i+1), d)
+            if not d == '': label = '%02d | [B]%s[/B] (%s) | ' % (int(i+1), d, p)
+            else: label = '%02d | %s | ' % (int(i+1), p)
 
-            if multi == True and not l == 'en': label += '[B]%s[/B] | ' % l
+            if multi == True and not l == 'de': label += '[B]%s[/B] | ' % l
 
             if q in ['4K', '1440p', '1080p', 'HD']: label += '%s | [B][I]%s [/I][/B] | %s' % (s, q, f)
             elif q == 'SD': label += '%s | %s' % (s, f)
@@ -662,7 +664,8 @@ class sources:
             label = re.sub('\|\s+\|', '|', label)
             label = re.sub('\|(?:\s+|)$', '', label)
 
-            self.sources[i]['label'] = label.upper()
+            if d: self.sources[i]['label'] = '[COLOR yellow]' + label.upper() + '[/COLOR]'
+            else: self.sources[i]['label'] = label.upper()
 
         return self.sources
 
@@ -924,8 +927,8 @@ class sources:
 
         self.hostprDict = ['1fichier.com', 'oboom.com', 'rapidgator.net', 'rg.to', 'uploaded.net', 'uploaded.to', 'ul.to', 'filefactory.com', 'nitroflare.com', 'turbobit.net', 'uploadrocket.net']
 
-        self.hostcapDict = ['hugefiles.net', 'kingfiles.net', 'openload.io', 'openload.co', 'oload.tv', 'thevideo.me', 'vidup.me', 'streamin.to', 'torba.se']
+        self.hostcapDict = ['hugefiles.net', 'kingfiles.net', 'openload.io', 'openload.co', 'oload.tv', 'thevideo.me', 'vidup.me', 'streamin.to', 'torba.se', 'vshare.eu']
 
-        self.hosthqDict = ['gvideo', 'google.com', 'openload.io', 'openload.co', 'oload.tv', 'thevideo.me', 'rapidvideo.com', 'raptu.com', 'filez.tv', 'uptobox.com', 'uptobox.com', 'uptostream.com', 'xvidstage.com', 'streamango.com', 'vidzella.me']
+        self.hosthqDict = ['gvideo', 'google.com', 'openload.io', 'openload.co', 'oload.tv', 'thevideo.me', 'rapidvideo.com', 'raptu.com', 'filez.tv', 'uptobox.com', 'uptobox.com', 'uptostream.com', 'xvidstage.com', 'streamango.com', 'vidzella.me', 'bitporno.com']
 
         self.hostblockDict = []

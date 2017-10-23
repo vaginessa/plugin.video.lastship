@@ -6,6 +6,8 @@
     <img src=".github/animation.gif" alt="Animation"/>
     <br />
     <b><a href="README_DE.md">German translation / Übersetzung auf Deutsch</a></b>
+    <br />
+    <b><a href="https://github.com/lastship/FAQ/blob/master/Lastship_Exodus_Covenant_FAQ.md">FAQ (German / Deutsch)</a></b>
 </p>
 
 

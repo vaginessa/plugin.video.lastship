@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.lastship" version="1.2.1" name="Lastship" provider-name="Lastship">
+<addon id="plugin.video.lastship" version="1.2.2~beta10" name="Lastship" provider-name="Lastship">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0" />
 		<import addon="repository.lastship" version="1.0.1" />
@@ -28,23 +28,25 @@
 			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
 			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
-		<news lang="de">- Neue Provider : Tinklepad und AllRls
-- Aufrufe von YouTube sowie Trakt-API verschlüsselt und Logging erweitert
-- Texte und Übersetzung überarbeitet
-- Provider CMovies, PLocker und PrimeWire aktualisiert
-- Provider Sezonlukdizi, OnlineDizi, OpenMovies, PubFilm und DirectDL repariert
-- Premieren-Termin für Serien repariert
-- Neue Sprachenlisten für Filme und Serien in Balkan-Sprachen
-- Neue Hauptmenü-Option "Neue deutsche Filme"</news>
-- Multi-Provider Alluc überarbeitet
-		<news lang="en">- New providers : Tinklepad and AllRls
-- Encrypted YouTube and Trakt API calls and logging extended
-- Updated Strings and translation
-- Providers CMovies, PLocker and PrimeWire updated
-- Fixed provider Sezonlukdizi, OnlineDizi, OpenMovies, PubFilm and DirectDL
-- Fixed premiere date for TV shows
-- Added TV show/movie lists for Balkan languages
-- New main menu shortcut option : "Latest German movies"</news>
-- Tweaked multi provider Alluc
+		<news lang="de">- Provider PLocker, MyVideoLink, CMovies und PubFilmTo repariert
+- TheXem integriert für Staffel/Episoden-Zuordnung
+- Provider Foxx, ReleaseBB aktualisiert
+- Neue Einstellung für "Fortschritt"-Sortierung
+- Darstellung der Ergebnisliste optimiert
+- Neue Einstellung zum Filtern von Filmen nach Jahrgang (Danke an Fire-Hawk)
+- Provider Cinanator repariert (Dankeschön Philps)
+- Neuer Pairing-Hoster : VShare.eu
+- "Gesehen"-Markierung in der Library ab 90% der Videolänge
+- Deutsche Trailer, wenn Info-Sprache auf deutsch gestellt ist</news>
+		<news lang="en">- Fixed provider PLocker, CMovies, MyVideoLink and PubFilmTo
+- Integrated TheXem for season/episode matching
+- Updated providers Foxx, ReleaseBB
+- New user setting for "Progress" sort order
+- Tweak display of source results
+- New user setting to filter movies by year (Hattip to Fire-Hawk)
+- Fix Cinenator provider (Thx Philps)
+- New pairing host : VShare.eu
+- Mark video as "watched" in library after 90% have been played
+- Search german trailers when info language is set to german</news>
 	</extension>
 </addon>

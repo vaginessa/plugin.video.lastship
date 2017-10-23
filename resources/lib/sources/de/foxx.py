@@ -23,6 +23,7 @@ import json
 import re
 import urllib
 import urlparse
+import requests
 
 from resources.lib.modules import anilist
 from resources.lib.modules import cache
@@ -92,24 +93,29 @@ class source:
             r = client.request(url, output='extended')
 
             headers = r[3]
-            headers.update({'Cookie': r[2].get('Set-Cookie'), 'Referer': self.base_link})
+            headers.update({'Cookie': r[2].get('Set-Cookie'), 'Referer': self.base_link, 'User-Agent': client.randomagent()})
             r = r[0]
 
-            rels = dom_parser.parse_dom(r, 'nav', attrs={'class': 'player'})
-            rels = dom_parser.parse_dom(rels, 'ul', attrs={'class': 'idTabs'})
-            rels = dom_parser.parse_dom(rels, 'li')
-            rels = [(dom_parser.parse_dom(i, 'a', attrs={'class': 'options'}, req='href'), dom_parser.parse_dom(i, 'img', req='src')) for i in rels]
-            rels = [(i[0][0].attrs['href'][1:], re.findall('/flags/(\w+)\.png$', i[1][0].attrs['src'])) for i in rels if i[0] and i[1]]
-            rels = [i[0] for i in rels if len(i[1]) > 0 and i[1][0].lower() == 'de']
+            #rels = dom_parser.parse_dom(r, 'div', attrs={'id': 'player'})
+            #rels = dom_parser.parse_dom(rels, 'ul', attrs={'class': 'idTabs'})
+            #rels = dom_parser.parse_dom(rels, 'li')
+            #rels = [(dom_parser.parse_dom(i, 'a', attrs={'class': 'options'}, req='href'), dom_parser.parse_dom(i, 'img', req='src')) for i in rels]
+            #rels = [(i[0][0].attrs['href'][1:], re.findall('/flags/(\w+)\.png$', i[1][0].attrs['src'])) for i in rels if i[0] and i[1]]
+            #rels = [i[0] for i in rels if len(i[1]) > 0 and i[1][0].lower() == 'de']
 
-            r = [dom_parser.parse_dom(r, 'div', attrs={'id': i}) for i in rels]
+            #r = [dom_parser.parse_dom(r, 'div', attrs={'id': i}) for i in rels]
 
-            links = re.findall('''(?:link|file)["']?\s*:\s*["'](.+?)["']''', ''.join([i[0].content for i in r]))
-            links += [l.attrs['src'] for i in r for l in dom_parser.parse_dom(i, 'iframe', attrs={'class': 'metaframe'}, req='src')]
-            links += [l.attrs['src'] for i in r for l in dom_parser.parse_dom(i, 'source', req='src')]
+            #links = re.findall('''(?:link|file)["']?\s*:\s*["'](.+?)["']''', ''.join([i[0].content for i in r]))
+            #links += [l.attrs['src'] for i in r for l in dom_parser.parse_dom(i, 'iframe', attrs={'class': 'metaframe'}, req='src')]
+            #links += [l.attrs['src'] for i in r for l in dom_parser.parse_dom(i, 'source', req='src')]
+
+            links = dom_parser.parse_dom(r, 'div', attrs={'id': 'playex'})
+            links = dom_parser.parse_dom(r, 'iframe', attrs={'class': 'hidden'})
 
             for i in links:
                 try:
+                    i = i[0]['src']
+
                     i = re.sub('\[.+?\]|\[/.+?\]', '', i)
                     i = client.replaceHTMLCodes(i)
 
@@ -134,8 +140,9 @@ class source:
                         links += doc_links
 
                         for url, quality in links:
-                            if self.base_link in url:
-                                url = url + '|Referer=' + self.base_link
+                            if self.domains[0] in url:
+                                url = requests.get(url, allow_redirects=False)
+                                url = url.headers['Location']
 
                             sources.append({'source': 'gvideo', 'quality': quality, 'language': 'de', 'url': url, 'direct': True, 'debridonly': False})
                     else:

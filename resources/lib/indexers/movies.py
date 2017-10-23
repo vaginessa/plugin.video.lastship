@@ -57,6 +57,7 @@ class movies:
         self.user = str(control.setting('fanart.tv.user')) + str(control.setting('tm.user'))
         self.lang = control.apiLanguage()['trakt']
         self.hidecinema = control.setting('hidecinema')
+        self.filterbyyear = control.setting('filter.movies.byyear')
 
         self.search_link = 'https://api.trakt.tv/search/movie?limit=20&page=1&query='
         self.fanart_tv_art_link = 'http://webservice.fanart.tv/v3/movies/%s'
@@ -88,6 +89,16 @@ class movies:
             self.language_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&num_votes=100,&production_status=released&primary_language=%s&sort=moviemeter,asc&count=40&start=1'
             self.certification_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&num_votes=100,&production_status=released&certificates=us:%s&sort=moviemeter,asc&count=40&start=1'
             self.boxoffice_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&production_status=released&sort=boxoffice_gross_us,desc&count=40&start=1'
+
+        # Filter Movies By Year
+        if self.filterbyyear == 'true':
+            from_year = control.setting('movies.byyear.from')
+            to_year = control.setting('movies.byyear.to')
+            self.genre_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&num_votes=100,&genres=%s&year=%s,%s&sort=moviemeter,asc&count=40&start=1' % ('%s', str(from_year), str(to_year))
+            self.oscars_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&production_status=released&groups=oscar_best_picture_winners&year=%s,%s&sort=year,desc&count=40&start=1' % (str(from_year), str(to_year))
+            self.boxoffice_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&production_status=released&sort=boxoffice_gross_us,desc&year=%s,%s&count=40&start=1' % (str(from_year), str(to_year))
+            self.popular_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&num_votes=1000,&production_status=released&groups=top_1000&year=%s,%s&sort=moviemeter,asc&count=40&start=1' % (str(from_year), str(to_year))
+
 
         self.added_link  = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&languages=de&num_votes=250,&production_status=released&release_date=%s,%s&sort=release_date,desc&count=40&start=1' % (self.year_date, self.today_date)
         self.trending_link = 'https://api.trakt.tv/movies/trending?limit=40&page=1'

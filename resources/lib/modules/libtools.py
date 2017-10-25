@@ -225,7 +225,7 @@ class libtvshows:
         self.dupe_setting = control.setting('library.check') or 'true'
 
         self.datetime = (datetime.datetime.utcnow() - datetime.timedelta(hours = 5))
-        self.date = (self.datetime - datetime.timedelta(hours = 24)).strftime('%Y%m%d')
+        self.date = self.datetime.strftime('%Y%m%d')
 
         self.infoDialog = False
         self.block = False

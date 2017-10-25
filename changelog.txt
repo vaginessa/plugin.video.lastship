@@ -1,3 +1,6 @@
+[B]1.2.3~beta1[/B]
+- Beim Hinzufügen neuer Episoden zur Library wird eine bereits vorhandene "tvshow.nfo" nicht mehr überschrieben
+
 [B]1.2.2[/B]
 - Film Trailer werden jetzt in Deutsch abgespielt, wenn Deutsch als Info-Sprache eingestellt ist; Danke an nokodemus
 - Provider PLocker, MyVideoLink, CMovies und PubFilmTo repariert

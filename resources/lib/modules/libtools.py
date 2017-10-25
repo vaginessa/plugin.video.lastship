@@ -433,6 +433,10 @@ class libepisodes:
 
         files_added = 0
 
+        # first update to current date and time
+        self.datetime = (datetime.datetime.utcnow() - datetime.timedelta(hours = 5))
+        self.date = self.datetime.strftime('%Y%m%d')
+        
         for item in items:
             it = None
 

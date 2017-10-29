@@ -2,6 +2,7 @@
 - Beim Hinzufügen neuer Episoden zur Library wird eine bereits vorhandene "tvshow.nfo" nicht mehr überschrieben
 - Neu gesendete Episoden können sofort zur Library hinzugefügt werden (nicht erst 1 Tag später)
 - Datumsaktualisierung im Hintergrund bei Auto-Import von Episoden
+- Exuary kann als Erscheinungsbild ausgewählt werden
 
 [B]1.2.2[/B]
 - Film Trailer werden jetzt in Deutsch abgespielt, wenn Deutsch als Info-Sprache eingestellt ist; Danke an nokodemus

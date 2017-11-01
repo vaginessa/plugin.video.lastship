@@ -104,6 +104,7 @@
 		<setting id="provider.gogoanime" type="bool" label="GOGOANIME.IO" default="true" />
 		<setting id="provider.gostream" type="bool" label="GOSTREAM.IS" default="true"/>
 		<setting id="provider.hevcfilm" type="bool" label="HEVCBLURAY.INFO" default="true" />
+		<setting id="provider.icefilms" type="bool" label="ICEFILMS" default="true" />
 		<setting id="provider.twoddl" type="bool" label="IIDDL.COM" default="true" />
 		<setting id="provider.imdark" type="bool" label="IMDARK.COM" default="true" />
 		<setting id="provider.kingmovies" type="bool" label="KINGMOVIES.IS" default="true" />
@@ -113,6 +114,7 @@
 		<setting id="provider.moviexk" type="bool" label="MOVIEXK.ORG" default="true" />
 		<setting id="provider.dltube" type="bool" label="MYDOWNLOADTUBE.COM" default="true" />
 		<setting id="provider.onseries" type="bool" label="MYWATCHSERIES.TO" default="true" />
+		<setting id="provider.openloadmovies" type="bool" label="OPENLOADMOVIES" default="true" />
 		<setting id="provider.myvideolink" type="bool" label="NEWMYVIDEOLINK.XYZ" default="true" />
 		<setting id="provider.onlinedizi" type="bool" label="ONLINEDIZI.COM" default="true" />
 		<setting id="provider.onlinemoviesis" type="bool" label="ONLINEMOVIES.IS" default="true" />
@@ -131,6 +133,7 @@
 		<setting id="provider.scenedown" type="bool" label="SCENEDOWN.IN" default="true" />
 		<setting id="provider.scnrls" type="bool" label="SCENE-RLS.COM" default="true" />
 		<setting id="provider.sceper" type="bool" label="SCEPER.WS" default="true" />
+		<setting id="provider.series9" type="bool" label="SERIES9" default="true" />
 		<setting id="provider.watchseries" type="bool" label="SERIESFREE.TO" default="true" />
 		<setting id="provider.seriesonline" type="bool" label="SERIESONLINE8.COM" default="true" />
 		<setting id="provider.sezonlukdizi" type="bool" label="SEZONLUKDIZI.NET" default="true" />

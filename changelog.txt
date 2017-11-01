@@ -3,7 +3,7 @@
 - Neu gesendete Episoden können sofort zur Library hinzugefügt werden (nicht erst 1 Tag später)
 - Datumsaktualisierung im Hintergrund bei Auto-Import von Episoden
 - Exuary kann als Erscheinungsbild ausgewählt werden
-- Neue Englische Index Seiten hinzugefügt: Icefilms, Openloadmovies, Series9
+- Neue Englische Index Seiten hinzugefügt: Icefilms, Openloadmovies, Series9, 123netflix
 - cfscrape erstellt (Cloudflare Scraper)
 - Update source.py
 - Update Index Seite Alluc-de

@@ -83,6 +83,7 @@
 		<setting id="provider.1movies" type="bool" label="1MOVIES.TV" default="true" />
 		<setting id="provider.movie25" type="bool" label="5MOVIES.TO" default="true" />
 		<setting id="provider.afdah" type="bool" label="AFDAH.TO" default="true" />
+		<setting id="provider.123netflix" type="bool" label="123NETFLIX" default="true" />
 		<setting id="provider.allrls" type="bool" label="ALLRLS.ME" default="true" />
 		<setting id="provider.alluc-en" type="bool" label="ALLUC.EE" default="false" />
 		<setting id="provider.animeultima" type="bool" label="ANIMEULTIMA.IO" default="true" />

@@ -5,6 +5,7 @@
 - Exuary kann als Erscheinungsbild ausgewählt werden
 - Neue Englische Index Seiten hinzugefügt: Icefilms, Openloadmovies, Series9
 - cfscrape erstellt (Cloudflare Scraper)
+- Update source.py
 
 [B]1.2.2[/B]
 - Film Trailer werden jetzt in Deutsch abgespielt, wenn Deutsch als Info-Sprache eingestellt ist; Danke an nokodemus

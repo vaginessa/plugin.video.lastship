@@ -6,6 +6,7 @@
 - Neue Englische Index Seiten hinzugefügt: Icefilms, Openloadmovies, Series9
 - cfscrape erstellt (Cloudflare Scraper)
 - Update source.py
+- Update Index Seite Alluc-de
 
 [B]1.2.2[/B]
 - Film Trailer werden jetzt in Deutsch abgespielt, wenn Deutsch als Info-Sprache eingestellt ist; Danke an nokodemus

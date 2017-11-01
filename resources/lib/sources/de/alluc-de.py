@@ -37,8 +37,7 @@ class source:
         self.api = control.setting('alluc.api')
         self.debrid = control.setting('alluc.download')
         if self.debrid == 'true': self.types = ['stream', 'download']
-
-        self.rlsFilter = ['FRENCH', 'LATINO', 'SELF', 'SAMPLE', 'EXTRA']
+        self.extensions = ['mp4', 'mpg', 'mpeg', 'mp2', 'm4v', 'm2v', 'mkv', 'avi', 'flv', 'asf', '3gp', '3g2', 'wmv', 'mov', 'qt', 'webm', 'vob', '']
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
@@ -79,8 +78,6 @@ class source:
             data = urlparse.parse_qs(url)
             data = dict([(i, data[i][0]) if data[i] else (i, '') for i in data])
 
-            hdlr = 'S%02dE%02d' % (int(data['season']), int(data['episode'])) if 'tvshowtitle' in data else data['year']
-            
             title = data['tvshowtitle'] if 'tvshowtitle' in data else data['title']
             year = int(data['year']) if 'year' in data and not data['year'] == None else None
             season = int(data['season']) if 'season' in data and not data['season'] == None else None
@@ -131,13 +128,9 @@ class source:
                         if jsonLink in seen_urls: continue
                         seen_urls.add(jsonLink)
 
-                        if not hdlr in jsonName.upper(): continue
-
-                        if not self.releaseValid(title, jsonName): continue # filter non en releases
-
                         if not jsonHoster in hostDict: continue
 
-                        if jsonExtension == 'rar': continue
+                        if not self.extensionValid(jsonExtension): continue
 
                         quality, info = source_utils.get_release_quality(jsonName)
                         info.append(self.formatSize(jsonSize))
@@ -157,6 +150,10 @@ class source:
     def resolve(self, url):
       return url
 
+    def extensionValid(self, extension):
+        extension = extension.replace('.', '').replace(' ', '').lower()
+        return extension in self.extensions
+
     def formatSize(self, size):
         if size == 0 or size is None: return ''
         size = int(size) / (1024 * 1024)
@@ -167,9 +164,3 @@ class source:
             unit = 'MB'
         size = '[B][%s %s][/B]' % (size, unit)
         return size
-
-    def releaseValid (self, title, release):
-        for unw in self.rlsFilter:
-            if not unw in title.upper() and unw in release.upper():
-                return False
-        return True

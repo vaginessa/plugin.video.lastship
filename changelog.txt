@@ -1,11 +1,11 @@
-[B]1.2.3~beta3[/B]
+[B]1.2.3~beta4[/B]
 - Beim Hinzufügen neuer Episoden zur Library wird eine bereits vorhandene "tvshow.nfo" nicht mehr überschrieben
 - Neu gesendete Episoden können sofort zur Library hinzugefügt werden (nicht erst 1 Tag später)
 - Datumsaktualisierung im Hintergrund bei Auto-Import von Episoden
 - Exuary kann als Erscheinungsbild ausgewählt werden
 - Neue Englische Index Seiten hinzugefügt: Icefilms, Openloadmovies, Series9, 123netflix
 - cfscrape erstellt (Cloudflare Scraper)
-- Update source.py
+- Update source.py (Beim Durchsuchen der Index Seiten wird jetzt auch angezeigt, welche Stream Auflösungen zur Verfügung stehen)
 - Update Index Seite Alluc-de
 
 [B]1.2.2[/B]

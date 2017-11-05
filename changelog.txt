@@ -1,4 +1,4 @@
-[B]1.2.3~beta4[/B]
+[B]1.2.3[/B]
 - Beim Hinzufügen neuer Episoden zur Library wird eine bereits vorhandene "tvshow.nfo" nicht mehr überschrieben
 - Neu gesendete Episoden können sofort zur Library hinzugefügt werden (nicht erst 1 Tag später)
 - Datumsaktualisierung im Hintergrund bei Auto-Import von Episoden

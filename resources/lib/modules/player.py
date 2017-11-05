@@ -64,6 +64,11 @@ class player(xbmc.Player):
             item = control.item(path=url)
             item.setArt({'icon': thumb, 'thumb': thumb, 'poster': poster, 'tvshow.poster': poster, 'season.poster': poster})
             item.setInfo(type='Video', infoLabels = meta)
+            # temp. foxx fix start
+            if url.startswith('http://stream'):
+                item.setContentLookup(False)
+                item.setMimeType('mime/x-type')
+            # temp. foxx fix ende
 
             if 'plugin' in control.infoLabel('Container.PluginName'):
                 control.player.play(url, item)

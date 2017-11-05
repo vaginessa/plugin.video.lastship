@@ -7,6 +7,7 @@
 - cfscrape erstellt (Cloudflare Scraper)
 - Update source.py (Beim Durchsuchen der Index Seiten wird jetzt auch angezeigt, welche Stream Auflösungen zur Verfügung stehen)
 - Update Index Seite Alluc-de
+- Fix foxx.to (Danke an Philps)
 
 [B]1.2.2[/B]
 - Film Trailer werden jetzt in Deutsch abgespielt, wenn Deutsch als Info-Sprache eingestellt ist; Danke an nokodemus

@@ -1,6 +1,6 @@
 [B]1.2.4~beta1[/B]
 - Update allucde
-
+- Update foxx
 
 [B]1.2.3[/B]
 - Beim Hinzufügen neuer Episoden zur Library wird eine bereits vorhandene "tvshow.nfo" nicht mehr überschrieben

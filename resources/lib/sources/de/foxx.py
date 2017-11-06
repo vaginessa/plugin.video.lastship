@@ -26,7 +26,6 @@ import urlparse
 import requests
 
 
-from resources.lib.modules import openanything
 from resources.lib.modules import anilist
 from resources.lib.modules import cache
 from resources.lib.modules import cleantitle

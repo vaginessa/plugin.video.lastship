@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.lastship" version="1.2.3" name="Lastship" provider-name="Lastship">
+<addon id="plugin.video.lastship" version="1.2.4~beta1" name="Lastship" provider-name="Lastship">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0" />
 		<import addon="repository.lastship" version="1.0.1" />
@@ -28,15 +28,7 @@
 			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
 			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
-		<news lang="de">- Beim Hinzufügen neuer Episoden zur Library wird eine bereits vorhandene "tvshow.nfo" nicht mehr überschrieben
-- Neu gesendete Episoden können sofort zur Library hinzugefügt werden (nicht erst 1 Tag später)
-- Datumsaktualisierung im Hintergrund bei Auto-Import von Episoden
-- Exuary kann als Erscheinungsbild ausgewählt werden
-- Neue Englische Index Seiten hinzugefügt: Icefilms, Openloadmovies, Series9, 123netflix
-- cfscrape erstellt (Cloudflare Scraper)
-- Update source.py (Beim Durchsuchen der Index Seiten wird jetzt auch angezeigt, welche Stream Auflösungen zur Verfügung stehen)
-- Update Index Seite Alluc-de
-- Fix foxx.to (Danke an Philps)</news>
+		<news lang="de">update allucde</news>
 		<news lang="en"></news>
 	</extension>
 </addon>

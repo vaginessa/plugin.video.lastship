@@ -1,6 +1,7 @@
 [B]1.2.4~beta1[/B]
 - Update allucde
 - Update foxx
+- Update source.py (Beim Durchsuchen der Index Seiten wird jetzt auch angezeigt, welche Stream Auflösungen zur Verfügung stehen)
 
 [B]1.2.3[/B]
 - Beim Hinzufügen neuer Episoden zur Library wird eine bereits vorhandene "tvshow.nfo" nicht mehr überschrieben
@@ -9,7 +10,7 @@
 - Exuary kann als Erscheinungsbild ausgewählt werden
 - Neue Englische Index Seiten hinzugefügt: Icefilms, Openloadmovies, Series9, 123netflix
 - cfscrape erstellt (Cloudflare Scraper)
-- Update source.py (Beim Durchsuchen der Index Seiten wird jetzt auch angezeigt, welche Stream Auflösungen zur Verfügung stehen)
+
 - Update Index Seite Alluc-de
 - Fix foxx.to (Danke an Philps)
 

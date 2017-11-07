@@ -1,6 +1,6 @@
 [B]1.2.4~beta1[/B]
 - Update allucde
-- Update foxx (script.module.requests erfrderlich)
+- Update foxx (script.module.requests erforderlich, wird automatisch mit installiert)
 - Update source.py (Beim Durchsuchen der Index Seiten wird jetzt auch angezeigt, welche Stream Auflösungen zur Verfügung stehen)
 - Lichtspielhaus & Moviesever entfernt
 
@@ -11,7 +11,8 @@
 - Exuary kann als Erscheinungsbild ausgewählt werden
 - Neue Englische Index Seiten hinzugefügt: Icefilms, Openloadmovies, Series9, 123netflix
 - cfscrape erstellt (Cloudflare Scraper)
-
+- source.py (angepasst an das requests module)  
+- player.py (angepasst an foxx.py)
 - Update Index Seite Alluc-de
 - Fix foxx.to (Danke an Philps)
 

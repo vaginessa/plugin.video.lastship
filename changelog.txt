@@ -13,7 +13,7 @@
 - source.py (angepasst an das requests module)  
 - player.py (angepasst an foxx.py)
 - Update Index Seite Alluc-de
-- Fix foxx.to (Danke an Philps)
+- Fix foxx.to (Danke an Philps), script.module.requests erforderlich, wird automatisch mit installiert
 
 [B]1.2.2[/B]
 - Film Trailer werden jetzt in Deutsch abgespielt, wenn Deutsch als Info-Sprache eingestellt ist; Danke an nokodemus

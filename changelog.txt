@@ -1,5 +1,4 @@
 [B]1.2.4~beta1[/B]
-- Update allucde
 - Update foxx (script.module.requests erforderlich, wird automatisch mit installiert)
 - Update source.py (Beim Durchsuchen der Index Seiten wird jetzt auch angezeigt, welche Stream Auflösungen zur Verfügung stehen)
 - Lichtspielhaus & Moviesever entfernt

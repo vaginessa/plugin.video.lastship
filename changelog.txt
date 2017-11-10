@@ -1,7 +1,8 @@
 [B]1.2.4~beta1[/B]
 - Update foxx (script.module.requests erforderlich, wird automatisch mit installiert)
 - Update source.py (Beim Durchsuchen der Index Seiten wird jetzt auch angezeigt, welche Stream Auflösungen zur Verfügung stehen)
-- Lichtspielhaus & Moviesever entfernt
+- Lichtspielhaus & Moviesever entfernt, Homepage Down
+- kinow entfernt, hinter Captcha
 
 [B]1.2.3[/B]
 - Beim Hinzufügen neuer Episoden zur Library wird eine bereits vorhandene "tvshow.nfo" nicht mehr überschrieben

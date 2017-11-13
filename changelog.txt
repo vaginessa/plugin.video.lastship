@@ -1,7 +1,7 @@
 [B]1.2.4~beta1[/B]
 - Update foxx (script.module.requests erforderlich, wird automatisch mit installiert)
 - Update source.py (Beim Durchsuchen der Index Seiten wird jetzt auch angezeigt, welche Stream Auflösungen zur Verfügung stehen)
-- Lichtspielhaus, Moviesever, Kinodogs entfernt, Homepage Down
+- Lichtspielhaus, Moviesever entfernt, Homepage Down
 - Streamflix entfernt, hat einen neue Domain (streamflix.ru)
 - kinos.to als zusätzliche Domain in der kinox.py hinzugefügt
 

@@ -6,6 +6,7 @@
 - kinos.to als zusätzliche Domain in der kinox.py hinzugefügt
 - client.py (source fix)
 - Update directstream.py (Umbenennung von HD in 720p)
+- Update source_utils.py
 
 [B]1.2.3[/B]
 - Beim Hinzufügen neuer Episoden zur Library wird eine bereits vorhandene "tvshow.nfo" nicht mehr überschrieben

@@ -70,7 +70,6 @@
 		<setting id="provider.seriesever" type="bool" label="SERIESEVER.NET" default="true" />
 		<setting id="provider.stream-to" type="bool" label="STREAM.TO" default="true" />
 		<setting id="provider.streamdream" type="bool" label="STREAMDREAM.WS" default="true" />
-		<setting id="provider.streamflix" type="bool" label="STREAMFLIX.TO" default="true" />
 		<setting id="provider.streamit" type="bool" label="STREAMIT.WS" default="true" />
 		<setting id="provider.tata" type="bool" label="TATA.TO" default="true" />
 		<setting id="provider.video4k" type="bool" label="VIDEO4K.TO" default="true" />

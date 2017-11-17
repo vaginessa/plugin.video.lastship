@@ -33,7 +33,7 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['de']
-        self.domains = ['kinox.to', 'kinos.to', 'kinox.ag', 'kinox.tv', 'kinox.me', 'kinox.am', 'kinox.nu', 'kinox.pe', 'kinox.sg']
+        self.domains = ['kinox.to', 'kinox.ag', 'kinox.tv', 'kinox.me', 'kinox.am', 'kinox.nu', 'kinox.pe', 'kinox.sg']
         self._base_link = None
         self.search_link = '/Search.html?q=%s'
         self.get_links_epi = '/aGET/MirrorByEpisode/?Addr=%s&SeriesID=%s&Season=%s&Episode=%s'

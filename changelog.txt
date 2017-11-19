@@ -4,6 +4,7 @@
 - Lichtspielhaus & Moviesever entfernt, Homepage down
 - Streamflix entfernt, hat einen neue Domain (streamflix.ru)
 - kinos.to als zusätzliche Domain in der kinox.py hinzugefügt
+- Englische Index Seiten entfernt (in sources & settings)
 
 [B]1.2.3[/B]
 - Beim Hinzufügen neuer Episoden zur Library wird eine bereits vorhandene "tvshow.nfo" nicht mehr überschrieben

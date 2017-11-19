@@ -29,7 +29,12 @@
 			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
 			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
-		<news lang="de"></news>
+		<news lang="de">- Update foxx (script.module.requests erforderlich, wird automatisch mit installiert)
+- Update source.py (Beim Durchsuchen der Index Seiten wird jetzt auch angezeigt, welche Stream Auflösungen zur Verfügung stehen)
+- Lichtspielhaus & Moviesever entfernt, Homepage down
+- Streamflix entfernt, hat einen neue Domain (streamflix.ru)
+- kinos.to als zusätzliche Domain in der kinox.py hinzugefügt
+- Englische Index Seiten entfernt (in sources & settings)</news>
 		<news lang="en"></news>
 	</extension>
 </addon>

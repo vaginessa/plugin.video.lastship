@@ -1,4 +1,4 @@
-[B]1.2.4~beta4[/B]
+[B]1.2.4~beta5[/B]
 - Update foxx (script.module.requests erforderlich, wird automatisch mit installiert)
 - Update source.py (Beim Durchsuchen der Index Seiten wird jetzt auch angezeigt, welche Stream Auflösungen zur Verfügung stehen)
 - Lichtspielhaus & Moviesever entfernt, Homepage down

@@ -1,10 +1,10 @@
-[B]1.2.4~beta5[/B]
+[B]1.2.4[/B]
 - Update foxx (script.module.requests erforderlich, wird automatisch mit installiert)
 - Update source.py (Beim Durchsuchen der Index Seiten wird jetzt auch angezeigt, welche Stream Auflösungen zur Verfügung stehen)
 - Lichtspielhaus & Moviesever entfernt, Homepage down
 - Streamflix entfernt, hat einen neue Domain (streamflix.ru)
 - kinos.to als zusätzliche Domain in der kinox.py hinzugefügt
-- Englische Index Seiten entfernt (in sources & settings)
+- Englische Index Seiten entfernt 
 
 [B]1.2.3[/B]
 - Beim Hinzufügen neuer Episoden zur Library wird eine bereits vorhandene "tvshow.nfo" nicht mehr überschrieben

@@ -879,3 +879,47 @@ msgstr "Von"
 msgctxt "#32590"
 msgid "To"
 msgstr "Bis"
+
+msgctxt "#32591"
+msgid "Premium Source Identifier Color"
+msgstr "Textfarbe für Premium-Links"
+
+msgctxt "#32592"
+msgid "Blue"
+msgstr "Blau"
+
+msgctxt "#32593"
+msgid "Red"
+msgstr "Rot"
+
+msgctxt "#32594"
+msgid "Yellow"
+msgstr "Gelb"
+
+msgctxt "#32595"
+msgid "Deep Pink"
+msgstr "Altrosa"
+
+msgctxt "#32596"
+msgid "Cyan"
+msgstr "Cyan"
+
+msgctxt "#32597"
+msgid "Lawn Green"
+msgstr "Grasgrün"
+
+msgctxt "#32598"
+msgid "Gold"
+msgstr "Gold"
+
+msgctxt "#32599"
+msgid "Magenta"
+msgstr "Magenta"
+
+msgctxt "#32600"
+msgid "Yellow Green"
+msgstr "Gelbgrün"
+
+msgctxt "#32601"
+msgid "No Color"
+msgstr "Ohne Farbe"

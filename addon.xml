@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.lastship" version="1.2.4" name="Lastship" provider-name="Lastship">
+<addon id="plugin.video.lastship" version="1.2.5~beta1" name="Lastship" provider-name="Lastship">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0" />
 		<import addon="repository.lastship" version="1.0.1" />
@@ -29,12 +29,7 @@
 			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
 			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
-		<news lang="de">- Update foxx (script.module.requests erforderlich, wird automatisch mit installiert)
-- Update source.py (Beim Durchsuchen der Index Seiten wird jetzt auch angezeigt, welche Stream Auflösungen zur Verfügung stehen)
-- Lichtspielhaus + Moviesever entfernt, Homepage down
-- Streamflix entfernt, hat einen neue Domain (streamflix.ru)
-- kinos.to als zusätzliche Domain in der kinox.py hinzugefügt
-- Englische Index Seiten entfernt</news>
+		<news lang="de">- Die Farbe für Premium-Links kann in den Einstellungen, vom User, angepasst werden (Danke petemei)</news>
 		<news lang="en"></news>
 	</extension>
 </addon>

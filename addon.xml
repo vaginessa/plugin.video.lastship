@@ -30,7 +30,7 @@
 			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
 		<news lang="de">- Die Farbe für Premium-Links kann in den Einstellungen, vom User, angepasst werden (Danke petemei)
-		- Anbieter Einstellung, für Englische und Englisch_Deutsche Sprache, entfernt</news>
+		- Einstellung, für Englische und Englisch_Deutsche Sprache, entfernt</news>
 		<news lang="en"></news>
 	</extension>
 </addon>

@@ -44,7 +44,7 @@ class source:
         self.login_link = 'service/login'
         self.user = control.setting('seriesever.user')
         self.password = control.setting('seriesever.pass')
-
+        print "print seriesever user + pass", self.user, self.password
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
@@ -84,20 +84,23 @@ class source:
             url = urlparse.urljoin(self.base_link, url)
 
             cookie = self.__get_premium_cookie()
-
+            print "print seriesever print get premium cookie", cookie
             r = client.request(url, mobile=True, cookie=cookie)
-
+            print "print seriesever url r", r
             query = urlparse.urljoin(self.base_link, self.part_link)
             id = re.compile('var\s*video_id\s*=\s*"(\d+)"').findall(r)[0]
 
             p = dom_parser.parse_dom(r, 'a', attrs={'class': 'changePart', 'data-part': re.compile('\d+p')}, req='data-part')
-
+            print "print seriesever p dom parser", p
+            
             for i in p:
                 i = i.attrs['data-part']
-
+                print "print seriesever part_name i", i
                 p = urllib.urlencode({'video_id': id, 'part_name': i, 'page': '0'})
+                print "print seriesever p dom parser after urlencode", p
+                print "print seriesever print cookie", cookie
                 p = client.request(query, cookie=cookie, mobile=True, XHR=True, post=p, referer=url)
-
+                print "print seriesever p dom parser after clientrquest", p
                 p = json.loads(p)
                 p = p.get('part_count', 0)
 
@@ -136,7 +139,7 @@ class source:
                         else: quali = 'SD'
 
                         urls, host, direct = source_utils.check_directstreams(url, host, quali)
-
+                        print "print urls", urls
                         for i in urls: sources.append({'source': host, 'quality': i['quality'], 'language': 'de', 'url': i['url'], 'direct': direct, 'debridonly': False})
                     except:
                         pass
@@ -202,7 +205,9 @@ class source:
             login = urlparse.urljoin(self.base_link, self.login_link)
             post = urllib.urlencode({'username': self.user, 'password': self.password})
             cookie = client.request(login, mobile=True, post=post, XHR=True, output='cookie')
+            print "print P COOKIE", cookie
             r = client.request(urlparse.urljoin(self.base_link, 'api'), mobile=True, cookie=cookie)
-            return cookie if r == '1' else ''
+            print "print r COOKIE", r
+            return cookie #if r == '1' else ''
         except:
             return ''

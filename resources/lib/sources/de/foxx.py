@@ -36,7 +36,6 @@ from resources.lib.modules import jsunpack
 from resources.lib.modules import source_utils
 from resources.lib.modules import tvmaze
 
-
 class source:
     def __init__(self):
         self.priority = 1
@@ -44,12 +43,14 @@ class source:
         self.domains = ['foxx.to']
         self.base_link = 'http://foxx.to'
         self.search_link = '/wp-json/dooplay/search/?keyword=%s&nonce=%s'
-
+        
+        
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
             url = self.__search([localtitle] + source_utils.aliases_to_array(aliases), year)
             if not url and title != localtitle: url = self.__search([title] + source_utils.aliases_to_array(aliases), year)
             if not url and source_utils.is_anime('movie', 'imdb', imdb): url = self.__search([anilist.getAlternativTitle(title)] + source_utils.aliases_to_array(aliases), year)
+            
             return url
         except:
             return
@@ -77,42 +78,36 @@ class source:
             r = client.request(url)
             r = dom_parser.parse_dom(r, 'ul', attrs={'class': 'episodios'})
             r = dom_parser.parse_dom(r, 'a', attrs={'href': re.compile('[^\'"]*%s' % ('-%sx%s' % (season, episode)))})[0].attrs['href']
-
             return source_utils.strip_domain(r)
         except:
             return
 
     def sources(self, url, hostDict, hostprDict):
         sources = []
-
         try:
             if not url:
                 return sources
 
-                     
-            url = urlparse.urljoin(self.base_link, url)
-            #print "print Entry URL", url
+            url = urlparse.urljoin(self.base_link, url)            
             r = client.request(url, output='extended')
             regex= ur'iframe src="(.+?)"+?'
             url_iframe=re.findall(regex,r[0])
-            #print "print url iframestring", url_iframe[0]
             r = client.request(url_iframe[0], output='extended')
-            links=re.findall('''(?:link|file)["']?\s*:\s*["'](.+?)["']''', r[0])
-            #print "print all FOXX Links",links     
-            url2redirect=links[2]
-            #print "print link 1080",url2redirect
-            final_url_redirected = requests.get(url2redirect, allow_redirects=False)
-            #print "final url", final_url_redirected.headers['Location']
-            url = final_url_redirected.headers['Location'] 
+            headers = r[3]
+            headers.update({'Cookie': r[2].get('Set-Cookie'), 'Referer': self.base_link})
+            r = r[0]     
+            links=re.findall('''(?:link|file)["']?\s*:\s*["'](.+?)["']''', r) 
+            url2redirect=links[3]            
+            final_url_redirected = requests.get(url2redirect,headers=headers, allow_redirects=False)
+            url = final_url_redirected.headers['Location']
             # quick&dirty fix Nov2017 - sources.py had to be changed to make this compatible    
-            sources.append({'source': 'CDN', 'quality': '1080p', 'language': 'de', 'url':url , 'direct': True, 'debridonly': False})
+            sources.append({'source': 'CDN', 'quality': '1080p', 'language': 'de', 'url':url+'|%s' % urllib.urlencode(headers) , 'direct': True, 'debridonly': False})
             
             return sources
         except:
             return sources
 
     def resolve(self, url):
-        print "print hakkkts hier?", self,url
         return url
 
     def __search(self, titles, year):
@@ -136,7 +131,6 @@ class source:
             return
 
     def __get_nonce(self):
-        print "printfoxx getnonce"
         n = client.request(self.base_link)
         try: n = re.findall('nonce"?\s*:\s*"?([0-9a-zA-Z]+)', n)[0]
         except: n = '5d12d0fa54'

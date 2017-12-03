@@ -146,7 +146,7 @@ def check_directstreams(url, hoster='', quality='SD'):
         if urls: host = 'gvideo'
     elif 'ok.ru' in url:
         urls = directstream.odnoklassniki(url)
-        if urls: host = 'vk'
+        if urls: host = 'ok'
     elif 'vk.com' in url:
         urls = directstream.vk(url)
         if urls: host = 'vk'

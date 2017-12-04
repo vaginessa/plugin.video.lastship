@@ -1,4 +1,4 @@
-[B]1.2.5~beta4[/B]
+[B]1.2.5/B]
 - Die Farbe für Premium-Links kann in den Einstellungen, vom User, angepasst werden (Danke petemei)
 - Einstellung, für Englische und Englisch_Deutsche Sprache, entfernt
 - Fix Seriesever (aber leider ohne RealDebrid), Danke philps

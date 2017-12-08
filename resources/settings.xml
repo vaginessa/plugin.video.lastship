@@ -27,8 +27,8 @@
 	<category label="32330">
 		<setting id="hosts.mode" type="enum" label="32331" lvalues="32332|32333|32334" default="1" />
 		<setting id="progress.dialog" type="enum" label="32335" lvalues="32336|32337" default="0" />
-		<setting id="prem.identify" type="enum" label="32591" lvalues="32592|32593|32594|32595|32596|32597|32598|32599|32600|32601" default="8" />
-                <setting type="lsep" label="32338" />
+		<setting id="prem.identify" type="enum" label="33591" lvalues="33592|33593|33594|33595|33596|33597|33598|33599|33600|33601" default="8" />
+        <setting type="lsep" label="32338" />
 		<setting id="hosts.quality" type="enum" label="32339" values="4K|1440p|1080p|720p|480p" default="0" />
 		<setting id="autoplay.sd" type="bool" label="32340" default="false" />
 		<setting id="hosts.captcha" type="bool" label="32341" default="true" />

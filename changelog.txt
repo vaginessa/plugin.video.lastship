@@ -1,5 +1,6 @@
-[B]1.2.6~nightly1[/B]
-- Irreführende/Falsche Anzeige bei der Streamsuche behoben
+[B]1.2.6~nightly2[/B]
+- Irreführende/Falsche Anzeige bei der Streamsuche behoben (Danke petemei)
+- Gesamtanzahl der Streams während der Suche anzeigen (Danke petemei)
 
 [B]1.2.5[/B]
 - Die Farbe für Premium-Links kann in den Einstellungen, vom User, angepasst werden (Danke petemei)

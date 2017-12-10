@@ -880,6 +880,10 @@ msgctxt "#32590"
 msgid "To"
 msgstr "Bis"
 
+msgctxt "#32601"
+msgid "Total"
+msgstr "Total"
+
 msgctxt "#33591"
 msgid "Premium Source Identifier Color"
 msgstr "Textfarbe für Premium-Links"

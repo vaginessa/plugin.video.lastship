@@ -1,8 +1,10 @@
-[B]1.2.6~nightly4[/B]
+[B]1.2.6~nightly5[/B]
 - Irreführende/Falsche Anzeige bei der Streamsuche behoben (Danke petemei)
 - Gesamtanzahl der Streams während der Suche anzeigen (Danke petemei)
 - Fix IMDB, funktioniert nur für User Listen, also eigene oder fremde oeffentliche ID, nicht für die Watchlist (Danke petemei)
 - tata entfernt (aktuell keine Filme und Serien mehr)
+- stream.to entfernt (verwendet reCaptcha)
+- streamdream entfernt (verwednet FileCrypt)
 
 [B]1.2.5[/B]
 - Die Farbe für Premium-Links kann in den Einstellungen, vom User, angepasst werden (Danke petemei)

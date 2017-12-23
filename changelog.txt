@@ -1,4 +1,4 @@
-[B]1.2.6~nightly6[/B]
+[B]1.2.6[/B]
 - Irreführende/Falsche Anzeige bei der Streamsuche behoben (Danke petemei)
 - Gesamtanzahl der Streams während der Suche anzeigen (Danke petemei)
 - Fix IMDB, funktioniert nur für User Listen, also eigene oder fremde oeffentliche ID, nicht für die Watchlist (Danke petemei)

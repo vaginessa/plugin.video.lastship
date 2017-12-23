@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.lastship" version="1.2.6~nightly4" name="Lastship" provider-name="Lastship">
+<addon id="plugin.video.lastship" version="1.2.6~nightly6" name="Lastship" provider-name="Lastship">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0" />
 		<import addon="repository.lastship" version="1.0.1" />
@@ -29,10 +29,12 @@
 			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
 			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
-		<news lang="de">- Irreführende/Falsche Anzeige bei der Streamsuche behoben
-		- Gesamtanzahl der Streams während der Suche anzeigen
-		- Fix IMDB, funktioniert nur für User Listen, also eigene oder fremde oeffentliche ID, nicht für die Watchlist
-		- tata entfernt (aktuell keine Filme und Serien mehr)</news>
+		<news lang="de">- Irreführende/Falsche Anzeige bei der Streamsuche behoben (Danke petemei)
+- Gesamtanzahl der Streams während der Suche anzeigen (Danke petemei)
+- Fix IMDB, funktioniert nur für User Listen, also eigene oder fremde oeffentliche ID, nicht für die Watchlist (Danke petemei)
+- tata entfernt (aktuell keine Filme und Serien mehr)
+- stream.to entfernt (verwendet reCaptcha)
+- streamdream entfernt (verwednet FileCrypt)</news>
 		<news lang="en"></news>
 	</extension>
 </addon>

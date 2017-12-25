@@ -29,12 +29,7 @@
 			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
 			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
-		<news lang="de">- Irreführende/Falsche Anzeige bei der Streamsuche behoben (Danke petemei)
-- Gesamtanzahl der Streams während der Suche anzeigen (Danke petemei)
-- Fix IMDB, funktioniert nur für User Listen, also eigene oder fremde oeffentliche ID, nicht für die Watchlist (Danke petemei)
-- tata entfernt (aktuell keine Filme und Serien mehr)
-- stream.to entfernt (verwendet reCaptcha)
-- streamdream entfernt (verwednet FileCrypt)</news>
+		<news lang="de">- settings Fix</news>
 		<news lang="en"></news>
 	</extension>
 </addon>

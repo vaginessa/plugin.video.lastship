@@ -1,3 +1,6 @@
+[B]1.2.6.1[/B]
+- Settings Fix (tata, stream.to und streamdream entfernt)
+
 [B]1.2.6[/B]
 - Irreführende/Falsche Anzeige bei der Streamsuche behoben (Danke petemei)
 - Gesamtanzahl der Streams während der Suche anzeigen (Danke petemei)

@@ -66,6 +66,7 @@
         <setting id="provider.animebase" type="bool" label="ANIMEBASE.NET" default="true" />
         <setting id="provider.animeloads" type="bool" label="ANIMELOADS.ORG" default="true" />
         <setting id="provider.cinemaxx" type="bool" label="CINEMAXX.CC" default="true" />
+        <setting id="provider.cinematrix" type="bool" label="CINEMATRIX.TO" default="true" />
         <setting id="provider.ddl" type="bool" label="DDL.ME" default="true" />
         <setting id="provider.filmpalast" type="bool" label="FILMPALAST.TO" default="true" />
         <setting id="provider.horrorkino" type="bool" label="FLIMMERSTUBE.COM" default="true" />

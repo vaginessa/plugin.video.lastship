@@ -1,23 +1,5 @@
 # -*- coding: utf-8 -*-
 
-"""
-    Lastship Add-on (C) 2017
-    Credits to Exodus and Covenant; our thanks go to their creators
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
-
 import base64
 import re
 import urllib
@@ -28,6 +10,7 @@ from resources.lib.modules import client
 from resources.lib.modules import directstream
 from resources.lib.modules import source_utils
 from resources.lib.modules import dom_parser
+from resources.lib.modules import source_faultlog
 
 
 class source:
@@ -41,8 +24,12 @@ class source:
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
-            url = self.__search([localtitle] + source_utils.aliases_to_array(aliases), year)
+            titles = [localtitle] + source_utils.aliases_to_array(aliases)
+            url = self.__search(titles, year)
             if not url and title != localtitle: url = self.__search([title] + source_utils.aliases_to_array(aliases), year)
+            if not url:
+                from resources.lib.modules import duckduckgo
+                url = duckduckgo.search(titles, year, self.domains[0], '(.*?)\sstream')
             return url
         except:
             return
@@ -90,6 +77,8 @@ class source:
             if not url:
                 return sources
 
+            url = url.replace('-info', '-stream')
+
             r = re.findall('(\d+)-stream(?:\?episode=(\d+))?', url)
             r = [(i[0], i[1] if i[1] else '1') for i in r][0]
 
@@ -119,6 +108,7 @@ class source:
 
             return sources
         except:
+            source_faultlog.logFault(__name__, source_faultlog.tagScrape)
             return sources
 
     def resolve(self, url):
@@ -149,10 +139,17 @@ class source:
             r = [(i[0], i[3][0][0] if len(i[3]) > 0 else i[1], i[2], i[3][0][1] if len(i[3]) > 0 else '0') for i in r]
             r = [(i[0], i[1].replace(' hd', ''), i[2], '1' if int(season) > 0 and i[3] == '0' else i[3]) for i in r]
             r = sorted(r, key=lambda i: int(i[2]), reverse=True)  # with year > no year
-            r = [i[0]for i in r if cleantitle.get(i[1]) in t and i[2] in y and int(i[3]) == int(season)][0]
+            r = [i[0]for i in r if cleantitle.get(i[1]) in t and i[2] in y and int(i[3]) == int(season)]
+            if len(r) > 0:
+                r = r[0]
+            else:
+                return
 
             url = source_utils.strip_domain(r)
-            url = url.replace('-info', '-stream')
             return url
         except:
+            try:
+                source_faultlog.logFault(__name__, source_faultlog.tagSearch, titles[0])
+            except:
+                return
             return

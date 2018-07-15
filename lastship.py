@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
+# -*- coding: UTF-8 -*-
 
 """
     Lastship Add-on (C) 2017
-    Credits to Exodus and Covenant; our thanks go to their creators
+    Credits to Placenta and Covenant; our thanks go to their creators
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,6 +18,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+# Addon Name: Lastship
+# Addon id: plugin.video.lastship
+# Addon Provider: LastShip
 
 import urlparse,sys,urllib
 
@@ -59,10 +62,18 @@ source = params.get('source')
 
 content = params.get('content')
 
+windowedtrailer = params.get('windowedtrailer')
+windowedtrailer = int(windowedtrailer) if windowedtrailer in ("0","1") else 0
 
 if action == None:
+    from resources.lib.modules import cache
     from resources.lib.indexers import navigator
+    cache.cache_version_check()
     navigator.navigator().root()
+
+elif action == 'newsNavigator':
+    from resources.lib.indexers import navigator
+    navigator.navigator().news()
 
 elif action == 'movieNavigator':
     from resources.lib.indexers import navigator
@@ -109,8 +120,34 @@ elif action == 'toolNavigator':
     navigator.navigator().tools()
 
 elif action == 'searchNavigator':
-    from resources.lib.indexers import navigator
-    navigator.navigator().search()
+    from resources.lib.indexers import movies
+    from resources.lib.modules import control
+    from resources.lib.indexers import tvshows
+    import xbmcgui
+
+    if not control.setting('search.quick') == '0':
+        searchSelect = xbmcgui.Dialog().select(control.lang(32010).encode('utf-8'),
+                                               [
+                                                   control.lang(32001).encode('utf-8'),
+                                                   control.lang(32002).encode('utf-8'),
+                                                   control.lang(32029).encode('utf-8'),
+                                                   control.lang(32030).encode('utf-8')
+                                               ])
+        if searchSelect == 0:
+            movies.movies().search()
+            movies.movies().search_new()
+        elif searchSelect == 1:
+            tvshows.tvshows().search()
+            tvshows.tvshows().search_new()
+        elif searchSelect == 2:
+            movies.movies().person()
+        elif searchSelect == 3:
+            tvshows.tvshows().person()
+        else:
+            pass
+    else:
+        from resources.lib.indexers import navigator
+        navigator.navigator().search()
 
 elif action == 'viewsNavigator':
     from resources.lib.indexers import navigator
@@ -119,6 +156,18 @@ elif action == 'viewsNavigator':
 elif action == 'clearCache':
     from resources.lib.indexers import navigator
     navigator.navigator().clearCache()
+
+elif action == 'clearCacheSearch':
+    from resources.lib.indexers import navigator
+    navigator.navigator().clearCacheSearch()
+
+elif action == 'clearCacheAll':
+    from resources.lib.indexers import navigator
+    navigator.navigator().clearCacheAll()
+
+elif action == 'clearCacheMeta':
+    from resources.lib.indexers import navigator
+    navigator.navigator().clearCacheMeta()
 
 elif action == 'infoCheck':
     from resources.lib.indexers import navigator
@@ -139,6 +188,14 @@ elif action == 'movieWidget':
 elif action == 'movieSearch':
     from resources.lib.indexers import movies
     movies.movies().search()
+
+elif action == 'movieSearchnew':
+    from resources.lib.indexers import movies
+    movies.movies().search_new()
+
+elif action == 'movieSearchterm':
+    from resources.lib.indexers import movies
+    movies.movies().search_term(name)
 
 elif action == 'moviePerson':
     from resources.lib.indexers import movies
@@ -168,9 +225,9 @@ elif action == 'movieUserlists':
     from resources.lib.indexers import movies
     movies.movies().userlists()
 
-elif action == 'channels':
-    from resources.lib.indexers import channels
-    channels.channels().get()
+elif action == 'moviePostloadAndPlay':
+    from resources.lib.indexers import movies
+    movies.movies().LoadAndPlay(tmdb,meta)
 
 elif action == 'tvshows':
     from resources.lib.indexers import tvshows
@@ -183,6 +240,14 @@ elif action == 'tvshowPage':
 elif action == 'tvSearch':
     from resources.lib.indexers import tvshows
     tvshows.tvshows().search()
+
+elif action == 'tvSearchnew':
+    from resources.lib.indexers import tvshows
+    tvshows.tvshows().search_new()
+
+elif action == 'tvSearchterm':
+    from resources.lib.indexers import tvshows
+    tvshows.tvshows().search_term(name)
 
 elif action == 'tvPerson':
     from resources.lib.indexers import tvshows
@@ -270,7 +335,7 @@ elif action == 'tvPlaycount':
 
 elif action == 'trailer':
     from resources.lib.modules import trailer
-    trailer.trailer().play(name, url)
+    trailer.trailer().play(name, url, windowedtrailer)
 
 elif action == 'traktManager':
     from resources.lib.modules import trakt
@@ -280,20 +345,21 @@ elif action == 'authTrakt':
     from resources.lib.modules import trakt
     trakt.authTrakt()
 
-elif action == 'smuSettings':
+elif action == 'urlResolver':
     try: import urlresolver
     except: pass
     urlresolver.display_settings()
 
 elif action == 'download':
-    import json
-    from resources.lib.modules import sources
     from resources.lib.modules import downloader
+    from resources.lib.modules import sources
+    import json
     try: downloader.download(name, image, sources.sources().sourcesResolve(json.loads(source)[0], True))
     except: pass
 
 elif action == 'play':
     from resources.lib.modules import sources
+
     sources.sources().play(title, year, imdb, tvdb, season, episode, tvshowtitle, premiered, meta, select)
 
 elif action == 'addItem':
@@ -313,24 +379,28 @@ elif action == 'clearSources':
     sources.sources().clearSources()
 
 elif action == 'random':
+    from resources.lib.indexers import movies
+    from resources.lib.indexers import episodes
+    from resources.lib.indexers import tvshows
+    from resources.lib.modules import control
     rtype = params.get('rtype')
     if rtype == 'movie':
-        from resources.lib.indexers import movies
+
         rlist = movies.movies().get(url, create_directory=False)
         r = sys.argv[0]+"?action=play"
     elif rtype == 'episode':
-        from resources.lib.indexers import episodes
+
         rlist = episodes.episodes().get(tvshowtitle, year, imdb, tvdb, season, create_directory=False)
         r = sys.argv[0]+"?action=play"
     elif rtype == 'season':
-        from resources.lib.indexers import episodes
+
         rlist = episodes.seasons().get(tvshowtitle, year, imdb, tvdb, create_directory=False)
         r = sys.argv[0]+"?action=random&rtype=episode"
     elif rtype == 'show':
-        from resources.lib.indexers import tvshows
+
         rlist = tvshows.tvshows().get(url, create_directory=False)
         r = sys.argv[0]+"?action=random&rtype=season"
-    from resources.lib.modules import control
+
     from random import randint
     import json
     try:
@@ -362,6 +432,10 @@ elif action == 'moviesToLibrary':
     from resources.lib.modules import libtools
     libtools.libmovies().range(url)
 
+elif action == 'moviesToLibrarySilent':
+    from resources.lib.modules import libtools
+    libtools.libmovies().silent(url)
+
 elif action == 'tvshowToLibrary':
     from resources.lib.modules import libtools
     libtools.libtvshows().add(tvshowtitle, year, imdb, tvdb)
@@ -370,6 +444,10 @@ elif action == 'tvshowsToLibrary':
     from resources.lib.modules import libtools
     libtools.libtvshows().range(url)
 
+elif action == 'tvshowsToLibrarySilent':
+    from resources.lib.modules import libtools
+    libtools.libtvshows().silent(url)
+
 elif action == 'updateLibrary':
     from resources.lib.modules import libtools
     libtools.libepisodes().update(query)
@@ -377,3 +455,13 @@ elif action == 'updateLibrary':
 elif action == 'service':
     from resources.lib.modules import libtools
     libtools.libepisodes().service()
+
+elif action == 'devUpdateNavigator':
+    from resources.lib.modules import updateManager
+    updateManager.updateLastShip()
+
+elif action == 'showFaultyProvider':
+    from resources.lib.modules import source_faultlog as faultlog
+    from resources.lib.modules import control
+    infoString = faultlog.getFaultInfoString()
+    control.dialog.ok("Faulty Providers",infoString)

@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding: UTF-8 -*-
 
 """
     Lastship Add-on (C) 2017
@@ -18,6 +18,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+# Addon Name: lastship
+# Addon id: plugin.video.lastship
+# Addon Provider: LastShip
 
 import os.path
 

@@ -26,6 +26,7 @@ from resources.lib.modules import cleantitle
 from resources.lib.modules import client
 from resources.lib.modules import dom_parser
 from resources.lib.modules import source_utils
+from resources.lib.modules import source_faultlog
 
 
 class source:
@@ -38,103 +39,73 @@ class source:
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
-            url = self.__search([localtitle] + source_utils.aliases_to_array(aliases), year)
-            if not url and title != localtitle: url = self.__search([title] + source_utils.aliases_to_array(aliases), year)
-            return urllib.urlencode({'url': url}) if url else None
-        except:
-            return
+            url = self.__search([localtitle] + source_utils.aliases_to_array(aliases))
+            if not url and title != localtitle: url = self.__search([title] + source_utils.aliases_to_array(aliases))
 
-    def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
-        try:
-            url = {'tvshowtitle': tvshowtitle, 'localtvshowtitle': localtvshowtitle, 'aliases': aliases, 'year': year}
-            url = urllib.urlencode(url)
             return url
         except:
             return
 
-    def episode(self, url, imdb, tvdb, title, premiered, season, episode):
-        try:
-            if not url:
-                return
-
-            data = urlparse.parse_qs(url)
-            data = dict([(i, data[i][0]) if data[i] else (i, '') for i in data])
-            tvshowtitle = data['tvshowtitle']
-            localtvshowtitle = data['localtvshowtitle']
-            aliases = source_utils.aliases_to_array(eval(data['aliases']))
-
-            url = self.__search([localtvshowtitle] + aliases, data['year'], season)
-            if not url and tvshowtitle != localtvshowtitle: url = self.__search([tvshowtitle] + aliases, data['year'], season)
-            if not url: return
-
-            return urllib.urlencode({'url': url, 'episode': episode})
-        except:
+    def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
             return
+
+    def episode(self, url, imdb, tvdb, title, premiered, season, episode):
+        #filecrypt.cc
+        return ''
 
     def sources(self, url, hostDict, hostprDict):
         sources = []
-
         try:
             if not url:
                 return
 
-            data = urlparse.parse_qs(url)
-            data = dict([(i, data[i][0]) if data[i] else (i, '') for i in data])
-            url = urlparse.urljoin(self.base_link, data.get('url', ''))
-            episode = data.get('episode')
+            url = urlparse.urljoin(self.base_link, url)
 
             r = client.request(url)
             r = r.replace('\n', ' ')
             r = dom_parser.parse_dom(r, 'div', attrs={'class': 'fullstory'})
             r = dom_parser.parse_dom(r, 'div', attrs={'class': 'row'})
 
-            if episode:
-                r = dom_parser.parse_dom(r, 'select', attrs={'id': 'series'})
-                r = dom_parser.parse_dom(r, 'option', req='value')
-                r = [(i.attrs['value'], i.content) for i in r]
-                r = [(i[0], re.findall('\s+(\d+)\s+episode', i[1], re.IGNORECASE)) for i in r]
-                r = [i[0].strip() for i in r if i[1] and episode in i[1]]
-            else:
-                r = dom_parser.parse_dom(r, 'div', attrs={'class': 'inner'})
-                r = dom_parser.parse_dom(r, 'a', req='href')
-                r = [i.attrs['href'].strip() for i in r]
+            r = dom_parser.parse_dom(r, 'div', attrs={'class': 'inner'})
+
+            r = dom_parser.parse_dom(r, 'a', req='href')
+            r = [i.attrs['href'].strip() for i in r]
 
             for link in r:
                 valid, host = source_utils.is_host_valid(link, hostDict)
                 if not valid: continue
-
                 sources.append({'source': host, 'quality': 'SD', 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
 
             return sources
         except:
+            source_faultlog.logFault(__name__,source_faultlog.tagScrape)
             return sources
 
     def resolve(self, url):
         return url
 
-    def __search(self, titles, year, season='0'):
+    def __search(self, titles):
         try:
             query = self.search_link % urllib.quote_plus(cleantitle.query(titles[0]))
             query = urlparse.urljoin(self.base_link, query)
 
             t = [cleantitle.get(i) for i in set(titles) if i]
-            y = ['%s' % str(year), '%s' % str(int(year) + 1), '%s' % str(int(year) - 1), '0']
 
             r = client.request(query)
 
-            r = dom_parser.parse_dom(r, 'article', attrs={'class': 'shortstory'})
-            r = dom_parser.parse_dom(r, 'div', attrs={'class': 's_info'})
-            r = dom_parser.parse_dom(r, 'h2')
-            r = dom_parser.parse_dom(r, 'a', req='href')
-            r = [(i.attrs['href'], i.content.lower()) for i in r if i]
-            r = [(i[0],  re.sub('<.+?>|</.+?>', '', i[1]), re.findall('(.+?) \(*(\d{4})', i[1])) for i in r]
-            r = [(i[0], i[2][0][0] if len(i[2]) > 0 else i[1], i[2][0][1] if len(i[2]) > 0 else '0') for i in r]
-            r = [(i[0], i[1], i[2], re.findall('(.+?)(\d+)\s+(?:staf+el|s)', i[1])) for i in r]
-            r = [(i[0], i[3][0][0] if len(i[3]) > 0 else i[1], i[2], i[3][0][1] if len(i[3]) > 0 else '0') for i in r]
-            r = [(i[0], i[1], i[2], '1' if int(season) > 0 and i[3] == '0' else i[3]) for i in r]
-            r = sorted(r, key=lambda i: int(i[2]), reverse=True)  # with year > no year
-            r = [i[0]for i in r if cleantitle.get(i[1]) in t and i[2] in y and int(i[3]) == int(season)][0]
+            body = dom_parser.parse_dom(r, 'div', attrs={'class': 'content_body'})[1].content
+            r = dom_parser.parse_dom(body, 'a', req='href')
+            r = [(i.attrs['href'], i.content.lower().replace('<b>','').replace('</b>','')) for i in r if i]
+            r = [i for i in r if '<' not in i[1]]
 
-            return source_utils.strip_domain(r)
+            r = [i[0] for i in r if cleantitle.get(i[1]) in t]
+
+            if len(r) > 0:
+                return source_utils.strip_domain(r[0])
+            return ""
         except:
+            try:
+                source_faultlog.logFault(__name__, source_faultlog.tagSearch, titles[0])
+            except:
+                return
             return

@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
+# -*- coding: UTF-8 -*-
 
 """
     Lastship Add-on (C) 2017
-    Credits to Exodus and Covenant; our thanks go to their creators
+    Credits to Placenta and Covenant; our thanks go to their creators
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,6 +17,10 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
+
+# Addon Name: lastship
+# Addon id: plugin.video.lastship
+# Addon Provider: LastShip
 
 import ast
 import hashlib
@@ -34,7 +38,6 @@ This module is used to get/set cache for every action done in the system
 """
 
 cache_table = 'cache'
-
 
 def get(function, duration, *args):
     # type: (function, int, object) -> object or None
@@ -73,7 +76,6 @@ def timeout(function, *args):
     except Exception:
         return None
 
-
 def cache_get(key):
     # type: (str, str) -> dict or None
     try:
@@ -82,7 +84,6 @@ def cache_get(key):
         return cursor.fetchone()
     except OperationalError:
         return None
-
 
 def cache_insert(key, value):
     # type: (str, str) -> None
@@ -119,11 +120,58 @@ def cache_clear():
     except:
         pass
 
+def cache_clear_meta():
+    try:
+        cursor = _get_connection_cursor_meta()
 
+        for t in ['meta']:
+            try:
+                cursor.execute("DROP TABLE IF EXISTS %s" % t)
+                cursor.execute("VACUUM")
+                cursor.commit()
+            except:
+                pass
+    except:
+        pass
+
+def cache_clear_providers():
+    try:
+        cursor = _get_connection_cursor_providers()
+
+        for t in ['rel_src', 'rel_url', 'faultLog']:
+            try:
+                cursor.execute("DROP TABLE IF EXISTS %s" % t)
+                cursor.execute("VACUUM")
+                cursor.commit()
+            except:
+                pass
+        cache_insert("source_fault_last_seen","0")
+    except:
+        pass
+
+def cache_clear_search():
+    try:
+        cursor = _get_connection_cursor_search()
+
+        for t in ['tvshow', 'movies']:
+            try:
+                cursor.execute("DROP TABLE IF EXISTS %s" % t)
+                cursor.execute("VACUUM")
+                cursor.commit()
+            except:
+                pass
+    except:
+        pass
+
+def cache_clear_all():
+    cache_clear()
+    cache_clear_meta()
+    cache_clear_providers()
+    cache_clear_search()
+        
 def _get_connection_cursor():
     conn = _get_connection()
     return conn.cursor()
-
 
 def _get_connection():
     control.makeFile(control.dataPath)
@@ -131,6 +179,35 @@ def _get_connection():
     conn.row_factory = _dict_factory
     return conn
 
+def _get_connection_cursor_meta():
+    conn = _get_connection_meta()
+    return conn.cursor()
+
+def _get_connection_meta():
+    control.makeFile(control.dataPath)
+    conn = db.connect(control.metacacheFile)
+    conn.row_factory = _dict_factory
+    return conn
+
+def _get_connection_cursor_providers():
+    conn = _get_connection_providers()
+    return conn.cursor()
+
+def _get_connection_providers():
+    control.makeFile(control.dataPath)
+    conn = db.connect(control.providercacheFile)
+    conn.row_factory = _dict_factory
+    return conn
+    
+def _get_connection_cursor_search():
+    conn = _get_connection_search()
+    return conn.cursor()
+
+def _get_connection_search():
+    control.makeFile(control.dataPath)
+    conn = db.connect(control.searchFile)
+    conn.row_factory = _dict_factory
+    return conn
 
 def _dict_factory(cursor, row):
     d = {}
@@ -157,3 +234,24 @@ def _is_cache_valid(cached_time, cache_timeout):
     now = int(time.time())
     diff = now - cached_time
     return (cache_timeout * 3600) > diff
+
+def cache_version_check():
+
+    if _find_cache_version():
+        cache_clear(); cache_clear_meta(); cache_clear_providers(); cache_clear_search()
+        control.infoDialog(control.lang(32057).encode('utf-8'), sound=True, icon='INFO')
+        
+def _find_cache_version():
+
+    import os
+    versionFile = os.path.join(control.dataPath, 'cache.v')
+    try: 
+        with open(versionFile, 'rb') as fh: oldVersion = fh.read()
+    except: oldVersion = '0'
+    try:
+        curVersion = control.addon('script.module.lastship').getAddonInfo('version')
+        if oldVersion != curVersion: 
+            with open(versionFile, 'wb') as fh: fh.write(curVersion)
+            return True
+        else: return False
+    except: return False

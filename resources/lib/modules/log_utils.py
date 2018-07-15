@@ -1,6 +1,8 @@
+# -*- coding: UTF-8 -*-
+
 """
-    tknorris shared module
-    Copyright (C) 2016 tknorris
+    Lastship Add-on (C) 2017
+    Credits to Placenta and Covenant; our thanks go to their creators
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,6 +17,12 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
+
+# Addon Name: lastship
+# Addon id: plugin.video.lastship
+# Addon Provider: LastShip
+
+
 import time
 import cProfile
 import StringIO
@@ -24,8 +32,8 @@ import xbmc
 from resources.lib.modules import control
 from xbmc import LOGDEBUG, LOGERROR, LOGFATAL, LOGINFO, LOGNONE, LOGNOTICE, LOGSEVERE, LOGWARNING  # @UnusedImport
 
-name = control.addonInfo('name')
-
+name        = control.addonInfo('name')
+DEBUGPREFIX = '[COLOR red][ lastship DEBUG ] : [/COLOR]' # Using color coding, for color formatted log viewers like Assassin's Tools
 
 def log(msg, level=LOGDEBUG):
     req_level = level
@@ -37,8 +45,7 @@ def log(msg, level=LOGDEBUG):
         if isinstance(msg, unicode):
             msg = '%s (ENCODED)' % (msg.encode('utf-8'))
 
-        xbmc.log('[%s] %s' % (name, msg), level)
-
+        xbmc.log('%s: %s' % (DEBUGPREFIX, msg), level)
     except Exception as e:
         try:
             xbmc.log('Logging Failure: %s' % (e), level)

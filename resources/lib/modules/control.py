@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
+# -*- coding: UTF-8 -*-
 
 """
     Lastship Add-on (C) 2017
-    Credits to Exodus and Covenant; our thanks go to their creators
+    Credits to Placenta and Covenant; our thanks go to their creators
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,6 +17,10 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
+
+# Addon Name: lastship
+# Addon id: plugin.video.lastship
+# Addon Provider: LastShip
 
 
 import os
@@ -74,9 +78,16 @@ button = xbmcgui.ControlButton
 
 image = xbmcgui.ControlImage
 
+getCurrentDialogId = xbmcgui.getCurrentWindowDialogId()
+
 keyboard = xbmc.Keyboard
 
-sleep = xbmc.sleep
+# Modified `sleep` command that honors a user exit request
+def sleep (time):
+    while time > 0 and not xbmc.abortRequested:
+        xbmc.sleep(min(100, time))
+        time = time - 100
+
 
 execute = xbmc.executebuiltin
 
@@ -116,10 +127,15 @@ providercacheFile = os.path.join(dataPath, 'providers.13.db')
 
 metacacheFile = os.path.join(dataPath, 'meta.5.db')
 
+searchFile = os.path.join(dataPath, 'search.1.db')
+
 libcacheFile = os.path.join(dataPath, 'library.db')
 
 cacheFile = os.path.join(dataPath, 'cache.db')
 
+def autoTraktSubscription(tvshowtitle, year, imdb, tvdb):
+     from . import libtools
+     libtools.libtvshows().add(tvshowtitle, year, imdb, tvdb)
 
 def addonIcon():
     theme = appearance() ; art = artPath()
@@ -212,7 +228,7 @@ def selectDialog(list, heading=addonInfo('name')):
 
 
 def moderator():
-    netloc = [urlparse.urlparse(sys.argv[0]).netloc, '', 'plugin.video.live.streamspro', 'plugin.video.phstreams', 'plugin.video.cpstreams', 'plugin.video.tinklepad', 'script.tvguide.fullscreen', 'script.tvguide.assassins', 'plugin.program.super.favourites']
+    netloc = [urlparse.urlparse(sys.argv[0]).netloc, '', 'plugin.video.metalliq', 'plugin.video.live.streamspro', 'plugin.video.phstreams', 'plugin.video.cpstreams', 'plugin.video.tinklepad', 'script.tvguide.fullscreen', 'script.tvguide.assassins', 'plugin.program.super.favourites']
 
     if not infoLabel('Container.PluginName') in netloc: sys.exit()
 
@@ -229,7 +245,10 @@ def apiLanguage(ret_name=None):
     tvdb = ['en','sv','no','da','fi','nl','de','it','es','fr','pl','hu','el','tr','ru','he','ja','pt','zh','cs','sl','hr','ko']
     youtube = ['gv', 'gu', 'gd', 'ga', 'gn', 'gl', 'ty', 'tw', 'tt', 'tr', 'ts', 'tn', 'to', 'tl', 'tk', 'th', 'ti', 'tg', 'te', 'ta', 'de', 'da', 'dz', 'dv', 'qu', 'zh', 'za', 'zu', 'wa', 'wo', 'jv', 'ja', 'ch', 'co', 'ca', 'ce', 'cy', 'cs', 'cr', 'cv', 'cu', 'ps', 'pt', 'pa', 'pi', 'pl', 'mg', 'ml', 'mn', 'mi', 'mh', 'mk', 'mt', 'ms', 'mr', 'my', 've', 'vi', 'is', 'iu', 'it', 'vo', 'ii', 'ik', 'io', 'ia', 'ie', 'id', 'ig', 'fr', 'fy', 'fa', 'ff', 'fi', 'fj', 'fo', 'ss', 'sr', 'sq', 'sw', 'sv', 'su', 'st', 'sk', 'si', 'so', 'sn', 'sm', 'sl', 'sc', 'sa', 'sg', 'se', 'sd', 'lg', 'lb', 'la', 'ln', 'lo', 'li', 'lv', 'lt', 'lu', 'yi', 'yo', 'el', 'eo', 'en', 'ee', 'eu', 'et', 'es', 'ru', 'rw', 'rm', 'rn', 'ro', 'be', 'bg', 'ba', 'bm', 'bn', 'bo', 'bh', 'bi', 'br', 'bs', 'om', 'oj', 'oc', 'os', 'or', 'xh', 'hz', 'hy', 'hr', 'ht', 'hu', 'hi', 'ho', 'ha', 'he', 'uz', 'ur', 'uk', 'ug', 'aa', 'ab', 'ae', 'af', 'ak', 'am', 'an', 'as', 'ar', 'av', 'ay', 'az', 'nl', 'nn', 'no', 'na', 'nb', 'nd', 'ne', 'ng', 'ny', 'nr', 'nv', 'ka', 'kg', 'kk', 'kj', 'ki', 'ko', 'kn', 'km', 'kl', 'ks', 'kr', 'kw', 'kv', 'ku', 'ky']
 
+    name = None
     name = setting('api.language')
+    if not name: name = 'AUTO'
+
     if name[-1].isupper():
         try: name = xbmc.getLanguage(xbmc.ENGLISH_NAME).split(' ')[0]
         except: pass
@@ -301,7 +320,6 @@ def busy():
 
 def idle():
     return execute('Dialog.Close(busydialog)')
-
 
 def queueItem():
     return execute('Action(Queue)')

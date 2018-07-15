@@ -29,6 +29,7 @@ from resources.lib.modules import tvmaze
 from resources.lib.modules import anilist
 from resources.lib.modules import source_utils
 from resources.lib.modules import dom_parser
+from resources.lib.modules import source_faultlog
 
 
 class source:
@@ -83,7 +84,9 @@ class source:
             data = urlparse.parse_qs(url)
             data = dict([(i, data[i][0]) if data[i] else (i, '') for i in data])
 
-            for item_id, episode, content_type in self.__get_episode(data.get('url'), data.get('episode')):
+            token = dom_parser.parse_dom(client.request(urlparse.urljoin(self.base_link,url)), 'input', attrs={'id': 'proxerToken'})[0].attrs['value']
+
+            for item_id, episode, content_type in self.__get_episode(data.get('url'), token, data.get('episode')):
                 stream_link = urlparse.urljoin(self.base_link, '/watch/%s/%s/%s' % (item_id, episode, content_type))
 
                 info = 'subbed' if content_type.endswith('sub') else ''
@@ -115,18 +118,19 @@ class source:
 
             return sources
         except:
+            source_faultlog.logFault(__name__,source_faultlog.tagScrape)
             return sources
 
     def resolve(self, url):
         return url
 
-    def __get_episode(self, url, episode='1'):
+    def __get_episode(self, url, token, episode='1'):
         try:
             if not url:
                 return []
 
             item_id = re.findall('info/(\d+)', url)[0]
-            url = urlparse.urljoin(self.base_link, '/info/%s/list?format=json' % item_id)
+            url = urlparse.urljoin(self.base_link, '/info/%s/list?format=json&%s=1' % (item_id, token))
 
             r = client.request(url)
             r = json.loads(r).get('data', [])
@@ -136,25 +140,31 @@ class source:
 
     def __search(self, titles, year, content_type):
         try:
-            query = self.search_link % (urllib.quote_plus(cleantitle.query(titles[0])), content_type)
-            query = urlparse.urljoin(self.base_link, query)
+            if len(titles) > 0 and titles[0] is not None:
+                query = self.search_link % (urllib.quote_plus(cleantitle.query(titles[0])), content_type)
+                query = urlparse.urljoin(self.base_link, query)
 
-            t = [cleantitle.get(i) for i in set(titles) if i]
-            y = ['%s' % str(year), '%s' % str(int(year) + 1), '%s' % str(int(year) - 1), '0']
+                t = [cleantitle.get(i) for i in set(titles) if i]
+                y = ['%s' % str(year), '%s' % str(int(year) + 1), '%s' % str(int(year) - 1), '0']
 
-            r = client.request(query)
+                r = client.request(query)
 
-            r = dom_parser.parse_dom(r, 'div', attrs={'id': 'search'})
-            r = dom_parser.parse_dom(r, 'table')
-            r = dom_parser.parse_dom(r, 'tr', attrs={'class': re.compile('entry\d+')})
-            r = [(dom_parser.parse_dom(i, 'a'), dom_parser.parse_dom(i, 'img', attrs={'class': 'flag', 'alt': 'de'})) for i in r]
-            r = [i[0] for i in r if i[0] and i[1]]
-            r = [(i[0].attrs['href'], i[0].content) for i in r]
-            r = [(i[0], i[1], re.findall('(.+?) \(*(\d{4})', i[1])) for i in r]
-            r = [(i[0], i[2][0][0] if len(i[2]) > 0 else i[1], i[2][0][1] if len(i[2]) > 0 else '0') for i in r]
-            r = sorted(r, key=lambda i: int(i[2]), reverse=True)  # with year > no year
-            r = [i[0] for i in r if cleantitle.get(i[1]) in t and i[2] in y][0]
+                r = dom_parser.parse_dom(r, 'div', attrs={'id': 'search'})
+                r = dom_parser.parse_dom(r, 'table')
+                r = dom_parser.parse_dom(r, 'tr', attrs={'class': re.compile('entry\d+')})
+                r = [(dom_parser.parse_dom(i, 'a'), dom_parser.parse_dom(i, 'img', attrs={'class': 'flag', 'alt': 'de'})) for i in r]
+                r = [i[0] for i in r if i[0] and i[1]]
+                r = [(i[0].attrs['href'], i[0].content) for i in r]
+                r = [(i[0], i[1], re.findall('(.+?) \(*(\d{4})', i[1])) for i in r]
+                r = [(i[0], i[2][0][0] if len(i[2]) > 0 else i[1], i[2][0][1] if len(i[2]) > 0 else '0') for i in r]
+                r = sorted(r, key=lambda i: int(i[2]), reverse=True)  # with year > no year
+                r = [i[0] for i in r if cleantitle.get(i[1]) in t and i[2] in y][0]
 
-            return source_utils.strip_domain(r)
+                return source_utils.strip_domain(r)
+            return
         except:
+            try:
+                source_faultlog.logFault(__name__, source_faultlog.tagSearch, titles[0])
+            except:
+                return
             return

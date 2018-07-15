@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
+# -*- coding: UTF-8 -*-
 
 """
     Lastship Add-on (C) 2017
-    Credits to Exodus and Covenant; our thanks go to their creators
+    Credits to Placenta and Covenant; our thanks go to their creators
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,8 +18,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+# Addon Name: lastship
+# Addon id: plugin.video.lastship
+# Addon Provider: LastShip
 
-import xbmc,sys,re,json,urllib,urlparse,random,datetime,time
+import sys,re,json,urllib,urlparse,random,datetime,time
 
 from resources.lib.modules import trakt
 from resources.lib.modules import tvmaze
@@ -31,7 +34,7 @@ from resources.lib.modules import debrid
 from resources.lib.modules import workers
 from resources.lib.modules import source_utils
 from resources.lib.modules import log_utils
-from resources.lib.modules import thexem
+from resources.lib.modules import source_faultlog
 
 try: from sqlite3 import dbapi2 as database
 except: from pysqlite2 import dbapi2 as database
@@ -42,7 +45,6 @@ except: pass
 try: import xbmc
 except: pass
 
-
 class sources:
     def __init__(self):
         self.getConstants()
@@ -50,7 +52,6 @@ class sources:
 
     def play(self, title, year, imdb, tvdb, season, episode, tvshowtitle, premiered, meta, select):
         try:
-              
             url = None
             
             control.moderator()
@@ -123,7 +124,6 @@ class sources:
         elif 'year' in meta:
             sysname += urllib.quote_plus(' (%s)' % meta['year'])
 
-
         poster = meta['poster3'] if 'poster3' in meta else '0'
         if poster == '0': poster = meta['poster'] if 'poster' in meta else '0'
 
@@ -146,7 +146,6 @@ class sources:
         sysimage = urllib.quote_plus(poster.encode('utf-8'))
 
         downloadMenu = control.lang(32403).encode('utf-8')
-
 
         for i in range(len(items)):
             try:
@@ -325,9 +324,16 @@ class sources:
         sourceDict = [(i[0], i[1], i[1].language) for i in sourceDict]
         sourceDict = [(i[0], i[1]) for i in sourceDict if any(x in i[2] for x in language)]
 
+
         try: sourceDict = [(i[0], i[1], control.setting('provider.' + i[0])) for i in sourceDict]
         except: sourceDict = [(i[0], i[1], 'true') for i in sourceDict]
         sourceDict = [(i[0], i[1]) for i in sourceDict if not i[2] == 'false']
+
+        try: faultLoggerEnable = control.setting('FaultLogger.enabled')
+        except: faultLoggerEnable = "false"
+        if faultLoggerEnable == 'true':
+            source_faultlog.init()
+            sourceDict = [(i[0], i[1]) for i in sourceDict if source_faultlog.isEnabled(i[0])]
 
         sourceDict = [(i[0], i[1], i[1].priority) for i in sourceDict]
 
@@ -345,7 +351,7 @@ class sources:
             tvshowtitle = self.getTitle(tvshowtitle)
             localtvshowtitle = self.getLocalTitle(tvshowtitle, imdb, tvdb, content)
             aliases = self.getAliasTitles(imdb, localtvshowtitle, content)
-            season, episode = thexem.get_scene_episode_number(tvdb, season, episode)
+            #Disabled on 11/11/17 due to hang. Should be checked in the future and possible enabled again.
             for i in sourceDict: threads.append(workers.Thread(self.getEpisodeSource, title, year, imdb, tvdb, season, episode, tvshowtitle, localtvshowtitle, aliases, premiered, i[0], i[1]))
 
         s = [i[0] + (i[1],) for i in zip(sourceDict, threads)]
@@ -356,11 +362,9 @@ class sources:
 
         [i.start() for i in threads]
 
-        string1 = control.lang(32404).encode('utf-8')
-        string2 = control.lang(32405).encode('utf-8')
         string3 = control.lang(32406).encode('utf-8')
         string4 = control.lang(32601).encode('utf-8')
-        string5 = control.lang(32602).encode('utf-8')
+
         string6 = control.lang(32606).encode('utf-8')
         string7 = control.lang(32607).encode('utf-8')
 
@@ -369,22 +373,37 @@ class sources:
         
         quality = control.setting('hosts.quality')
         if quality == '': quality = '0'
-        
-        line1 = line2 = line3 = ""
-        
+
+        line1 = line2 = ""
+
+        pre_emp = control.setting('preemptive.termination')
+        pre_emp_limit = control.setting('preemptive.limit')
+
         source_4k = d_source_4k = 0
         source_1080 = d_source_1080 = 0
         source_720 = d_source_720 = 0
         source_sd = d_source_sd = 0
         total = d_total = 0
-        
+
         debrid_list = debrid.debrid_resolvers
         debrid_status = debrid.status()
-        
+
+        total_format = '[COLOR %s][B]%s[/B][/COLOR]'
+        pdiag_format = ' 4K: %s | 1080p: %s | 720p: %s | SD: %s | %s: %s'.split('|')
+        pdiag_bg_format = '4K:%s(%s)|1080p:%s(%s)|720p:%s(%s)|SD:%s(%s)|T:%s(%s)'.split('|')
+
         for i in range(0, 4 * timeout):
+            if str(pre_emp) == 'true':
+                if quality in ['1','0']:
+                    if (source_1080 + d_source_1080) >= int(pre_emp_limit): break
+                elif quality in ['2']:
+                    if (source_720 + d_source_720) >= int(pre_emp_limit): break
+                elif quality in ['3']:
+                    if (source_sd + d_source_sd) >= int(pre_emp_limit): break
+                else:
+                    if (source_sd + d_source_sd) >= int(pre_emp_limit): break
             try:
                 if xbmc.abortRequested == True: return sys.exit()
-
                 try:
                     if progressDialog.iscanceled(): break
                 except:
@@ -440,22 +459,17 @@ class sources:
                         d_total = d_source_4k + d_source_1080 + d_source_720 + d_source_sd
 
                 if debrid_status:
-                    source_4k_label = '[COLOR red][B]%s[/B][/COLOR]' % source_4k if source_4k == 0 else '[COLOR lime][B]%s[/B][/COLOR]' % source_4k
-                    source_1080_label = '[COLOR red][B]%s[/B][/COLOR]' % source_1080 if source_1080 == 0 else '[COLOR lime][B]%s[/B][/COLOR]' % source_1080
-                    source_720_label = '[COLOR red][B]%s[/B][/COLOR]' % source_720 if source_720 == 0 else '[COLOR lime][B]%s[/B][/COLOR]' % source_720
-                    source_sd_label = '[COLOR red][B]%s[/B][/COLOR]' % source_sd if source_sd == 0 else '[COLOR lime][B]%s[/B][/COLOR]' % source_sd
-                    source_total_label = '[COLOR red][B]%s[/B][/COLOR]' % total if total == 0 else '[COLOR lime][B]%s[/B][/COLOR]' % total
-                    d_4k_label = '[COLOR red][B]%s[/B][/COLOR]' % d_source_4k if d_source_4k == 0 else '[COLOR lime][B]%s[/B][/COLOR]' % d_source_4k
-                    d_1080_label = '[COLOR red][B]%s[/B][/COLOR]' % d_source_1080 if d_source_1080 == 0 else '[COLOR lime][B]%s[/B][/COLOR]' % d_source_1080
-                    d_720_label = '[COLOR red][B]%s[/B][/COLOR]' % d_source_720 if d_source_720 == 0 else '[COLOR lime][B]%s[/B][/COLOR]' % d_source_720
-                    d_sd_label = '[COLOR red][B]%s[/B][/COLOR]' % d_source_sd if d_source_sd == 0 else '[COLOR lime][B]%s[/B][/COLOR]' % d_source_sd
-                    d_total_label = '[COLOR red][B]%s[/B][/COLOR]' % total if total == 0 else '[COLOR lime][B]%s[/B][/COLOR]' % d_total
-                else:
-                    source_4k_label = '[COLOR red][B]%s[/B][/COLOR]' % source_4k if source_4k == 0 else '[COLOR lime][B]%s[/B][/COLOR]' % source_4k
-                    source_1080_label = '[COLOR red][B]%s[/B][/COLOR]' % source_1080 if source_1080 == 0 else '[COLOR lime][B]%s[/B][/COLOR]' % source_1080
-                    source_720_label = '[COLOR red][B]%s[/B][/COLOR]' % source_720 if source_720 == 0 else '[COLOR lime][B]%s[/B][/COLOR]' % source_720
-                    source_sd_label = '[COLOR red][B]%s[/B][/COLOR]' % source_sd if source_sd == 0 else '[COLOR lime][B]%s[/B][/COLOR]' % source_sd
-                    source_total_label = '[COLOR red][B]%s[/B][/COLOR]' % total if total == 0 else '[COLOR lime][B]%s[/B][/COLOR]' % total
+                    d_4k_label = total_format % ('red', d_source_4k) if d_source_4k == 0 else total_format % ('lime', d_source_4k)
+                    d_1080_label = total_format % ('red', d_source_1080) if d_source_1080 == 0 else total_format % ('lime', d_source_1080)
+                    d_720_label = total_format % ('red', d_source_720) if d_source_720 == 0 else total_format % ('lime', d_source_720)
+                    d_sd_label = total_format % ('red', d_source_sd) if d_source_sd == 0 else total_format % ('lime', d_source_sd)
+                    d_total_label = total_format % ('red', d_total) if d_total == 0 else total_format % ('lime', d_total)
+
+                source_4k_label = total_format % ('red', source_4k) if source_4k == 0 else total_format % ('lime', source_4k)
+                source_1080_label = total_format % ('red', source_1080) if source_1080 == 0 else total_format % ('lime', source_1080)
+                source_720_label = total_format % ('red', source_720) if source_720 == 0 else total_format % ('lime', source_720)
+                source_sd_label = total_format % ('red', source_sd) if source_sd == 0 else total_format % ('lime', source_sd)
+                source_total_label = total_format % ('red', total) if total == 0 else total_format % ('lime', total)
 
                 if (i / 2) < timeout:
                     try:
@@ -465,45 +479,46 @@ class sources:
                         if debrid_status:
                             if quality in ['0']:
                                 if not progressDialog == control.progressDialogBG:
-                                    line1 = '%s: 4K: %s | 1080p: %s | 720p: %s | SD: %s | %s: %s' % (string6, d_4k_label, d_1080_label, d_720_label, d_sd_label, str(string4), d_total_label)
-                                    line2 = '%s: 4K: %s | 1080p: %s | 720p: %s | SD: %s | %s: %s' % (string7, source_4k_label, source_1080_label, source_720_label, source_sd_label, str(string4), source_total_label)
+                                    line1 = ('%s:' + '|'.join(pdiag_format)) % (string6, d_4k_label, d_1080_label, d_720_label, d_sd_label, str(string4), d_total_label)
+                                    line2 = ('%s:' + '|'.join(pdiag_format)) % (string7, source_4k_label, source_1080_label, source_720_label, source_sd_label, str(string4), source_total_label)
+                                    print line1, line2
                                 else:
-                                    line1 = '4K: %s(%s) | 1080p: %s(%s) | 720p: %s(%s) | SD: %s(%s)' % (source_4k_label, d_4k_label, source_1080_label, d_1080_label, source_720_label, d_720_label, source_sd_label, d_sd_label)
+                                    line1 = '|'.join(pdiag_bg_format[:-1]) % (source_4k_label, d_4k_label, source_1080_label, d_1080_label, source_720_label, d_720_label, source_sd_label, d_sd_label)
                             elif quality in ['1']:
                                 if not progressDialog == control.progressDialogBG:
-                                    line1 = '%s: 1080p: %s | 720p: %s | SD: %s | %s: %s' % (string6, d_1080_label, d_720_label, d_sd_label, str(string4), d_total_label)
-                                    line2 = '%s: 1080p: %s | 720p: %s | SD: %s | %s: %s' % (string7, source_1080_label, source_720_label, source_sd_label, str(string4), source_total_label)
+                                    line1 = ('%s:' + '|'.join(pdiag_format[1:])) % (string6, d_1080_label, d_720_label, d_sd_label, str(string4), d_total_label)
+                                    line2 = ('%s:' + '|'.join(pdiag_format[1:])) % (string7, source_1080_label, source_720_label, source_sd_label, str(string4), source_total_label)
                                 else:
-                                    line1 = '1080p: %s(%s) | 720p: %s(%s) | SD: %s(%s) | Total: %s(%s)' % (source_1080_label, d_1080_label, source_720_label, d_720_label, source_sd_label, d_sd_label, source_total_label, d_total_label)
+                                    line1 = '|'.join(pdiag_bg_format[1:]) % (source_1080_label, d_1080_label, source_720_label, d_720_label, source_sd_label, d_sd_label, source_total_label, d_total_label)
                             elif quality in ['2']:
                                 if not progressDialog == control.progressDialogBG:
-                                    line1 = '%s: 1080p: %s | 720p: %s | SD: %s | %s: %s' % (string6, d_1080_label, d_720_label, d_sd_label, str(string4), d_total_label)
-                                    line2 = '%s: 1080p: %s | 720p: %s | SD: %s | %s: %s' % (string7, source_1080_label, source_720_label, source_sd_label, str(string4), source_total_label)
+                                    line1 = ('%s:' + '|'.join(pdiag_format[1:])) % (string6, d_1080_label, d_720_label, d_sd_label, str(string4), d_total_label)
+                                    line2 = ('%s:' + '|'.join(pdiag_format[1:])) % (string7, source_1080_label, source_720_label, source_sd_label, str(string4), source_total_label)
                                 else:
-                                    line1 = '1080p: %s(%s) | 720p: %s(%s) | SD: %s(%s) | Total: %s(%s)' % (source_1080_label, d_1080_label, source_720_label, d_720_label, source_sd_label, d_sd_label, source_total_label, d_total_label)
+                                    line1 = '|'.join(pdiag_bg_format[1:]) % (source_1080_label, d_1080_label, source_720_label, d_720_label, source_sd_label, d_sd_label, source_total_label, d_total_label)
                             elif quality in ['3']:
                                 if not progressDialog == control.progressDialogBG:
-                                    line1 = '%s: 720p: %s | SD: %s | %s: %s' % (string6, d_720_label, d_sd_label, str(string4), d_total_label)
-                                    line2 = '%s: 720p: %s | SD: %s | %s: %s' % (string7, source_720_label, source_sd_label, str(string4), source_total_label)
+                                    line1 = ('%s:' + '|'.join(pdiag_format[2:])) % (string6, d_720_label, d_sd_label, str(string4), d_total_label)
+                                    line2 = ('%s:' + '|'.join(pdiag_format[2:])) % (string7, source_720_label, source_sd_label, str(string4), source_total_label)
                                 else:
-                                    line1 = '720p: %s(%s) | SD: %s(%s) | Total: %s(%s)' % (source_720_label, d_720_label, source_sd_label, d_sd_label, source_total_label, d_total_label)
+                                    line1 = '|'.join(pdiag_bg_format[2:]) % (source_720_label, d_720_label, source_sd_label, d_sd_label, source_total_label, d_total_label)
                             else:
                                 if not progressDialog == control.progressDialogBG:
-                                    line1 = '%s: SD: %s | %s  %s' % (string6, d_sd_label, str(string4), d_total_label)
-                                    line2 = '%s: SD: %s | %s: %s' % (string7, source_sd_label, str(string4), source_total_label)
+                                    line1 = ('%s:' + '|'.join(pdiag_format[3:])) % (string6, d_sd_label, str(string4), d_total_label)
+                                    line2 = ('%s:' + '|'.join(pdiag_format[3:])) % (string7, source_sd_label, str(string4), source_total_label)
                                 else:
-                                    line1 = 'SD: %s(%s) | Total: %s(%s)' % (source_sd_label, d_sd_label, source_total_label, d_total_label)
+                                    line1 = '|'.join(pdiag_bg_format[3:]) % (source_sd_label, d_sd_label, source_total_label, d_total_label)
                         else:
                             if quality in ['0']:
-                                line1 = '4K:  %s  |  1080p:  %s  |  720p:  %s  |  SD:  %s  |  %s:  %s' % (source_4k_label, source_1080_label, source_720_label, source_sd_label, str(string4), source_total_label)
+                                line1 = '|'.join(pdiag_format) % (source_4k_label, source_1080_label, source_720_label, source_sd_label, str(string4), source_total_label)
                             elif quality in ['1']:
-                                line1 = '1080p:  %s  |  720p:  %s  |  SD:  %s  |  %s:  %s' % (source_1080_label, source_720_label, source_sd_label, str(string4), source_total_label)
+                                line1 = '|'.join(pdiag_format[1:]) % (source_1080_label, source_720_label, source_sd_label, str(string4), source_total_label)
                             elif quality in ['2']:
-                                line1 = '1080p:  %s  |  720p:  %s  |  SD:  %s  |  %s:  %s' % (source_1080_label, source_720_label, source_sd_label, str(string4), source_total_label)
+                                line1 = '|'.join(pdiag_format[1:]) % (source_1080_label, source_720_label, source_sd_label, str(string4), source_total_label)
                             elif quality in ['3']:
-                                line1 = '720p:  %s  |  SD:  %s  |  %s:  %s' % (source_720_label, source_sd_label, str(string4), source_total_label)
+                                line1 = '|'.join(pdiag_format[2:]) % (source_720_label, source_sd_label, str(string4), source_total_label)
                             else:
-                                line1 = 'SD:  %s  |  %s:  %s' % (source_sd_label, str(string4), source_total_label)
+                                line1 = '|'.join(pdiag_format[3:]) % (source_sd_label, str(string4), source_total_label)
 
                         if debrid_status:
                             if len(info) > 6: line3 = string3 % (str(len(info)))
@@ -518,8 +533,8 @@ class sources:
                             else: break
                             percent = int(100 * float(i) / (2 * timeout) + 0.5)
                             progressDialog.update(max(1, percent), line1, line2)
-                    except:
-                        pass
+                    except Exception as e:
+                        log_utils.log('Exception Raised: %s' % str(e), log_utils.LOGERROR)
                 else:
                     try:
                         mainleft = [sourcelabelDict[x.getName()] for x in threads if x.is_alive() == True and x.getName() in mainsourceDict]
@@ -544,54 +559,12 @@ class sources:
             except:
                 pass
 
-        if control.addonInfo('id') == 'plugin.video.bennu':
-            try:
-                if progressDialog: progressDialog.update(100, control.lang(30726).encode('utf-8'), control.lang(30731).encode('utf-8'))
+        try: progressDialog.close()
+        except: pass
 
-                items = self.sourcesFilter()
-                
-                if quality == 'RD': items = [i for i in items if i['debrid'] != '']
-                elif quality == 'SD': items = [i for i in items if i['quality'] == 'SD' and i['debrid'] == '']
-                elif quality == 'HD': items = [i for i in items if i['quality'] != 'SD']
+        self.sourcesFilter()
 
-                if control.setting('bennu.dev.log') == 'true':
-                    log_utils.log('Sources Returned: %s' % str(items), log_utils.LOGNOTICE)
-
-                try: progressDialog.close()
-                except: pass
-
-                if quality == 'AUTO': 
-                    u = self.sourcesDirect(items)
-                    return u
-                else:
-                    meta = '{"title": "%s", "year": "%s", "imdb": "%s"}' % (title, year, imdb)
-                    '''control.window.clearProperty("plugin.video.bennu.container.items")
-                    control.window.setProperty("plugin.video.bennu.container.items", json.dumps(items))
-                    
-                    control.window.clearProperty("plugin.video.bennu.container.meta")
-                    control.window.setProperty("plugin.video.bennu.container.meta", meta)'''
-                    control.window.clearProperty(self.itemProperty)
-                    control.window.setProperty(self.itemProperty, json.dumps(items))
-                    
-                    control.window.clearProperty(self.metaProperty)
-                    control.window.setProperty(self.metaProperty, meta)
-
-                    control.sleep(200)
-                    control.execute('Container.Update(%s?action=addItem&title=%s)' % (sys.argv[0], urllib.quote_plus(title)))
-
-                    return "DIR"
-
-            except:
-                try: progressDialog.close()
-                except: pass
-                return
-        else: 
-            try: progressDialog.close()
-            except: pass
-
-            self.sourcesFilter()
-
-            return self.sources
+        return self.sources
 
     def prepareSources(self):
         try:
@@ -626,7 +599,6 @@ class sources:
         ''' END '''
         
         try:
-            sources = []
             dbcur.execute("SELECT * FROM rel_src WHERE source = '%s' AND imdb_id = '%s' AND season = '%s' AND episode = '%s'" % (source, imdb, '', ''))
             match = dbcur.fetchone()
             t1 = int(re.sub('[^0-9]', '', str(match[5])))
@@ -656,7 +628,6 @@ class sources:
             pass
 
         try:
-            sources = []
             sources = call.sources(url, self.hostDict, self.hostprDict)
             if sources == None or sources == []: raise Exception()
             sources = [json.loads(t) for t in set(json.dumps(d, sort_keys=True) for d in sources)]
@@ -677,7 +648,6 @@ class sources:
             pass
 
         try:
-            sources = []
             dbcur.execute("SELECT * FROM rel_src WHERE source = '%s' AND imdb_id = '%s' AND season = '%s' AND episode = '%s'" % (source, imdb, season, episode))
             match = dbcur.fetchone()
             t1 = int(re.sub('[^0-9]', '', str(match[5])))
@@ -725,7 +695,6 @@ class sources:
             pass
 
         try:
-            sources = []
             sources = call.sources(ep_url, self.hostDict, self.hostprDict)
             if sources == None or sources == []: raise Exception()
             sources = [json.loads(t) for t in set(json.dumps(d, sort_keys=True) for d in sources)]
@@ -751,26 +720,19 @@ class sources:
         try:
             control.idle()
 
-            yes = control.yesnoDialog(control.lang(32407).encode('utf-8'), '', '')
-            if not yes: return
-
-            control.makeFile(control.dataPath)
-            dbcon = database.connect(control.providercacheFile)
-            dbcur = dbcon.cursor()
-            dbcur.execute("DROP TABLE IF EXISTS rel_src")
-            dbcur.execute("DROP TABLE IF EXISTS rel_url")
-            dbcur.execute("VACUUM")
-            dbcon.commit()
-
-            control.infoDialog(control.lang(32408).encode('utf-8'), sound=True, icon='INFO')
+            if control.yesnoDialog(control.lang(32407).encode('utf-8'), '', ''):
+                cache.cache_clear_providers()
+                control.infoDialog(control.lang(32408).encode('utf-8'), sound=True, icon='INFO')
         except:
             pass
-
 
     def sourcesFilter(self):
         provider = control.setting('hosts.sort.provider')
         if provider == '': provider = 'false'
-        
+
+        debrid_only = control.setting('debrid.only')
+        if debrid_only == '': debrid_only = 'false'
+
         quality = control.setting('hosts.quality')
         if quality == '': quality = '0'
 
@@ -798,11 +760,14 @@ class sources:
         self.sources = filter
 
         filter = []
+        
+
         for d in debrid.debrid_resolvers:
             valid_hoster = set([i['source'] for i in self.sources])
             valid_hoster = [i for i in valid_hoster if d.valid_url('', i)]
             filter += [dict(i.items() + [('debrid', d.name)]) for i in self.sources if i['source'] in valid_hoster]
-        filter += [i for i in self.sources if not i['source'].lower() in self.hostprDict and i['debridonly'] == False]
+        if debrid_only == 'false' or  debrid.status() == False:
+            filter += [i for i in self.sources if not i['source'].lower() in self.hostprDict and i['debridonly'] == False]
 
         self.sources = filter
       
@@ -851,70 +816,66 @@ class sources:
         extra_info = control.setting('sources.extrainfo')
         prem_identify = control.setting('prem.identify')
         if prem_identify == '': prem_identify = 'blue'
-        prem_identify = self.getPremColor(prem_identify)
-        
-        urls = []
+        prem_identify = self.getPremColor(prem_identify)        
         
         for i in range(len(self.sources)):
-           
-            if not self.sources[i]['url'] in urls:
-        
-                urls += [(self.sources[i]['url'])]
-
-                if extra_info == 'true': t = source_utils.getFileType(self.sources[i]['url'])
-                else: t = None
-                
-                u = self.sources[i]['url']
-
-                p = self.sources[i]['provider']
-
-                q = self.sources[i]['quality']
-
-                s = self.sources[i]['source']
-                
-                s = s.rsplit('.', 1)[0]
-
-                l = self.sources[i]['language']
-
-                try: f = (' | '.join(['[I]%s [/I]' % info.strip() for info in self.sources[i]['info'].split('|')]))
-                except: f = ''
-
-                try: d = self.sources[i]['debrid']
-                except: d = self.sources[i]['debrid'] = ''
-
-                if not d == '': label = '%02d | [B]%s[/B] | ' % (int(i+1), d)
-                #if not d == '': label = '%02d | [B]%s[/B] | [B]%s[/B] | ' % (int(i+1), p, d)
-                else: label = '%02d | [B]%s[/B] | ' % (int(i+1), p)
-
-                if multi == True and not l == 'en': label += '[B]%s[/B] | ' % l
-
-                ### if q in ['4K', '1440p', '1080p', 'HD']: label += '%s | %s | [B][I]%s [/I][/B]' % (s, f, q)
-                if t:
-                    if q in ['4K', '1440p', '1080p', '720p']: label += '%s | [B][I]%s [/I][/B] | [I]%s[/I] | %s' % (s, q, t, f)
-                    elif q == 'SD': label += '%s | %s | [I]%s[/I]' % (s, f, t)
-                    else: label += '%s | %s | [I]%s [/I] | [I]%s[/I]' % (s, f, q, t)
-                else:
-                    if q in ['4K', '1440p', '1080p', '720p']: label += '%s | [B][I]%s [/I][/B] | %s' % (s, q, f)
-                    elif q == 'SD': label += '%s | %s' % (s, f)
-                    else: label += '%s | %s | [I]%s [/I]' % (s, f, q)
-                label = label.replace('| 0 |', '|').replace(' | [I]0 [/I]', '')
-                #label = label.replace('[I]HEVC [/I]', 'HEVC')
-                label = re.sub('\[I\]\s+\[/I\]', ' ', label)
-                label = re.sub('\|\s+\|', '|', label)
-                label = re.sub('\|(?:\s+|)$', '', label)
+                       
+            if extra_info == 'true': t = source_utils.getFileType(self.sources[i]['url'])
+            else: t = None
             
-                if d: 
-                    if not prem_identify == 'nocolor':
-                        self.sources[i]['label'] = ('[COLOR %s]' % (prem_identify)) + label.upper() + '[/COLOR]'
-                    else: self.sources[i]['label'] = label.upper()
-                else: self.sources[i]['label'] = label.upper()
+            p = self.sources[i]['provider']
 
+            q = self.sources[i]['quality']
+
+            s = self.sources[i]['source']
+            
+            s = s.rsplit('.', 1)[0]
+
+            l = self.sources[i]['language']
+
+            try: f = (' | '.join(['[I]%s [/I]' % info.strip() for info in self.sources[i]['info'].split('|')]))
+            except: f = ''
+
+            try: d = self.sources[i]['debrid']
+            except: d = self.sources[i]['debrid'] = ''
+
+            if d.lower() == 'real-debrid': d = 'RD'
+
+            if not d == '': label = '%02d | [B]%s | %s[/B] | ' % (int(i+1), d, p)
+            else: label = '%02d | [B]%s[/B] | ' % (int(i+1), p)
+
+            if multi == True and not l == 'en': label += '[B]%s[/B] | ' % l
+
+            if t:
+                if q in ['4K', '1440p', '1080p', '720p']: label += '%s | [B][I]%s [/I][/B] | [I]%s[/I] | %s' % (s, q, t, f)
+                elif q == 'SD': label += '%s | %s | [I]%s[/I]' % (s, f, t)
+                else: label += '%s | %s | [I]%s [/I] | [I]%s[/I]' % (s, f, q, t)
+            else:
+                if q in ['4K', '1440p', '1080p', '720p']: label += '%s | [B][I]%s [/I][/B] | %s' % (s, q, f)
+                elif q == 'SD': label += '%s | %s' % (s, f)
+                else: label += '%s | %s | [I]%s [/I]' % (s, f, q)
+            label = label.replace('| 0 |', '|').replace(' | [I]0 [/I]', '')
+            label = re.sub('\[I\]\s+\[/I\]', ' ', label)
+            label = re.sub('\|\s+\|', '|', label)
+            label = re.sub('\|(?:\s+|)$', '', label)
+            
+            if d: 
+                if not prem_identify == 'nocolor':
+                    self.sources[i]['label'] = ('[COLOR %s]' % (prem_identify)) + label.upper() + '[/COLOR]'
+                else: self.sources[i]['label'] = label.upper()
+            else: self.sources[i]['label'] = label.upper()
+
+            ## vodhd shown as premium link ##
+            if self.sources[i]['provider']=="vodhd":
+                if not prem_identify == 'nocolor':
+                    self.sources[i]['label'] = ('[COLOR %s]' % (prem_identify)) + label.upper() + '[/COLOR]'
+            
         try: 
             if not HEVC == 'true': self.sources = [i for i in self.sources if not 'HEVC' in i['label']]
         except: pass
-        
+            
         self.sources = [i for i in self.sources if 'label' in i]
-        
+    
         return self.sources
 
 
@@ -922,14 +883,14 @@ class sources:
         try:
             self.url = None
 
-            u = url = item['url']
+            url = item['url']
 
             d = item['debrid'] ; direct = item['direct']
             local = item.get('local', False)
 
             provider = item['provider']
             call = [i[1] for i in self.sourceDict if i[0] == provider][0]
-            u = url = call.resolve(url)
+            url = call.resolve(url)
 
             if url == None or (not '://' in str(url) and not local): raise Exception()
 
@@ -959,18 +920,13 @@ class sources:
             headers = urllib.quote_plus(headers).replace('%3D', '=') if ' ' in headers else headers
             headers = dict(urlparse.parse_qsl(headers))
 
-            #Start Quick & Dirty Hack Nov2017 for Foxx fix
-            if url.startswith('http://stream'):
-                pass
-            #End Quick & Dirty Hack
-            elif url.startswith('http') and '.m3u8' in url:
+            if url.startswith('http') and '.m3u8' in url:
                 result = client.request(url.split('|')[0], headers=headers, output='geturl', timeout='20')
                 if result == None: raise Exception()
 
             elif url.startswith('http'):
                 result = client.request(url.split('|')[0], headers=headers, output='chunk', timeout='20')
                 if result == None: raise Exception()
-
 
             self.url = url
             return url
@@ -981,7 +937,6 @@ class sources:
 
     def sourcesDialog(self, items):
         try:
-            #log_utils.log('%s' % str(items), log_utils.LOGNOTICE)
             
             labels = [i['label'] for i in items]
 
@@ -1161,9 +1116,9 @@ class sources:
         return title
 
     def getConstants(self):
-        self.itemProperty = 'plugin.video.covenant.container.items'
+        self.itemProperty = 'plugin.video.lastship.container.items'
 
-        self.metaProperty = 'plugin.video.covenant.container.meta'
+        self.metaProperty = 'plugin.video.lastship.container.meta'
 
         from resources.lib.sources import sources
 
@@ -1181,7 +1136,7 @@ class sources:
 
         self.hostcapDict = ['hugefiles.net', 'kingfiles.net', 'openload.io', 'openload.co', 'oload.tv', 'thevideo.me', 'vidup.me', 'streamin.to', 'torba.se']
 
-        self.hosthqDict = ['gvideo', 'google.com', 'openload.io', 'openload.co', 'oload.tv', 'thevideo.me', 'rapidvideo.com', 'raptu.com', 'filez.tv', 'uptobox.com', 'uptobox.com', 'uptostream.com', 'xvidstage.com', 'streamango.com']
+        self.hosthqDict = ['bitporno.com', 'filez.tv', 'fruitadblock.net', 'fruitstreams.com', 'google.com', 'gvideo', 'oload.download', 'oload.stream', 'oload.tv', 'oload.tv', 'oload.win', 'openload.co', 'openload.io', 'rapidvideo.com', 'rapidvideo.ws', 'raptu.com', 'streamango.com', 'streamcherry.com', 'thevideo.me', 'uptobox.com', 'uptostream.com', 'vidoza.net', 'vivo.sx']
 
         self.hostblockDict = []
 

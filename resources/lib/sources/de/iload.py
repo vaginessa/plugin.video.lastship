@@ -26,6 +26,7 @@ from resources.lib.modules import cleantitle
 from resources.lib.modules import client
 from resources.lib.modules import source_utils
 from resources.lib.modules import dom_parser
+from resources.lib.modules import source_faultlog
 
 
 class source:
@@ -133,6 +134,7 @@ class source:
 
             return sources
         except:
+            source_faultlog.logFault(__name__,source_faultlog.tagScrape)
             return sources
 
     def resolve(self, url):
@@ -155,7 +157,10 @@ class source:
             r = dom_parser.parse_dom(r, 'table', attrs={'class': 'row'})
             r = dom_parser.parse_dom(r, 'td', attrs={'class': 'list-name'})
             r = dom_parser.parse_dom(r, 'a', req='href')
-            r = [i.attrs['href']for i in r if i and cleantitle.get(i.content) in t][0]
+            r = [i.attrs['href']for i in r if i and cleantitle.get(i.content) in t]
+            if len(r) == 0 :
+                return None
+            r = r[0]
 
             url = source_utils.strip_domain(r)
 
@@ -166,4 +171,8 @@ class source:
 
             return url if imdb in r else None
         except:
+            try:
+                source_faultlog.logFault(__name__, source_faultlog.tagSearch, titles[0])
+            except:
+                return
             return

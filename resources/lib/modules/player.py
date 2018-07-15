@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
+# -*- coding: UTF-8 -*-
 
 """
     Lastship Add-on (C) 2017
-    Credits to Exodus and Covenant; our thanks go to their creators
+    Credits to Placenta and Covenant; our thanks go to their creators
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,6 +18,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+# Addon Name: lastship
+# Addon id: plugin.video.lastship
+# Addon Provider: LastShip
 
 import re,sys,json,time,xbmc
 import hashlib,urllib,os,base64,codecs,xmlrpclib
@@ -57,7 +60,7 @@ class player(xbmc.Player):
             self.ids = {'imdb': self.imdb, 'tvdb': self.tvdb}
             self.ids = dict((k,v) for k, v in self.ids.iteritems() if not v == '0')
 
-            self.offset = bookmarks().get(self.name, self.year)
+            self.offset = bookmarks().get(self.name, season, episode, imdb, self.year)
 
             poster, thumb, meta = self.getMeta(meta)
 
@@ -65,11 +68,10 @@ class player(xbmc.Player):
             item.setArt({'icon': thumb, 'thumb': thumb, 'poster': poster, 'tvshow.poster': poster, 'season.poster': poster})
             item.setInfo(type='Video', infoLabels = meta)
             # temp. foxx fix start
-            if url.startswith('http://stream'):
+            if "foxx.to" in url:
                 item.setContentLookup(False)
-                item.setMimeType('mime/x-type')
+                item.setMimeType('video/mp4')
             # temp. foxx fix ende
-
             if 'plugin' in control.infoLabel('Container.PluginName'):
                 control.player.play(url, item)
 
@@ -234,7 +236,6 @@ class player(xbmc.Player):
                     pass
                 xbmc.sleep(2000)
 
-
         control.window.clearProperty(pname)
 
 
@@ -271,10 +272,11 @@ class player(xbmc.Player):
         if control.setting('crefresh') == 'true':
             xbmc.executebuiltin('Container.Refresh')
 
-        if (self.currentTime / self.totalTime) >= .90:
-            self.libForPlayback()
+        try:
+            if (self.currentTime / self.totalTime) >= .90:
+                self.libForPlayback()
+        except: pass
 
-            
     def onPlayBackEnded(self):
         self.libForPlayback()
         self.onPlayBackStopped()
@@ -286,7 +288,6 @@ class subtitles:
     def get(self, name, imdb, season, episode):
         try:
             if not control.setting('subtitles') == 'true': raise Exception()
-
 
             langDict = {'Afrikaans': 'afr', 'Albanian': 'alb', 'Arabic': 'ara', 'Armenian': 'arm', 'Basque': 'baq', 'Bengali': 'ben', 'Bosnian': 'bos', 'Breton': 'bre', 'Bulgarian': 'bul', 'Burmese': 'bur', 'Catalan': 'cat', 'Chinese': 'chi', 'Croatian': 'hrv', 'Czech': 'cze', 'Danish': 'dan', 'Dutch': 'dut', 'English': 'eng', 'Esperanto': 'epo', 'Estonian': 'est', 'Finnish': 'fin', 'French': 'fre', 'Galician': 'glg', 'Georgian': 'geo', 'German': 'ger', 'Greek': 'ell', 'Hebrew': 'heb', 'Hindi': 'hin', 'Hungarian': 'hun', 'Icelandic': 'ice', 'Indonesian': 'ind', 'Italian': 'ita', 'Japanese': 'jpn', 'Kazakh': 'kaz', 'Khmer': 'khm', 'Korean': 'kor', 'Latvian': 'lav', 'Lithuanian': 'lit', 'Luxembourgish': 'ltz', 'Macedonian': 'mac', 'Malay': 'may', 'Malayalam': 'mal', 'Manipuri': 'mni', 'Mongolian': 'mon', 'Montenegrin': 'mne', 'Norwegian': 'nor', 'Occitan': 'oci', 'Persian': 'per', 'Polish': 'pol', 'Portuguese': 'por,pob', 'Portuguese(Brazil)': 'pob,por', 'Romanian': 'rum', 'Russian': 'rus', 'Serbian': 'scc', 'Sinhalese': 'sin', 'Slovak': 'slo', 'Slovenian': 'slv', 'Spanish': 'spa', 'Swahili': 'swa', 'Swedish': 'swe', 'Syriac': 'syr', 'Tagalog': 'tgl', 'Tamil': 'tam', 'Telugu': 'tel', 'Thai': 'tha', 'Turkish': 'tur', 'Ukrainian': 'ukr', 'Urdu': 'urd'}
 
@@ -363,37 +364,83 @@ class subtitles:
 
 
 class bookmarks:
-    def get(self, name, year='0'):
-        try:
-            offset = '0'
+    def get(self, name, season, episode, imdb, year='0'):
+        offset = '0'
 
-            if not control.setting('bookmarks') == 'true': raise Exception()
+        if control.setting('bookmarks') == 'true':
+            if control.setting('bookmarks.trakt') == 'true':
+                try:
+                    from resources.lib.modules import trakt
 
-            idFile = hashlib.md5()
-            for i in name: idFile.update(str(i))
-            for i in year: idFile.update(str(i))
-            idFile = str(idFile.hexdigest())
+                    if not episode is None:
 
-            dbcon = database.connect(control.bookmarksFile)
-            dbcur = dbcon.cursor()
-            dbcur.execute("SELECT * FROM bookmark WHERE idFile = '%s'" % idFile)
-            match = dbcur.fetchone()
-            self.offset = str(match[1])
-            dbcon.commit()
+                        # Looking for a Episode progress
 
-            if self.offset == '0': raise Exception()
+                        traktInfo = trakt.getTraktAsJson('https://api.trakt.tv/sync/playback/episodes?extended=full')
+                        for i in traktInfo:
+                            if imdb == i['show']['ids']['imdb']:
+                                # Checking Episode Number
+                                if int(season) == i['episode']['season'] and int(episode) == i['episode']['number']:
+                                    # Calculating Offset to seconds
+                                    offset = (float(i['progress'] / 100) * int(i['episode']['runtime']) * 60)
+                    else:
 
-            minutes, seconds = divmod(float(self.offset), 60) ; hours, minutes = divmod(minutes, 60)
-            label = '%02d:%02d:%02d' % (hours, minutes, seconds)
-            label = (control.lang(32502) % label).encode('utf-8')
+                        # Looking for a Movie Progress
+                        traktInfo = trakt.getTraktAsJson('https://api.trakt.tv/sync/playback/episodes?extended=full')
+                        for i in traktInfo:
+                            if imdb == i['movie']['ids']['imdb']:
+                                # Calculating Offset to seconds
+                                offset = (float(i['progress'] / 100) * int(i['movie']['runtime']) * 60)
 
-            try: yes = control.dialog.contextmenu([label, control.lang(32501).encode('utf-8'), ])
-            except: yes = control.yesnoDialog(label, '', '', str(name), control.lang(32503).encode('utf-8'), control.lang(32501).encode('utf-8'))
+                    if control.setting('bookmarks.auto') == 'false':
+                        try:
+                            yes = control.dialog.contextmenu(["Resume", control.lang(32501).encode('utf-8'), ])
+                        except:
+                            yes = control.yesnoDialog("Resume", '', '', str(name), control.lang(32503).encode('utf-8'),
+                                                      control.lang(32501).encode('utf-8'))
+                        if yes: offset = '0'
 
-            if yes: self.offset = '0'
+                    return offset
 
-            return self.offset
-        except:
+                except:
+                    return '0'
+            else:
+                try:
+                    offset = '0'
+
+                    if not control.setting('bookmarks') == 'true': raise Exception()
+
+                    idFile = hashlib.md5()
+                    for i in name: idFile.update(str(i))
+                    for i in year: idFile.update(str(i))
+                    idFile = str(idFile.hexdigest())
+
+                    dbcon = database.connect(control.bookmarksFile)
+                    dbcur = dbcon.cursor()
+                    dbcur.execute("SELECT * FROM bookmark WHERE idFile = '%s'" % idFile)
+                    match = dbcur.fetchone()
+                    self.offset = str(match[1])
+                    dbcon.commit()
+                    if self.offset == '0': raise Exception()
+
+                    minutes, seconds = divmod(float(self.offset), 60);
+                    hours, minutes = divmod(minutes, 60)
+                    label = '%02d:%02d:%02d' % (hours, minutes, seconds)
+                    label = (control.lang(32502) % label).encode('utf-8')
+
+                    if control.setting('bookmarks.auto') == 'false':
+
+                        try:
+                            yes = control.dialog.contextmenu([label, control.lang(32501).encode('utf-8'), ])
+                        except:
+                            yes = control.yesnoDialog(label, '', '', str(name), control.lang(32503).encode('utf-8'),
+                                                      control.lang(32501).encode('utf-8'))
+                        if yes: self.offset = '0'
+
+                    return self.offset
+                except:
+                    return offset
+        else:
             return offset
 
 
@@ -408,7 +455,6 @@ class bookmarks:
             for i in name: idFile.update(str(i))
             for i in year: idFile.update(str(i))
             idFile = str(idFile.hexdigest())
-
             control.makeFile(control.dataPath)
             dbcon = database.connect(control.bookmarksFile)
             dbcur = dbcon.cursor()
@@ -418,5 +464,3 @@ class bookmarks:
             dbcon.commit()
         except:
             pass
-
-

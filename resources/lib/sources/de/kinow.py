@@ -25,16 +25,16 @@ import urlparse
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
 from resources.lib.modules import control
-from resources.lib.modules import directstream
 from resources.lib.modules import source_utils
 from resources.lib.modules import dom_parser
+from resources.lib.modules import source_faultlog
 
 class source:
     def __init__(self):
         self.priority = 1
         self.language = ['de']
         self.domains = ['kinow.to']
-        self.base_link = 'http://kinow.to'
+        self.base_link = 'http://streamworld.to'
         self.search_link = '/suche.html'
 
         self.year_link = '/jahr/%d.html'
@@ -106,7 +106,7 @@ class source:
 
             for link in links:
                 if '/englisch/' in link: continue
-                control.sleep(3000)
+
                 if link != url: r = client.request(urlparse.urljoin(self.base_link, link))
 
                 quality = 'SD'
@@ -139,12 +139,11 @@ class source:
 
             return sources
         except:
+            source_faultlog.logFault(__name__,source_faultlog.tagScrape)
             return sources
 
     def resolve(self, url):
         try:
-            control.sleep(5000)
-
             url = urlparse.urljoin(self.base_link, url)
             url = client.request(url, redirect=False, output='extended')
 
@@ -156,6 +155,7 @@ class source:
                     return self.__google(url)
                 return url
         except:
+            source_faultlog.logFault(__name__,source_faultlog.tagResolve)
             return
 
     def __search(self, titles, year, content):
@@ -168,22 +168,23 @@ class source:
             c = client.request(urlparse.urljoin(self.base_link, self.search_link), cookie=c, post=p, output='cookie')
             r = client.request(urlparse.urljoin(self.base_link, self.type_link % content), cookie=c, post=p)
 
-            r = dom_parser.parse_dom(r, 'div', attrs={'id': 'content'})
+            r = dom_parser.parse_dom(r, 'table', attrs={'width': '100%'})[0].content
             r = dom_parser.parse_dom(r, 'tr')
-            r = [dom_parser.parse_dom(i, 'td') for i in r]
-            r = [dom_parser.parse_dom(i, 'a', req='href') for i in r]
+            r = [(dom_parser.parse_dom(i.content, 'a')) for i in r if 'otherLittles' in i.content]
 
-            r = [(i[0].attrs['href'], i[0].content, i[1].content) for i in r if i]
-            x = []
-            for i in r:
-                if re.search('(?<=<i>\().*$', i[1]):
-                    x.append((i[0], re.search('(.*?)(?=\s<)', i[1]).group(), re.search('(?<=<i>\().*$', i[1]).group(), i[2]))
-                else:
-                    x.append((i[0], i[1], i[1], i[2]))
-            r = [i[0] for i in x if (cleantitle.get(i[1]) in t or cleantitle.get(i[2]) in t) and i[3] == year][0]
+            r = sorted(r, key=lambda i: int(i[1].content), reverse=True)  # with year > no year
 
-            return source_utils.strip_domain(r)
+            links = [i[0].attrs['href'] for i in r if
+                     (cleantitle.get(i[0].content).partition('<')[0] in t) and i[1].content == year]
+
+            if len(r) > 0:
+                return source_utils.strip_domain(links[0])
+            return ""
         except:
+            try:
+                source_faultlog.logFault(__name__, source_faultlog.tagSearch, titles[0])
+            except:
+                return
             return
 
     def __google(self, url):

@@ -27,15 +27,18 @@ from resources.lib.modules import cleantitle
 from resources.lib.modules import client
 from resources.lib.modules import source_utils
 from resources.lib.modules import dom_parser
+from resources.lib.modules import source_faultlog
+from resources.lib.modules import cfscrape
 
 
 class source:
     def __init__(self):
         self.priority = 1
         self.language = ['de']
-        self.domains = ['movie4k.to', 'movie4k.tv', 'movie.to', 'movie4k.me', 'movie4k.org', 'movie4k.pe', 'movie4k.am']
+        self.domains = ['movie4k.io', 'movie4k.tv', 'movie.to', 'movie4k.me', 'movie4k.org', 'movie4k.pe', 'movie2k.cm', 'movie2k.nu', 'movie4k.am']
         self._base_link = None
         self.search_link = '/movies.php?list=search&search=%s'
+        self.scraper = cfscrape.create_scraper()
 
     @property
     def base_link(self):
@@ -51,6 +54,40 @@ class source:
         except:
             return
 
+    def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
+        try:
+            url = self.__search(imdb, [localtvshowtitle] + source_utils.aliases_to_array(aliases), year)
+            if not url and tvshowtitle != localtvshowtitle:
+                url = self.__search(imdb, [tvshowtitle] + source_utils.aliases_to_array(aliases), year)
+            if url:
+                return url
+        except:
+            return
+
+    def episode(self, url, imdb, tvdb, title, premiered, season, episode):
+        try:
+            if url == None:
+                return
+
+            url = urlparse.urljoin(self.base_link, url)
+
+            r = self.scraper.get(url).content
+
+            seasonMapping = dom_parser.parse_dom(r, 'select', attrs={'name': 'season'})
+            seasonMapping = dom_parser.parse_dom(seasonMapping, 'option', req='value')
+            seasonIndex = [i.attrs['value'] for i in seasonMapping if season in i.content]
+            seasonIndex = int(seasonIndex[0]) - 1
+
+            seasons = dom_parser.parse_dom(r, 'div', attrs={'id': re.compile('episodediv.+?')})
+            seasons = seasons[seasonIndex]
+            episodes = dom_parser.parse_dom(seasons, 'option', req='value')
+
+            url = [i.attrs['value'] for i in episodes if episode in i.content]
+            if len(url) > 0:
+                return url[0]
+        except:
+            return
+
     def sources(self, url, hostDict, hostprDict):
         sources = []
         try:
@@ -59,7 +96,7 @@ class source:
 
             url = urlparse.urljoin(self.base_link, url)
 
-            r = client.request(url)
+            r = self.scraper.get(url).content
             r = r.replace('\\"', '"')
 
             links = dom_parser.parse_dom(r, 'tr', attrs={'id': 'tablemoviesindex2'})
@@ -84,13 +121,14 @@ class source:
 
             return sources
         except:
+            source_faultlog.logFault(__name__,source_faultlog.tagScrape)
             return sources
 
     def resolve(self, url):
         try:
             h = urlparse.urlparse(url.strip().lower()).netloc
 
-            r = client.request(url)
+            r = self.scraper.get(url).content
             r = r.rsplit('"underplayer"')[0].rsplit("'underplayer'")[0]
 
             u = re.findall('\'(.+?)\'', r) + re.findall('\"(.+?)\"', r)
@@ -98,54 +136,48 @@ class source:
             u = [i for i in u if i.startswith('http') and not h in i]
 
             url = u[-1].encode('utf-8')
+            if 'bit.ly' in url:
+                url = self.scraper.get(url).url
+            elif 'nullrefer.com' in url:
+                url = url.replace('nullrefer.com/?', '')
+
             return url
         except:
+            source_faultlog.logFault(__name__,source_faultlog.tagResolve)
             return
 
     def __search(self, imdb, titles, year):
         try:
-            q = self.search_link % urllib.quote_plus(cleantitle.query(titles[0]))
+            q = self.search_link % titles[0]
             q = urlparse.urljoin(self.base_link, q)
 
             t = [cleantitle.get(i) for i in set(titles) if i]
-            y = ['%s' % str(year), '%s' % str(int(year) + 1), '%s' % str(int(year) - 1), '0']
 
-            r = client.request(q)
+            r = self.scraper.get(q).content
 
-            r = dom_parser.parse_dom(r, 'tr', attrs={'id': re.compile('coverPreview.+?')})
-            r = [(dom_parser.parse_dom(i, 'a', req='href'), dom_parser.parse_dom(i, 'div', attrs={'style': re.compile('.+?')}), dom_parser.parse_dom(i, 'img', req='src')) for i in r]
-            r = [(i[0][0].attrs['href'].strip(), i[0][0].content.strip(), i[1], i[2]) for i in r if i[0] and i[2]]
-            r = [(i[0], i[1], [x.content for x in i[2] if x.content.isdigit() and len(x.content) == 4], i[3]) for i in r]
-            r = [(i[0], i[1], i[2][0] if i[2] else '0', i[3]) for i in r]
-            r = [i for i in r if any('us_ger_' in x.attrs['src'] for x in i[3])]
-            r = [(i[0], i[1], i[2], [re.findall('(\d+)', x.attrs['src']) for x in i[3] if 'smileys' in x.attrs['src']]) for i in r]
-            r = [(i[0], i[1], i[2], [x[0] for x in i[3] if x]) for i in r]
-            r = [(i[0], i[1], i[2], int(i[3][0]) if i[3] else 0) for i in r]
-            r = sorted(r, key=lambda x: x[3])[::-1]
-            r = [(i[0], i[1], i[2], re.findall('\((.+?)\)$', i[1])) for i in r]
-            r = [(i[0], i[1], i[2]) for i in r if not i[3]]
-            r = [i for i in r if i[2] in y]
-            r = sorted(r, key=lambda i: int(i[2]), reverse=True)  # with year > no year
+            links = dom_parser.parse_dom(r, 'tr', attrs={'id': re.compile('coverPreview.+?')})
+            tds = [dom_parser.parse_dom(i, 'td') for i in links]
+            tuples = [(dom_parser.parse_dom(i[0], 'a')[0], re.findall('>(\d{4})', i[1].content)) for i in tds if 'ger' in i[4].content]
 
-            r = [(client.replaceHTMLCodes(i[0]), i[1], i[2]) for i in r]
+            tuplesSortByYear = [(i[0].attrs['href'], i[0].content) for i in tuples if year in i[1]]
 
-            match = [i[0] for i in r if cleantitle.get(i[1]) in t and year == i[2]]
+            if len(tuplesSortByYear) > 0:
+                tuples = tuplesSortByYear
+            else:
+                tuples = [(i[0].attrs['href'], i[0].content) for i in tuples]
 
-            match2 = [i[0] for i in r]
-            match2 = [x for y, x in enumerate(match2) if x not in match2[:y]]
-            if match2 == []: return
+            urls = [i[0] for i in tuples if cleantitle.get(i[1]) in t]
 
-            for i in match2[:5]:
-                try:
-                    if match: url = match[0]; break
-                    r = client.request(urlparse.urljoin(self.base_link, i))
-                    r = re.findall('(tt\d+)', r)
-                    if imdb in r: url = i; break
-                except:
-                    pass
+            if len(urls) == 0:
+                urls = [i[0] for i in tuples if 'untertitel' not in i[1]]
 
-            return source_utils.strip_domain(url)
+            if len(urls) > 0:
+                return source_utils.strip_domain(urls[0])
         except:
+            try:
+                source_faultlog.logFault(__name__, source_faultlog.tagSearch, titles[0])
+            except:
+                return
             return
 
     def __get_base_url(self, fallback):
@@ -153,9 +185,9 @@ class source:
             for domain in self.domains:
                 try:
                     url = 'http://%s' % domain
-                    r = client.request(url, limit=1, timeout='10')
+                    r = self.scraper.get(url).content
                     r = dom_parser.parse_dom(r, 'meta', attrs={'name': 'author'}, req='content')
-                    if r and 'movie4k.to' in r[0].attrs.get('content').lower():
+                    if r and 'movie4k.io' in r[0].attrs.get('content').lower():
                         return url
                 except:
                     pass

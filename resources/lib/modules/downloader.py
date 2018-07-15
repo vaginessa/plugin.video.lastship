@@ -1,6 +1,8 @@
+# -*- coding: UTF-8 -*-
+
 """
-    Simple XBMC Download Script
-    Copyright (C) 2013 Sean Poyser (seanpoyser@gmail.com)
+    Lastship Add-on (C) 2017
+    Credits to Placenta and Covenant; our thanks go to their creators
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,6 +18,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+# Addon Name: lastship
+# Addon id: plugin.video.lastship
+# Addon Provider: LastShip
 
 import re
 import json
@@ -24,14 +29,12 @@ import urllib2
 import urlparse
 import xbmc
 import xbmcgui
-import xbmcplugin
 import xbmcvfs
 import os
 import inspect
 
 
 def download(name, image, url):
-
     if url == None: return
 
     from resources.lib.modules import control
@@ -157,17 +160,17 @@ def doDownload(url, dest, title, image, headers):
         return
 
     size = 1024 * 1024
-    mb   = content / (1024 * 1024)
+    mb = content / (1024 * 1024)
 
     if content < size:
         size = content
 
-    total   = 0
-    notify  = 0
-    errors  = 0
-    count   = 0
-    resume  = 0
-    sleep   = 0
+    total = 0
+    notify = 0
+    errors = 0
+    count = 0
+    resume = 0
+    sleep = 0
 
     if xbmcgui.Dialog().yesno(title + ' - Confirm Download', file, 'Complete file is %dMB' % mb, 'Continue with download?', 'Confirm',  'Cancel') == 1:
         return
@@ -177,7 +180,6 @@ def doDownload(url, dest, title, image, headers):
     #f = open(dest, mode='wb')
     f = xbmcvfs.File(dest, 'w')
 
-    chunk  = None
     chunks = []
 
     while True:
@@ -196,7 +198,7 @@ def doDownload(url, dest, title, image, headers):
         error = False
 
         try:        
-            chunk  = resp.read(size)
+            chunk = resp.read(size)
             if not chunk:
                 if percent < 99:
                     error = True

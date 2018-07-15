@@ -38,14 +38,14 @@ def request(url, close=True, redirect=True, error=False, proxy=None, post=None, 
         if not proxy == None:
             handlers += [urllib2.ProxyHandler({'http':'%s' % (proxy)}), urllib2.HTTPHandler]
             opener = urllib2.build_opener(*handlers)
-            opener = urllib2.install_opener(opener)
+            urllib2.install_opener(opener)
 
 
         if output == 'cookie' or output == 'extended' or not close == True:
             cookies = cookielib.LWPCookieJar()
             handlers += [urllib2.HTTPHandler(), urllib2.HTTPSHandler(), urllib2.HTTPCookieProcessor(cookies)]
             opener = urllib2.build_opener(*handlers)
-            opener = urllib2.install_opener(opener)
+            urllib2.install_opener(opener)
 
         if (2, 7, 8) < sys.version_info < (2, 7, 12):
             try:
@@ -54,7 +54,7 @@ def request(url, close=True, redirect=True, error=False, proxy=None, post=None, 
                 ssl_context.verify_mode = ssl.CERT_NONE
                 handlers += [urllib2.HTTPSHandler(context=ssl_context)]
                 opener = urllib2.build_opener(*handlers)
-                opener = urllib2.install_opener(opener)
+                urllib2.install_opener(opener)
             except:
                 pass
 
@@ -96,7 +96,7 @@ def request(url, close=True, redirect=True, error=False, proxy=None, post=None, 
                 def http_response(self, request, response): return response
 
             opener = urllib2.build_opener(NoRedirection)
-            opener = urllib2.install_opener(opener)
+            urllib2.install_opener(opener)
 
             try: del _headers['Referer']
             except: pass
@@ -126,7 +126,8 @@ def request(url, close=True, redirect=True, error=False, proxy=None, post=None, 
 
                     netloc = '%s://%s' % (urlparse.urlparse(url).scheme, urlparse.urlparse(url).netloc)
 
-                    if not netloc.endswith('/'): netloc += '/'
+                    if not netloc.endswith('/'):
+                        netloc += '/'
                     ua = _headers['User-Agent']
 
                     cf = cache.get(cfcookie().get, 168, netloc, ua, timeout)
@@ -306,7 +307,7 @@ def randomagent():
          '40.0.2214.115', '42.0.2311.90', '42.0.2311.135', '42.0.2311.152', '43.0.2357.81', '43.0.2357.124', '44.0.2403.155', '44.0.2403.157', '45.0.2454.101',
          '45.0.2454.85', '46.0.2490.71',
          '46.0.2490.80', '46.0.2490.86', '47.0.2526.73', '47.0.2526.80', '48.0.2564.116', '49.0.2623.112', '50.0.2661.86', '51.0.2704.103', '52.0.2743.116',
-         '53.0.2785.143', '54.0.2840.71'],
+         '53.0.2785.143', '54.0.2840.71', '61.0.3163.100'],
         ['11.0'],
         ['8.0', '9.0', '10.0', '10.6']]
     WIN_VERS = ['Windows NT 10.0', 'Windows NT 7.0', 'Windows NT 6.3', 'Windows NT 6.2', 'Windows NT 6.1', 'Windows NT 6.0', 'Windows NT 5.1', 'Windows NT 5.0']
@@ -385,12 +386,12 @@ class cfcookie:
             cookies = cookielib.LWPCookieJar()
             handlers = [urllib2.HTTPHandler(), urllib2.HTTPSHandler(), urllib2.HTTPCookieProcessor(cookies)]
             opener = urllib2.build_opener(*handlers)
-            opener = urllib2.install_opener(opener)
+            urllib2.install_opener(opener)
 
             try:
                 request = urllib2.Request(query)
                 _add_request_header(request, headers)
-                response = urllib2.urlopen(request, timeout=int(timeout))
+                urllib2.urlopen(request, timeout=int(timeout))
             except:
                 pass
 
@@ -485,4 +486,14 @@ class sucuri:
         except:
             pass
 
+def _get_keyboard( default="", heading="", hidden=False ):
+    """ shows a keyboard and returns a value """
+    keyboard = xbmc.Keyboard( default, heading, hidden )
+    keyboard.doModal()
+    if ( keyboard.isConfirmed() ):
+        return unicode( keyboard.getText(), "utf-8" )
+    return default
+
+def removeNonAscii(s): 
+    return "".join(i for i in s if ord(i)<128)
 

@@ -26,6 +26,7 @@ import urlparse
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
 from resources.lib.modules import source_utils
+from resources.lib.modules import source_faultlog
 
 
 class source:
@@ -64,6 +65,7 @@ class source:
 
             return sources
         except:
+            source_faultlog.logFault(__name__,source_faultlog.tagScrape)
             return sources
 
     def resolve(self, url):
@@ -84,8 +86,14 @@ class source:
             r = [(i[0], i[1]) for i in r if i[0] and i[1]]
             r = [(i[0], i[1].get('Streaming', ['']), i[1].get('Jahr', ['0']), i[1].get('IMDb-Link', [''])) for i in r if i]
             r = [(i[0], i[1][0], i[2][0], re.findall('.+?(tt\d+).*?', i[3][0])) for i in r if i[0] and i[1] and i[2] and i[3]]
-            r = [i[1] for i in r if imdb in i[3] or (cleantitle.get(i[0]) in t and i[2] in y)][0]
+            r = [i[1] for i in r if imdb in i[3] or (cleantitle.get(i[0]) in t and i[2] in y)]
+            if len(r) > 0 :
+                return source_utils.strip_domain(r[0])
+            return ""
 
-            return source_utils.strip_domain(r)
         except:
+            try:
+                source_faultlog.logFault(__name__, source_faultlog.tagSearch, titles[0])
+            except:
+                return
             return

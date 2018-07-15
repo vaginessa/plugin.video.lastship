@@ -25,6 +25,7 @@ from resources.lib.modules import cleantitle
 from resources.lib.modules import client
 from resources.lib.modules import dom_parser
 from resources.lib.modules import source_utils
+from resources.lib.modules import source_faultlog
 
 
 class source:
@@ -64,6 +65,7 @@ class source:
 
             return sources
         except:
+            source_faultlog.logFault(__name__,source_faultlog.tagScrape)
             return sources
 
     def resolve(self, url):
@@ -82,8 +84,16 @@ class source:
             r = [(i[0][0].attrs['href'], i[1], re.findall('(.+?) \(*(\d{4})', i[1])) for i in r]
             r = [(i[0], i[2][0][0] if len(i[2]) > 0 else i[1], i[2][0][1] if len(i[2]) > 0 else '0') for i in r]
             r = sorted(r, key=lambda i: int(i[2]), reverse=True)  # with year > no year
-            r = [i[0] for i in r if cleantitle.get(i[1]) in t and i[2] in y][0]
+            r = [i[0] for i in r if cleantitle.get(i[1]) in t and i[2] in y]
+            if len(r) > 0:
+                r = r[0]
+            else:
+                return
 
             return source_utils.strip_domain(r)
         except:
+            try:
+                source_faultlog.logFault(__name__, source_faultlog.tagSearch, titles[0])
+            except:
+                return
             return

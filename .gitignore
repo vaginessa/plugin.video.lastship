@@ -1,51 +1,33 @@
-##Python
-
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
-
-# Installer logs
-pip-log.txt
-
-# C extensions
-*.so
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
-
-# Translations
-*.mo
-*.pot
-
-# Environments
-/.project
-/.pydevproject
-/.settings
-/.idea
-.python-version
-
-# mkdocs documentation
-/site
-
-## Windows junk
-# image file caches
-Thumbs.db
-ehthumbs.db
-
-# Folder config file
-Desktop.ini
-
-# Recycle bin on file shares
-$RECYCLE.BIN/
-
-## Mac crap
-.DS_Store
+*.pyo
+.idea/
+third_party/
+tests_pydevd_python/
+tests_pydevd_runfiles/
+_pydev_bundle/
+_pydev_imps/
+_pydev_runfiles/
+_pydevd_bundle/
+_pydevd_frame_eval/
+build_tools/
+EGG-INFO/
+pydev_ipython/
+pydev_sitecustomize/
+pydevd_attach_to_process/
+pydevd_concurrency_analyser/
+pydevd_plugins/
+stubs/
+test_pydevd_reload/
+tests_pydevd/
+tests_pydevd_mainloop/
+setup_cython.py
+runfiles.py
+pydevd_file_utils.py
+pydevd.py
+pydevconsole.py
+pydev_run_in_console.py
+pydev_pysrc.py
+pydev_coverage.py
+pydev_app_engine_debug_startup.py
+pycompletionserver.py
+interpreterInfo.py
+profile_faster*

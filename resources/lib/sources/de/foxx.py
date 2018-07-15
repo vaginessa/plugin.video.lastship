@@ -23,18 +23,14 @@ import json
 import re
 import urllib
 import urlparse
-import requests
-
 
 from resources.lib.modules import anilist
-from resources.lib.modules import cache
-from resources.lib.modules import cleantitle
-from resources.lib.modules import client
-from resources.lib.modules import directstream
+from resources.lib.modules import cfscrape
 from resources.lib.modules import dom_parser
-from resources.lib.modules import jsunpack
+from resources.lib.modules import source_faultlog
 from resources.lib.modules import source_utils
 from resources.lib.modules import tvmaze
+
 
 class source:
     def __init__(self):
@@ -42,9 +38,9 @@ class source:
         self.language = ['de']
         self.domains = ['foxx.to']
         self.base_link = 'http://foxx.to'
-        self.search_link = '/wp-json/dooplay/search/?keyword=%s&nonce=%s'
-        
-        
+        self.search_link = '/?s=%s'
+        self.scraper = cfscrape.create_scraper()
+
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
             url = self.__search([localtitle] + source_utils.aliases_to_array(aliases), year)
@@ -53,58 +49,55 @@ class source:
             
             return url
         except:
-            return
+            return ""
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
-            url = self.__search([localtvshowtitle] + source_utils.aliases_to_array(aliases), year)
-            if not url and tvshowtitle != localtvshowtitle: url = self.__search([tvshowtitle] + source_utils.aliases_to_array(aliases), year)
-            if not url and source_utils.is_anime('show', 'tvdb', tvdb): url = self.__search([tvmaze.tvMaze().showLookup('thetvdb', tvdb).get('name')] + source_utils.aliases_to_array(aliases), year)
-            return url
+
+            linkAndTitle = self.__search([tvshowtitle, localtvshowtitle] + source_utils.aliases_to_array(aliases), year)
+            aliases = source_utils.aliases_to_array(aliases)
+
+            if not tvshowtitle and source_utils.is_anime('show', 'tvdb', tvdb): linkAndTitle = self.__search([tvmaze.tvMaze().showLookup('thetvdb', tvdb).get('name')] + source_utils.aliases_to_array(aliases), year)
+
+            return linkAndTitle
         except:
-            return
+            return ""
 
     def episode(self, url, imdb, tvdb, title, premiered, season, episode):
         try:
             if not url:
                 return
-
-            url = urlparse.urljoin(self.base_link, url)
-            url = client.request(url, output='geturl')
+            r = self.scraper.get(url).content
 
             if season == 1 and episode == 1:
                 season = episode = ''
 
-            r = client.request(url)
             r = dom_parser.parse_dom(r, 'ul', attrs={'class': 'episodios'})
             r = dom_parser.parse_dom(r, 'a', attrs={'href': re.compile('[^\'"]*%s' % ('-%sx%s' % (season, episode)))})[0].attrs['href']
             return source_utils.strip_domain(r)
         except:
-            return
+            return ""
 
     def sources(self, url, hostDict, hostprDict):
         sources = []
         try:
             if not url:
                 return sources
+            url = urlparse.urljoin(self.base_link, url)
+            temp = self.scraper.get(url)
+            link = re.findall('iframe\ssrc="(.*?view\.php.*?)"', temp.content)[0]
+            if link.startswith('//'):
+                link = "https:" + link
 
-            url = urlparse.urljoin(self.base_link, url)            
-            r = client.request(url, output='extended')
-            regex= ur'iframe src="(.+?)"+?'
-            url_iframe=re.findall(regex,r[0])
-            r = client.request(url_iframe[0], output='extended')
-            headers = r[3]
-            headers.update({'Cookie': r[2].get('Set-Cookie'), 'Referer': self.base_link})
-            r = r[0]     
-            links=re.findall('''(?:link|file)["']?\s*:\s*["'](.+?)["']''', r) 
-            url2redirect=links[3]            
-            final_url_redirected = requests.get(url2redirect,headers=headers, allow_redirects=False)
-            url = final_url_redirected.headers['Location']
-            # quick&dirty fix Nov2017 - sources.py had to be changed to make this compatible    
-            sources.append({'source': 'CDN', 'quality': '1080p', 'language': 'de', 'url':url+'|%s' % urllib.urlencode(headers) , 'direct': True, 'debridonly': False})
-            
+            r = self.scraper.get(link, headers={'referer': url}).content
+            phrase = re.findall('jbdaskgs = \'(.*)?\'', r)[0]
+            links = json.loads(base64.b64decode(phrase))
+
+            [sources.append({'source': 'CDN', 'quality': i['label'] if i['label'] in ['720p', '1080p'] else 'SD', 'language': 'de', 'url': i['file'], 'direct': True,
+                         'debridonly': False}) for i in links]
             return sources
         except:
+            source_faultlog.logFault(__name__,source_faultlog.tagScrape)
             return sources
 
     def resolve(self, url):
@@ -112,26 +105,24 @@ class source:
 
     def __search(self, titles, year):
         try:
-            n = cache.get(self.__get_nonce, 24)
-
-            query = self.search_link % (urllib.quote_plus(cleantitle.query(titles[0])), n)
+            query = self.search_link % (urllib.quote_plus(titles[0]))
             query = urlparse.urljoin(self.base_link, query)
 
-            t = [cleantitle.get(i) for i in set(titles) if i]
-            y = ['%s' % str(year), '%s' % str(int(year) + 1), '%s' % str(int(year) - 1), '0']
+            r = self.scraper.get(query).content
+            dom_parsed = dom_parser.parse_dom(r, 'div', attrs={'class': 'details'})
+            links = [(dom_parser.parse_dom(i, 'a')[0], dom_parser.parse_dom(i, 'span', attrs={'class' : 'year'})[0].content) for i in dom_parsed]
 
-            r = client.request(query)
-            r = json.loads(r)
-            r = [(r[i].get('url'), r[i].get('title'), r[i].get('extra').get('date')) for i in r]
-            r = sorted(r, key=lambda i: int(i[2]), reverse=True)  # with year > no year
-            r = [i[0] for i in r if cleantitle.get(i[1]) in t and i[2] in y][0]
+            r = sorted(links, key=lambda i: int(i[1]), reverse=True)  # with year > no year
+            r = [x[0].attrs['href'] for x in r if int(x[1]) == int(year)]
 
-            return source_utils.strip_domain(r)
+            if len(r) > 0:
+                return source_utils.strip_domain(r[0])
+
+            return ""
+
         except:
-            return
-
-    def __get_nonce(self):
-        n = client.request(self.base_link)
-        try: n = re.findall('nonce"?\s*:\s*"?([0-9a-zA-Z]+)', n)[0]
-        except: n = '5d12d0fa54'
-        return n
+            try:
+                source_faultlog.logFault(__name__, source_faultlog.tagSearch, titles[0])
+            except:
+                return
+            return ""

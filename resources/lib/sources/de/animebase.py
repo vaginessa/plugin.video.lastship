@@ -27,6 +27,7 @@ from resources.lib.modules import client
 from resources.lib.modules import tvmaze
 from resources.lib.modules import source_utils
 from resources.lib.modules import dom_parser
+from resources.lib.modules import source_faultlog
 
 
 class source:
@@ -93,6 +94,7 @@ class source:
 
             return sources
         except:
+            source_faultlog.logFault(__name__, source_faultlog.tagScrape)
             return sources
 
     def resolve(self, url):
@@ -109,6 +111,7 @@ class source:
 
             return url
         except:
+            source_faultlog.logFault(__name__, source_faultlog.tagResolve)
             return
 
     def __search(self, title):
@@ -118,8 +121,14 @@ class source:
             r = client.request(urlparse.urljoin(self.base_link, self.search_link), post={'suchbegriff': title})
             r = dom_parser.parse_dom(r, 'a', attrs={'class': 'ausgabe_1'}, req='href')
             r = [(i.attrs['href'], i.content) for i in r]
-            r = [i[0] for i in r if cleantitle.get(i[1]) == t][0]
+            r = [i[0] for i in r if cleantitle.get(i[1]) == t]
+            if len(r) == 0:
+                return
 
-            return source_utils.strip_domain(r)
+            return source_utils.strip_domain(r[0])
         except:
+            try:
+                source_faultlog.logFault(__name__, source_faultlog.tagSearch, title)
+            except:
+                return
             return

@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
+# -*- coding: UTF-8 -*-
 
 """
     Lastship Add-on (C) 2017
-    Credits to Exodus and Covenant; our thanks go to their creators
+    Credits to Placenta and Covenant; our thanks go to their creators
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,12 +18,23 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+# Addon Name: lastship
+# Addon id: plugin.video.lastship
+# Addon Provider: LastShip
+
 from resources.lib.modules import log_utils
 
 try:
     import urlresolver
 
     debrid_resolvers = [resolver() for resolver in urlresolver.relevant_resolvers(order_matters=True) if resolver.isUniversal()]
+
+    if len(debrid_resolvers) == 0:
+        # Support Rapidgator accounts! Unfortunately, `sources.py` assumes that rapidgator.net is only ever
+        # accessed via a debrid service, so we add rapidgator as a debrid resolver and everything just works.
+        # As a bonus(?), rapidgator links will be highlighted just like actual debrid links
+        debrid_resolvers = [resolver() for resolver in urlresolver.relevant_resolvers(order_matters=True,include_universal=False) if 'rapidgator.net' in resolver.domains]
+
 except:
     debrid_resolvers = []
 

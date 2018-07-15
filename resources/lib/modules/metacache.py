@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
+# -*- coding: UTF-8 -*-
 
 """
     Lastship Add-on (C) 2017
-    Credits to Exodus and Covenant; our thanks go to their creators
+    Credits to Placenta and Covenant; our thanks go to their creators
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,8 +18,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+# Addon Name: lastship
+# Addon id: plugin.video.lastship
+# Addon Provider: LastShip
 
-import time,hashlib
+import time
 
 try: from sqlite3 import dbapi2 as database
 except: from pysqlite2 import dbapi2 as database
@@ -27,7 +30,7 @@ except: from pysqlite2 import dbapi2 as database
 from resources.lib.modules import control
 
 
-def fetch(items, lang, user):
+def fetch(items, lang='en', user=''):
     try:
         t2 = int(time.time())
         dbcon = database.connect(control.metacacheFile)
@@ -64,6 +67,8 @@ def insert(meta):
         t = int(time.time())
         for m in meta:
             try:
+                if not "user" in m: m["user"] = ''
+                if not "lang" in m: m["lang"] = 'en'
                 i = repr(m['item'])
                 try: dbcur.execute("DELETE * FROM meta WHERE (imdb = '%s' and lang = '%s' and user = '%s' and not imdb = '0') or (tvdb = '%s' and lang = '%s' and user = '%s' and not tvdb = '0')" % (m['imdb'], m['lang'], m['user'], m['tvdb'], m['lang'], m['user']))
                 except: pass
@@ -108,5 +113,3 @@ def local(items, link, poster, fanart):
             pass
 
     return items
-
-

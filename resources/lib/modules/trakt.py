@@ -1,8 +1,8 @@
-# -*- coding: utf-8 -*-
+# -*- coding: UTF-8 -*-
 
 """
     Lastship Add-on (C) 2017
-    Credits to Exodus and Covenant; our thanks go to their creators
+    Credits to Placenta and Covenant; our thanks go to their creators
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,6 +18,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+# Addon Name: lastship
+# Addon id: plugin.video.lastship
+# Addon Provider: LastShip
+
 
 import json
 import re
@@ -27,7 +31,6 @@ import urlparse
 
 from resources.lib.modules import cache
 from resources.lib.modules import cleandate
-from resources.lib.modules import client
 from resources.lib.modules import control
 from resources.lib.modules import log_utils
 from resources.lib.modules import utils
@@ -38,6 +41,7 @@ CLIENT_SECRET = '0a361de39a8e9038da91971c23b69fa2860d6f14d8a2f4d57522889c05a1e5f
 REDIRECT_URI = 'urn:ietf:wg:oauth:2.0:oob'
 
 def __getTrakt(url, post=None):
+    from resources.lib.modules import client
     try:
         url = urlparse.urljoin(BASE_URL, url)
         post = json.dumps(post) if post else None
@@ -53,13 +57,13 @@ def __getTrakt(url, post=None):
         result = result[0]
 
         if resp_code in ['500', '502', '503', '504', '520', '521', '522', '524']:
-            log_utils.log('Temporary Trakt Error : %s' % resp_code, log_utils.LOGWARNING)
+            log_utils.log('Temporary Trakt Error: %s' % resp_code, log_utils.LOGWARNING)
             return
         elif resp_code in ['404']:
             log_utils.log('Object Not Found : %s' % resp_code, log_utils.LOGWARNING)
             return
         elif resp_code in ['429']:
-            log_utils.log('Trakt Rate Limit Reached : %s' % resp_code, log_utils.LOGWARNING)
+            log_utils.log('Trakt Rate Limit Reached: %s' % resp_code, log_utils.LOGWARNING)
             return
 
         if resp_code not in ['401', '405']:
@@ -95,6 +99,7 @@ def getTraktAsJson(url, post=None):
         pass
 
 def authTrakt():
+    from resources.lib.modules import client
     try:
         if getTraktCredentialsInfo() == True:
             if control.yesnoDialog(control.lang(32511).encode('utf-8'), control.lang(32512).encode('utf-8'), '', 'Trakt'):

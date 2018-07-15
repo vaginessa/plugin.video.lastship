@@ -19,37 +19,56 @@
 """
 
 import json
-import urllib
-import urlparse
 import re
 import base64
 
-from resources.lib.modules import cache
-from resources.lib.modules import cleantitle
-from resources.lib.modules import client
+from resources.lib.modules import cfscrape
+from resources.lib.modules import source_faultlog
 from resources.lib.modules import source_utils
-from resources.lib.modules import dom_parser
+from resources.lib.modules import cleantitle
+
+
 
 class source:
     def __init__(self):
         self.priority = 1
         self.language = ['de']
         self.domains = ['hd-streams.org']
-        self.base_link = 'https://hd-streams.org'
+        self.base_link = 'https://hd-streams.org/'
+        self.movie_link = self.base_link + 'movies?perPage=54'
+        self.movie_link = self.base_link + 'seasons?perPage=54'
+        self.search = self.base_link + 'search?q=%s&movies=true&seasons=true&actors=false&didyoumean=false'
+        self.scraper = cfscrape.create_scraper()
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
-            url = self.__search([localtitle] + source_utils.aliases_to_array(aliases), year)
-            if not url and title != localtitle: url = self.__search([title] + source_utils.aliases_to_array(aliases), year)
-            return urllib.urlencode({'url': url}) if url else None
+            objects = self.__search(imdb, True)
+
+            t = [cleantitle.get(i) for i in set(source_utils.aliases_to_array(aliases)) if i]
+            t.append(cleantitle.get(title))
+            t.append(cleantitle.get(localtitle))
+
+            for i in range(1, len(objects)):
+                if cleantitle.get(objects[i]['title']) in t:
+                    url = objects[i]['url']
+                    break
+
+            return url
+            
         except:
             return
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
-            url = {'tvshowtitle': tvshowtitle, 'localtvshowtitle': localtvshowtitle, 'aliases': aliases}
-            url = urllib.urlencode(url)
-            return url
+            objects = self.__search(imdb, False)
+
+            t = [cleantitle.get(i) for i in set(source_utils.aliases_to_array(aliases)) if i]
+            t.append(cleantitle.get(tvshowtitle))
+            t.append(cleantitle.get(localtvshowtitle))
+
+            for i in range(1, len(objects)):
+                if cleantitle.get(objects[i]['title']) in t:
+                    return objects[i]['seasons']
         except:
             return
 
@@ -58,106 +77,112 @@ class source:
             if not url:
                 return
 
-            data = urlparse.parse_qs(url)
-            data = dict([(i, data[i][0]) if data[i] else (i, '') for i in data])
-            tvshowtitle = data['tvshowtitle']
-            localtvshowtitle = data['localtvshowtitle']
-            aliases = source_utils.aliases_to_array(eval(data['aliases']))
+            url = [i['url'] for i in url if 'season/' + season in i['url']]
 
-            year = re.findall('(\d{4})', premiered)
-            year = year[0] if year else data['year']
-
-            url = self.__search([localtvshowtitle] + aliases, year, season)
-            if not url and tvshowtitle != localtvshowtitle: url = self.__search([tvshowtitle] + aliases,year, season)
-            if not url: return
-
-            return urllib.urlencode({'url': url, 'episode': episode})
+            return url[0]
         except:
             return
 
     def sources(self, url, hostDict, hostprDict):
         sources = []
-
         try:
             if not url:
                 return sources
 
-            data = urlparse.parse_qs(url)
-            data = dict([(i, data[i][0]) if data[i] else (i, '') for i in data])
-            url = urlparse.urljoin(self.base_link, data.get('url'))
-            episode = data.get('episode')
-
-            r = client.request(url)
-
-            aj = self.__get_ajax_object(r)
-
-            b = dom_parser.parse_dom(r, 'img', attrs={'class': 'dgvaup'}, req='data-img')[0].attrs['data-img']
-
-            if episode:
-                r = dom_parser.parse_dom(r, 'a', attrs={'class': 'btn-stream-ep', 'data-episode': episode}, req=['data-episode', 'data-server'])
-            else:
-                r = dom_parser.parse_dom(r, 'div', attrs={'id': 'lang-de'})
-                r = dom_parser.parse_dom(r, 'div', attrs={'class': 'movie'})
-                r = dom_parser.parse_dom(r, 'a', attrs={'class': 'btn-stream'}, req=['data-episode', 'data-server'])
-
-            r = [(i.attrs['data-episode'], i.attrs['data-server']) for i in r]
-
-            for epi, server in r:
-                try:
-                    x = {'action': aj.get('load_episodes'), 'episode': epi, 'pid': aj.get('postid'), 'server': server, 'nonce': aj.get('nonce'), 'b': b}
-                    x = client.request(aj.get('ajax_url'), post=x, XHR=True, referer=url)
-                    x = json.loads(x)
-
-                    q = source_utils.label_to_quality(x.get('q'))
-                    x = json.loads(base64.decodestring(x.get('u')))
-
-                    u = source_utils.evp_decode(x.get('ct'), base64.decodestring(b), x.get('s').decode("hex"))
-                    u = u.replace('\/', '/').strip('"')
-
-                    valid, host = source_utils.is_host_valid(u, hostDict)
-                    if not valid: continue
-
-                    sources.append({'source': host, 'quality': q, 'language': 'de', 'url': u, 'direct': False, 'debridonly': False, 'checkquality': True})
-                except:
-                    pass
+            sHtmlContent=self.scraper.get(url).content
+            
+            pPattern = "recaptcha[^>]'([^']+)', '([^']+)', '([^']+).*?"
+            pPattern += '>.*?>([^"]+)</v-btn>'
+            aResult = re.compile(pPattern, re.DOTALL).findall(sHtmlContent)
+            
+            pattern = '<meta name="csrf-token" content="([^"]+)">'
+            string = str(sHtmlContent)
+            token = re.compile(pattern, flags=re.I | re.M).findall(string)
+            
+            # 1080p finden
+            if '1080p' in string:
+                q = '1080p'
+      
+            for e, h, sLang, sName in aResult:
+                link=self.__getlinks(e,h,sLang,sName,token,url)
+                
+                # hardcoded, da Qualität auf der Webseite inkorrekt beschrieben ist unnd sName.strip() problem liefert aufgrund webseite. nxload kanndamit unterdrückt werden
+                
+                if q == '1080p' and e == '1':
+                    if 'openload' in link:
+                        sources.append({'source': 'openload.com', 'quality': '1080p', 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
+                    elif 'streamango' in link:
+                        sources.append({'source': 'streamango.com', 'quality': 'HD', 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
+                    elif 'nxload' in link:
+                        sources.append({'source': 'nxload.com', 'quality': '1080p', 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
+                    elif 'streamcloud' in link:
+                        sources.append({'source': 'streamcloud.com', 'quality': 'SD', 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
+                else:
+                    if 'openload' in link:
+                        sources.append({'source': 'openload.com', 'quality': 'HD', 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
+                    elif 'streamango' in link:
+                        sources.append({'source': 'streamango.com', 'quality': 'HD', 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
+                    elif 'nxload' in link:
+                        sources.append({'source': 'nxload.com', 'quality': 'HD', 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
+                    elif 'streamcloud' in link:
+                        sources.append({'source': 'streamcloud.com', 'quality': 'SD', 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
 
             return sources
         except:
+            source_faultlog.logFault(__name__,source_faultlog.tagScrape)
             return sources
+
+    def __getlinks(self,e, h, sLang, sName,token,url):
+            url = url + '/stream'
+            # hardcoded german language
+            params={'e':e,'h':h,'lang':'de', 'q':'','grecaptcha':''}
+            sHtmlContent=self.scraper.post(url,headers={'X-CSRF-TOKEN':token[0],'X-Requested-With':'XMLHttpRequest'},data=params).content
+                        
+            pattern = 'ct[^>]":[^>]"([^"]+).*?iv[^>]":[^>]"([^"]+).*?s[^>]":[^>]"([^"]+).*?e"[^>]([^}]+)'
+            
+            aResult = re.compile(pattern, re.DOTALL).findall(sHtmlContent)
+            
+            token=base64.b64encode(token[0])
+           
+            for ct, iv, s, e in aResult:                
+                ct = re.sub(r"\\", "", ct[::-1])
+                s = re.sub(r"\\", "", s)
+
+            from resources.lib.modules import source_utils
+
+            sUrl2 = source_utils.evp_decode(ct, token, s.decode('hex'))
+            fUrl=sUrl2.replace('\/', '/').replace('"', '')       
+                
+            return fUrl
 
     def resolve(self, url):
         return url
 
-    def __search(self, titles, year, season='0'):
+    def __search(self, imdb, isMovieSearch):
         try:
-            aj = cache.get(self.__get_ajax_object, 24)
+            sHtmlContent = self.scraper.get(self.base_link).content
 
-            t = [cleantitle.get(i) for i in set(titles) if i]
-            y = ['%s' % str(year), '%s' % str(int(year) + 1), '%s' % str(int(year) - 1), '0']
+            pattern = '<meta name="csrf-token" content="([^"]+)">'
+            string = str(sHtmlContent)
+            token = re.compile(pattern, flags=re.I | re.M).findall(string)
 
-            r = client.request(aj.get('ajax_url'), post={'action': aj.get('search'), 'nonce': aj.get('snonce'), 'query': cleantitle.query(titles[0])})
+            if len(token) == 0:
+                return #No Entry found?
+            # first iteration of session object to be parsed for search
 
-            r = dom_parser.parse_dom(r, 'div', attrs={'class': 'search-result'})
-            r = dom_parser.parse_dom(r, 'div', attrs={'class': 'search-item-content'})
-            r = dom_parser.parse_dom(r, 'a', req='href')
-            r = [(i.attrs['href'], i.content.lower()) for i in r if i]
-            r = [(i[0], i[1], re.findall('(.+?) \(*(\d{4})', i[1])) for i in r]
-            r = [(i[0], i[2][0][0] if len(i[2]) > 0 else i[1], i[2][0][1] if len(i[2]) > 0 else '0') for i in r]
-            r = [(i[0], i[1], i[2], re.findall('(.+?)\s+(?:staf+el|s)\s+(\d+)', i[1])) for i in r]
-            r = [(i[0], i[3][0][0] if len(i[3]) > 0 else i[1], i[2], i[3][0][1] if len(i[3]) > 0 else '0') for i in r]
-            r = [(i[0], i[1].replace(' hd', ''), i[2], '1' if int(season) > 0 and i[3] == '0' else i[3]) for i in r]
-            r = sorted(r, key=lambda i: int(i[2]), reverse=True)  # with year > no year
-            r = [i[0] for i in r if cleantitle.get(i[1]) in t and i[2] in y and int(i[3]) == int(season)][0]
+            sHtmlContent = self.scraper.get(self.search % imdb, headers={'X-CSRF-TOKEN':token[0],'X-Requested-With':'XMLHttpRequest'}).text
 
-            return source_utils.strip_domain(r)
+            content = json.loads(sHtmlContent)
+
+            if isMovieSearch:
+                returnObjects = content["movies"]
+            else:
+                returnObjects = content["series"]
+
+            return returnObjects
         except:
-            return
-
-    def __get_ajax_object(self, html=None):
-        try:
-            r = client.request(self.base_link) if not html else html
-            r = re.findall('ajax_object\s*=\s*({.*?});', r)[0]
-            r = json.loads(r)
-            return r
-        except:
-            return {}
+            try:
+                source_faultlog.logFault(__name__, source_faultlog.tagSearch, imdb)
+            except:
+                return
+        return

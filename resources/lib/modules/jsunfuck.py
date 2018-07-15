@@ -1,7 +1,8 @@
-#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+
 """
     Lastship Add-on (C) 2017
-    Copyright (C) 2016 tknorris
+    Credits to Placenta and Covenant; our thanks go to their creators
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,6 +17,12 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
+
+# Addon Name: lastship
+# Addon id: plugin.video.lastship
+# Addon Provider: LastShip
+
+
 import re
 import sys
 import urllib
@@ -173,10 +180,15 @@ class JSUnfuck(object):
                 start = offset
         
     def __gen_numbers(self):
-        n = {'(+[]+[])': '0', '(+![]+([]+[]))': '0', '[+[]]': '[0]',
-             '(+!![]+[])': '1', '[+!+[]]': '[1]', '[+!![]]': '[1]',
-             '[+!+[]+[+[]]]': '[10]', '+(1+1)': '11', '(+20)': '20'}
-        
+        n = {'!+[]+!![]+!![]+!![]+!![]+!![]+!![]+!![]+!![]': '9',
+             '!+[]+!![]+!![]+!![]+!![]': '5', '!+[]+!![]+!![]+!![]': '4',
+             '!+[]+!![]+!![]+!![]+!![]+!![]': '6', '!+[]+!![]': '2',
+             '!+[]+!![]+!![]': '3', '(+![]+([]+[]))': '0', '(+[]+[])': '0', '+[]':'0',
+             '(+!![]+[])': '1', '!+[]+!![]+!![]+!![]+!![]+!![]+!![]': '7',
+             '!+[]+!![]+!![]+!![]+!![]+!![]+!![]+!![]': '8', '+!![]': '1',
+             '[+[]]': '[0]', '!+[]+!+[]': '2', '[+!+[]]': '[1]', '(+20)': '20',
+             '[+!![]]': '[1]', '[+!+[]+[+[]]]': '[10]', '+(1+1)': '11'}
+             
         for i in xrange(2, 20):
             key = '+!![]' * (i - 1)
             key = '!+[]' + key
@@ -214,12 +226,30 @@ class JSUnfuck(object):
                     n[key] = str(hundreds * 100 + tens * 10 + ones)
         return n
     
-def to_base(n, base, digits="0123456789abcdefghijklmnopqrstuvwxyz"):
-    n, base = int(n), int(base)
-    if n < base:
-        return digits[n]
-    else:
-        return to_base(n // base, base, digits).lstrip(digits[0]) + digits[n % base]
+    def to_base(n, base, digits="0123456789abcdefghijklmnopqrstuvwxyz"):
+        n, base = int(n), int(base)
+        if n < base:
+            return digits[n]
+        else:
+            return to_base(n // base, base, digits).lstrip(digits[0]) + digits[n % base]
+
+            
+def cfunfuck(fuckedup):
+    fuck = re.findall(r's,t,o,p,b,r,e,a,k,i,n,g,f,\s*(\w+=).*?:\+?\(?(.*?)\)?\}', fuckedup)
+    fucks = re.findall(r'(\w+)\.\w+([\+\-\*\/]=)\+?\(?(.*?)\)?;', fuckedup)
+    endunfuck = fuck[0][0].split('=')[0]
+    unfuck = JSUnfuck(fuck[0][1]).decode()
+    unfuck = re.sub(r'[\(\)]', '', unfuck)
+    unfuck = fuck[0][0]+unfuck
+    exec(unfuck)
+
+    for fucker in fucks:
+        unfucker = JSUnfuck(fucker[2]).decode()
+        unfucker = re.sub(r'[\(\)]', '', unfucker)
+        unfucker = fucker[0]+fucker[1]+unfucker
+        exec(unfucker)
+        
+    return str(eval(endunfuck))
 
 def main():
     with open(sys.argv[1]) as f:

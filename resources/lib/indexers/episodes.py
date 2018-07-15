@@ -1,9 +1,9 @@
-# -*- coding: utf-8 -*-
+# -*- coding: UTF-8 -*-
 
 """
     Lastship Add-on (C) 2017
-    Credits to Exodus and Covenant; our thanks go to their creators
-    
+    Credits to Placenta and Covenant; our thanks go to their creators
+
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -18,19 +18,22 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+# Addon Name: lastship
+# Addon id: plugin.video.lastship
+# Addon Provider: LastShip
 
-from resources.lib.modules import trakt
-from resources.lib.modules import cleantitle
-from resources.lib.modules import cleangenre
-from resources.lib.modules import control
-from resources.lib.modules import client
+import StringIO, datetime, json, os, re, sys, urllib, urllib2, urlparse, zipfile
+
 from resources.lib.modules import cache
+from resources.lib.modules import cleangenre
+from resources.lib.modules import cleantitle
+from resources.lib.modules import client
+from resources.lib.modules import control
 from resources.lib.modules import playcount
-from resources.lib.modules import workers
-from resources.lib.modules import views
+from resources.lib.modules import trakt
 from resources.lib.modules import utils
-
-import os,sys,re,json,zipfile,StringIO,urllib,urllib2,urlparse,datetime
+from resources.lib.modules import views
+from resources.lib.modules import workers
 
 params = dict(urlparse.parse_qsl(sys.argv[2].replace('?',''))) if len(sys.argv) > 1 else dict()
 
@@ -45,9 +48,12 @@ class seasons:
 
         self.lang = control.apiLanguage()['tvdb']
         self.showunaired = control.setting('showunaired') or 'true'
+        self.unairedcolor = control.setting('unaired.identify')
+        if self.unairedcolor == '': self.unairedcolor = 'red'
+        self.unairedcolor = self.getUnairedColor(self.unairedcolor)
         self.datetime = (datetime.datetime.utcnow() - datetime.timedelta(hours = 5))
         self.today_date = (self.datetime).strftime('%Y-%m-%d')
-        self.tvdb_key = 'QzE1NTNERTM4MTcwNUE0Mw=='
+        self.tvdb_key = 'MUQ2MkYyRjkwMDMwQzQ0NA=='
 
         self.tvdb_info_link = 'http://thetvdb.com/api/%s/series/%s/all/%s.zip' % (self.tvdb_key.decode('base64'), '%s', '%s')
         self.tvdb_by_imdb = 'http://thetvdb.com/api/GetSeriesByRemoteID.php?imdbid=%s'
@@ -55,6 +61,19 @@ class seasons:
         self.tvdb_image = 'http://thetvdb.com/banners/'
         self.tvdb_poster = 'http://thetvdb.com/banners/_cache/'
 
+    def getUnairedColor(self, n):
+        if n == '0': n = 'blue'
+        elif n == '1': n = 'red'
+        elif n == '2': n = 'yellow'
+        elif n == '3': n = 'deeppink'
+        elif n == '4': n = 'cyan'
+        elif n == '5': n = 'lawngreen'
+        elif n == '6': n = 'gold'
+        elif n == '7': n = 'magenta'
+        elif n == '8': n = 'yellowgreen'
+        elif n == '9': n = 'nocolor'
+        else: n == 'blue'
+        return n
 
     def get(self, tvshowtitle, year, imdb, tvdb, idx=True, create_directory=True):
         if control.window.getProperty('PseudoTVRunning') == 'True':
@@ -171,8 +190,6 @@ class seasons:
             seasons = [i for i in episodes if '<EpisodeNumber>1</EpisodeNumber>' in i]
 
             locals = [i for i in result2 if '<EpisodeNumber>' in i]
-
-            result = '' ; result2 = ''
 
             if limit == '':
                 episodes = []
@@ -434,7 +451,7 @@ class seasons:
                 label = '%s %s' % (labelMenu, i['season'])
                 try:
                     if i['unaired'] == 'true':
-                        label = '[COLOR darkorange][I]%s[/I][/COLOR]' % label
+                        label = '[COLOR %s][I]%s[/I][/COLOR]' % (self.unairedcolor, label)
                 except:
                     pass
                 systitle = sysname = urllib.quote_plus(i['tvshowtitle'])
@@ -461,9 +478,7 @@ class seasons:
                 except:
                     pass
 
-
                 url = '%s?action=episodes&tvshowtitle=%s&year=%s&imdb=%s&tvdb=%s&season=%s' % (sysaddon, systitle, year, imdb, tvdb, season)
-
 
                 cm = []
                 
@@ -529,32 +544,49 @@ class episodes:
     def __init__(self):
         self.list = []
 
-        self.trakt_link = 'https://api.trakt.tv'
+        self.trakt_link = 'http://api.trakt.tv'
         self.tvmaze_link = 'http://api.tvmaze.com'
-        self.tvdb_key = 'QzE1NTNERTM4MTcwNUE0Mw=='
+        self.tvdb_key = 'NzFCQjk5MzY5NDI0RjE2Nw=='
         self.datetime = (datetime.datetime.utcnow() - datetime.timedelta(hours = 5))
         self.systime = (self.datetime).strftime('%Y%m%d%H%M%S%f')
         self.today_date = (self.datetime).strftime('%Y-%m-%d')
         self.trakt_user = control.setting('trakt.user').strip()
         self.lang = control.apiLanguage()['tvdb']
         self.showunaired = control.setting('showunaired') or 'true'
+        self.unairedcolor = control.setting('unaired.identify')
+        if self.unairedcolor == '': self.unairedcolor = 'red'
+        self.unairedcolor = self.getUnairedColor(self.unairedcolor)
 
         self.tvdb_info_link = 'http://thetvdb.com/api/%s/series/%s/all/%s.zip' % (self.tvdb_key.decode('base64'), '%s', '%s')
         self.tvdb_image = 'http://thetvdb.com/banners/'
         self.tvdb_poster = 'http://thetvdb.com/banners/_cache/'
 
         self.added_link = 'http://api.tvmaze.com/schedule'
-        #self.mycalendar_link = 'https://api.trakt.tv/calendars/my/shows/date[29]/60/'
-        self.mycalendar_link = 'https://api.trakt.tv/calendars/my/shows/date[30]/31/' #go back 30 and show all shows aired until tomorrow
-        self.trakthistory_link = 'https://api.trakt.tv/users/me/history/shows?limit=300'
-        self.progress_link = 'https://api.trakt.tv/users/me/watched/shows'
-        self.hiddenprogress_link = 'https://api.trakt.tv/users/hidden/progress_watched?limit=1000&type=show'
+        #https://api.trakt.tv/calendars/all/shows/date[30]/31 #use this for new episodes?
+        #self.mycalendar_link = 'http://api.trakt.tv/calendars/my/shows/date[29]/60/'
+        self.mycalendar_link = 'http://api.trakt.tv/calendars/my/shows/date[30]/31/' #go back 30 and show all shows aired until tomorrow
+        self.trakthistory_link = 'http://api.trakt.tv/users/me/history/shows?limit=300'
+        self.progress_link = 'http://api.trakt.tv/users/me/watched/shows'
+        self.hiddenprogress_link = 'http://api.trakt.tv/users/hidden/progress_watched?limit=1000&type=show'
         self.calendar_link = 'http://api.tvmaze.com/schedule?date=%s'
+        self.onDeck_link = 'http://api.trakt.tv/sync/playback/episodes?extended=full&limit=10'
+        self.traktlists_link = 'http://api.trakt.tv/users/me/lists'
+        self.traktlikedlists_link = 'http://api.trakt.tv/users/likes/lists?limit=1000000'
+        self.traktlist_link = 'http://api.trakt.tv/users/%s/lists/%s/items'
 
-        self.traktlists_link = 'https://api.trakt.tv/users/me/lists'
-        self.traktlikedlists_link = 'https://api.trakt.tv/users/likes/lists?limit=1000000'
-        self.traktlist_link = 'https://api.trakt.tv/users/%s/lists/%s/items'
-
+    def getUnairedColor(self, n):
+        if n == '0': n = 'blue'
+        elif n == '1': n = 'red'
+        elif n == '2': n = 'yellow'
+        elif n == '3': n = 'deeppink'
+        elif n == '4': n = 'cyan'
+        elif n == '5': n = 'lawngreen'
+        elif n == '6': n = 'gold'
+        elif n == '7': n = 'magenta'
+        elif n == '8': n = 'yellowgreen'
+        elif n == '9': n = 'nocolor'
+        else: n == 'blue'
+        return n
 
     def get(self, tvshowtitle, year, imdb, tvdb, season=None, episode=None, idx=True, create_directory=True):
         try:
@@ -579,11 +611,17 @@ class episodes:
 
     def calendar(self, url):
         try:
+
             try: url = getattr(self, url + '_link')
             except: pass
 
+            if self.trakt_link in url and url == self.onDeck_link:
+                self.blist = cache.get(self.trakt_episodes_list, 720, url, self.trakt_user, self.lang)
+                self.list = []
+                self.list = cache.get(self.trakt_episodes_list, 0, url, self.trakt_user, self.lang)
+                self.list = self.list[::-1]
 
-            if self.trakt_link in url and url == self.progress_link:
+            elif self.trakt_link in url and url == self.progress_link:
                 self.blist = cache.get(self.trakt_progress_list, 720, url, self.trakt_user, self.lang)
                 self.list = []
                 self.list = cache.get(self.trakt_progress_list, 0, url, self.trakt_user, self.lang)
@@ -799,7 +837,7 @@ class episodes:
         except:
             return
 
-        sortorder = control.setting('prog.sortorder')
+        sortorder = control.setting('prgr.sortorder')
         for item in result:
             try:
                 num_1 = 0
@@ -1212,7 +1250,6 @@ class episodes:
             except:
                 pass
 
-
         items = items[:100]
 
         threads = []
@@ -1414,7 +1451,7 @@ class episodes:
                 
                 try:
                     if i['unaired'] == 'true':
-                        label = '[COLOR darkorange][I]%s[/I][/COLOR]' % label
+                        label = '[COLOR %s][I]%s[/I][/COLOR]' % (self.unairedcolor, label)
                 except:
                     pass
 
@@ -1443,12 +1480,11 @@ class episodes:
 
                 url = '%s?action=play&title=%s&year=%s&imdb=%s&tvdb=%s&season=%s&episode=%s&tvshowtitle=%s&premiered=%s&meta=%s&t=%s' % (sysaddon, systitle, year, imdb, tvdb, season, episode, systvshowtitle, syspremiered, sysmeta, self.systime)
                 sysurl = urllib.quote_plus(url)
-
+                
                 path = '%s?action=play&title=%s&year=%s&imdb=%s&tvdb=%s&season=%s&episode=%s&tvshowtitle=%s&premiered=%s' % (sysaddon, systitle, year, imdb, tvdb, season, episode, systvshowtitle, syspremiered)
 
                 if isFolder == True:
                     url = '%s?action=episodes&tvshowtitle=%s&year=%s&imdb=%s&tvdb=%s&season=%s&episode=%s' % (sysaddon, systvshowtitle, year, imdb, tvdb, season, episode)
-
 
                 cm = []
 

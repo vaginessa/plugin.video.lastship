@@ -97,7 +97,7 @@ class source:
             params = self.getParams(url['content_id'], cookies, h=url['h'], m=content, s=url['bq'], e=url['sq'])
 
             content = self.scraper.post(link, headers=self.getHeader(url['url']), data=params).content
-            link = dom_parser.parse_dom(content, 'a')[0].attrs['href']
+            link = re.findall('(http.*?)"', content)[0]
 
             return link
         except:

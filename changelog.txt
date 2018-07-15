@@ -1,18 +1,16 @@
-[B]2.1[/B]
-  28.06.2018
-- Rework plugin.video.lastship auf Ursprung
-
-[B]2.0.8.4~nightly4[/B]
+[B]3.0.0[/B]
+  15.07.2018
+- Rework auf Ursprungs Version, ein Modul, plugin.video.lastship
+- Add Cinematrix
+- Add and Update HDGO.py (Modules)
 - Add Cinemaxx
-
-[B]2.0.8.4~nightly3[/B]
 - Add HDKino
-
-[B]2.0.8.4~nightly2[/B]
-- Seriesever entfernt, Seite Offline-Umleitung auf Moviesever
-
-[B]2.0.8.4~nightly1[/B]
 - Add Amazon
+- Update movietown (add cloudflare scraper)
+- Update moovie
+- Update HDFilme.tv
+- Update Duckduckgo
+- Seriesever entfernt, Seite Offline-Umleitung auf Moviesever
 
 [B]2.0.8.3[/B]
   15.06.2018

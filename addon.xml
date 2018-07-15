@@ -30,15 +30,15 @@
     			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
 		<news>- Rework auf Ursprungs Version, ein Modul, plugin.video.lastship
-			  - Add Cinematrix
-			  - Add and Update HDGO.py (Modules)
-			  - Add Cinemaxx
+		      - Add Cinematrix
+		      - Add and Update HDGO.py (Modules)
+		      - Add Cinemaxx
 		      - Add HDKino
 		      - Add Amazon
-			  - Update movietown (add cloudflare scraper)
-			  - Update moovie
-			  - Update HDFilme.tv
-			  - Update Duckduckgo
+		      - Update movietown (add cloudflare scraper)
+		      - Update moovie
+		      - Update HDFilme.tv
+		      - Update Duckduckgo
 		      - Seriesever entfernt, Seite Offline-Umleitung auf Moviesever
 		</news>
 	</extension>

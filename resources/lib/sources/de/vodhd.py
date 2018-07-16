@@ -37,6 +37,10 @@ class source:
         try:
             
             url = self.__search(localtitle,imdb)
+
+            if not url:
+                url = self.__search(cleantitle.getsearch(localtitle),imdb)           
+            
             if not url:
                 url = self.__search(title,imdb)
 
@@ -104,7 +108,7 @@ class source:
         
     def __search(self, localtitle,imdb):
         try:
-            suchbegriff=cleantitle.getsearch(localtitle)           
+            suchbegriff=localtitle      
             sHtmlContent=self.session.get(self.search %suchbegriff,headers=self.header).json()
                                      
             if sHtmlContent['movies']:                

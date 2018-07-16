@@ -1,6 +1,7 @@
-[B]3.0.0[/B]
+[B]3.0.0~nightly2[/B]
   15.07.2018
 - Rework auf Ursprungs Version, ein Modul, plugin.video.lastship
+- Update Kinoger
 - Add Cinematrix und Update
 - Add and Update HDGO.py (Modules)
 - Add Cinemaxx

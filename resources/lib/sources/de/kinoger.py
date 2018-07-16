@@ -23,10 +23,10 @@ class source:
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
-            url = self.__search(localtitle,aliases ,year)
+            url = self.__search([localtitle] + source_utils.aliases_to_array(aliases), year)
 
             if not url and title != localtitle:
-                url = self.__search(title, aliases, year)
+                url = self.__search([title] + source_utils.aliases_to_array(aliases), year)
             return urllib.urlencode({'url': url, 'imdb': re.sub('[^0-9]', '', imdb)}) if url else None
             
         except:
@@ -34,9 +34,9 @@ class source:
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
-            url = self.__search(tvshowtitle, aliases, year)
+            url = self.__search([localtvshowtitle] + source_utils.aliases_to_array(aliases), year)
             if not url and tvshowtitle != localtvshowtitle:
-                url = self.__search(localtvshowtitle, aliases, year)
+                url = self.__search([tvshowtitle] + source_utils.aliases_to_array(aliases), year)
             return urllib.urlencode({'url': url, 'imdb': re.sub('[^0-9]', '', imdb)}) if url else None
         except:
             return
@@ -124,7 +124,6 @@ class source:
                                         'debridonly': False, 'checkquality': True})
 
                 else:
-                    #warning?
                     continue
                     
             return sources
@@ -139,50 +138,26 @@ class source:
                 request = self.scraper.get(url).content
                 pattern = 'src:  "(.*?)"'
                 request = re.compile(pattern, re.DOTALL).findall(request)
-                return request[0]+ '|Referer=' + url
+                return request[0] + '|Referer=' + url
             return url
         except:
             source_faultlog.logFault(__name__, source_faultlog.tagResolve)
             return url
 
-    def __search(self, localtitle, aliases ,year):
+    def __search(self, titles, year):
         try:
+            t = [cleantitle.get(i) for i in set(titles) if i]
+            url = self.search % titles[0]
 
-            aliases = [b["title"] for b in aliases]
-            aliases = [localtitle] + aliases
-            #KinoGer Suche
-            url=self.search % str(localtitle)
-
-            sHtmlContent=self.scraper.get(url).content
-            search_results = dom_parser.parse_dom(sHtmlContent,'div', attrs={'id':'dle-content'})
-            if len(search_results) == 0:
-                raise Exception()
-
-            #split content by seperator
-            contentGroup = search_results[0].content.split("separator2")
-            for c in contentGroup:
-
-                #Fiter out English streams. I.e.: Downsizing
-                category_content = dom_parser.parse_dom(c,'li', attrs={'class':'category'})
-                if len(category_content) > 0 and "Englisch" in category_content[0].content:
-                    continue
-
-                r = dom_parser.parse_dom(c,'div', attrs={'class':'titlecontrol'})
-                if len(r) == 0:
-                    raise Exception()
-                titlecontainer = r[0]
-                k = dom_parser.parse_dom(titlecontainer,'a')
-                for link in k:
-                    linkTitle = cleantitle.get(link.content)
-                    #clean it from
-                    staffIndex = linkTitle.find('staffel')
-                    if staffIndex > -1 :
-                        linkTitle = linkTitle[:staffIndex]
-                    linkTitle = linkTitle.replace("film","")
-                    for alias in aliases:
-                        if linkTitle in cleantitle.get(alias):
-                            return link.attrs["href"]
+            sHtmlContent = self.scraper.get(url).content
+            search_results = dom_parser.parse_dom(sHtmlContent, 'div', attrs={'class': 'title'})
+            search_results = dom_parser.parse_dom(search_results, 'a')
+            search_results = [(i.attrs['href'], i.content) for i in search_results]
+            search_results = [(i[0], re.findall('(.*?)\((\d+)', i[1])[0]) for i in search_results]
+            search_results = [i[0] for i in search_results if cleantitle.get(i[1][0]) in t and i[1][1] in year]
                 
+            if len(search_results) > 0:
+                return source_utils.strip_domain(search_results[0])
             return
         except:
             try:

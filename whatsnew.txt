@@ -1,7 +1,7 @@
 [B][COLOR red]Lastship Infos und Updates[/COLOR][/B]
 [B]Hier findet Ihr aktuelle Informationen zu Lastship, den Changelog usw.[/B]
 
-FAQ und Hilfe bekommt Ihr in unserem Forum: http://lastship.square7.ch/forum
+FAQ und Hilfe bekommt Ihr in unserem Forum: http://lastship.square7.ch/home
 Unser Chatroom: https://gitter.im/Lastship_Chat/Lobby
 
 [B]INFO Indexseiten:[/B]
@@ -9,21 +9,16 @@ Für die Seite Serienstream ist ein Benutzerkonto auf der jeweiligen Betreiberse
 Die Seite VodHD ist Standardmäßig deaktiviert, da diese Seite eine Premium Seite ist, dass heißt es muss für die Nutzung bezahlt werden. Infos zu Bezahlung und Anmeldung auf https://vodhd.to/
 
 [B][COLOR blue]Aktuelles[/COLOR][/B]
-15.06.2018
-Nightly:
+20.07.2018
+Das neue Forum ist mit 21.Juni 2018 (Jahrestag Lastship) wieder eröffnet
 
-In der Nightly befindet sich jetzt der erste legale Streaming Anbieter, Amazon
-Dieser Anbieter ist als Standard "DEAKTIVIERT", da er NUR mit einem gültigen Amazon Prime Video Konto funktioniert
+20.07.2018
+Lastship wurde jetzt mit dem Update 3.0.0 umgestellt, zurück auf Ursprung, auf nur noch ein Module: plugin.video.lastship
 
-Ebenso ist es zur Zeit (noch) nicht möglich, Amazon mit Kodi 18 zu nutzen
+Ihr müsst nichts machen, Aktualisierung erfolgte mit dem Update, wenn Ihr das hier lesen könnt
 
-Und eine weiter Einschränkung ist, zur Zeit KEINE Inputstream Funktion in Kodi 17
-
-Um Amazon in Lastship verwenden zu können ist folgendes zwingend notwendig:
-
-Es muss das Video Addon AmazonVOD, vom Sandmann Repo, installiert sein, da Lastship über dieses Addon arbeitet
-Das Sandmann Repo bekommt man hier: https://github.com/Sandmann79/xbmc/blob/master/packages/repository.sandmann79.plugins/repository.sandmann79.plugins-1.0.2.zip
-
+Das script.module.lastship kann jetzt gelöscht werden, muss aber nicht
+Zu finden ist das script.module.lastship hier: ...kodi/addons/script.module.lastship
 
 12.05.2018
 Bs.to zur Zeit nicht funktionsfähig. Der Seitenbetreiber hat den API Key geändert und Captcha eingeführt
@@ -33,9 +28,21 @@ Ob sich eine Lösung finden wird ist offen
 
 [B][COLOR lime]Changelog plugin.video.lastship[/COLOR][/B]
 
-[B]2.1[/B]
-  28.06.2018
-- Rework plugin.video.lastship auf Ursprung
+[B]3.0.0[/B]
+  20.07.2018
+- Rework auf Ursprungs Version, ein Modul, plugin.video.lastship
+- Update VodHD
+- Update Kinoger
+- Add Cinematrix und Update
+- Add and Update HDGO.py (Modules)
+- Add Cinemaxx
+- Add HDKino
+- Add Amazon
+- Update movietown (add cloudflare scraper)
+- Update moovie
+- Update HDFilme.tv
+- Update Duckduckgo
+- Seriesever entfernt, Seite Offline-Umleitung auf Moviesever
 
 [B]2.0.8.3[/B]
   15.06.2018

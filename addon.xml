@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.lastship" version="3.0.0" name="Lastship" provider-name="Lastship">
+<addon id="plugin.video.lastship" version="3.0.1~nightly1" name="Lastship" provider-name="Lastship">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0" />
 		<import addon="repository.lastship" version="1.0.2" />
@@ -29,19 +29,7 @@
     			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
     			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
-		<news>- Rework auf Ursprungs Version, ein Modul, plugin.video.lastship
-		      - Update VodHD
-		      - Update Kinoger
-		      - Add Cinematrix
-		      - Add and Update HDGO.py (Modules)
-		      - Add Cinemaxx
-		      - Add HDKino
-		      - Add Amazon
-		      - Update movietown (add cloudflare scraper)
-		      - Update moovie
-		      - Update HDFilme.tv
-		      - Update Duckduckgo
-		      - Seriesever entfernt, Seite Offline-Umleitung auf Moviesever
+		<news>- kinodogs entfernt
 		</news>
 	</extension>
 </addon>

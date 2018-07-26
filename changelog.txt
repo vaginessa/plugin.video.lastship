@@ -1,3 +1,6 @@
+[B]3.0.1~nightly1[/B]
+- kinodogs entfernt
+
 [B]3.0.0[/B]
   20.07.2018
 - Rework auf Ursprungs Version, ein Modul, plugin.video.lastship

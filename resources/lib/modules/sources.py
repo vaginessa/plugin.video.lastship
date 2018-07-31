@@ -865,8 +865,8 @@ class sources:
                 else: self.sources[i]['label'] = label.upper()
             else: self.sources[i]['label'] = label.upper()
 
-            ## vodhd shown as premium link ##
-            if self.sources[i]['provider']=="vodhd":
+            ## EMBY shown as premium link ##
+            if self.sources[i]['provider']=="emby":
                 if not prem_identify == 'nocolor':
                     self.sources[i]['label'] = ('[COLOR %s]' % (prem_identify)) + label.upper() + '[/COLOR]'
             

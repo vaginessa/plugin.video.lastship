@@ -60,13 +60,14 @@
     </category>
     <category label="32345">
         <setting id="provider.library" type="bool" label="32704" default="true" />
+		<setting id="provider.emby" type="bool" label="EMBY" default="false" />
         <setting type="sep" />
         <setting label="Deutsch" type="lsep" />
         <setting id="provider.amazon" type="bool" label="AMAZON.DE" default="false" />
         <setting id="provider.animebase" type="bool" label="ANIMEBASE.NET" default="true" />
         <setting id="provider.animeloads" type="bool" label="ANIMELOADS.ORG" default="true" />
         <setting id="provider.cinemaxx" type="bool" label="CINEMAXX.CC" default="true" />
-	<setting id="provider.cinematrix" type="bool" label="CINEMATRIX.TO" default="true" />
+		<setting id="provider.cinematrix" type="bool" label="CINEMATRIX.TO" default="true" />
         <setting id="provider.ddl" type="bool" label="DDL.ME" default="true" />
         <setting id="provider.filmpalast" type="bool" label="FILMPALAST.TO" default="true" />
         <setting id="provider.horrorkino" type="bool" label="FLIMMERSTUBE.COM" default="true" />
@@ -93,8 +94,7 @@
         <setting id="provider.streamit" type="bool" label="STREAMIT.WS" default="true" />
         <setting id="provider.szene-streamz" type="bool" label="SZENE-STREAMZ.COM" default="true" />
         <setting id="provider.tata" type="bool" label="TATA.TO" default="true" />
-        <setting id="provider.view4u" type="bool" label="VIEW4U.CO" default="true" />
-        <setting id="provider.vodhd" type="bool" label="VODHD.TO" default="false" />
+        <setting id="provider.view4u" type="bool" label="VIEW4U.CO" default="true" />        
         <setting type="sep" />
     </category>
     <category label="32346">
@@ -126,10 +126,13 @@
         <setting id="seriesever.user" type="text" label="32303" default="" />
         <setting id="seriesever.pass" type="text" label="32307" default="" />
         <setting type="sep" />
-        <setting type="lsep" label="vodhd.to" />
-        <setting id="vodhd.user" type="text" label="32303" default="" />
-        <setting id="vodhd.pass" type="text" label="32307" option="hidden" default="" />
-        <setting id="vodhd.server" type="text" label="32718" default="" />
+        <setting type="lsep" label="EMBY" />
+        <setting id="emby.user" type="text" label="32303" default="" />
+        <setting id="emby.pass" type="text" label="32307" option="hidden" default="" />
+        <setting id="emby.serverip" type="ipaddress" label="32718" default="" />
+		<setting id="emby.port" type="number" label="32719" default="" />
+		<setting id="emby.name" type="text" label="32720" default="Server" />
+		
         <setting type="sep" />
     </category>
     <category label="32541">

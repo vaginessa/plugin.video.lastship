@@ -1,3 +1,8 @@
+[B]3.0.1~nightly2[/B]
+- VodHD entfernt
+- Emby hinzugefügt (als Ersatz für VodHD)
+- Update settings, string.po und sources.py
+
 [B]3.0.1~nightly1[/B]
 - kinodogs entfernt
 

@@ -9,8 +9,11 @@ Für die Seite Serienstream ist ein Benutzerkonto auf der jeweiligen Betreiberse
 Die Seite VodHD ist Standardmäßig deaktiviert, da diese Seite eine Premium Seite ist, dass heißt es muss für die Nutzung bezahlt werden. Infos zu Bezahlung und Anmeldung auf https://vodhd.to/
 
 [B][COLOR blue]Aktuelles[/COLOR][/B]
+31.07.2018
+VodHD wurde umgestellt und umbenannt auf Emby. ALLE User müssen Ihre Benutzerdaten NEU in Lastship eintragen um VodHD Dienste weiterhin nutzen zu können
+
 20.07.2018
-Das neue Forum ist mit 21.Juni 2018 (Jahrestag Lastship) wieder eröffnet
+Das neue Forum ist Online
 
 20.07.2018
 Lastship wurde jetzt mit dem Update 3.0.0 umgestellt, zurück auf Ursprung, auf nur noch ein Module: plugin.video.lastship

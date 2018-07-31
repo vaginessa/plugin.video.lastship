@@ -1005,5 +1005,13 @@ msgid "AddInfo TMDB & Trakt"
 msgstr "TMDB & Trakt.tv"
 
 msgctxt "#32718"
-msgid "Server IP"
-msgstr "Server IP"
+msgid "Emby Server IP"
+msgstr "Emby Server IP"
+
+msgctxt "#32719"
+msgid "Emby Server Port"
+msgstr "Emby Server Port"
+
+msgctxt "#32720"
+msgid "Emby Server Name"
+msgstr "Emby Server Name"

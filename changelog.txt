@@ -1,6 +1,9 @@
+[B]3.0.1~nightly3[/B]
+- Update Emby (Fix Umlaut Suche)
+
 [B]3.0.1~nightly2[/B]
-- VodHD entfernt
-- Emby hinzugefügt (als Ersatz für VodHD)
+ -VODHD Streama Scraper entfernet
+- allg. Emby Client implementation hinzugefügt. Es werden alle Emby ( auch eigene ) Server via API unterstützt
 - Update settings, string.po und sources.py
 
 [B]3.0.1~nightly1[/B]

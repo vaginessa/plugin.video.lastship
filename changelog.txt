@@ -1,3 +1,6 @@
+[B]3.0.1~nightly4[/B]
+- Update Emby (Wird immer als erster Anbieter angezeigt, extra Stream Info Video und Audio)
+
 [B]3.0.1~nightly3[/B]
 - Update Emby (Fix Umlaut Suche)
 

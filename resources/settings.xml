@@ -33,7 +33,7 @@
         <setting type="lsep" label="0 Geplantes Update deaktiviert" />
         <setting id="DevUpdate" type="bool" label="32075" default="false" />
         <setting type="lsep" label="32711" />
-        <setting id="FaultLogger.enabled" type="bool" label="32711" default="false" />
+        <setting id="FaultLogger.enabled" type="bool" label="32711" default="true" />
         <setting id="FaultLogger.numErrors" type="slider" label="32712" default="5" range="1,30" visible="eq(-1,true)"  option="int" />
         <setting id="FaultLogger.recheckHours" type="slider" label="32713" default="24" range="12,72" visible="eq(-2,true)" option="int" />
     </category>

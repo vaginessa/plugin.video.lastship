@@ -126,15 +126,13 @@ class source:
     def resolve(self, url):
         try:
             url = urlparse.urljoin(self.base_link, url)
-
-            r = self.scraper.get(url, referer=self.base_link).content
+            r = self.scraper.get(url).content
             r = json.loads(r)['Stream']
             r = [(dom_parser.parse_dom(r, 'a', req='href'), dom_parser.parse_dom(r, 'iframe', req='src'))]
             r = [i[0][0].attrs['href'] if i[0] else i[1][0].attrs['src'] for i in r if i[0] or i[1]][0]
 
             if not r.startswith('http'):
-                r = urlparse.parse_qs(r)
-                r = [r[i][0] if r[i] and r[i][0].startswith('http') else (i, '') for i in r][0]
+                r = urlparse.urljoin('http:', r)
 
             return r
         except:

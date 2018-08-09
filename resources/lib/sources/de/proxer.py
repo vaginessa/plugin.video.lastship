@@ -108,17 +108,19 @@ class source:
                         i = [(match[0], match[1]) for match in re.findall('''["']?\s*file\s*["']?\s*[:=,]?\s*["'](?P<url>[^"']+)(?:[^}>\]]+)["']?\s*width\s*["']?\s*[:=]\s*["']?(?P<label>[^"',]+)''', stream_link, re.DOTALL)]
                         i = [(x[0].replace('\/', '/'), source_utils.label_to_quality(x[1])) for x in i]
 
-                        for url, quality in i:
-                            sources.append({'source': 'cdn', 'quality': quality, 'language': 'de', 'url': url, 'info': info, 'direct': True, 'debridonly': False})
+                        for link, quality in i:
+                            sources.append({'source': 'cdn', 'quality': quality, 'language': 'de', 'url': link, 'info': info, 'direct': True, 'debridonly': False})
                     else:
                         valid, host = source_utils.is_host_valid(stream_link, hostDict)
                         if not valid: continue
 
                         sources.append({'source': host, 'quality': 'SD', 'language': 'de', 'url': stream_link, 'info': info, 'direct': False, 'debridonly': False})
 
+            if len(sources) == 0:
+                raise Exception()
             return sources
         except:
-            source_faultlog.logFault(__name__,source_faultlog.tagScrape)
+            source_faultlog.logFault(__name__,source_faultlog.tagScrape, url)
             return sources
 
     def resolve(self, url):

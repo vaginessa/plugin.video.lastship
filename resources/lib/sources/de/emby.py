@@ -246,6 +246,8 @@ class source:
             for quality, stream in return_url.items():            
                 sources.append({'source': 'VODHD', 'quality': quality, 'language': 'de', 'url': stream,'info': info, 'local': True, 'direct': True, 'debridonly': False})
 
+            if len(sources) == 0:
+                raise Exception()
             return sources
         except:
             return sources

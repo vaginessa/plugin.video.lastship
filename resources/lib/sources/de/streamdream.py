@@ -90,15 +90,17 @@ class source:
             r = [(i[0][0].attrs['href'], i[1][0].attrs['class'].lower()) for i in r if i[0] and i[1]]
             r = [(i[0].strip(), 'HD' if i[1].startswith('hd') else 'SD') for i in r]
 
-            for url, quli in r:
-                valid, host = source_utils.is_host_valid(url, hostDict)
+            for link, quli in r:
+                valid, host = source_utils.is_host_valid(link, hostDict)
                 if not valid: continue
 
-                sources.append({'source': host, 'quality': quli, 'language': 'de', 'url': url, 'direct': False, 'debridonly': False})
+                sources.append({'source': host, 'quality': quli, 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
 
+            if len(sources) == 0:
+                raise Exception()
             return sources
         except:
-            source_faultlog.logFault(__name__,source_faultlog.tagScrape)
+            source_faultlog.logFault(__name__,source_faultlog.tagScrape, url)
             return sources
 
     def resolve(self, url):

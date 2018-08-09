@@ -4,6 +4,7 @@ import json
 import urllib3
 import base64
 from resources.lib.modules import source_utils
+from resources.lib.modules import source_faultlog
 
 class source:
     def __init__(self):
@@ -46,9 +47,9 @@ class source:
             movie_type=request_json['movie_type']
                         
             ## getlinks from movieID ##
-            url=(self.base_link_api+self.getlinks %movie_id+self.key)            
+            link=(self.base_link_api+self.getlinks % movie_id+self.key)
             http = urllib3.PoolManager()
-            request = http.request('GET',url)
+            request = http.request('GET',link)
             request_json=json.loads(request.data.decode('utf8'))
             request.release_conn()
 
@@ -64,11 +65,13 @@ class source:
                 if not valid: continue
                                 
                 sources.append({'source': host, 'quality': q, 'language': 'de', 'url': link, 'direct': False, 'debridonly': False,'checkquality':True})
-                
+
+            if len(sources) == 0:
+                raise Exception()
             return sources
         except:
+            source_faultlog.logFault(__name__,source_faultlog.tagScrape, url)
             return sources
-        
 
     def resolve(self, url):
         return url

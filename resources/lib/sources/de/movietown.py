@@ -94,17 +94,19 @@ class source:
                 hoster = re.search("(?<=>).*$", x[0][1])
                 hoster = hoster.group().lower()
 
-                url = re.search("http(.*?)(?=')", x[0][0]['data-bind'])
-                url = url.group()
+                link = re.search("http(.*?)(?=')", x[0][0]['data-bind'])
+                link = link.group()
 
                 valid, hoster = source_utils.is_host_valid(hoster, hostDict)
                 if not valid: continue
 
-                sources.append({'source': hoster, 'quality': 'SD', 'language': 'de', 'url': url, 'direct': False, 'debridonly': False})
+                sources.append({'source': hoster, 'quality': 'SD', 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
 
+            if len(sources) == 0:
+                raise Exception()
             return sources
         except:
-            source_faultlog.logFault(__name__,source_faultlog.tagScrape)
+            source_faultlog.logFault(__name__,source_faultlog.tagScrape, url)
             return sources
 
     def resolve(self, url):

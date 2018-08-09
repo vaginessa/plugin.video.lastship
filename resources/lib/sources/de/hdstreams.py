@@ -127,9 +127,11 @@ class source:
                     elif 'streamcloud' in link:
                         sources.append({'source': 'streamcloud.com', 'quality': 'SD', 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
 
+            if len(sources) == 0:
+                raise Exception()
             return sources
         except:
-            source_faultlog.logFault(__name__,source_faultlog.tagScrape)
+            source_faultlog.logFault(__name__,source_faultlog.tagScrape, url)
             return sources
 
     def __getlinks(self,e, h, sLang, sName,token,url):

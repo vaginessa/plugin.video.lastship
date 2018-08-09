@@ -80,7 +80,7 @@ class source:
         sources = []
 
         try:
-            if url == None:
+            if not url:
                 return sources
 
             data = urlparse.parse_qs(url)
@@ -111,14 +111,16 @@ class source:
                 u = urlparse.parse_qs('&id=%s' % link)
                 u = dict([(x, u[x][0]) if u[x] else (x, '') for x in u])
                 for x in range(0, int(mirrors)):
-                    url = self.mirror_link % (u['id'], u['Hoster'], x + 1)
+                    tempLink = self.mirror_link % (u['id'], u['Hoster'], x + 1)
                     if season and episode: url += "&Season=%s&Episode=%s" % (season, episode)
-                    try: sources.append({'source': hoster, 'quality': 'SD', 'language': 'de', 'url': url, 'direct': False, 'debridonly': False})
+                    try: sources.append({'source': hoster, 'quality': 'SD', 'language': 'de', 'url': tempLink, 'direct': False, 'debridonly': False})
                     except: pass
 
+            if len(sources) == 0:
+                raise Exception()
             return sources
         except:
-            source_faultlog.logFault(__name__,source_faultlog.tagScrape)
+            source_faultlog.logFault(__name__,source_faultlog.tagScrape, url)
             return sources
 
     def resolve(self, url):

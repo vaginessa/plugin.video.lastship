@@ -60,8 +60,8 @@ class source:
             r = client.request(r[0][0]['src'])
             r = dom_parser.parse_dom(r, 'a', attrs={'class': 'play_container'}, req='href')
             r = client.request(r[0][0]['href'])
-            url = self.get_link % (re.search('(?<=var id = \")(.*?)(?=\")', r).group(), re.search('(?<=var links = \")(.*?)(?=\")', r).group())
-            r = client.request(url)
+            link = self.get_link % (re.search('(?<=var id = \")(.*?)(?=\")', r).group(), re.search('(?<=var links = \")(.*?)(?=\")', r).group())
+            r = client.request(link)
             r = dom_parser.parse_dom(r, 'ul', attrs={'id': 'articleList'})
             r = dom_parser.parse_dom(r, 'a')
 
@@ -71,16 +71,18 @@ class source:
                 elif 'http' in i[0]['onclick']:
                     link = re.search('http(.*?)(?=\")', i[0]['onclick']).group()
                 else:
-                    return sources
+                    raise Exception()
 
                 valid, hoster = source_utils.is_host_valid(link, hostDict)
                 if not valid: continue
 
                 sources.append({'source': hoster, 'quality': 'SD', 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
 
+            if len(sources) == 0:
+                raise Exception()
             return sources
         except:
-            source_faultlog.logFault(__name__,source_faultlog.tagScrape)
+            source_faultlog.logFault(__name__,source_faultlog.tagScrape, url)
             return sources
 
     def resolve(self, url):

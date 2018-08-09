@@ -67,9 +67,11 @@ class source:
                 else:
                     sources = hdgo.getStreams(link[0].attrs['src'], sources)
 
+            if len(sources) == 0:
+                raise Exception()
             return sources
         except:
-            source_faultlog.logFault(__name__, source_faultlog.tagScrape)
+            source_faultlog.logFault(__name__, source_faultlog.tagScrape, url)
             return sources
 
 

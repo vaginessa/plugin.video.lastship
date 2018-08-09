@@ -78,9 +78,11 @@ class source:
                     url_dict['zm'] = unicode(i)
                     sources.append({'source': hoster, 'quality': quality, 'language': 'de', 'url': url_dict.copy(), 'direct': False, 'debridonly': False, 'checkquality': False})
 
+            if len(sources) == 0:
+                raise Exception()
             return sources
         except:
-            source_faultlog.logFault(__name__, source_faultlog.tagScrape)
+            source_faultlog.logFault(__name__, source_faultlog.tagScrape, url)
             return sources
 
     def resolve(self, url):

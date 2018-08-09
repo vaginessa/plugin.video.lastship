@@ -76,9 +76,11 @@ class source:
                 if not valid: continue
                 sources.append({'source': host, 'quality': 'SD', 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
 
+            if len(sources) == 0:
+                raise Exception()
             return sources
         except:
-            source_faultlog.logFault(__name__,source_faultlog.tagScrape)
+            source_faultlog.logFault(__name__, source_faultlog.tagScrape, url)
             return sources
 
     def resolve(self, url):

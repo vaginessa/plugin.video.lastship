@@ -69,7 +69,7 @@ class source:
         sources = []
 
         try:
-            if url == None:
+            if not url:
                 return sources
 
             data = urlparse.parse_qs(url)
@@ -95,9 +95,11 @@ class source:
                 try: sources.append({'source': hoster, 'quality': 'SD', 'language': 'de', 'info' : '' if pcnt == 1 else 'multi-part', 'url': h_url, 'direct': False, 'debridonly': False})
                 except: pass
 
+            if len(sources) == 0:
+                raise Exception()
             return sources
         except:
-            source_faultlog.logFault(__name__,source_faultlog.tagScrape)
+            source_faultlog.logFault(__name__,source_faultlog.tagScrape, url)
             return sources
 
     def resolve(self, url):

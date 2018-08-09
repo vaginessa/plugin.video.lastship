@@ -95,9 +95,12 @@ class source:
 
             [sources.append({'source': 'CDN', 'quality': i['label'] if i['label'] in ['720p', '1080p'] else 'SD', 'language': 'de', 'url': i['file'], 'direct': True,
                          'debridonly': False}) for i in links]
+
+            if len(sources) == 0:
+                raise Exception()
             return sources
         except:
-            source_faultlog.logFault(__name__,source_faultlog.tagScrape)
+            source_faultlog.logFault(__name__,source_faultlog.tagScrape, url)
             return sources
 
     def resolve(self, url):

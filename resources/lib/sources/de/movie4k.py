@@ -110,18 +110,20 @@ class source:
                     valid, host = source_utils.is_host_valid(host, hostDict)
                     if not valid: continue
 
-                    url = dom_parser.parse_dom(i, 'a', req='href')[0].attrs['href']
-                    url = client.replaceHTMLCodes(url)
-                    url = urlparse.urljoin(self.base_link, url)
-                    url = url.encode('utf-8')
+                    link = dom_parser.parse_dom(i, 'a', req='href')[0].attrs['href']
+                    link = client.replaceHTMLCodes(link)
+                    link = urlparse.urljoin(self.base_link, link)
+                    link = link.encode('utf-8')
 
-                    sources.append({'source': host, 'quality': 'SD', 'language': 'de', 'url': url, 'direct': False, 'debridonly': False})
+                    sources.append({'source': host, 'quality': 'SD', 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
                 except:
                     pass
 
+            if len(sources) == 0:
+                raise Exception()
             return sources
         except:
-            source_faultlog.logFault(__name__,source_faultlog.tagScrape)
+            source_faultlog.logFault(__name__,source_faultlog.tagScrape, url)
             return sources
 
     def resolve(self, url):

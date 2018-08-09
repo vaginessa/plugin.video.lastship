@@ -52,13 +52,11 @@ class source:
             if not url:                
                 return sources
             
-            sHtmlContent = requests.get(urlparse.urljoin(self.base_link,url))
+            sHtmlContent = requests.get(urlparse.urljoin(self.base_link, url))
 
             
             pattern1= 'blank"[^>]*href="([^"]+)">'
             hoster = re.compile(pattern1).findall(sHtmlContent.content)
-
-            hosters = []
 
             if "1080p" in url:
                 q="1080p"
@@ -81,13 +79,12 @@ class source:
                     sources.append({'source': 'flashx.tv', 'quality': 'SD', 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
                 elif 'streamcloud' in link:
                     sources.append({'source': 'streamcloud.eu', 'quality': 'SD', 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
-                
-               
 
-            
+            if len(sources) == 0:
+                raise Exception()
             return sources
         except:
-            source_faultlog.logFault(__name__,source_faultlog.tagScrape)
+            source_faultlog.logFault(__name__, source_faultlog.tagScrape, url)
             return sources
 
 

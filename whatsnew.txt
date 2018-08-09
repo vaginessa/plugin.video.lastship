@@ -12,6 +12,7 @@ Die Seite VodHD ist Standardmäßig deaktiviert, da diese Seite eine Premium Sei
 31.07.2018
 Nightly Update:
 VodHD wurde umgestellt und umbenannt auf Emby. ALLE User müssen Ihre Benutzerdaten NEU in Lastship eintragen um VodHD Dienste weiterhin nutzen zu können
+INFO's dazu stehen in der FAQ
 
 20.07.2018
 Das neue Forum ist Online

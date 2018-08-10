@@ -50,7 +50,7 @@
         <setting id="HEVC" type="bool" label="32363" default="true" />
         <setting id="hosts.captcha" type="bool" label="32341" default="true" />
         <setting id="hosts.sort.provider" type="bool" label="32342" default="false" />
-        <setting id="debrid.only" type="bool" label="Nur Premium Quellen anzeigen" default="false" />
+        <setting id="no.subbed" type="bool" label="Filter Streams mit Untertitel" default="false" />
         <setting type="lsep" label="32343" />
         <setting id="bookmarks" type="bool" label="32344" default="true" />
         <setting id="bookmarks.trakt" type="bool" label="Trakt Fortsetzungspunkt" default="true" enable="!eq(-1,false)" visible="false" />

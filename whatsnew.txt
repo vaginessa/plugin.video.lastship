@@ -10,7 +10,6 @@ Die Seite VodHD ist Standardmäßig deaktiviert, da diese Seite eine Premium Sei
 
 [B][COLOR blue]Aktuelles[/COLOR][/B]
 31.07.2018
-Nightly Update:
 VodHD wurde umgestellt und umbenannt auf Emby. ALLE User müssen Ihre Benutzerdaten NEU in Lastship eintragen um VodHD Dienste weiterhin nutzen zu können
 INFO's dazu stehen in der FAQ
 
@@ -25,13 +24,22 @@ Ihr müsst nichts machen, Aktualisierung erfolgte mit dem Update, wenn Ihr das h
 Das script.module.lastship kann jetzt gelöscht werden, muss aber nicht
 Zu finden ist das script.module.lastship hier: ...kodi/addons/script.module.lastship
 
-12.05.2018
-Bs.to zur Zeit nicht funktionsfähig. Der Seitenbetreiber hat den API Key geändert und Captcha eingeführt
-Ob sich eine Lösung finden wird ist offen
-
 [COLOR orange]-------------------------------------------------------------------------------------------------------[/COLOR]
 
 [B][COLOR lime]Changelog plugin.video.lastship[/COLOR][/B]
+
+[B]3.0.1[/B]
+  10.08.2018
+- Update HDFilme
+- Update kinox
+- FaultLogging verbessert
+- FaultLogger Standard EIN (Fehler werden damit automatisch an den Forum Server gesendet /siehe dazu FAQ)
+- Update Emby (Wird immer als erster Anbieter angezeigt, extra Stream Info Video und Audio)
+- Update Emby (Fix Umlaut Suche)
+ -VODHD Streama Scraper entfernet
+- allg. Emby Client implementation hinzugefügt. Es werden alle Emby ( auch eigene ) Server via API unterstützt
+- Update settings, string.po und sources.py
+- kinodogs entfernt
 
 [B]3.0.0[/B]
   20.07.2018
@@ -48,24 +56,6 @@ Ob sich eine Lösung finden wird ist offen
 - Update HDFilme.tv
 - Update Duckduckgo
 - Seriesever entfernt, Seite Offline-Umleitung auf Moviesever
-
-[B]2.0.8.3[/B]
-  15.06.2018
-- TMovie entfernt 
-
-[B]2.0.8.2[/B]
-  08.06.2018
-- Update movie2k-sh
-- Add movie4k-lt
-- Alluc Konto entfernt
-- cine.to entfernt (Captcha)
-- Pure-Anime.tv (Seite gibt es nicht mehr)
-- Kategorie Kanäle (Channels) entfernt
-- bs.to (Captcha und API changed) und alluc.ee (Seite stillgelegt) entfernt
-- add vodhd
-- add movie-gg
-- add moovie
-- Update string.po
 
 [COLOR orange]-------------------------------------------------------------------------------------------------------[/COLOR] 
   

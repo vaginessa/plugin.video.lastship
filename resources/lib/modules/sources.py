@@ -730,8 +730,8 @@ class sources:
         provider = control.setting('hosts.sort.provider')
         if provider == '': provider = 'false'
 
-        debrid_only = control.setting('debrid.only')
-        if debrid_only == '': debrid_only = 'false'
+        no_subbed = control.setting('no.subbed')
+        if no_subbed == '': no_subbed = 'false'
 
         quality = control.setting('hosts.quality')
         if quality == '': quality = '0'
@@ -751,6 +751,12 @@ class sources:
                 if not i['source'].lower() in self.hosthqDict and i['quality'] not in ['SD', 'SCR', 'CAM']: i.update({'quality': 'SD'})
         
         local = [i for i in self.sources if 'local' in i and i['local'] == True]
+
+        ## quick & drity fix,sor if multiple available items with different quality
+        ## https://github.com/lastship/plugin.video.lastship/issues/119
+        local = sorted(local, key=lambda k: k['quality'],reverse=True)
+        ## END ##
+        
         for i in local: i.update({'language': self._getPrimaryLang() or 'en'})
         self.sources = [i for i in self.sources if not i in local]
 
@@ -766,8 +772,11 @@ class sources:
             valid_hoster = set([i['source'] for i in self.sources])
             valid_hoster = [i for i in valid_hoster if d.valid_url('', i)]
             filter += [dict(i.items() + [('debrid', d.name)]) for i in self.sources if i['source'] in valid_hoster]
-        if debrid_only == 'false' or  debrid.status() == False:
-            filter += [i for i in self.sources if not i['source'].lower() in self.hostprDict and i['debridonly'] == False]
+
+        #removing debrid only function, re-use for  https://github.com/lastship/plugin.video.lastship/issues/120
+        ## debrid_only wird zu no_subbed
+        #if debrid_only == 'false' or  debrid.status() == False:
+        filter += [i for i in self.sources if not i['source'].lower() in self.hostprDict and i['debridonly'] == False]
 
         self.sources = filter
       
@@ -801,8 +810,12 @@ class sources:
             filter = [i for i in self.sources if i['source'].lower() in self.hostcapDict and not 'debrid' in i]
             self.sources = [i for i in self.sources if not i in filter]
 
-        filter = [i for i in self.sources if i['source'].lower() in self.hostblockDict and not 'debrid' in i]
-        self.sources = [i for i in self.sources if not i in filter]
+        #removing debrid only function, re-use for  https://github.com/lastship/plugin.video.lastship/issues/120
+        if no_subbed == 'true': 
+            filter = [i for i in self.sources if  'info' in i and 'subbed' in i['info']]     
+            self.sources = [i for i in self.sources if not i in filter]
+        
+        
         
         multi = [i['language'] for i in self.sources]
         multi = [x for y,x in enumerate(multi) if x not in multi[:y]]

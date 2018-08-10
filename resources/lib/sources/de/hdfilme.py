@@ -12,6 +12,13 @@ from resources.lib.modules import source_utils
 from resources.lib.modules import dom_parser
 from resources.lib.modules import source_faultlog
 
+def test_viewer1(s):###loki###
+    import xbmcgui
+    xbmcgui.Dialog().textviewer('TEST VIEWER', str(s))
+def test_viewer2(s):
+    d = open('TEST_WRITER.txt','wb')
+    d.write(str(s))
+    d.close()
 
 class source:
     def __init__(self):
@@ -29,7 +36,7 @@ class source:
             if not url and title != localtitle: url = self.__search([title] + source_utils.aliases_to_array(aliases), year)
             if not url:
                 from resources.lib.modules import duckduckgo
-                url = duckduckgo.search(titles, year, self.domains[0], '(.*?)\sstream')
+                url = duckduckgo.search(titles, year, self.domains[0])
             return url
         except:
             return
@@ -72,7 +79,6 @@ class source:
 
     def sources(self, url, hostDict, hostprDict):
         sources = []
-
         try:
             if not url:
                 return sources
@@ -106,11 +112,9 @@ class source:
                 except:
                     pass
 
-            if len(sources) == 0:
-                raise Exception()
             return sources
         except:
-            source_faultlog.logFault(__name__, source_faultlog.tagScrape, url)
+            source_faultlog.logFault(__name__, source_faultlog.tagScrape)
             return sources
 
     def resolve(self, url):

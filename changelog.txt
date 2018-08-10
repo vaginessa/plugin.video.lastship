@@ -1,15 +1,14 @@
-[B]3.0.1~nightly4[/B]
+[B]3.0.1[/B]
+  10.08.2018
+- Update HDFilme
+- Update kinox
+- FaultLogging verbessert
+- FaultLogger Standard EIN (Fehler werden damit automatisch an den Forum Server gesendet /siehe dazu FAQ)
 - Update Emby (Wird immer als erster Anbieter angezeigt, extra Stream Info Video und Audio)
-
-[B]3.0.1~nightly3[/B]
 - Update Emby (Fix Umlaut Suche)
-
-[B]3.0.1~nightly2[/B]
  -VODHD Streama Scraper entfernet
 - allg. Emby Client implementation hinzugefügt. Es werden alle Emby ( auch eigene ) Server via API unterstützt
 - Update settings, string.po und sources.py
-
-[B]3.0.1~nightly1[/B]
 - kinodogs entfernt
 
 [B]3.0.0[/B]

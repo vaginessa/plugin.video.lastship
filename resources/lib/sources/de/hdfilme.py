@@ -12,14 +12,6 @@ from resources.lib.modules import source_utils
 from resources.lib.modules import dom_parser
 from resources.lib.modules import source_faultlog
 
-def test_viewer1(s):###loki###
-    import xbmcgui
-    xbmcgui.Dialog().textviewer('TEST VIEWER', str(s))
-def test_viewer2(s):
-    d = open('TEST_WRITER.txt','wb')
-    d.write(str(s))
-    d.close()
-
 class source:
     def __init__(self):
         self.priority = 1
@@ -36,7 +28,7 @@ class source:
             if not url and title != localtitle: url = self.__search([title] + source_utils.aliases_to_array(aliases), year)
             if not url:
                 from resources.lib.modules import duckduckgo
-                url = duckduckgo.search(titles, year, self.domains[0])
+                url = duckduckgo.search(titles, year, self.domains[0], '(.*?)\sstream')
             return url
         except:
             return
@@ -64,8 +56,7 @@ class source:
             if not url and tvshowtitle != localtvshowtitle: url = self.__search([tvshowtitle] + aliases, data['year'], season)
             if not url: return
 
-            r = client.request(urlparse.urljoin(self.base_link, url))
-
+            r = client.request(urlparse.urljoin(self.base_link, url, timeout='40'))
             r = dom_parser.parse_dom(r, 'ul', attrs={'class': ['list-inline', 'list-film']})
             r = dom_parser.parse_dom(r, 'li')
             r = dom_parser.parse_dom(r, 'a', req='href')
@@ -79,6 +70,7 @@ class source:
 
     def sources(self, url, hostDict, hostprDict):
         sources = []
+
         try:
             if not url:
                 return sources
@@ -87,11 +79,10 @@ class source:
 
             r = re.findall('(\d+)-stream(?:\?episode=(\d+))?', url)
             r = [(i[0], i[1] if i[1] else '1') for i in r][0]
-
-            r = client.request(urlparse.urljoin(self.base_link, self.get_link % r), output='extended')
+            r = client.request(urlparse.urljoin(self.base_link, self.get_link % r), output='extended', timeout='40')
 
             headers = r[3]
-            headers.update({'Cookie': r[2].get('Set-Cookie'), 'Referer': self.base_link})
+            headers.update({'Cookie': r[2].get('Set-Cookie'), 'Referer': self.base_link,'Origin': self.base_link})
             r = r[0]
 
             r += '=' * (-len(r) % 4)
@@ -104,14 +95,12 @@ class source:
             for u, q in r:
                 try:
                     tag = directstream.googletag(u)
-
                     if tag:
                         sources.append({'source': 'gvideo', 'quality': tag[0].get('quality', 'SD'), 'language': 'de', 'url': u, 'direct': True, 'debridonly': False})
                     else:
                         sources.append({'source': 'CDN', 'quality': q, 'language': 'de', 'url': u + '|%s' % urllib.urlencode(headers), 'direct': True, 'debridonly': False})
                 except:
                     pass
-
             return sources
         except:
             source_faultlog.logFault(__name__, source_faultlog.tagScrape)
@@ -128,7 +117,7 @@ class source:
             t = [cleantitle.get(i) for i in set(titles) if i]
             y = ['%s' % str(year), '%s' % str(int(year) + 1), '%s' % str(int(year) - 1), '0']
 
-            r = client.request(query)
+            r = client.request(query,timeout='40')
 
             r = dom_parser.parse_dom(r, 'ul', attrs={'class': ['products', 'row']})
             r = dom_parser.parse_dom(r, 'div', attrs={'class': ['box-product', 'clearfix']})
@@ -150,7 +139,6 @@ class source:
                 r = r[0]
             else:
                 return
-
             url = source_utils.strip_domain(r)
             return url
         except:

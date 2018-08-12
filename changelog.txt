@@ -1,3 +1,6 @@
+[B]3.0.2~nightly[/B]
+- Fix HDFilme
+
 [B]3.0.1[/B]
   10.08.2018
 - Update HDFilme

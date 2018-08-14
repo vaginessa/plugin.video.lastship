@@ -31,14 +31,6 @@
 		</assets>
 		<news>- Update HDFilme
 		      - Update kinox
-		      - FaultLogging verbessert
-		      - FaultLogger Standard EIN (Fehler werden damit automatisch an den Forum Server gesendet, siehe dazu FAQ)
-		      - Update Emby (Wird immer als erster Anbieter angezeigt, extra Stream Info Video und Audio)
-		      - Update Emby (Fix Umlaut Suche)
-		      -VODHD Streama Scraper entfernt
-		     - Add allg. Emby Client implementation. Es werden alle Emby ( auch eigene ) Server via API supported
-		     - Update settings, string.po und sources.py
-		     - kinodogs entfernt
 		</news>
 	</extension>
 </addon>

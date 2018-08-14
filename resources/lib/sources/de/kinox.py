@@ -141,8 +141,6 @@ class source:
 
     def __search(self, imdb):
         try:
-            l = ['1', '15']
-
             r = self.scraper.get(urlparse.urljoin(self.base_link, self.search_link % imdb)).content
             r = dom_parser.parse_dom(r, 'table', attrs={'id': 'RsltTableStatic'})
             r = dom_parser.parse_dom(r, 'tr')
@@ -151,9 +149,9 @@ class source:
             r = [(i[0], i[1], re.findall('.+?(\d+)\.', i[2])) for i in r]
             r = [(i[0], i[1], i[2][0] if len(i[2]) > 0 else '0') for i in r]
             r = sorted(r, key=lambda i: int(i[2]))  # german > german/subbed
-            r = [i[0] for i in r if i[2] in l]
+            r = [i[0] for i in r if i[2] in ['1', '15']]
 
-            if len(r) > 0 :
+            if len(r) > 0:
                 return source_utils.strip_domain(r[0])
             return ""
         except:
@@ -168,7 +166,7 @@ class source:
             for domain in self.domains:
                 try:
                     url = 'http://%s' % domain
-                    r = self.scraper.get(url, limit=1, timeout='2').content
+                    r = self.scraper.get(url, timeout=2).content
                     r = dom_parser.parse_dom(r, 'meta', attrs={'name': 'keywords'}, req='content')
                     if r and 'kino.to' in r[0].attrs.get('content').lower():
                         return url

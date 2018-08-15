@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import base64
+import json
 import re
 import urllib
 import urlparse
+import requests
 
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
@@ -87,18 +89,21 @@ class source:
 
             r += '=' * (-len(r) % 4)
             r = base64.b64decode(r)
+            r = json.loads(r)
+            r = r['playinfo'][0]['file']
 
-            i = [(match[1], match[0]) for match in re.findall('''["']?label\s*["']?\s*[:=]\s*["']?([^"',]+)["']?(?:[^}\]]+)["']?\s*file\s*["']?\s*[:=,]?\s*["']([^"']+)''', r, re.DOTALL)]
-            i += [(match[0], match[1]) for match in re.findall('''["']?\s*file\s*["']?\s*[:=,]?\s*["']([^"']+)(?:[^}>\]]+)["']?\s*label\s*["']?\s*[:=]\s*["']?([^"',]+)''', r, re.DOTALL)]
-            r = [(x[0].replace('\/', '/'), source_utils.label_to_quality(x[1])) for x in i]
+            links = requests.get(r, headers=headers).content
+            links = re.findall('RESOLUTION=\d+x(\d+)\n(.*)', links)
 
-            for u, q in r:
+            links = [(r.replace('playlist.m3u8', x[1]), source_utils.label_to_quality(x[0])) for x in links]
+
+            for url, quality in links:
                 try:
-                    tag = directstream.googletag(u)
+                    tag = directstream.googletag(url)
                     if tag:
-                        sources.append({'source': 'gvideo', 'quality': tag[0].get('quality', 'SD'), 'language': 'de', 'url': u, 'direct': True, 'debridonly': False})
+                        sources.append({'source': 'gvideo', 'quality': tag[0].get('quality', 'SD'), 'language': 'de', 'url': url, 'direct': True, 'debridonly': False})
                     else:
-                        sources.append({'source': 'CDN', 'quality': q, 'language': 'de', 'url': u + '|%s' % urllib.urlencode(headers), 'direct': True, 'debridonly': False})
+                        sources.append({'source': 'CDN', 'quality': quality, 'language': 'de', 'url': url + '|%s' % urllib.urlencode(headers), 'direct': True, 'debridonly': False})
                 except:
                     pass
             return sources

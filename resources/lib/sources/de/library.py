@@ -58,7 +58,6 @@ class source:
 
     def sources(self, url, hostDict, hostprDict):
         sources = []
-
         try:
             if url is None:
                 return sources
@@ -155,7 +154,6 @@ class source:
 
             return sources
         except:
-            source_faultlog.logFault(__name__,source_faultlog.tagScrape)
             return sources
 
     def resolve(self, url):

@@ -1,6 +1,7 @@
 [B]3.0.2~nightly[/B]
 - Fix HDFilme
 - Fix kinox
+- Update library.py (Fault Logging entfernt)
 
 [B]3.0.1[/B]
   10.08.2018

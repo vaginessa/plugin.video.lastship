@@ -271,10 +271,15 @@ class sources:
                         if w.is_alive() == False: break
                         time.sleep(0.5)
 
-
                     if w.is_alive() == True: block = items[i]['source']
 
-                    if self.url == None: raise Exception()
+                    if self.url == None:
+                        if items[i]['source'] == "fast.streamservice.online":
+                            w.join(5000)
+                            if self.url == None:
+                                raise Exception()
+                        else:
+                            raise Exception()
 
                     try: progressDialog.close()
                     except: pass

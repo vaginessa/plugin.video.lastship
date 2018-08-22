@@ -90,11 +90,21 @@ class source:
                 link = "https:" + link
 
             r = self.scraper.get(link, headers={'referer': url}).content
-            phrase = re.findall('jbdaskgs = \'(.*)?\'', r)[0]
-            links = json.loads(base64.b64decode(phrase))
+            phrase = re.findall("(?:jbdaskgs|m3u8File)[^>]=[^>]'([^']+)", r)[0]
 
-            [sources.append({'source': 'CDN', 'quality': i['label'] if i['label'] in ['720p', '1080p'] else 'SD', 'language': 'de', 'url': i['file'], 'direct': True,
-                         'debridonly': False}) for i in links]
+            if "downloaded." in phrase:
+                phrase = re.findall("m3u8File\s=\s'(.*?)'", r)[0]
+                link = 'https://fast.streamservice.online/public/dist/index.html?id=%s' % phrase
+                quality = re.findall("(\d{3,4}p)", phrase)[0]
+                valid, hoster = source_utils.is_host_valid(link, hostDict)
+                if valid:
+                    sources.append({'source': hoster, 'quality': quality if quality in ['720p', '1080p'] else 'SD', 'language': 'de', 'url': link, 'direct': False,
+                         'debridonly': False})
+            else:
+                links = json.loads(base64.b64decode(phrase))
+                [sources.append({'source': 'CDN', 'quality': i['label'] if i['label'] in ['720p', '1080p'] else 'SD',
+                                 'language': 'de', 'url': i['file'], 'direct': True, 'debridonly': False}) for i in links]
+
 
             if len(sources) == 0:
                 raise Exception()

@@ -33,7 +33,7 @@ class source:
         self.priority = 1
         self.language = ['de']
         self.domains = ['streamdream.ws']
-        self.base_link = 'https://streamdream.ws'
+        self.base_link = 'https://moviedream.ws'
         self.search_link = '/searchy.php?ser=%s'
         self.hoster_link = '/episodeholen3.php'
 

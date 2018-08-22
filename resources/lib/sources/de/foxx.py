@@ -53,7 +53,6 @@ class source:
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
-
             linkAndTitle = self.__search([tvshowtitle, localtvshowtitle] + source_utils.aliases_to_array(aliases), year)
             aliases = source_utils.aliases_to_array(aliases)
 
@@ -67,6 +66,7 @@ class source:
         try:
             if not url:
                 return
+            url = urlparse.urljoin(self.base_link, url)
             r = self.scraper.get(url).content
 
             if season == 1 and episode == 1:

@@ -64,6 +64,7 @@
         <setting type="sep" />
         <setting label="Deutsch" type="lsep" />
         <setting id="provider.amazon" type="bool" label="AMAZON.DE" default="false" />
+        <setting id="provider.alleserien" type="bool" label="ALLESERIEN.COM" default="true" />
         <setting id="provider.animebase" type="bool" label="ANIMEBASE.NET" default="true" />
         <setting id="provider.animeloads" type="bool" label="ANIMELOADS.ORG" default="true" />
         <setting id="provider.cinemaxx" type="bool" label="CINEMAXX.CC" default="true" />

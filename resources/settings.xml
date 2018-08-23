@@ -78,6 +78,7 @@
         <setting id="provider.hdstreams" type="bool" label="HD-STREAMS.ORG" default="false" />
         <setting id="provider.iload" type="bool" label="ILOAD.TO" default="true" />
         <setting id="provider.kinoger" type="bool" label="KINOGER.COM" default="true" />
+        <setting id="provider.kinocx" type="bool" label="KINO.CX" default="true" />
         <setting id="provider.kinoking" type="bool" label="KINOKING.TO" default="true" />
         <setting id="provider.kinow" type="bool" label="KINOW.TO" default="false" />
         <setting id="provider.kinox" type="bool" label="KINOX.TO" default="false" />

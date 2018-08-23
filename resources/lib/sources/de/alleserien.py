@@ -26,7 +26,7 @@ import re
 import urlparse
 
 from resources.lib.modules import cleantitle
-from resources.lib.modules import cfscrape
+from resources.lib.modules import client
 from resources.lib.modules import dom_parser
 from resources.lib.modules import source_faultlog
 from resources.lib.modules import source_utils
@@ -41,7 +41,6 @@ class source:
         self.search_link = '/filme'
         self.link_url = '/getpart'
         self.link_url_movie = '/film-getpart'
-        self.scraper = cfscrape.create_scraper()
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
@@ -66,7 +65,7 @@ class source:
                 return
             url = urlparse.urljoin(self.base_link, url)
 
-            r = self.scraper.get(url).content
+            r = client.request(url)
 
             def getLinks(content, searchSeason=False):
                 links = dom_parser.parse_dom(content, 'div', attrs={'class': 'hosterSiteDirectNav'})
@@ -80,7 +79,7 @@ class source:
             seasonLinks = getLinks(r, True)
 
             if len(seasonLinks) > 0:
-                r = self.scraper.get(seasonLinks[0]).content
+                r = client.request(seasonLinks[0])
                 episodeLink = getLinks(r)
                 if len(episodeLink) > 0:
                     return source_utils.strip_domain(episodeLink[0])
@@ -95,13 +94,14 @@ class source:
             if not url:
                 return sources
             url = urlparse.urljoin(self.base_link, url)
-            content = self.scraper.get(url).content
+            content = client.request(url)
 
             links = dom_parser.parse_dom(content, 'a', attrs={'class': 'PartChange'})
             links = [(i.attrs['data-id'], i.attrs['data-controlid'], dom_parser.parse_dom(i, 'h4')[0].content) for i in
                      links if 'data-id' in i[0]]
 
             temp = [i for i in links if i[2].lower() == 'vip']
+
             for id, controlId, host in temp:
                 link = self.resolve((url, id, controlId, 'film' in url))
                 import json
@@ -111,18 +111,25 @@ class source:
                     'Upgrade-Insecure-Requests': '1'
                 }
 
-                result = self.scraper.get(link, headers=params).content
+                result = client.request(link, headers=params)
                 result = re.findall('sources:\s(.*?])', result, flags=re.S)[0]
                 result = json.loads(result)
                 [sources.append({'source': 'CDN', 'quality': source_utils.label_to_quality(i['label']), 'language': 'de', 'url': i['file'],
                                 'direct': True, 'debridonly': False, 'checkquality': False}) for i in result]
 
-            for id, controlId, hoster in links:
-                valid, hoster = source_utils.is_host_valid(hoster, hostDict)
+            for i in links:
+                multiPart = re.findall('(.*?)\sPart\s\d+', i[2])
+                if(len(multiPart) > 0):
+                    links = [(i[0], i[1], i[2] + ' Part 1' if i[2] == multiPart[0] else i[2]) for i in links]
+
+            links = [(i[0], i[1], re.findall('(.*?)\sPart\s\d+', i[2])[0] if len(re.findall('\d+', i[2])) > 0 else i[2], 'Multi-Part ' + re.findall('\d+', i[2])[0] if len(re.findall('\d+', i[2])) > 0 else None) for i in links]
+
+            for id, controlId, host, multiPart in links:
+                valid, hoster = source_utils.is_host_valid(host, hostDict)
                 if not valid: continue
 
                 sources.append({'source': hoster, 'quality': 'SD', 'language': 'de', 'url': (url, id, controlId, 'film' in url),
-                                'direct': False, 'debridonly': False, 'checkquality': False})
+                                'info': multiPart if multiPart else '', 'direct': False, 'debridonly': False, 'checkquality': False})
 
             return sources
         except:
@@ -135,7 +142,7 @@ class source:
                 return url
             url, id, controlId, movieSearch = url
 
-            content = self.scraper.get(url).content
+            content = client.request(url)
             token = re.findall("_token':'(.*?)'", content)[0]
 
             params = {
@@ -145,7 +152,7 @@ class source:
             }
 
             link = urlparse.urljoin(self.base_link, self.link_url_movie if movieSearch else self.link_url)
-            result = self.scraper.post(link, data=params).content
+            result = client.request(link, post=params)
             if 'false' in result:
                 return
             else:
@@ -160,7 +167,7 @@ class source:
 
             query = urlparse.urljoin(self.base_link, self.search_link if movieSearch else '/')
 
-            content = self.scraper.get(query).content
+            content = client.request(query)
 
             seriesList = dom_parser.parse_dom(content, 'div', attrs={'class': 'seriesList'})
             seriesList = dom_parser.parse_dom(seriesList, 'a')
@@ -170,9 +177,7 @@ class source:
 
             if len(seriesList) > 0:
                 return seriesList[0][1]
-
             return
-
 
         except:
             try:

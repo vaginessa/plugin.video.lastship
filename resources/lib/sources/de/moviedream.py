@@ -32,7 +32,7 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['de']
-        self.domains = ['streamdream.ws']
+        self.domains = ['moviedream.ws']
         self.base_link = 'https://moviedream.ws'
         self.search_link = '/searchy.php?ser=%s'
         self.hoster_link = '/episodeholen3.php'

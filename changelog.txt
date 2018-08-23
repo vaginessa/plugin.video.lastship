@@ -6,6 +6,7 @@
 - Update sources.py (foxx.to Resolver Fix)
 - Add alleserien.com
 - Add Kino.cx
+- streamdream domain auf moviedream.
 
 [B]3.0.1[/B]
   10.08.2018

@@ -112,7 +112,7 @@ class source:
                 u = dict([(x, u[x][0]) if u[x] else (x, '') for x in u])
                 for x in range(0, int(mirrors)):
                     tempLink = self.mirror_link % (u['id'], u['Hoster'], x + 1)
-                    if season and episode: url += "&Season=%s&Episode=%s" % (season, episode)
+                    if season and episode: tempLink += "&Season=%s&Episode=%s" % (season, episode)
                     try: sources.append({'source': hoster, 'quality': 'SD', 'language': 'de', 'url': tempLink, 'direct': False, 'debridonly': False})
                     except: pass
 

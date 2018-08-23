@@ -4,7 +4,7 @@
 FAQ und Hilfe bekommt Ihr in unserem Forum: http://lastship.square7.ch/home
 Unser Chatroom: https://gitter.im/Lastship_Chat/Lobby
 
-Die Gründer und Entwickler von Lastship sind auch nur in unserem Lastship Forum anzutreffen
+Die Gründer und auch die Entwickler von Lastship sind nur in unserem Lastship Forum anzutreffen
 
 [B]INFO Indexseiten:[/B]
 Für die Seite Serienstream ist ein Benutzerkonto auf der jeweiligen Betreiberseite erforderlich (kann auch Wegwerf E-Mailadresse sein)
@@ -19,20 +19,22 @@ Da die Server von HDFilme.tv sehr lahm sind, kann es sein, dass die Seite nicht 
 VodHD wurde umgestellt und umbenannt auf Emby. ALLE User müssen Ihre Benutzerdaten NEU in Lastship eintragen um VodHD Dienste weiterhin nutzen zu können
 INFO's dazu stehen in der FAQ
 
-20.07.2018
-Das neue Forum ist Online
-
-20.07.2018
-Lastship wurde jetzt mit dem Update 3.0.0 umgestellt, zurück auf Ursprung, auf nur noch ein Module: plugin.video.lastship
-
-Ihr müsst nichts machen, Aktualisierung erfolgte mit dem Update, wenn Ihr das hier lesen könnt
-
-Das script.module.lastship kann jetzt gelöscht werden, muss aber nicht
-Zu finden ist das script.module.lastship hier: ...kodi/addons/script.module.lastship
-
 [COLOR orange]-------------------------------------------------------------------------------------------------------[/COLOR]
 
 [B][COLOR lime]Changelog plugin.video.lastship[/COLOR][/B]
+
+[B]3.0.2[/B]
+  25.08.2018
+- Fix HDFilme
+- Update kinox (Fix Serien Links)
+- Update foxx (Fix Serien)
+- Update Moovie (es werden nun auch Serien gefunden)
+- Update library.py (Fault Logging entfernt)
+- Update sources.py (foxx.to Resolver Fix)
+- Add Alleserien.com
+- Add Kino.cx
+- Add Feedme Scraper
+- Streamdream Anpassung auf Moviedream.ws
 
 [B]3.0.1[/B]
   10.08.2018

@@ -3,6 +3,7 @@
 - Fix kinox
 - Update library.py (Fault Logging entfernt)
 - Update sources.py (foxx.to Resolver Fix)
+- Add alleserien.
 
 [B]3.0.1[/B]
   10.08.2018

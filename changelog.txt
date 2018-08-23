@@ -1,12 +1,14 @@
-[B]3.0.2~nightly[/B]
+[B]3.0.2[/B]
 - Fix HDFilme
-- Fix kinoxkinox
-- Update foxx
+- Update kinox (Fix Serien Links)
+- Update foxx (Fix Serien)
+- Update Moovie (es werden nun auch Serien gefunden)
 - Update library.py (Fault Logging entfernt)
 - Update sources.py (foxx.to Resolver Fix)
-- Add alleserien.com
+- Add Alleserien.com
 - Add Kino.cx
-- streamdream domain auf moviedream.
+- Add Feedme Scraper
+- Streamdream Anpassung auf Moviedream.ws
 
 [B]3.0.1[/B]
   10.08.2018

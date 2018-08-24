@@ -23,8 +23,12 @@ INFO's dazu stehen in der FAQ
 
 [B][COLOR lime]Changelog plugin.video.lastship[/COLOR][/B]
 
+[B]3.0.2.1[/B]
+  24.08.2018
+- Bugfix und Update moovie
+
 [B]3.0.2[/B]
-  25.08.2018
+  23.08.2018
 - Fix HDFilme
 - Update kinox (Fix Serien Links)
 - Update foxx (Fix Serien)

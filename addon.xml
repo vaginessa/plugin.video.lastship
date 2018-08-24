@@ -30,7 +30,7 @@
     			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
 		<news>
-- Bugfix und Update moovie
+	- Bugfix und Update moovie
 		</news>
 	</extension>
 </addon>

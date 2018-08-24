@@ -1,3 +1,6 @@
+[B]3.0.2.1~nightly[/B]
+- Bugfix und Update moovie
+
 [B]3.0.2[/B]
 - Fix HDFilme
 - Update kinox (Fix Serien Links)

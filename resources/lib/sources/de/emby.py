@@ -56,7 +56,7 @@ class source:
             itemid=[]
 
             for i in resp['SearchHints']:
-                print "print emby seatch hints ItemId's",i['ItemId']
+                #print "print emby seatch hints ItemId's",i['ItemId']
 
                 ## https://github.com/MediaBrowser/Emby/wiki/Item-Information ##
                 #  When retrieving a single item, the entire object is returned. When querying for items, the return data will be stripped to include only a minimal amount of information.
@@ -75,20 +75,15 @@ class source:
 
                 resp = json.loads(r.data)
 
-                print "print emby request item status und content",r.status,type(r.data),r.data
-                print "print emby search content json tree for ProviderID",json.dumps(resp, indent=4)
 
                 ## static Items field [0] as we only pull 1 item. Alternatively we could pull all items from /Search/Hints but no advantage seen ##
 
-                print "print emby Item IMDB",resp['Items'][0]['ProviderIds']['Imdb']                
-                print "print emby Item Id",resp['Items'][0]['Id']
-                print "print emby Container",resp['Items'][0]['Container']
-                print "print emby MediaSourceId",resp['Items'][0]['MediaSources'][0]['Id']
+
 
                 ## compare each item vs. imdb, multiple recors possible due to 1080p and 4K ##                
                 
                 if str(resp['Items'][0]['ProviderIds']['Imdb'])== imdb:
-                        print "print Emby WE HAVE A MOVIE MATCH"
+                        #print "print Emby WE HAVE A MOVIE MATCH"
                         itemid.append(str(i['ItemId']))
 
                 ## return itemid as a list of emby items ##      
@@ -104,7 +99,7 @@ class source:
 
 
             for i in resp['SearchHints']:
-                print "print emby seatch hints ItemId's",i['ItemId']
+                #print "print emby seatch hints ItemId's",i['ItemId']
 
                 ## https://github.com/MediaBrowser/Emby/wiki/Item-Information ##
                 #  When retrieving a single item, the entire object is returned. When querying for items, the return data will be stripped to include only a minimal amount of information.
@@ -122,11 +117,8 @@ class source:
 
                 resp_imdb = json.loads(r.data)
 
-                print "print emby request TVSHOW SEASON item status und content",r.status,type(r.data),r.data
-                print "print emby search content json tree for ProviderID",resp_imdb['Items'][0]['ProviderIds']['Imdb'],json.dumps(resp_imdb, indent=4),
-
                 if resp_imdb['Items'][0]['ProviderIds']['Imdb'] == imdb:
-                    print "print emby, we have a TVSHOW MATCH!"
+                    #print "print emby, we have a TVSHOW MATCH!"
                     season_itemid=str(i['ItemId'])
                     break
 
@@ -155,18 +147,14 @@ class source:
 
             resp = json.loads(r.data)  
 
-            print "print emby request TVSHOW Episode item status und content",r.status,type(r.data),r.data
-
-
+          
 
             for i in resp['Items']:
-                print "print emby search episode ItemId's",i['ParentIndexNumber'],i['IndexNumber'],i['Id']
+                
 
                 if str(i['ParentIndexNumber']) == season and str(i['IndexNumber']) == episode:
                     itemid_liste.append(str(i['Id']))
                     break
-
-            print "print emby request TVSHOW Episode ID",itemid_liste
 
 
 
@@ -181,11 +169,11 @@ class source:
             if not itemid_liste:
                 return sources
 
-            print "print sources url",itemid_liste
+            
             return_url={}
              ## Last Call to get ItemProperties for Playback ##
             for itemid in itemid_liste:
-                print "print emby sources loop itemid",itemid
+                #print "print emby sources loop itemid",itemid
                 url = self.server+"/emby/Users/"+self.userid+"/items?Ids="+itemid+"&Fields=EpisodeCount,SeasonCount,MediaStreams,MediaSources,Overview&format=json"
 
                 http = urllib3.PoolManager()
@@ -198,10 +186,7 @@ class source:
                     
                 resp = json.loads(r.data)
 
-                print "print emby episodes  status und content",r.status,type(r.data),r.data
-                print "print emby search content json tree for ProviderID",json.dumps(resp, indent=4)
-
-
+        
                  ## Extended Info on Emby Streams, Experimental at this stage ##
                 info = ""
 
@@ -278,10 +263,7 @@ class source:
             r.release_conn()               
             resp = json.loads(r.data)
 
-            print "print emby __authenticate request status und content",r.status,type(r.data),r.data
-            print "print emby access-token",resp['AccessToken']
-            print "print emby ServerUserId",resp['User']['ServerId']
-            print "print emby UserId",resp['User']['Id']
+
 
             ## Set UserId, AccessToken(Api Key) & ServerID, header_postauth
                         
@@ -299,19 +281,16 @@ class source:
     def __search(self,title,searchtype):
         try:
 
-            print "print emby __search type& titel",self,searchtype,type(title),title
+
             title=re.sub(r"\([0-9]+\)","",title )
 
             self.__authenticate()
-            print "print emby __search after auth",self.userid,self.token,self.serverid
 
             ## create search url, encode whitespaces ##
             query =urllib.quote(title)
 
             url = self.server+"/emby/Search/Hints?searchTerm="+query+"&UserId="+self.userid+"&Limit=10&IncludeItemTypes="+searchtype+"&ExcludeItemTypes=LiveTvProgram&IncludePeople=false&IncludeMedia=true&IncludeGenres=false&IncludeStudios=false&IncludeArtists=false"
                         
-            print "print emby search url",type(url),url
-
 
             ### urllib3 Search Request ###
             http = urllib3.PoolManager()           
@@ -323,9 +302,6 @@ class source:
 
             resp = json.loads(r.data)
 
-            print "print emby search status und content",r.status,type(r.data),r.data        
-            print "print emby search content json tree",json.dumps(resp, indent=4)
-            print "print emby look for empty result", resp['TotalRecordCount']
 
             if int(resp['TotalRecordCount']) == 0:
                 return

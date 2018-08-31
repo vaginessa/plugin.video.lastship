@@ -154,7 +154,7 @@ class sources:
                 syssource = urllib.quote_plus(json.dumps([items[i]]))
 
                 sysurl = '%s?action=playItem&title=%s&source=%s' % (sysaddon, systitle, syssource)
-
+                
                 cm = []
 
                 if downloads == True:
@@ -170,9 +170,21 @@ class sources:
                 item.addStreamInfo('video', video_streaminfo)
 
                 item.addContextMenuItems(cm)
-                item.setInfo(type='Video', infoLabels = meta)
-
+                item.setInfo(type='Video', infoLabels= meta)
+                ## Amazon Scraper Details ##
+                if "AMAZON" in label:
+                    item.setProperty('IsPlayable','true')
+                    aid=re.findall(r'(?<=amazon.de)..........', sysurl)
+                    #aid=re.findall(r'/.de(.*?)/%', sysurl)
+                    print "print LS source control.addItem AMAZON ID ",aid
+                    sysurl='plugin://plugin.video.amazon-test/?mode=PlayVideo&asin=' + str(aid[0])
+                    
+                    print "print LS source item Amazon true",sysurl
+                    
                 control.addItem(handle=syshandle, url=sysurl, listitem=item, isFolder=False)
+                
+                control.directory(handle=syshandle, updateListing=False)
+                
             except:
                 pass
 
@@ -884,7 +896,7 @@ class sources:
             else: self.sources[i]['label'] = label.upper()
 
             ## EMBY shown as premium link ##
-            if self.sources[i]['provider']=="emby":
+            if self.sources[i]['provider']=="emby" or self.sources[i]['provider']=="amazon":
                 if not prem_identify == 'nocolor':
                     self.sources[i]['label'] = ('[COLOR %s]' % (prem_identify)) + label.upper() + '[/COLOR]'
             

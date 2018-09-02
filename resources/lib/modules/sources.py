@@ -182,9 +182,6 @@ class sources:
                     print "print LS source item Amazon true",sysurl
                     
                 control.addItem(handle=syshandle, url=sysurl, listitem=item, isFolder=False)
-                
-                control.directory(handle=syshandle, updateListing=False)
-                
             except:
                 pass
 

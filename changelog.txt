@@ -3,6 +3,7 @@
 - Amazon suche gefixt und voll kompatibel zu Amazon VOD auf allen Systemen
 - Amazon nun als Premium gekennzeichnet, immer on Top bei den Suchergebnissen (source.py)
 - Fix HDFilme (Fix Serien)
+- Fix Cinemaxx (Fix Serien und Suche)
 
 [B]3.0.2.1[/B]
   24.08.2018

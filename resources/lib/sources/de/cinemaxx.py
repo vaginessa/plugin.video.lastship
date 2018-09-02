@@ -41,7 +41,7 @@ class source:
         try:
             if not url:
                 return
-            return [episode, url]
+            return [season, episode, url]
         except:
             return
 
@@ -51,21 +51,21 @@ class source:
             if not url:
                 return sources
             episode = None
+            season = None
             if isinstance(url, list):
-                episode, url = url
+                season, episode, url = url
             url = urlparse.urljoin(self.base_link, url)
-
+            
             content = client.request(url)
             link = dom_parser.parse_dom(content, 'div', attrs={'id': 'full-video'})
-            link = dom_parser.parse_dom(link, 'iframe')
-
-            if len(link) > 0:
-                if episode:
-                    links = hdgo.getPlaylistLinks(link[0].attrs['src'])
-                    link = links[int(episode)-1]
-                    sources = hdgo.getStreams(link, sources)
-                else:
-                    sources = hdgo.getStreams(link[0].attrs['src'], sources)
+            if season:
+                link = re.findall("vk.show\(\d+,(.*?)\)", link[0].content)[0]
+                link = re.findall("\[(.*?)\]", link)[int(season)-1]
+                link = re.findall("'(.*?)'", link)
+                sources = hdgo.getStreams(link[int(episode)-1], sources)
+            else:
+                link = dom_parser.parse_dom(link, 'iframe')
+                sources = hdgo.getStreams(link[0].attrs['src'], sources)
 
             if len(sources) == 0:
                 raise Exception()
@@ -98,7 +98,7 @@ class source:
                 links = dom_parser.parse_dom(result, 'div', attrs={'class': 'shortstory-in'})
                 links = [dom_parser.parse_dom(i, 'a')[0] for i in links]
                 links = [(i.attrs['href'], i.attrs['title']) for i in links]
-                links = [i[0] for i in links if cleantitle.get(i[1]) in t]
+                links = [i[0] for i in links if any(a in cleantitle.get(i[1]) for a in t)]
 
                 if len(links) > 0:
                     return source_utils.strip_domain(links[0])

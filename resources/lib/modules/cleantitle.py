@@ -22,15 +22,26 @@ import re
 import unicodedata
 
 
+def replaceUmlaute(title):
+    return title.replace("Ä", "Ae").replace("Ö", "Oe").replace("Ü", "Ue").replace("ä", "ae").replace("ö", "oe").replace("ü", "ue").replace("ß", "ss")
+
+
 def get(title):
     if title is None: return
     try:
         title = title.encode('utf-8')
     except:
+        try:
+            import sys
+            reload(sys)
+            sys.setdefaultencoding('utf8')
+        except:
+            pass
         pass
     title = re.sub('&#(\d+);', '', title)
     title = re.sub('(&#[0-9]+)([^;^0-9]+)', '\\1;\\2', title)
     title = title.replace('&quot;', '\"').replace('&amp;', '&')
+    title = replaceUmlaute(title)
     title = normalize(re.sub('\n|([[].+?[]])|([(].+?[)])|\s(vs|v[.])\s|(:|;|-|–|"|,|\'|\_|\.|\?)|\s', '', title)).lower()
     return title
 

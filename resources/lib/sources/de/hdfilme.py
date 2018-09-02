@@ -58,7 +58,7 @@ class source:
             if not url and tvshowtitle != localtvshowtitle: url = self.__search([tvshowtitle] + aliases, data['year'], season)
             if not url: return
 
-            r = client.request(urlparse.urljoin(self.base_link, url, timeout='40'))
+            r = client.request(urlparse.urljoin(self.base_link, url), timeout='40')
             r = dom_parser.parse_dom(r, 'ul', attrs={'class': ['list-inline', 'list-film']})
             r = dom_parser.parse_dom(r, 'li')
             r = dom_parser.parse_dom(r, 'a', req='href')
@@ -139,7 +139,7 @@ class source:
             r = [(i[0], i[3][0][0] if len(i[3]) > 0 else i[1], i[2], i[3][0][1] if len(i[3]) > 0 else '0') for i in r]
             r = [(i[0], i[1].replace(' hd', ''), i[2], '1' if int(season) > 0 and i[3] == '0' else i[3]) for i in r]
             r = sorted(r, key=lambda i: int(i[2]), reverse=True)  # with year > no year
-            r = [i[0]for i in r if cleantitle.get(i[1]) in t and i[2] in y and int(i[3]) == int(season)]
+            r = [i[0]for i in r if any(a in cleantitle.get(i[1]) for a in t) and i[2] in y and int(i[3]) == int(season)]
             if len(r) > 0:
                 r = r[0]
             else:

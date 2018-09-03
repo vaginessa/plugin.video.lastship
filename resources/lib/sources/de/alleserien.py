@@ -30,6 +30,7 @@ from resources.lib.modules import client
 from resources.lib.modules import dom_parser
 from resources.lib.modules import source_faultlog
 from resources.lib.modules import source_utils
+from resources.lib.modules import duckduckgo
 
 
 class source:
@@ -44,18 +45,13 @@ class source:
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
-            url = self.__search([localtitle] + source_utils.aliases_to_array(aliases), True)
-            if not url and title != localtitle: url = self.__search([title] + source_utils.aliases_to_array(aliases), True)
-            return url
+            return duckduckgo.search([localtitle] + source_utils.aliases_to_array(aliases), year, self.domains[0], "(.*)\sHD\sStream")
         except:
             return ""
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
-            url = self.__search([localtvshowtitle] + source_utils.aliases_to_array(aliases))
-            if not url and tvshowtitle != localtvshowtitle: url = self.__search(
-                [tvshowtitle] + source_utils.aliases_to_array(aliases))
-            return url
+            return duckduckgo.search([localtvshowtitle] + source_utils.aliases_to_array(aliases), year, self.domains[0], "(.*)\sStaffel")
         except:
             return
 
@@ -67,26 +63,19 @@ class source:
 
             r = client.request(url)
 
-            def getLinks(content, searchSeason=False):
-                links = dom_parser.parse_dom(content, 'div', attrs={'class': 'hosterSiteDirectNav'})
-                links = dom_parser.parse_dom(links, 'a')
-                if searchSeason:
-                    return [i.attrs['href'] for i in links if i.attrs['title'].lower() == 'staffel %s' % season]
-                else:
-                    return [i.attrs['href'] for i in links if
-                            i.attrs['title'].lower().strip() == 'staffel %s folge %s' % (season, episode)]
+            seasons = dom_parser.parse_dom(r, "div", attrs={"class": "section-watch-season"})
+            seasons = seasons[len(seasons)-int(season)]
+            episodes = dom_parser.parse_dom(seasons, "tr")
+            episodes = [(dom_parser.parse_dom(i, "th")[0].content, i.attrs["onclick"]) for i in episodes if "onclick" in i.attrs]
+            episodes = [re.findall("'(.*?)'", i[1])[0] for i in episodes if i[0] == episode][0]
 
-            seasonLinks = getLinks(r, True)
-
-            if len(seasonLinks) > 0:
-                r = client.request(seasonLinks[0])
-                episodeLink = getLinks(r)
-                if len(episodeLink) > 0:
-                    return source_utils.strip_domain(episodeLink[0])
-
-            return
+            return source_utils.strip_domain(episodes)
         except:
-            return
+            try:
+                source_faultlog.logFault(__name__, source_faultlog.tagSearch, title)
+            except:
+                return
+            return ""
 
     def sources(self, url, hostDict, hostprDict):
         sources = []
@@ -96,8 +85,8 @@ class source:
             url = urlparse.urljoin(self.base_link, url)
             content = client.request(url)
 
-            links = dom_parser.parse_dom(content, 'a', attrs={'class': 'PartChange'})
-            links = [(i.attrs['data-id'], i.attrs['data-controlid'], dom_parser.parse_dom(i, 'h4')[0].content) for i in
+            links = dom_parser.parse_dom(content, 'tr', attrs={'class': 'partItem'})
+            links = [(i.attrs['data-id'], i.attrs['data-controlid'], re.findall("(.*)\.png", i.content)[0].split("/")[-1]) for i in
                      links if 'data-id' in i[0]]
 
             temp = [i for i in links if i[2].lower() == 'vip']
@@ -118,11 +107,11 @@ class source:
                                 'direct': True, 'debridonly': False, 'checkquality': False}) for i in result]
 
             for i in links:
-                multiPart = re.findall('(.*?)\sPart\s\d+', i[2])
+                multiPart = re.findall('(.*?)-part-\d+', i[2])
                 if(len(multiPart) > 0):
-                    links = [(i[0], i[1], i[2] + ' Part 1' if i[2] == multiPart[0] else i[2]) for i in links]
+                    links = [(i[0], i[1], i[2] + '-part-1' if i[2] == multiPart[0] else i[2]) for i in links]
 
-            links = [(i[0], i[1], re.findall('(.*?)\sPart\s\d+', i[2])[0] if len(re.findall('\d+', i[2])) > 0 else i[2], 'Multi-Part ' + re.findall('\d+', i[2])[0] if len(re.findall('\d+', i[2])) > 0 else None) for i in links]
+            links = [(i[0], i[1], re.findall('(.*?)-part-\d+', i[2])[0] if len(re.findall('\d+', i[2])) > 0 else i[2], 'Multi-Part ' + re.findall('\d+', i[2])[0] if len(re.findall('\d+', i[2])) > 0 else None) for i in links]
 
             for id, controlId, host, multiPart in links:
                 valid, hoster = source_utils.is_host_valid(host, hostDict)
@@ -132,7 +121,7 @@ class source:
                                 'info': multiPart if multiPart else '', 'direct': False, 'debridonly': False, 'checkquality': False})
 
             return sources
-        except:
+        except Exception as e:
             source_faultlog.logFault(__name__, source_faultlog.tagScrape)
             return sources
 
@@ -160,28 +149,3 @@ class source:
         except:
             source_faultlog.logFault(__name__, source_faultlog.tagResolve)
             return
-
-    def __search(self, titles, movieSearch = False):
-        try:
-            t = [cleantitle.get(i) for i in set(titles) if i]
-
-            query = urlparse.urljoin(self.base_link, self.search_link if movieSearch else '/')
-
-            content = client.request(query)
-
-            seriesList = dom_parser.parse_dom(content, 'div', attrs={'class': 'seriesList'})
-            seriesList = dom_parser.parse_dom(seriesList, 'a')
-            seriesList = [(i.content, i.attrs['href']) for i in seriesList]
-
-            seriesList = [i for i in seriesList if any(a in cleantitle.get(i[0]) for a in t)]
-
-            if len(seriesList) > 0:
-                return seriesList[0][1]
-            return
-
-        except:
-            try:
-                source_faultlog.logFault(__name__, source_faultlog.tagSearch, titles[0])
-            except:
-                return
-            return ""

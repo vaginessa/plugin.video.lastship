@@ -171,15 +171,22 @@ class sources:
 
                 item.addContextMenuItems(cm)
                 item.setInfo(type='Video', infoLabels= meta)
+                
                 ## Amazon Scraper Details ##
                 if "AMAZON" in label:
                     item.setProperty('IsPlayable','true')
-                    aid=re.findall(r'(?<=amazon.de)..........', sysurl)
-                    #aid=re.findall(r'/.de(.*?)/%', sysurl)
-                    print "print LS source control.addItem AMAZON ID ",aid
-                    sysurl='plugin://plugin.video.amazon-test/?mode=PlayVideo&asin=' + str(aid[0])
-                    
-                    print "print LS source item Amazon true",sysurl
+                    aid=re.findall(r'amazonid_start-(.*?)-amazonid_end', sysurl)                    
+                    sysurl='plugin://plugin.video.amazon-test/?mode=PlayVideo&asin=' + aid[0]
+                   
+                ## Amazon Scraper Details ##
+                if "NETFLIX" in label:
+                    item.setProperty('IsPlayable','true')
+                    aid=re.findall(r'netflixid_start-(.*?)-netflixid_end', sysurl)
+                    sysurl='plugin://plugin.video.netflix/?action=play_video&video_id=' + aid[0]
+                    sysurl=urllib.unquote(sysurl).decode('utf8')         
+                
+
+          
                     
                 control.addItem(handle=syshandle, url=sysurl, listitem=item, isFolder=False)
             except:
@@ -893,7 +900,7 @@ class sources:
             else: self.sources[i]['label'] = label.upper()
 
             ## EMBY shown as premium link ##
-            if self.sources[i]['provider']=="emby" or self.sources[i]['provider']=="amazon":
+            if self.sources[i]['provider']=="emby" or self.sources[i]['provider']=="amazon" or self.sources[i]['provider']=="netflix":
                 if not prem_identify == 'nocolor':
                     self.sources[i]['label'] = ('[COLOR %s]' % (prem_identify)) + label.upper() + '[/COLOR]'
             

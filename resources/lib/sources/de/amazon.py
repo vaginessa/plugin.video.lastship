@@ -1,14 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import re
-import urllib
-import urlparse
 import os
-import sqlite3
 import xbmc
 
 import requests
-import urllib2
 import simplejson
 
 import difflib
@@ -61,13 +57,18 @@ class source:
         for i in data['message']['body']['titles']:
             
             ## Titel abgleich ##
-            
-            if localtitle in cleantitle.getsearch(str(i['ancestorTitles'][0]['title'])):
+            try:
+                ## try-block weil ChildTitles manchmal leeres ergebnis liefern
+                if localtitle in cleantitle.getsearch(str(i['ancestorTitles'][0]['title'])):
                 
-                if str(season) == str(i['number']):
-                    easin=str(i['childTitles'][0]['feedUrl'])
-                    
+                    if str(season) == str(i['number']):
+                        easin=str(i['childTitles'][0]['feedUrl'])                    
                     break;
+            except:
+                continue
+
+            
+            i
                         
 
         ## Season abgleich ##
@@ -96,22 +97,19 @@ class source:
 
     def sources(self, url, hostDict, hostprDict):
         sources = []
-        
+        print "print AP sources url",url
         try:
             if not url:
                 return sources
 
             
-            sources.append({'source': 'Prime', 'quality': '1080p', 'language': 'de', 'url': BaseUrl+url, 'info': '', 'direct': True,'local': True, 'debridonly': False})
+            sources.append({'source': 'Prime', 'quality': '1080p', 'language': 'de', 'url': 'amazonid_start-'+url+'-amazonid_end', 'info': '', 'direct': True,'local': True, 'debridonly': False})
            
             return sources
         except:
             return sources
 
-    def resolve(self, url):
-        
-        url = self.__amazon(url)
-
+    def resolve(self, url):        
         return url
 
     def __search(self, localtitle,year):
@@ -164,16 +162,4 @@ class source:
 
     
 
-    def __amazon(self, url):
-        
-        url=url.decode('utf-8')
-        
-        url=url.replace("https://www.amazon.de","")
-        
-        #xbmc.executebuiltin('StartAndroidActivity("%s", "%s", "", "%s")' % (pkg, act, url))
-        # return dummy to avoid skipping to next hoster
-        url="plugin://plugin.video.amazon-test/?mode=PlayVideo&asin=%s"+url
-        #url = 'plugin://plugin.video.amazon-test/?mode=PlayVideo&asin=B071FQY73H'
-        
-        return url #"https://www.amazon.de"
         

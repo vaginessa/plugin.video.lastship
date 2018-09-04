@@ -2,6 +2,7 @@
 - Emby Debug Logging entfernt
 - Amazon suche gefixt und voll kompatibel zu Amazon VOD auf allen Systemen
 - Amazon nun als Premium gekennzeichnet, immer on Top bei den Suchergebnissen (source.py)
+- Fix Amazon Serien und Film Suche
 - Fix HDFilme (Fix Serien)
 - Fix Cinemaxx (Fix Serien und Suche)
 - Fix Alleserien (and add duckduckgo search)

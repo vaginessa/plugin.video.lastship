@@ -22,9 +22,10 @@ import re
 import urllib
 import urlparse
 
+from resources.lib.modules import cfscrape
+from resources.lib.modules.recaptcha import recaptcha_app
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
-from resources.lib.modules import control
 from resources.lib.modules import source_utils
 from resources.lib.modules import dom_parser
 from resources.lib.modules import source_faultlog
@@ -33,12 +34,15 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['de']
-        self.domains = ['kinow.to']
-        self.base_link = 'http://streamworld.to'
+        self.domains = ['streamworld.cc']
+        self.base_link = 'http://streamworld.cc'
         self.search_link = '/suche.html'
 
         self.year_link = '/jahr/%d.html'
         self.type_link = '/%s.html'
+        self.scraper = cfscrape.create_scraper()
+
+        self.recapInfo = ""
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
@@ -67,7 +71,7 @@ class source:
                         return
 
                     _url = urlparse.urljoin(self.base_link, _url)
-                    r = client.request(_url)
+                    r = self.scraper.get(_url).content
 
                     r = re.findall('<h4>%s[^>]*</h4>(.*?)<div' % content, r, re.DOTALL | re.IGNORECASE)[0]
                     r = re.compile('(<a.+?/a>)', re.DOTALL).findall(''.join(r))
@@ -89,12 +93,11 @@ class source:
 
     def sources(self, url, hostDict, hostprDict):
         sources = []
-
         try:
             if not url:
                 return sources
 
-            r = client.request(urlparse.urljoin(self.base_link, url))
+            r = self.scraper.get(urlparse.urljoin(self.base_link, url)).content
 
             links = dom_parser.parse_dom(r, 'table')
             links = [i.content for i in links if dom_parser.parse_dom(i, 'span', attrs={'class': re.compile('linkSearch(-a)?')})]
@@ -107,35 +110,32 @@ class source:
             for link in links:
                 if '/englisch/' in link: continue
 
-                if link != url: r = client.request(urlparse.urljoin(self.base_link, link))
-
-                quality = 'SD'
-                info = []
+                if link != url: r = self.scraper.get(urlparse.urljoin(self.base_link, link)).content
 
                 detail = dom_parser.parse_dom(r, 'th', attrs={'class': 'thlink'})
                 detail = [dom_parser.parse_dom(i, 'a', req='href') for i in detail]
                 detail = [(i[0].attrs['href'], i[0].content.replace('&#9654;', '').strip()) for i in detail if i]
 
-                if detail:
-                    quality, info = source_utils.get_release_quality(detail[0][1])
-                    r = client.request(urlparse.urljoin(self.base_link, detail[0][0]))
+                for release in detail:
+                    quality, info = source_utils.get_release_quality(release[1])
+                    r = client.request(urlparse.urljoin(self.base_link, release[0]))
 
-                r = dom_parser.parse_dom(r, 'table')
-                r = [dom_parser.parse_dom(i, 'a', req=['href', 'title']) for i in r if not dom_parser.parse_dom(i, 'table')]
-                r = [(l.attrs['href'], l.attrs['title']) for i in r for l in i if l.attrs['title']]
+                    r = dom_parser.parse_dom(r, 'table')
+                    r = [dom_parser.parse_dom(i, 'a', req=['href', 'title']) for i in r if not dom_parser.parse_dom(i, 'table')]
+                    r = [(l.attrs['href'], l.attrs['title']) for i in r for l in i if l.attrs['title']]
 
-                info = ' | '.join(info)
+                    info = ' | '.join(info)
 
-                for stream_link, hoster in r:
-                    valid, hoster = source_utils.is_host_valid(hoster, hostDict)
-                    if not valid: continue
+                    for stream_link, hoster in r:
+                        valid, hoster = source_utils.is_host_valid(hoster, hostDict)
+                        if not valid: continue
 
-                    direct = False
+                        direct = False
 
-                    if hoster.lower() == 'gvideo':
-                        direct = True
+                        if hoster.lower() == 'gvideo':
+                            direct = True
 
-                    sources.append({'source': hoster, 'quality': quality, 'language': 'de', 'url': stream_link, 'info': info, 'direct': direct, 'debridonly': False, 'checkquality': True})
+                        sources.append({'source': hoster, 'quality': quality, 'language': 'de', 'url': stream_link, 'info': info, 'direct': direct, 'debridonly': False, 'checkquality': True, 'captcha': True})
 
             if len(sources) == 0:
                 raise Exception()
@@ -147,16 +147,23 @@ class source:
     def resolve(self, url):
         try:
             url = urlparse.urljoin(self.base_link, url)
-            url = client.request(url, redirect=False, output='extended')
 
-            if url and url[2]['Location'].strip():
-                url = url[2]['Location']
+            recap = recaptcha_app.recaptchaApp()
+            key = recap.getSolutionWithDialog(url, "6LeERkUUAAAAAJH4Yqk-gQH1N6psg0KCuEq_Lkxf", self.recapInfo)
+            import pydevd
+            pydevd.settrace('localhost', port=12345, stdoutToServer=True, stderrToServer=True)
+            response = ""
+            if key != "":
+                response = self.scraper.post(url, data={'g-recaptcha-response':key}, allow_redirects=False)
+
+            if response and response.headers['Location'].strip():
+                url = response.headers['Location']
 
             if self.base_link not in url:
                 if 'google' in url:
                     return self.__google(url)
                 return url
-        except:
+        except Exception as e:
             source_faultlog.logFault(__name__,source_faultlog.tagResolve)
             return
 
@@ -164,22 +171,22 @@ class source:
         try:
             t = [cleantitle.get(i) for i in set(titles) if i]
 
-            c = client.request(urlparse.urljoin(self.base_link, self.year_link % int(year)), output='cookie')
+            c = client.request(self.base_link, output='cookie')
 
             p = urllib.urlencode({'search': cleantitle.query(titles[0])})
             c = client.request(urlparse.urljoin(self.base_link, self.search_link), cookie=c, post=p, output='cookie')
             r = client.request(urlparse.urljoin(self.base_link, self.type_link % content), cookie=c, post=p)
 
-            r = dom_parser.parse_dom(r, 'table', attrs={'width': '100%'})[0].content
+            r = dom_parser.parse_dom(r, 'table')[0].content
             r = dom_parser.parse_dom(r, 'tr')
             r = [(dom_parser.parse_dom(i.content, 'a')) for i in r if 'otherLittles' in i.content]
+            r = [(i[0].attrs["href"], i[0].content, i[1].content,) for i in r]
 
-            r = sorted(r, key=lambda i: int(i[1].content), reverse=True)  # with year > no year
+            r = sorted(r, key=lambda i: int(i[2]), reverse=True)  # with year > no year
 
-            links = [i[0].attrs['href'] for i in r if
-                     (cleantitle.get(i[0].content).partition('<')[0] in t) and i[1].content == year]
+            links = [i[0] for i in r if (cleantitle.get(i[1]).partition('<')[0] in t) and i[2] == year]
 
-            if len(r) > 0:
+            if len(links) > 0:
                 return source_utils.strip_domain(links[0])
             return ""
         except:
@@ -208,3 +215,6 @@ class source:
             return url
         except:
             return url
+
+    def setRecapInfo(self, info):
+        self.recapInfo = info

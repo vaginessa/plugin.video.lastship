@@ -60,8 +60,8 @@
     </category>
     <category label="32345">
         <setting id="provider.library" type="bool" label="32704" default="true" />
-	<setting id="provider.emby" type="bool" label="EMBY" default="false" />
-	<setting id="provider.feedme" type="bool" label="FEEDME (DB)" default="false" />
+        <setting id="provider.emby" type="bool" label="EMBY" default="false" />
+        <setting id="provider.feedme" type="bool" label="FEEDME (DB)" default="false" />
         <setting type="sep" />
         <setting label="Deutsch" type="lsep" />
         <setting id="provider.amazon" type="bool" label="AMAZON.DE" default="false" />
@@ -69,7 +69,7 @@
         <setting id="provider.animebase" type="bool" label="ANIMEBASE.NET" default="true" />
         <setting id="provider.animeloads" type="bool" label="ANIMELOADS.ORG" default="true" />
         <setting id="provider.cinemaxx" type="bool" label="CINEMAXX.CC" default="true" />
-	<setting id="provider.cinematrix" type="bool" label="CINEMATRIX.TO" default="true" />
+        <setting id="provider.cinematrix" type="bool" label="CINEMATRIX.TO" default="true" />
         <setting id="provider.ddl" type="bool" label="DDL.ME" default="true" />
         <setting id="provider.filmpalast" type="bool" label="FILMPALAST.TO" default="true" />
         <setting id="provider.horrorkino" type="bool" label="FLIMMERSTUBE.COM" default="true" />
@@ -79,9 +79,8 @@
         <setting id="provider.hdstreams" type="bool" label="HD-STREAMS.ORG" default="false" />
         <setting id="provider.iload" type="bool" label="ILOAD.TO" default="true" />
         <setting id="provider.kinoger" type="bool" label="KINOGER.COM" default="true" />
-        <setting id="provider.kinocx" type="bool" label="KINO.CX" default="true" />
+        <setting id="provider.kino-cx" type="bool" label="KINO.CX" default="true" />
         <setting id="provider.kinoking" type="bool" label="KINOKING.TO" default="true" />
-        <setting id="provider.kinow" type="bool" label="KINOW.TO" default="false" />
         <setting id="provider.kinox" type="bool" label="KINOX.TO" default="false" />
         <setting id="provider.moovie" type="bool" label="MOOVIE" default="true" />
         <setting id="provider.movie2k-sc" type="bool" label="MOVIE2K.SC" default="true" />
@@ -90,12 +89,13 @@
         <setting id="provider.movie4k-lt" type="bool" label="MOVIE4K.LT" default="true" />
         <setting id="provider.movie-gg" type="bool" label="MOVIE-GG" default="true" />
         <setting id="provider.movietown" type="bool" label="MOVIETOWN.ORG" default="true" />
-	<setting id="provider.netflix" type="bool" label="NETFLIX (Kodi18 Only)" default="false" />
+        <setting id="provider.netflix" type="bool" label="NETFLIX (Kodi18 Only)" default="false" />
         <setting id="provider.netzkino" type="bool" label="NETZKINO.DE" default="true" />
         <setting id="provider.proxer" type="bool" label="PROXER.ME" default="true" />
         <setting id="provider.serienstream" type="bool" label="SERIENSTREAM.TO" default="true" />
         <setting id="provider.moviedream" type="bool" label="MOVIEDREAM.WS" default="true" />
         <setting id="provider.streamit" type="bool" label="STREAMIT.WS" default="true" />
+        <setting id="provider.streamworld" type="bool" label="STREAMWORLD.TO" default="false" />
         <setting id="provider.szene-streamz" type="bool" label="SZENE-STREAMZ.COM" default="true" />
         <setting id="provider.tata" type="bool" label="TATA.TO" default="false" />
         <setting id="provider.view4u" type="bool" label="VIEW4U.CO" default="true" />        
@@ -134,9 +134,11 @@
         <setting id="emby.user" type="text" label="32303" default="" />
         <setting id="emby.pass" type="text" label="32307" option="hidden" default="" />
         <setting id="emby.serverip" type="ipaddress" label="32718" default="" />
-		<setting id="emby.port" type="number" label="32719" default="" />
-		<setting id="emby.name" type="text" label="32720" default="Server" />
-		
+        <setting id="emby.port" type="number" label="32719" default="" />
+        <setting id="emby.name" type="text" label="32720" default="Server" />
+        <setting type="sep" label="Recaptcha2"/>
+        <setting id="MyJDownloader.user" type="text" label="32304" default="" />
+        <setting id="MyJDownloader.pass" type="text" label="32307" default="" />
         <setting type="sep" />
     </category>
     <category label="32541">

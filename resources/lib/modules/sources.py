@@ -242,7 +242,6 @@ class sources:
             progressDialog.update(0)
 
             block = None
-
             for i in range(len(items)):
                 try:
                     try:
@@ -258,34 +257,22 @@ class sources:
 
                     offset = 60 * 2 if items[i].get('source') in self.hostcapDict else 0
 
-                    m = ''
-
-                    for x in range(3600):
+                    waiting_time = 30
+                    while waiting_time > 0:
                         try:
                             if xbmc.abortRequested == True: return sys.exit()
                             if progressDialog.iscanceled(): return progressDialog.close()
                         except:
                             pass
 
-                        k = control.condVisibility('Window.IsActive(virtualkeyboard)')
-                        if k: m += '1'; m = m[-1]
-                        if (w.is_alive() == False or x > 30 + offset) and not k: break
-                        k = control.condVisibility('Window.IsActive(yesnoDialog)')
-                        if k: m += '1'; m = m[-1]
-                        if (w.is_alive() == False or x > 30 + offset) and not k: break
-                        time.sleep(0.5)
-
-
-                    for x in range(30):
-                        try:
-                            if xbmc.abortRequested == True: return sys.exit()
-                            if progressDialog.iscanceled(): return progressDialog.close()
-                        except:
-                            pass
-
-                        if m == '': break
                         if w.is_alive() == False: break
                         time.sleep(0.5)
+
+                        waiting_time = waiting_time - 0.5
+                        if control.condVisibility('Window.IsActive(virtualkeyboard)') or \
+                                control.condVisibility('Window.IsActive(yesnoDialog)') or \
+                                control.condVisibility('Window.IsActive(PopupRecapInfoWindow)'):
+                            waiting_time = waiting_time + 0.5 #dont count down while dialog is presented
 
                     if w.is_alive() == True: block = items[i]['source']
 
@@ -924,6 +911,8 @@ class sources:
 
             provider = item['provider']
             call = [i[1] for i in self.sourceDict if i[0] == provider][0]
+            if 'captcha' in item and item['captcha']:
+                call.setRecapInfo(item['label'])
             url = call.resolve(url)
 
             if url == None or (not '://' in str(url) and not local): raise Exception()
@@ -1005,35 +994,22 @@ class sources:
                     except:
                         progressDialog.update(int((100 / float(len(items))) * i), str(header2), str(items[i]['label']))
 
-                    m = ''
-
-                    for x in range(3600):
+                    waiting_time = 30
+                    while waiting_time > 0:
                         try:
                             if xbmc.abortRequested == True: return sys.exit()
                             if progressDialog.iscanceled(): return progressDialog.close()
                         except:
                             pass
 
-                        k = control.condVisibility('Window.IsActive(virtualkeyboard)')
-                        if k: m += '1'; m = m[-1]
-                        if (w.is_alive() == False or x > 30) and not k: break
-                        k = control.condVisibility('Window.IsActive(yesnoDialog)')
-                        if k: m += '1'; m = m[-1]
-                        if (w.is_alive() == False or x > 30) and not k: break
-                        time.sleep(0.5)
-
-
-                    for x in range(30):
-                        try:
-                            if xbmc.abortRequested == True: return sys.exit()
-                            if progressDialog.iscanceled(): return progressDialog.close()
-                        except:
-                            pass
-
-                        if m == '': break
                         if w.is_alive() == False: break
                         time.sleep(0.5)
 
+                        waiting_time = waiting_time - 0.5
+                        if control.condVisibility('Window.IsActive(virtualkeyboard)') or \
+                                control.condVisibility('Window.IsActive(yesnoDialog)') or \
+                                control.condVisibility('Window.IsActive(PopupRecapInfoWindow)'):
+                            waiting_time = waiting_time + 0.5 #dont count down while dialog is presented
 
                     if w.is_alive() == True: block = items[i]['source']
 

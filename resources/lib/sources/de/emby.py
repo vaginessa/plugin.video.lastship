@@ -27,14 +27,14 @@ class source:
         ## Required Init ##
         self.priority = 1
         self.language = ['de']
-
+        
         ## User Specific ##
         self.name=control.setting('emby.name')
         self.user=control.setting('emby.user')
         self.password=control.setting('emby.pass')
         self.serverip=control.setting('emby.serverip')
         self.server_port=control.setting('emby.port')
-
+        
         self.server="http://"+self.serverip+":"+self.server_port
         self.userid=''
         self.token=''
@@ -42,9 +42,8 @@ class source:
 
         # 2 static heads, 1 pre-auth, 1 post-auth being set in def __self.auth..
         self.header_preauth={'Content-Type': 'application/json','Accept-Charset': 'UTF-8,*', 'X-Emby-Authorization': 'MediaBrowser Client="Kodi Lastship",Device="LAssthi",DeviceId="xxx",Version="1.0"', 'Accept-encoding': 'gzip', 'Authorization': 'MediaBrowser Client="Kodi Lasthip",Device="Lastship",DeviceId="xxx",Version="1.0.0"'}
-        self.header_postauth={}
-                
-        print "print user info", self.user,self.password,self.server
+        self.header_postauth={}                
+        
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
@@ -52,34 +51,32 @@ class source:
 
             if not resp:
                 resp=self.__search(title,"movie")
-
+                
             itemid=[]
-
+            
             for i in resp['SearchHints']:
                 #print "print emby seatch hints ItemId's",i['ItemId']
-
+                
                 ## https://github.com/MediaBrowser/Emby/wiki/Item-Information ##
                 #  When retrieving a single item, the entire object is returned. When querying for items, the return data will be stripped to include only a minimal amount of information.
                 #  When querying, you can configure the fields that are returned in the output.
                 ## End ##
                             
                 url = self.server+"/emby/Users/"+self.userid+"/items?Ids="+str(i['ItemId'])+"&Fields=EpisodeCount,SeasonCount,MediaStreams,MediaSources,Overview,ProviderIds&format=json"
-
+                
                 http = urllib3.PoolManager()
                 r = http.request(
                 'GET',
                 url,                
                 headers=self.header_postauth)
-
+                
                 r.release_conn()
-
+                
                 resp = json.loads(r.data)
 
-
                 ## static Items field [0] as we only pull 1 item. Alternatively we could pull all items from /Search/Hints but no advantage seen ##
-
-
-
+                
+               
                 ## compare each item vs. imdb, multiple recors possible due to 1080p and 4K ##                
                 
                 if str(resp['Items'][0]['ProviderIds']['Imdb'])== imdb:
@@ -87,8 +84,8 @@ class source:
                         itemid.append(str(i['ItemId']))
 
                 ## return itemid as a list of emby items ##      
-
-
+                        
+            
             return itemid
         except:
             return
@@ -96,26 +93,28 @@ class source:
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
             resp=self.__search(localtvshowtitle,"series")
-
-
+            
+           
             for i in resp['SearchHints']:
                 #print "print emby seatch hints ItemId's",i['ItemId']
-
+                
                 ## https://github.com/MediaBrowser/Emby/wiki/Item-Information ##
                 #  When retrieving a single item, the entire object is returned. When querying for items, the return data will be stripped to include only a minimal amount of information.
                 #  When querying, you can configure the fields that are returned in the output.
                 ## End ##
-
+                
                 url = self.server+"/emby/Users/"+self.userid+"/items?Ids="+str(i['ItemId'])+"&Fields=EpisodeCount,SeasonCount,MediaStreams,MediaSources,Overview,ProviderIds&format=json"
-
+                
                 http = urllib3.PoolManager()
                 r = http.request(
                 'GET',
                 url,                
                 headers=self.header_postauth)
                 r.release_conn()
-
+                
                 resp_imdb = json.loads(r.data)
+
+                
 
                 if resp_imdb['Items'][0]['ProviderIds']['Imdb'] == imdb:
                     #print "print emby, we have a TVSHOW MATCH!"
@@ -127,7 +126,7 @@ class source:
             return season_itemid
         except:
             return
-
+        
     def episode(self, season_itemid, imdb, tvdb, title, premiered, season, episode):
         try:
             if not self.token:
@@ -144,49 +143,50 @@ class source:
                 headers=self.header_postauth)
 
             r.release_conn()
-
+            
             resp = json.loads(r.data)  
 
-          
-
+                  
+            
             for i in resp['Items']:
+                #print "print emby search episode ItemId's",i['ParentIndexNumber'],i['IndexNumber'],i['Id']
                 
-
                 if str(i['ParentIndexNumber']) == season and str(i['IndexNumber']) == episode:
                     itemid_liste.append(str(i['Id']))
                     break
 
-
-
+          
+           
+            
             return itemid_liste
         except:
             return
-
+        
     def sources(self, itemid_liste, hostDict, hostprDict):
         sources = []
-
+        
         try:
             if not itemid_liste:
                 return sources
 
-            
+            print "print sources url",itemid_liste
             return_url={}
              ## Last Call to get ItemProperties for Playback ##
             for itemid in itemid_liste:
                 #print "print emby sources loop itemid",itemid
                 url = self.server+"/emby/Users/"+self.userid+"/items?Ids="+itemid+"&Fields=EpisodeCount,SeasonCount,MediaStreams,MediaSources,Overview&format=json"
-
+                    
                 http = urllib3.PoolManager()
                 r = http.request(
                     'GET',
                     url,                
                     headers=self.header_postauth)
-
+                    
                 r.release_conn()
                     
                 resp = json.loads(r.data)
 
-        
+             
                  ## Extended Info on Emby Streams, Experimental at this stage ##
                 info = ""
 
@@ -195,14 +195,14 @@ class source:
                     c1=resp['Items'][0]['MediaSources'][0]['Container']
                     c2=resp['Items'][0]['MediaSources'][0]['MediaStreams'][0]['Codec']
                     c3=""
-
+                    
                     for index,item in enumerate(resp['Items'][0]['MediaSources'][0]['MediaStreams']):
                         if index == 0:
                             continue                        
                         c3+="| "+item['DisplayTitle']
                         if index == 2:
                             break                                      
-
+                    
                     info = c1+" ("+c2+") | "+c3   
                     info = re.sub('Default','',info)
                     info = re.sub('Ger','',info)
@@ -215,7 +215,7 @@ class source:
 
                 ## Extended Info on Emby End
 
-
+                
 
                 if int(resp['Items'][0]['MediaSources'][0]['MediaStreams'][0]['Width']) > 1920:
                     return_url['4K']=self.server+"/emby/Videos/"+str(resp['Items'][0]['Id'])+"/stream?static=true&PlaySessionId=1LIEC3&MediaSourceId="+str(resp['Items'][0]['MediaSources'][0]['Id'])+"&api_key="+self.token
@@ -230,9 +230,7 @@ class source:
 
             for quality, stream in return_url.items():            
                 sources.append({'source': 'VODHD', 'quality': quality, 'language': 'de', 'url': stream,'info': info, 'local': True, 'direct': True, 'debridonly': False})
-
-            if len(sources) == 0:
-                raise Exception()
+                
             return sources
         except:
             return sources
@@ -241,7 +239,7 @@ class source:
         try:
 
             if url:
-
+                
                 return url
         except:
             return
@@ -252,7 +250,7 @@ class source:
             # Body & Header for authentification call #
             messageData = json.dumps({'username':self.user, 'pw':self.password})            
             url = self.server+'/emby/Users/AuthenticateByName?format=json'
-
+            
             ### urllib3 Authentication request ##            
             http = urllib3.PoolManager()           
             r = http.request(
@@ -261,9 +259,8 @@ class source:
                 body=messageData,
                 headers=self.header_preauth)
             r.release_conn()               
-            resp = json.loads(r.data)
-
-
+            resp = json.loads(r.data)           
+       
 
             ## Set UserId, AccessToken(Api Key) & ServerID, header_postauth
                         
@@ -271,27 +268,30 @@ class source:
             self.token=str(resp['AccessToken'])
             self.serverid=str(resp['User']['ServerId'])
             self.header_postauth={'Content-Type': 'application/x-www-form-urlencoded','Accept-Charset': 'UTF-8,*', 'X-Emby-Authorization': 'MediaBrowser UserId='+self.userid+',Client="Kodi Lastship",Device="Lastship",DeviceId="xxx",Version="1.0"', 'Accept-encoding': 'gzip', 'Authorization': 'MediaBrowser UserId='+self.userid+',Client="Kodi Lastship",Device="Lastship",DeviceId="xxx",Version="1.0"', 'X-MediaBrowser-Token':self.token}
-
-
+            
+            
             return 
         except:
             return
 
-
+        
     def __search(self,title,searchtype):
         try:
 
-
+            #print "print emby __search type& titel",self,searchtype,type(title),title
             title=re.sub(r"\([0-9]+\)","",title )
-
+            
             self.__authenticate()
-
+            #print "print emby __search after auth",self.userid,self.token,self.serverid
+            
             ## create search url, encode whitespaces ##
             query =urllib.quote(title)
-
+            
             url = self.server+"/emby/Search/Hints?searchTerm="+query+"&UserId="+self.userid+"&Limit=10&IncludeItemTypes="+searchtype+"&ExcludeItemTypes=LiveTvProgram&IncludePeople=false&IncludeMedia=true&IncludeGenres=false&IncludeStudios=false&IncludeArtists=false"
                         
-
+            #print "print emby search url",type(url),url
+            
+            
             ### urllib3 Search Request ###
             http = urllib3.PoolManager()           
             r = http.request(
@@ -302,11 +302,14 @@ class source:
 
             resp = json.loads(r.data)
 
+       
 
             if int(resp['TotalRecordCount']) == 0:
                 return
-
-
+          
+            
             return resp
         except:
             return
+
+

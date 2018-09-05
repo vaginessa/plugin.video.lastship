@@ -16,7 +16,7 @@ class recaptchaApp:
     def callMyJDownloader(self, recap):
         self.result = recap.solve(self.url, self.siteKey)
 
-    def getSolutionWithDialog(self, url, siteKey, infotext, time=60):
+    def getSolutionWithDialog(self, url, siteKey, infotext, time=180):
         self.url = url
         self.siteKey = siteKey
         recap = recaptcha.CaptchaSolveTask()

@@ -136,7 +136,8 @@
         <setting id="emby.serverip" type="ipaddress" label="32718" default="" />
         <setting id="emby.port" type="number" label="32719" default="" />
         <setting id="emby.name" type="text" label="32720" default="Server" />
-        <setting type="sep" label="Recaptcha2"/>
+        <setting type="sep" />
+        <setting type="lsep" label="Recaptcha2"/>
         <setting id="MyJDownloader.user" type="text" label="32304" default="" />
         <setting id="MyJDownloader.pass" type="text" label="32307" default="" />
         <setting type="sep" />

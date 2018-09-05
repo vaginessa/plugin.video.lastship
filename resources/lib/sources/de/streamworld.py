@@ -150,8 +150,7 @@ class source:
 
             recap = recaptcha_app.recaptchaApp()
             key = recap.getSolutionWithDialog(url, "6LeERkUUAAAAAJH4Yqk-gQH1N6psg0KCuEq_Lkxf", self.recapInfo)
-            import pydevd
-            pydevd.settrace('localhost', port=12345, stdoutToServer=True, stderrToServer=True)
+            print "Recaptcha2 Key: " + key
             response = ""
             if key != "":
                 response = self.scraper.post(url, data={'g-recaptcha-response':key}, allow_redirects=False)

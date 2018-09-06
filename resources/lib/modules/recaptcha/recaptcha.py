@@ -517,7 +517,7 @@ class CaptchaSolveTask:
         except Exception as e:
             updateStatus('error', e, LAST_HTTP_ERROR_CODE)
             printExc()
-        return jd.captcha_result
+        return jd.captcha_result if jd else ""
 
     def setKill(self):
         self.IsAlive = False

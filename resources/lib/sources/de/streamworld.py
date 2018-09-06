@@ -183,7 +183,7 @@ class source:
 
             r = sorted(r, key=lambda i: int(i[2]), reverse=True)  # with year > no year
 
-            links = [i[0] for i in r if (cleantitle.get(i[1]).partition('<')[0] in t) and i[2] == year]
+            links = [i[0] for i in r if ((cleantitle.get(i[1]).partition('<')[0] in t) or ("(" in i[1] and cleantitle.get(re.findall("\((.*?)\)", i[1])[0]) in t)) and i[2] == year]
 
             if len(links) > 0:
                 return source_utils.strip_domain(links[0])

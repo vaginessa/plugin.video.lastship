@@ -23,7 +23,7 @@ class recaptchaApp:
         t = threading.Thread(target=self.callMyJDownloader, args=(recap,))
         t.start()
 
-        dialogResult = xbmcgui.Dialog().yesno(heading="Captcha | " + infotext, line1="Loese das Captcha in MyJDownloader!", line2="Zeit: %s s"%time, nolabel="Abbrechen", yeslabel="Mehr Info", autoclose=time*1000)
+        dialogResult = xbmcgui.Dialog().yesno(heading="Captcha | " + infotext, line1="Loese das Captcha in MyJDownloader!", line2="Zeit: %s s"%time, line3="Nach Captchaloesen \"Ende\" klicken", nolabel="Ende", yeslabel="Mehr Info", autoclose=time*1000)
         if dialogResult:
             xbmc.log("YesNo-Dialog closed with true",xbmc.LOGDEBUG)
         else:

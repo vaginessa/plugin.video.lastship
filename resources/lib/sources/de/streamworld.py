@@ -153,7 +153,7 @@ class source:
             print "Recaptcha2 Key: " + key
             response = ""
             if key != "":
-                response = self.scraper.post(url, data={'g-recaptcha-response':key}, allow_redirects=False)
+                response = self.scraper.post(url, data={'g-recaptcha-response':key}, allow_redirects=True)
 
             if response and response.headers['Location'].strip():
                 url = response.headers['Location']
@@ -161,7 +161,7 @@ class source:
             if self.base_link not in url:
                 if 'google' in url:
                     return self.__google(url)
-                return url
+            return url
         except Exception as e:
             source_faultlog.logFault(__name__,source_faultlog.tagResolve)
             return

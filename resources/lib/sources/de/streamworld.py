@@ -100,13 +100,16 @@ class source:
 
             r = self.scraper.get(urlparse.urljoin(self.base_link, url)).content
 
-            links = dom_parser.parse_dom(r, 'table')
-            links = [i.content for i in links if dom_parser.parse_dom(i, 'span', attrs={'class': re.compile('linkSearch(-a)?')})]
-            links = re.compile('(<a.+?/a>)', re.DOTALL).findall(''.join(links))
-            links = [dom_parser.parse_dom(i, 'a', req='href') for i in links if re.findall('(.+?)\s*\(\d+\)\s*<', i)]
-            links = [i[0].attrs['href'] for i in links if i]
+            if 'serie' not in url:
+                links = dom_parser.parse_dom(r, 'table')
+                links = [i.content for i in links if dom_parser.parse_dom(i, 'span', attrs={'class': re.compile('linkSearch(-a)?')})]
+                links = re.compile('(<a.+?/a>)', re.DOTALL).findall(''.join(links))
+                links = [dom_parser.parse_dom(i, 'a', req='href') for i in links if re.findall('(.+?)\s*\(\d+\)\s*<', i)]
+                links = [i[0].attrs['href'] for i in links if i]
 
-            url = re.sub('/streams-\d+', '', url)
+                url = re.sub('/streams-\d+', '', url)
+            else:
+                links = [url]
 
             for link in links:
                 if '/englisch/' in link: continue
@@ -116,6 +119,9 @@ class source:
                 detail = dom_parser.parse_dom(r, 'th', attrs={'class': 'thlink'})
                 detail = [dom_parser.parse_dom(i, 'a', req='href') for i in detail]
                 detail = [(i[0].attrs['href'], i[0].content.replace('&#9654;', '').strip()) for i in detail if i]
+
+                if 'serie' in url:
+                    detail.append((url, "x264"))
 
                 for release in detail:
                     quality, info = source_utils.get_release_quality(release[1])

@@ -23,6 +23,7 @@ import urllib
 import urlparse
 
 from resources.lib.modules import cfscrape
+from resources.lib.modules import directstream
 from resources.lib.modules.recaptcha import recaptcha_app
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
@@ -163,7 +164,7 @@ class source:
 
             if self.base_link not in url:
                 if 'google' in url:
-                    return self.__google(url)
+                    return directstream.google(url)[0]['url']
             return url
         except Exception as e:
             source_faultlog.logFault(__name__,source_faultlog.tagResolve)
@@ -197,26 +198,6 @@ class source:
             except:
                 return
             return
-
-    def __google(self, url):
-        try:
-            url = re.sub('[^\/]+$', 'view', url) # fix kinow problem for gvideo urls (/view)
-            
-            video_id = re.search('(?<=\/d\/)(.*?)(?=\/)', url).group()
-            
-            url = 'https://drive.google.com/uc?id=%s&export=download' % video_id
-            
-            cookie = client.request(url, output='cookie')
-            
-            confirm = '(?<=%s=)(.*?)(?=;)' % video_id
-            confirm = re.search(confirm, cookie).group()
-
-            url = 'https://drive.google.com/uc?export=download&confirm=%s&id=%s' % (confirm, video_id)
-            url = url + '|Cookie=' + cookie
-
-            return url
-        except:
-            return url
 
     def setRecapInfo(self, info):
         self.recapInfo = info

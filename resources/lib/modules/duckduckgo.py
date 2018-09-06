@@ -21,7 +21,7 @@ def search(titles, year, site, titleRegex):
         }
 
         result = client.request(base_url, post=params, headers={'Content-Type': 'application/x-www-form-urlencoded'}, error=True)
-        if params['q'].lower() in result.lower():
+        if cleantitle.get(params['q'].lower()) in cleantitle.get(result.lower()):
             links = dom_parser.parse_dom(result, 'h2', attrs={'class': 'result__title'})
             links = dom_parser.parse_dom(links, 'a')
             links = [(client.replaceHTMLCodes(i.content), i.attrs['href']) for i in links if site in i.attrs['href']]

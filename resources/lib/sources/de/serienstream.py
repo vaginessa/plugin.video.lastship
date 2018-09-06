@@ -24,6 +24,7 @@ import urllib
 import urlparse
 
 from resources.lib.modules import cleantitle
+from resources.lib.modules import duckduckgo
 from resources.lib.modules import client
 from resources.lib.modules import control
 from resources.lib.modules import source_utils
@@ -50,6 +51,7 @@ class source:
         try:
             url = self.__search([localtvshowtitle] + source_utils.aliases_to_array(aliases), year)
             if not url and tvshowtitle != localtvshowtitle: url = self.__search([tvshowtitle] + source_utils.aliases_to_array(aliases), year)
+            if not url: url = '/'.join(duckduckgo.search([localtvshowtitle] + source_utils.aliases_to_array(aliases), year, self.base_link, ">(.*)").split('/')[:3])
             return url
         except:
             return

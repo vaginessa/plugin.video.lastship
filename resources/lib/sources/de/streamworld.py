@@ -151,12 +151,15 @@ class source:
             recap = recaptcha_app.recaptchaApp()
             key = recap.getSolutionWithDialog(url, "6LeERkUUAAAAAJH4Yqk-gQH1N6psg0KCuEq_Lkxf", self.recapInfo)
             print "Recaptcha2 Key: " + key
-            response = ""
-            if key != "":
-                response = self.scraper.post(url, data={'g-recaptcha-response':key}, allow_redirects=True)
 
-            if response and response.headers['Location'].strip():
-                url = response.headers['Location']
+            response = None
+            if key != "" and "skipped" not in key.lower():
+                response = self.scraper.post(url, data={'g-recaptcha-response':key}, allow_redirects=True)
+            elif not response or "skipped" in key.lower():
+                return
+
+            if response is not None:
+                url = response.url
 
             if self.base_link not in url:
                 if 'google' in url:

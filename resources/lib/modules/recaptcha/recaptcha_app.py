@@ -15,6 +15,7 @@ class recaptchaApp:
 
     def callMyJDownloader(self, recap):
         self.result = recap.solve(self.url, self.siteKey)
+        control.execute('Dialog.Close(yesnoDialog)')
 
     def getSolutionWithDialog(self, url, siteKey, infotext, time=180):
         self.url = url
@@ -23,12 +24,11 @@ class recaptchaApp:
         t = threading.Thread(target=self.callMyJDownloader, args=(recap,))
         t.start()
 
-        dialogResult = xbmcgui.Dialog().yesno(heading="Captcha | " + infotext, line1="Loese das Captcha in MyJDownloader!", line2="Zeit: %s s"%time, line3="Nach Captchaloesen \"Ende\" klicken", nolabel="Ende", yeslabel="Mehr Info", autoclose=time*1000)
+        dialogResult = xbmcgui.Dialog().yesno(heading="Captcha | " + infotext, line1="Loese das Captcha in MyJDownloader!", line2="Zeit: %s s" % time, nolabel="Abbrechen", yeslabel="Mehr Info", autoclose=time*1000)
         if dialogResult:
-            xbmc.log("YesNo-Dialog closed with true",xbmc.LOGDEBUG)
+            xbmc.log("YesNo-Dialog closed with true", xbmc.LOGDEBUG)
         else:
-            xbmc.log("YesNo-Dialog closed with false",xbmc.LOGDEBUG)
-
+            xbmc.log("YesNo-Dialog closed with false", xbmc.LOGDEBUG)
         if self.result != "":
             #we have gotten a result! :)
             return self.result.strip()
@@ -38,7 +38,7 @@ class recaptchaApp:
             win.doModal()
             win.show()
             while control.condVisibility('Window.IsActive(PopupRecapInfoWindow)'):
-                xbmc.log("Info-Dialog still open...",xbmc.LOGDEBUG)
+                xbmc.log("Info-Dialog still open...", xbmc.LOGDEBUG)
                 xbmc.sleep(1000)
             return ""
         else:

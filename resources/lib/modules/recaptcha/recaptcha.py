@@ -6,7 +6,6 @@ import time
 import urllib
 import urllib2
 import base64
-import sys
 import traceback
 from BaseHTTPServer import BaseHTTPRequestHandler
 

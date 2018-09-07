@@ -171,19 +171,22 @@ class sources:
 
                 item.addContextMenuItems(cm)
                 item.setInfo(type='Video', infoLabels= meta)
+                item.setProperty('IsPlayable','true')
                 
                 ## Amazon Scraper Details ##
-                if "AMAZON" in label:
-                    item.setProperty('IsPlayable','true')
-                    aid=re.findall(r'amazonid_start-(.*?)-amazonid_end', sysurl)                    
-                    sysurl='plugin://plugin.video.amazon-test/?mode=PlayVideo&asin=' + aid[0]
+                if "amazon" in label:
+                    #item.setProperty('IsPlayable','true')
+                    aid=re.search(r'asin%3D(.*?)%22%2C', sysurl)
+                    sysurl='plugin://plugin.video.amazon-test/?mode=PlayVideo&asin=' + aid.group(1)
+                    
                    
-                ## Amazon Scraper Details ##
-                if "NETFLIX" in label:
-                    item.setProperty('IsPlayable','true')
-                    aid=re.findall(r'netflixid_start-(.*?)-netflixid_end', sysurl)
-                    sysurl='plugin://plugin.video.netflix/?action=play_video&video_id=' + aid[0]
-                    sysurl=urllib.unquote(sysurl).decode('utf8')         
+                ## Netflix Scraper Details ##
+                if "netflix" in label:
+                    #item.setProperty('IsPlayable','true')
+                    aid=re.search(r'video_id%3D(.*?)%22%2C', sysurl)
+                    print "print NF source REGEX",aid.group(1)
+                    sysurl='plugin://plugin.video.netflix/?action=play_video&video_id=' + aid.group(1)
+                           
                 
 
           

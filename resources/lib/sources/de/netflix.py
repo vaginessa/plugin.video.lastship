@@ -8,11 +8,11 @@ import json
 from resources.lib.modules import source_utils
 from resources.lib.modules import duckduckgo
 
-
 class source:
     def __init__(self):
         self.priority = 1
-        self.language = ['de']    
+        self.language = ['de']
+        
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:            
@@ -27,7 +27,8 @@ class source:
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):        
         titles = [localtvshowtitle] + source_utils.aliases_to_array(aliases)        
         result = duckduckgo.search(titles, year, 'netflix.com',  '(.*?)\|\sNetflix')        
-        tvshowid=re.findall('(\d+)', result)[0] 
+        tvshowid=re.findall('(\d+)', result)[0]
+        #print "print NF tvshowid",tvshowid
         return tvshowid
 
     def episode(self, tvshowid, imdb, tvdb, title, premiered, season, episode):        
@@ -50,7 +51,7 @@ class source:
             if not url:
                 return sources
             #print "print NF source url",url
-            sources.append({'source': 'Account', 'quality': '1080p', 'language': 'de', 'url': 'netflixid_start-'+url+'-netflixid_end', 'info': '', 'direct': True,'local': True, 'debridonly': False})
+            sources.append({'source': 'Account', 'quality': '1080p', 'language': 'de', 'url': 'plugin://plugin.video.netflix/?action=play_video&video_id='+url, 'info': '', 'direct': True,'local': True, 'debridonly': False})
            
             return sources
         except:

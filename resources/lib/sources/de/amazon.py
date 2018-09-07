@@ -3,6 +3,7 @@
 import re
 import os
 import xbmc
+import urllib
 
 import requests
 import simplejson
@@ -50,60 +51,79 @@ class source:
         ### Query Serie
 
         url="https://atv-ps-eu.amazon.de/cdp/catalog/Search?firmware=fmw:17-app:2.0.45.1210&deviceTypeID=A2M4YX06LWP8WI&deviceID=1&format=json&version=2&formatVersion=3&marketplaceId=A1PA6795UKMFR9&IncludeAll=T&AID=1&searchString="+localtitle+"&OfferGroups=B0043YVHMY&SuppressBlackedoutEST=T&NumberOfResults=40&StartIndex=0"
+        #print "print AP query series url", url
         
-        easin="empty"
+        easin=""
         data = requests.get(url).json()
        
         for i in data['message']['body']['titles']:
             
             ## Titel abgleich ##
             try:
+                #print "print AP episode local title VS. amazon clena title", localtitle,cleantitle.getsearch(str(i['ancestorTitles'][0]['title']))
+                #amazontitle =re.sub("\[dt.\/OV\]","",str(i['title']))
                 ## try-block weil ChildTitles manchmal leeres ergebnis liefern
                 if localtitle in cleantitle.getsearch(str(i['ancestorTitles'][0]['title'])):
-                
-                    if str(season) == str(i['number']):
-                        easin=str(i['childTitles'][0]['feedUrl'])                    
-                    break;
+                    #print "print AP TvSow Title found!"
+                    ## Season abgleich ##
+                    #print "print AP str(season) == str(i['number']", str(season), str(i['number'])
+                    try:
+                        if str(season) == str(i['number']):
+                            #print "print AP TRY S VS S"
+                            easin=str(i['childTitles'][0]['feedUrl'])
+                            break;
+                    except:
+                            easin="ERROR"
+                    
             except:
                 continue
 
             
-            i
-                        
-
-        ## Season abgleich ##
+      
+        
         
         ## if notempty ##
-        url="https://atv-ps-eu.amazon.de/cdp/catalog/Browse?firmware=fmw:17-app:2.0.45.1210&deviceTypeID=A2M4YX06LWP8WI&deviceID=d24ff55e99d2e8d6353cd941f9f63fbb3d242b92576e09b6b8a90660&format=json&version=2&formatVersion=3&marketplaceId=A1PA6795UKMFR9&IncludeAll=T&AID=1&version=2&"+easin
-        
-        data = requests.get(url).json()
-       
-        for i in data['message']['body']['titles']:
+        if easin:
             
-            if str(episode)==str(i['number']):
-                url=i['titleId']
+            url="https://atv-ps-eu.amazon.de/cdp/catalog/Browse?firmware=fmw:17-app:2.0.45.1210&deviceTypeID=A2M4YX06LWP8WI&deviceID=d24ff55e99d2e8d6353cd941f9f63fbb3d242b92576e09b6b8a90660&format=json&version=2&formatVersion=3&marketplaceId=A1PA6795UKMFR9&"+easin
+            data = requests.get(url).json()
 
-
-            ## Episode abgleich ##
+            for i in data['message']['body']['titles']:
             
-       ## methode if string containts substrin [:2]
+            ## Titel abgleich ##
+                try:
+                    ## try-block weil ChildTitles manchmal leeres ergebnis liefern
+                    prime=i['formats'][0]['offers'][0]['offerType']
+                    
+                    if prime == "SUBSCRIPTION":
+                        #print "print AP Prime Subrsciption",prime
+                        if str(episode)==str(i['number']):
+                            #print "print Title/EpisodeMAthc "
+                            videoid=i['titleId']
+                            break;
+                except:
+                    continue
         
-        #dp/catalog/Browse?firmware=fmw:17-app:2.0.45.1210&deviceTypeID=A2M4YX06LWP8WI&deviceID=d24ff55e99d2e8d6353cd941f9f63fbb3d242b92576e09b6b8a90660&format=json&version=2&formatVersion=3&marketplaceId=A1PA6795UKMFR9&IncludeAll=T&AID=1&version=2&SeasonASIN=B01NAO1BGO,B01MS28SUQ,B01N6LPWN6,B01N1X7R5P&OfferGroups=B0043YVHMY&IncludeAll=T&AID=T&Detailed=T&tag=1&ContentType=TVEpisode&IncludeBla
+          
+           
+                
         
-
-        
-        
-        return url
+            #print "print AP Return URL!!",videoid
+            return videoid
+        else:
+            return
 
     def sources(self, url, hostDict, hostprDict):
         sources = []
-        print "print AP sources url",url
+        #print "print AP sources Video ID",url
         try:
             if not url:
                 return sources
 
             
-            sources.append({'source': 'Prime', 'quality': '1080p', 'language': 'de', 'url': 'amazonid_start-'+url+'-amazonid_end', 'info': '', 'direct': True,'local': True, 'debridonly': False})
+
+                         
+            sources.append({'source': 'Prime', 'quality': '1080p', 'language': 'de', 'url':'plugin://plugin.video.amazon-test/?mode=PlayVideo&asin='+url , 'info': '', 'direct': True,'local': True, 'debridonly': False})
            
             return sources
         except:

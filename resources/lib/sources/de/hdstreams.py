@@ -23,10 +23,11 @@ import re
 import base64
 
 from resources.lib.modules import cfscrape
+from resources.lib.modules import dom_parser
 from resources.lib.modules import source_faultlog
 from resources.lib.modules import source_utils
 from resources.lib.modules import cleantitle
-
+from resources.lib.modules.recaptcha import recaptcha_app
 
 
 class source:
@@ -39,6 +40,7 @@ class source:
         self.movie_link = self.base_link + 'seasons?perPage=54'
         self.search = self.base_link + 'search?q=%s&movies=true&seasons=true&actors=false&didyoumean=false'
         self.scraper = cfscrape.create_scraper()
+        self.recapInfo = ""
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
@@ -88,63 +90,46 @@ class source:
         try:
             if not url:
                 return sources
+            r = self.scraper.get(url).content
 
-            sHtmlContent=self.scraper.get(url).content
-            
-            pPattern = "recaptcha[^>]'([^']+)', '([^']+)', '([^']+).*?"
-            pPattern += '>.*?>([^"]+)</v-btn>'
-            aResult = re.compile(pPattern, re.DOTALL).findall(sHtmlContent)
-            
-            pattern = '<meta name="csrf-token" content="([^"]+)">'
-            string = str(sHtmlContent)
-            token = re.compile(pattern, flags=re.I | re.M).findall(string)
-            
-            # 1080p finden
-            if '1080p' in string:
-                q = '1080p'
-      
-            for e, h, sLang, sName in aResult:
-                link=self.__getlinks(e,h,sLang,sName,token,url)
-                
-                # hardcoded, da Qualität auf der Webseite inkorrekt beschrieben ist unnd sName.strip() problem liefert aufgrund webseite. nxload kanndamit unterdrückt werden
-                
-                if q == '1080p' and e == '1':
-                    if 'openload' in link:
-                        sources.append({'source': 'openload.com', 'quality': '1080p', 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
-                    elif 'streamango' in link:
-                        sources.append({'source': 'streamango.com', 'quality': 'HD', 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
-                    elif 'nxload' in link:
-                        sources.append({'source': 'nxload.com', 'quality': '1080p', 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
-                    elif 'streamcloud' in link:
-                        sources.append({'source': 'streamcloud.com', 'quality': 'SD', 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
-                else:
-                    if 'openload' in link:
-                        sources.append({'source': 'openload.com', 'quality': 'HD', 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
-                    elif 'streamango' in link:
-                        sources.append({'source': 'streamango.com', 'quality': 'HD', 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
-                    elif 'nxload' in link:
-                        sources.append({'source': 'nxload.com', 'quality': 'HD', 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
-                    elif 'streamcloud' in link:
-                        sources.append({'source': 'streamcloud.com', 'quality': 'SD', 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
+            links = dom_parser.parse_dom(r, "v-tabs")
+            links = [i for i in links if 'alt="de"' in dom_parser.parse_dom(i, "v-tab")[0].content]
+            links = dom_parser.parse_dom(links, "v-tab-item")
+            links = dom_parser.parse_dom(links, "v-flex")
+            links = [dom_parser.parse_dom(i, "v-btn") for i in links]
+            links = [[(a.attrs["@click"], re.findall("\n(.*)", a.content)[0].strip(), i[0].content) for a in i if "@click" in a.attrs] for i in links]
+            links = [item for sublist in links for item in sublist]
+            links = [(re.findall("\d+", i[0]), i[1], i[2]) for i in links]
+            links = [(i[0][0], i[0][1], i[1], i[2]) for i in links]
+
+            for e, h, sName, quali in links:
+                valid, hoster = source_utils.is_host_valid(sName, hostDict)
+                if not valid: continue
+
+                sources.append(
+                    {'source': hoster, 'quality': quali, 'info': '|'.join([hoster, quali]),'language': 'de', 'url': (e, h, url), 'direct': False, 'debridonly': False})
 
             if len(sources) == 0:
                 raise Exception()
             return sources
-        except:
-            source_faultlog.logFault(__name__,source_faultlog.tagScrape, url)
+        except Exception:
+            source_faultlog.logFault(__name__, source_faultlog.tagScrape, url)
             return sources
 
-    def __getlinks(self,e, h, sLang, sName,token,url):
+    def __getlinks(self, e, h, url, key):
             url = url + '/stream'
             # hardcoded german language
-            params={'e':e,'h':h,'lang':'de', 'q':'','grecaptcha':''}
-            sHtmlContent=self.scraper.post(url,headers={'X-CSRF-TOKEN':token[0],'X-Requested-With':'XMLHttpRequest'},data=params).content
-                        
+            params = {'e': e, 'h': h, 'lang': 'de', 'q': '', 'grecaptcha': key}
+            r = self.scraper.get(url[:-7])
+            xsrf = r.cookies.get("XSRF-TOKEN")
+            csrf = dom_parser.parse_dom(r.content, "meta", attrs={"name": "csrf-token"})[0].attrs["content"]
+            sHtmlContent = self.scraper.post(url, headers={'X-CSRF-TOKEN': csrf, 'XSRF-TOKEN': xsrf, 'X-Requested-With': 'XMLHttpRequest'}, data=params).content
+
             pattern = 'ct[^>]":[^>]"([^"]+).*?iv[^>]":[^>]"([^"]+).*?s[^>]":[^>]"([^"]+).*?e"[^>]([^}]+)'
             
             aResult = re.compile(pattern, re.DOTALL).findall(sHtmlContent)
             
-            token=base64.b64encode(token[0])
+            token = base64.b64encode(csrf)
            
             for ct, iv, s, e in aResult:                
                 ct = re.sub(r"\\", "", ct[::-1])
@@ -158,7 +143,24 @@ class source:
             return fUrl
 
     def resolve(self, url):
-        return url
+        try:
+            e, h, url = url
+
+            recap = recaptcha_app.recaptchaApp()
+            key = recap.getSolutionWithDialog(url, "6LdWQEUUAAAAAOLikUMWfs8JIJK2CAShlLzsPE9v", self.recapInfo)
+            print "Recaptcha2 Key: " + key
+
+            response = ""
+
+            if key != "" and "skipped" not in key.lower():
+                response = self.__getlinks(e, h, url, key)
+
+            elif response == "" or "skipped" in key.lower():
+                return ""
+
+            return response
+        except:
+            return ""
 
     def __search(self, imdb, isMovieSearch):
         try:
@@ -188,3 +190,6 @@ class source:
             except:
                 return
         return
+
+    def setRecapInfo(self, info):
+        self.recapInfo = info

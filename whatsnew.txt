@@ -8,7 +8,7 @@ Die Gründer und auch die Entwickler von Lastship sind nur in unserem Lastship F
 
 [B]INFO Indexseiten:[/B]
 Für die Seite Serienstream ist ein Benutzerkonto auf der jeweiligen Betreiberseite erforderlich (kann auch Wegwerf E-Mailadresse sein)
-Die Seite VodHD ist Standardmäßig deaktiviert, da diese Seite eine Premium Seite ist, dass heißt es muss für die Nutzung bezahlt werden. Infos zu Bezahlung und Anmeldung auf https://vodhd.to/
+Die Seite Emby ist Standardmäßig deaktiviert, da diese Seite eine Premium Seite ist, dass heißt es muss für die Nutzung bezahlt werden. Infos zu Bezahlung und Anmeldung auf https://vodhd.to/
 
 [B][COLOR blue]Aktuelles[/COLOR][/B]
 11.08.2018

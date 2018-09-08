@@ -8,6 +8,7 @@
 - Fix Alleserien (and add duckduckgo search)
 - Fix Foxx 
 - Fix Serienstream 
+- Fix streamworld 
 - stream.to Debugging entfernt
 - Fix Duckduckgo.py 
 - Add Netflix

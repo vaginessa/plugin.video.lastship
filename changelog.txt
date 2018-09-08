@@ -6,6 +6,7 @@
 - Fix HDFilme (Fix Serien)
 - Fix Cinemaxx (Fix Serien und Suche)
 - Fix Alleserien (and add duckduckgo search)
+- Fix Foxx 
 - Fix Duckduckgo.py 
 - Add Netflix
 - Update source.py

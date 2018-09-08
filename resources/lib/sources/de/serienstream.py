@@ -38,7 +38,7 @@ class source:
         self.language = ['de']
         self.domains = ['s.to']
         self.base_link = 'https://s.to'
-        self.search_link = '/ajax/search'
+        self.search_link = '/serien'
         self.login = control.setting('serienstream.user')
         self.password = control.setting('serienstream.pass')
         self.cookie = ''
@@ -49,9 +49,10 @@ class source:
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
+
             url = self.__search([localtvshowtitle] + source_utils.aliases_to_array(aliases), year)
             if not url and tvshowtitle != localtvshowtitle: url = self.__search([tvshowtitle] + source_utils.aliases_to_array(aliases), year)
-            if not url: url = '/'.join(duckduckgo.search([localtvshowtitle] + source_utils.aliases_to_array(aliases), year, self.base_link, ">(.*)").split('/')[:3])
+            if not url: url = duckduckgo.search([localtvshowtitle] + source_utils.aliases_to_array(aliases), year, self.base_link, ">(.*)")
             return url
         except:
             return
@@ -60,8 +61,9 @@ class source:
         try:
             if not url:
                 return
-
             url = url[:-1] if url.endswith('/') else url
+            if "staffel" in url:
+                url = re.findall("(.*?)staffel", url)[0]
             url += '/staffel-%d/episode-%d/' % (int(season), int(episode))
             return url
         except:
@@ -126,26 +128,18 @@ class source:
 
     def __search(self, titles, year):
         try:
-            r = urllib.urlencode({'keyword': titles[0]})
-            r = client.request(urlparse.urljoin(self.base_link, self.search_link), XHR=True, post=r)
-            if r is None:
-                r = urllib.urlencode({'keyword': cleantitle.query(titles[0])})
-                r = client.request(urlparse.urljoin(self.base_link, self.search_link), XHR=True, post=r)
+            r = client.request(urlparse.urljoin(self.base_link, self.search_link))
 
             t = [cleantitle.get(i) for i in set(titles) if i]
-            y = ['%s' % str(year), '%s' % str(int(year) + 1), '%s' % str(int(year) - 1), '0']
 
-            r = json.loads(r)
-            r = [(i['link'], re.sub('<.+?>|</.+?>', '', i['title'])) for i in r if 'title' in i and 'link' in i]
-            r = [(i[0], i[1], re.findall('(.+?)\s*Movie \d+:.+?$', i[1], re.DOTALL)) for i in r]
-            r = [(i[0], i[2][0] if len(i[2]) > 0 else i[1]) for i in r]
-            r = [(i[0], i[1], re.findall('(.+?) \((\d{4})\)?', i[1])) for i in r]
-            r = [(i[0], i[2][0][0] if len(i[2]) > 0 else i[1], i[2][0][1] if len(i[2]) > 0 else '0') for i in r]
-            r = sorted(r, key=lambda i: int(i[2]), reverse=True)  # with year > no year
-            r = [i[0] for i in r if cleantitle.get(i[1]) in t and i[2] in y]
+            links = dom_parser.parse_dom(r, "div", attrs={"class" : "genre"})
+            links = dom_parser.parse_dom(links, "a")
+            links = [(i.attrs["href"], i.content) for i in links]
 
-            if len(r) > 0:
-                return source_utils.strip_domain(r[0])
+            links = [i[0] for i in links if cleantitle.get(i[1]) in t]
+
+            if len(links) > 0:
+                return source_utils.strip_domain(links[0])
             return ""
         except:
             try:

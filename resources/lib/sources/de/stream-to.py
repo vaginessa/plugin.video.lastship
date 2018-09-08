@@ -120,8 +120,7 @@ class source:
                 response = self.scraper.get(urlparse.urljoin(self.base_link, url) + "?typ=v2&token=" + key)
             elif not response or "skipped" in key.lower():
                 return
-            import pydevd
-            pydevd.settrace('localhost', port=12345, stdoutToServer=True, stderrToServer=True)
+
             if response is not None:
                 url = response.url
 

@@ -9,6 +9,7 @@ Die Gründer und auch die Entwickler von Lastship sind nur in unserem Lastship F
 [B]INFO Indexseiten:[/B]
 Für die Seite Serienstream ist ein Benutzerkonto auf der jeweiligen Betreiberseite erforderlich (kann auch Wegwerf E-Mailadresse sein)
 Die Seite Emby ist Standardmäßig deaktiviert, da diese Seite eine Premium Seite ist, dass heißt es muss für die Nutzung bezahlt werden. Infos zu Bezahlung und Anmeldung auf https://vodhd.to/
+Es ist bei 2 Index Seiten möglich, Captcha in Lastship zu lösen. Infos dazu stehen in der FAQ / Konten / ReCaptcha2
 
 [B][COLOR blue]Aktuelles[/COLOR][/B]
 11.08.2018
@@ -22,6 +23,25 @@ INFO's dazu stehen in der FAQ
 [COLOR orange]-------------------------------------------------------------------------------------------------------[/COLOR]
 
 [B][COLOR lime]Changelog plugin.video.lastship[/COLOR][/B]
+
+[B]3.0.2.2[/B]
+  09.09.2018
+- Emby Debug Logging entfernt
+- Amazon suche gefixt und voll kompatibel zu Amazon VOD auf allen Systemen
+- Amazon nun als Premium gekennzeichnet, immer on Top bei den Suchergebnissen (source.py)
+- Fix Amazon Serien und Film Suche
+- Fix HDFilme (Fix Serien)
+- Fix Cinemaxx (Fix Serien und Suche)
+- Fix Alleserien (and add duckduckgo search)
+- Fix Foxx 
+- Fix Serienstream 
+- Fix streamworld 
+- stream.to Debugging entfernt
+- Fix Duckduckgo.py 
+- Add Netflix
+- Update source.py
+- Add MyJdownloader rCaptcher
+- streamword, stream.to Captcha Solving available
 
 [B]3.0.2.1[/B]
   24.08.2018
@@ -39,35 +59,6 @@ INFO's dazu stehen in der FAQ
 - Add Kino.cx
 - Add Feedme Scraper
 - Streamdream Anpassung auf Moviedream.ws
-
-[B]3.0.1[/B]
-  10.08.2018
-- Update HDFilme
-- Update kinox
-- FaultLogging verbessert
-- FaultLogger Standard EIN (Fehler werden damit automatisch an den Forum Server gesendet /siehe dazu FAQ)
-- Update Emby (Wird immer als erster Anbieter angezeigt, extra Stream Info Video und Audio)
-- Update Emby (Fix Umlaut Suche)
- -VODHD Streama Scraper entfernet
-- allg. Emby Client implementation hinzugefügt. Es werden alle Emby ( auch eigene ) Server via API unterstützt
-- Update settings, string.po und sources.py
-- kinodogs entfernt
-
-[B]3.0.0[/B]
-  20.07.2018
-- Rework auf Ursprungs Version, ein Modul, plugin.video.lastship
-- Update VodHD
-- Update Kinoger
-- Add Cinematrix und Update
-- Add and Update HDGO.py (Modules)
-- Add Cinemaxx
-- Add HDKino
-- Add Amazon
-- Update movietown (add cloudflare scraper)
-- Update moovie
-- Update HDFilme.tv
-- Update Duckduckgo
-- Seriesever entfernt, Seite Offline-Umleitung auf Moviesever
 
 [COLOR orange]-------------------------------------------------------------------------------------------------------[/COLOR] 
   

@@ -1,4 +1,5 @@
 [B]3.0.2.2[/B]
+  09.09.2018
 - Emby Debug Logging entfernt
 - Amazon suche gefixt und voll kompatibel zu Amazon VOD auf allen Systemen
 - Amazon nun als Premium gekennzeichnet, immer on Top bei den Suchergebnissen (source.py)

@@ -21,6 +21,9 @@
 import json
 import re
 import base64
+from binascii import unhexlify
+from hashlib import md5
+from resources.lib.modules import pyaes
 
 from resources.lib.modules import cfscrape
 from resources.lib.modules import dom_parser
@@ -116,31 +119,77 @@ class source:
             source_faultlog.logFault(__name__, source_faultlog.tagScrape, url)
             return sources
 
+    def cryptoJS_AES_decrypt(self, encrypted, password, salt):
+        def derive_key_and_iv(password, salt, key_length, iv_length):
+            d = d_i = ''
+            while len(d) < key_length + iv_length:
+                d_i = md5(d_i + password + salt).digest()
+                d += d_i
+            return d[:key_length], d[key_length:key_length + iv_length]
+
+        key, iv = derive_key_and_iv(password, salt, 32, 16)
+        cipher = pyaes.AESModeOfOperationCBC(key=key, iv=iv)
+        decrypted_data = ""
+        for part in [encrypted[i:i+16] for i in range(0, len(encrypted), 16)]:
+            decrypted_data += cipher.decrypt(part)
+
+        return decrypted_data[0:-ord(decrypted_data[-1])]
+
+    def byteify(self, input, noneReplacement=None, baseTypesAsString=False):
+        if isinstance(input, dict):
+            return dict(
+                [(self.byteify(key, noneReplacement, baseTypesAsString), self.byteify(value, noneReplacement, baseTypesAsString))
+                 for key, value in input.iteritems()])
+        elif isinstance(input, list):
+            return [self.byteify(element, noneReplacement, baseTypesAsString) for element in input]
+        elif isinstance(input, unicode):
+            return input.encode('utf-8')
+        elif input is None and noneReplacement != None:
+            return noneReplacement
+        elif baseTypesAsString:
+            return str(input)
+        else:
+            return input
+
     def __getlinks(self, e, h, url, key):
+        try:
             url = url + '/stream'
-            # hardcoded german language
+
             params = {'e': e, 'h': h, 'lang': 'de', 'q': '', 'grecaptcha': key}
             r = self.scraper.get(url[:-7])
-            xsrf = r.cookies.get("XSRF-TOKEN")
             csrf = dom_parser.parse_dom(r.content, "meta", attrs={"name": "csrf-token"})[0].attrs["content"]
-            sHtmlContent = self.scraper.post(url, headers={'X-CSRF-TOKEN': csrf, 'XSRF-TOKEN': xsrf, 'X-Requested-With': 'XMLHttpRequest'}, data=params).content
+            sHtmlContent = self.scraper.post(url, headers={'X-CSRF-TOKEN': csrf, 'X-Requested-With': 'XMLHttpRequest'}, data=params).content
 
-            pattern = 'ct[^>]":[^>]"([^"]+).*?iv[^>]":[^>]"([^"]+).*?s[^>]":[^>]"([^"]+).*?e"[^>]([^}]+)'
-            
-            aResult = re.compile(pattern, re.DOTALL).findall(sHtmlContent)
-            
-            token = base64.b64encode(csrf)
-           
-            for ct, iv, s, e in aResult:                
-                ct = re.sub(r"\\", "", ct[::-1])
-                s = re.sub(r"\\", "", s)
+            helper = json.loads(sHtmlContent)
 
-            from resources.lib.modules import source_utils
+            mainData = self.byteify(helper)
 
-            sUrl2 = source_utils.evp_decode(ct, token, s.decode('hex'))
-            fUrl=sUrl2.replace('\/', '/').replace('"', '')       
-                
-            return fUrl
+            tmp = mainData.get('d', '') + mainData.get('c', '') + mainData.get('iv', '') + mainData.get('f','') + mainData.get('h', '') + mainData.get('b', '')
+
+            tmp = self.byteify(json.loads(base64.b64decode(tmp)))
+
+            salt = unhexlify(tmp['s'])
+            ciphertext = base64.b64decode(tmp['ct'][::-1])
+            b = base64.b64encode(csrf[::-1])
+
+            tmp = self.cryptoJS_AES_decrypt(ciphertext, b, salt)
+
+            tmp = self.byteify(json.loads(base64.b64decode(tmp)))
+            ciphertext = base64.b64decode(tmp['ct'][::-1])
+            salt = unhexlify(tmp['s'])
+            b = ''
+            a = csrf
+            for idx in range(len(a) - 1, 0, -2):
+                b += a[idx]
+            if mainData.get('e', None):
+                b += '1'
+            else:
+                b += '0'
+            tmp = self.cryptoJS_AES_decrypt(ciphertext, str(b), salt)
+
+            return self.byteify(json.loads(tmp))
+        except Exception:
+            return
 
     def resolve(self, url):
         try:
@@ -151,7 +200,6 @@ class source:
             print "Recaptcha2 Key: " + key
 
             response = ""
-
             if key != "" and "skipped" not in key.lower():
                 response = self.__getlinks(e, h, url, key)
 

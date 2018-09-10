@@ -107,7 +107,7 @@ class source:
                 if not valid: continue
 
                 sources.append(
-                    {'source': hoster, 'quality': quali, 'info': '|'.join([hoster, quali]),'language': 'de', 'url': (e, h, url), 'direct': False, 'debridonly': False})
+                    {'source': hoster, 'quality': quali, 'language': 'de', 'url': (e, h, url), 'direct': False, 'debridonly': False, 'captcha': True})
 
             if len(sources) == 0:
                 raise Exception()

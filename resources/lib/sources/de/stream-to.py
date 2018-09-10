@@ -94,7 +94,7 @@ class source:
                     url = i[0]['id']
                     if not url: continue
 
-                    sources.append({'source': hoster, 'quality': quality, 'language': 'de', 'url': url, 'direct': False, 'debridonly': False, 'checkquality': True})
+                    sources.append({'source': hoster, 'quality': quality, 'language': 'de', 'url': url, 'direct': False, 'debridonly': False, 'checkquality': True, 'captcha': True})
 
             return sources
         except:

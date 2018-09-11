@@ -10,6 +10,8 @@ class captcha9KW:
     def __init__(self):
         self.ApiKey = control.setting('Captcha9kw.ApiKey')
         self.SolveType = control.setting('Captcha9kw.SolveType')
+        self.IsAlive = True
+        self.time = int(control.setting('Recaptcha2.TimeOut'))
 
     def solve(self, url, siteKey):
 
@@ -40,12 +42,13 @@ class captcha9KW:
                 if 'captchaid' in data:
                     captchaid = data['captchaid']
                     tries = 0
-                    while True:
+                    while tries < self.time and self.IsAlive:
                         tries += 1
-                        xbmc.sleep(1)
+                        xbmc.sleep(1000)
 
                         data = client.request('https://www.9kw.eu/index.cgi?apikey=' + self.ApiKey + '&action=usercaptchacorrectdata&json=1&id=' + captchaid)
                         if data:
+                            print str(data)
                             data = utils.byteify(json.loads(data))
                             token = data['answer']
                             if token is not None and token != '':
@@ -54,3 +57,6 @@ class captcha9KW:
         except Exception as e:
             print '9kw Error: ' + str(e)
         return token
+
+    def setKill(self):
+        self.IsAlive = False

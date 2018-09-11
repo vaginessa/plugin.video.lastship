@@ -1,3 +1,8 @@
+[B]3.0.2.3~nightly[/B]
+- Update myjdownloader.py, recaptcha_app.py
+- Add Captcha9kw
+- Update HDStreams
+
 [B]3.0.2.2[/B]
   09.09.2018
 - Emby Debug Logging entfernt

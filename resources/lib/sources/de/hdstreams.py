@@ -119,22 +119,6 @@ class source:
             source_faultlog.logFault(__name__, source_faultlog.tagScrape, url)
             return sources
 
-    def cryptoJS_AES_decrypt(self, encrypted, password, salt):
-        def derive_key_and_iv(password, salt, key_length, iv_length):
-            d = d_i = ''
-            while len(d) < key_length + iv_length:
-                d_i = md5(d_i + password + salt).digest()
-                d += d_i
-            return d[:key_length], d[key_length:key_length + iv_length]
-
-        key, iv = derive_key_and_iv(password, salt, 32, 16)
-        cipher = pyaes.AESModeOfOperationCBC(key=key, iv=iv)
-        decrypted_data = ""
-        for part in [encrypted[i:i+16] for i in range(0, len(encrypted), 16)]:
-            decrypted_data += cipher.decrypt(part)
-
-        return decrypted_data[0:-ord(decrypted_data[-1])]
-
     def __getlinks(self, e, h, url, key):
         try:
             url = url + '/stream'
@@ -156,7 +140,7 @@ class source:
             ciphertext = base64.b64decode(tmp['ct'][::-1])
             b = base64.b64encode(csrf[::-1])
 
-            tmp = self.cryptoJS_AES_decrypt(ciphertext, b, salt)
+            tmp = utils.cryptoJS_AES_decrypt(ciphertext, b, salt)
 
             tmp = utils.byteify(json.loads(base64.b64decode(tmp)))
             ciphertext = base64.b64decode(tmp['ct'][::-1])
@@ -169,7 +153,7 @@ class source:
                 b += '1'
             else:
                 b += '0'
-            tmp = self.cryptoJS_AES_decrypt(ciphertext, str(b), salt)
+            tmp = utils.cryptoJS_AES_decrypt(ciphertext, str(b), salt)
 
             return utils.byteify(json.loads(tmp))
         except Exception:

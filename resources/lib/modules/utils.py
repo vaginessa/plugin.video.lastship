@@ -24,6 +24,9 @@
 
 import json, re
 
+from resources.lib.modules import pyaes
+from hashlib import md5
+
 
 def json_load_as_str(file_handle):
     return byteify(json.load(file_handle, object_hook=byteify), ignore_dicts=True)
@@ -58,3 +61,19 @@ def title_key(title):
         return title[offset:]
     except:
         return title
+
+def cryptoJS_AES_decrypt(encrypted, password, salt):
+    def derive_key_and_iv(password, salt, key_length, iv_length):
+        d = d_i = ''
+        while len(d) < key_length + iv_length:
+            d_i = md5(d_i + password + salt).digest()
+            d += d_i
+        return d[:key_length], d[key_length:key_length + iv_length]
+
+    key, iv = derive_key_and_iv(password, salt, 32, 16)
+    cipher = pyaes.AESModeOfOperationCBC(key=key, iv=iv)
+    decrypted_data = ""
+    for part in [encrypted[i:i+16] for i in range(0, len(encrypted), 16)]:
+        decrypted_data += cipher.decrypt(part)
+
+    return decrypted_data[0:-ord(decrypted_data[-1])]

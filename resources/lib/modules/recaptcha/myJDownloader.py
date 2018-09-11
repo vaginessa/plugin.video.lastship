@@ -462,7 +462,7 @@ class MyjdRequestHandler(BaseHTTPRequestHandler):
         return
 
 
-class CaptchaSolveTask:
+class MyJDownloader:
     def __init__(self):
         self.AppKey = "LastShip"
         self.User = control.setting('MyJDownloader.user')

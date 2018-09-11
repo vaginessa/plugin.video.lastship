@@ -4,7 +4,7 @@ import xbmc
 import xbmcgui
 from resources.lib.modules import control
 
-from resources.lib.modules.recaptcha import recaptcha
+from resources.lib.modules.recaptcha import myJDownloader
 from resources.lib.modules.recaptcha import captcha9kw
 
 
@@ -22,11 +22,12 @@ class recaptchaApp:
         self.result = recap.solve(self.url, self.siteKey)
         control.execute('Dialog.Close(yesnoDialog)')
 
-    def getSolutionWithDialog(self, url, siteKey, infotext, time=180):
+    def getSolutionWithDialog(self, url, siteKey, infotext):
+        time = int(control.setting('Recaptcha2.TimeOut'))
         self.url = url
         self.siteKey = siteKey
         if "0" == control.setting('Recaptcha2.Mode'):
-            recap = recaptcha.CaptchaSolveTask()
+            recap = myJDownloader.MyJDownloader()
             t = threading.Thread(target=self.callMyJDownloader, args=(recap,))
         else:
             recap = captcha9kw.captcha9KW()

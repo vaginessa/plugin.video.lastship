@@ -137,11 +137,14 @@
         <setting id="emby.serverip" type="ipaddress" label="32718" default="" />
         <setting id="emby.port" type="number" label="32719" default="" />
         <setting id="emby.name" type="text" label="32720" default="Server" />
-        <setting type="sep" />
-        <setting type="lsep" label="Recaptcha2"/>
+    </category>
+    <category label="Recaptcha2">
         <setting default="0" id="Recaptcha2.Mode" label="Recaptcha-Mode" type="enum" values="MyJDownloader|Captcha9KW" />
-        <setting id="MyJDownloader.user" type="text" label="MyJD - User" default="" />
-        <setting id="MyJDownloader.pass" type="text" label="MYJD - Passwort" default="" />
+        <setting id="Recaptcha2.TimeOut" type="slider" label="TimeOut" default="180" range="60,300" option="int" />
+        <setting type="sep" />
+        <setting type="lsep" label="MyJDownloader"/>
+        <setting id="MyJDownloader.user" type="text" label="E-Mail" default="" />
+        <setting id="MyJDownloader.pass" type="text" label="Passwort" default="" />
         <setting type="sep" />
         <setting type="lsep" label="Captcha9KW"/>
         <setting id="Captcha9kw.ApiKey" type="text" label="APIKey" default="" />

@@ -139,8 +139,13 @@
         <setting id="emby.name" type="text" label="32720" default="Server" />
         <setting type="sep" />
         <setting type="lsep" label="Recaptcha2"/>
-        <setting id="MyJDownloader.user" type="text" label="32304" default="" />
-        <setting id="MyJDownloader.pass" type="text" label="32307" default="" />
+        <setting default="0" id="Recaptcha2.Mode" label="Recaptcha-Mode" type="enum" values="MyJDownloader|Captcha9KW" />
+        <setting id="MyJDownloader.user" type="text" label="MyJD - User" default="" />
+        <setting id="MyJDownloader.pass" type="text" label="MYJD - Passwort" default="" />
+        <setting type="sep" />
+        <setting type="lsep" label="Captcha9KW"/>
+        <setting id="Captcha9kw.ApiKey" type="text" label="APIKey" default="" />
+        <setting id="Captcha9kw.SolveType" type="bool" label="SelfSolve" default="true" />
         <setting type="sep" />
     </category>
     <category label="32541">

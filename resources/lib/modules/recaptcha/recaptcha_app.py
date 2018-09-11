@@ -5,6 +5,7 @@ import xbmcgui
 from resources.lib.modules import control
 
 from resources.lib.modules.recaptcha import recaptcha
+from resources.lib.modules.recaptcha import captcha9kw
 
 
 class recaptchaApp:
@@ -17,11 +18,20 @@ class recaptchaApp:
         self.result = recap.solve(self.url, self.siteKey)
         control.execute('Dialog.Close(yesnoDialog)')
 
+    def call9kw(self, recap):
+        self.result = recap.solve(self.url, self.siteKey)
+        control.execute('Dialog.Close(yesnoDialog)')
+
     def getSolutionWithDialog(self, url, siteKey, infotext, time=180):
         self.url = url
         self.siteKey = siteKey
-        recap = recaptcha.CaptchaSolveTask()
-        t = threading.Thread(target=self.callMyJDownloader, args=(recap,))
+        if "0" == control.setting('Recaptcha2.Mode'):
+            recap = recaptcha.CaptchaSolveTask()
+            t = threading.Thread(target=self.callMyJDownloader, args=(recap,))
+        else:
+            recap = captcha9kw.captcha9KW()
+            t = threading.Thread(target=self.call9kw, args=(recap,))
+
         t.start()
 
         dialogResult = xbmcgui.Dialog().yesno(heading="Captcha | " + infotext, line1="Loese das Captcha in MyJDownloader!", line2="Zeit: %s s" % time, nolabel="Abbrechen", yeslabel="Mehr Info", autoclose=time*1000)

@@ -26,16 +26,18 @@ class recaptchaApp:
         time = int(control.setting('Recaptcha2.TimeOut'))
         self.url = url
         self.siteKey = siteKey
+        line1 = "Loese das Captcha in MyJDownloader!"
         if "0" == control.setting('Recaptcha2.Mode'):
             recap = myJDownloader.MyJDownloader()
             t = threading.Thread(target=self.callMyJDownloader, args=(recap,))
         else:
             recap = captcha9kw.captcha9KW()
             t = threading.Thread(target=self.call9kw, args=(recap,))
+            line1 = "Loese das Captcha mittels Captcha9KW!"
 
         t.start()
 
-        dialogResult = xbmcgui.Dialog().yesno(heading="Captcha | " + infotext, line1="Loese das Captcha in MyJDownloader!", line2="Zeit: %s s" % time, nolabel="Abbrechen", yeslabel="Mehr Info", autoclose=time*1000)
+        dialogResult = xbmcgui.Dialog().yesno(heading="Captcha | " + infotext, line1=line1, line2="Zeit: %s s" % time, nolabel="Abbrechen", yeslabel="Mehr Info", autoclose=time*1000)
         if dialogResult:
             xbmc.log("YesNo-Dialog closed with true", xbmc.LOGDEBUG)
         else:
@@ -76,9 +78,10 @@ class PopupRecapInfoWindow(xbmcgui.WindowDialog):
 
         self.addControl(xbmcgui.ControlImage(x=self.centerX, y=self.centerY, width=self.dialogWidth, height=self.dialogHeight, filename=back))
         self.addControl(xbmcgui.ControlImage(x=self.centerX+10, y=self.centerY+10, width=200, height=200, filename=qr))
-        self.addControl(xbmcgui.ControlLabel(x=self.centerX+220, y=self.centerY+10, width=600, height=25, font='font14', label="Download the App!"))
-        self.addControl(xbmcgui.ControlLabel(x=self.centerX+220, y=self.newLinePos()+10, width=600, height=25, font='font14', label="Use the QR-Code with caution!"))
-        self.okButton = xbmcgui.ControlButton(x = self.centerX+250, y = self.centerY + self.dialogHeight-80,height=60,width=300, font='font14', label="OK", alignment=2, textOffsetY=15, focusedColor="0xFF000000", textColor="0xFF00BBFF")
+        self.addControl(xbmcgui.ControlLabel(x=self.centerX+220, y=self.newLinePos(), width=600, height=25, font='font14', label="QR-Code Scannen oder"))
+        self.addControl(xbmcgui.ControlLabel(x=self.centerX+220, y=self.newLinePos()+10, width=600, height=25, font='font14', label="Webseite besuchen:"))
+        self.addControl(xbmcgui.ControlLabel(x=self.centerX+220, y=self.newLinePos()+20, width=600, height=25, font='font14', label="https://bit.ly/2NGvFHT"))
+        self.okButton = xbmcgui.ControlButton(x=self.centerX+250, y=self.centerY + self.dialogHeight-125, height=60, width=300, font='font14', label="OK", alignment=2, textOffsetY=15, focusedColor="0xFF000000", textColor="0xFF00BBFF")
         self.addControl(self.okButton)
         self.setFocus(self.okButton)
 

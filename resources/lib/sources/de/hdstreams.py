@@ -23,7 +23,7 @@ import re
 import base64
 from binascii import unhexlify
 from hashlib import md5
-from resources.lib.modules import pyaes
+from resources.lib.modules import pyaes, utils
 
 from resources.lib.modules import cfscrape
 from resources.lib.modules import dom_parser
@@ -135,22 +135,6 @@ class source:
 
         return decrypted_data[0:-ord(decrypted_data[-1])]
 
-    def byteify(self, input, noneReplacement=None, baseTypesAsString=False):
-        if isinstance(input, dict):
-            return dict(
-                [(self.byteify(key, noneReplacement, baseTypesAsString), self.byteify(value, noneReplacement, baseTypesAsString))
-                 for key, value in input.iteritems()])
-        elif isinstance(input, list):
-            return [self.byteify(element, noneReplacement, baseTypesAsString) for element in input]
-        elif isinstance(input, unicode):
-            return input.encode('utf-8')
-        elif input is None and noneReplacement != None:
-            return noneReplacement
-        elif baseTypesAsString:
-            return str(input)
-        else:
-            return input
-
     def __getlinks(self, e, h, url, key):
         try:
             url = url + '/stream'
@@ -162,11 +146,11 @@ class source:
 
             helper = json.loads(sHtmlContent)
 
-            mainData = self.byteify(helper)
+            mainData = utils.byteify(helper)
 
             tmp = mainData.get('d', '') + mainData.get('c', '') + mainData.get('iv', '') + mainData.get('f','') + mainData.get('h', '') + mainData.get('b', '')
 
-            tmp = self.byteify(json.loads(base64.b64decode(tmp)))
+            tmp = utils.byteify(json.loads(base64.b64decode(tmp)))
 
             salt = unhexlify(tmp['s'])
             ciphertext = base64.b64decode(tmp['ct'][::-1])
@@ -174,7 +158,7 @@ class source:
 
             tmp = self.cryptoJS_AES_decrypt(ciphertext, b, salt)
 
-            tmp = self.byteify(json.loads(base64.b64decode(tmp)))
+            tmp = utils.byteify(json.loads(base64.b64decode(tmp)))
             ciphertext = base64.b64decode(tmp['ct'][::-1])
             salt = unhexlify(tmp['s'])
             b = ''
@@ -187,28 +171,16 @@ class source:
                 b += '0'
             tmp = self.cryptoJS_AES_decrypt(ciphertext, str(b), salt)
 
-            return self.byteify(json.loads(tmp))
+            return utils.byteify(json.loads(tmp))
         except Exception:
             return
 
     def resolve(self, url):
         try:
             e, h, url = url
-
-            recap = recaptcha_app.recaptchaApp()
-            key = recap.getSolutionWithDialog(url, "6LdWQEUUAAAAAOLikUMWfs8JIJK2CAShlLzsPE9v", self.recapInfo)
-            print "Recaptcha2 Key: " + key
-
-            response = ""
-            if key != "" and "skipped" not in key.lower():
-                response = self.__getlinks(e, h, url, key)
-
-            elif response == "" or "skipped" in key.lower():
-                return ""
-
-            return response
+            return self.__getlinks(e, h, url, '')
         except:
-            return ""
+            return
 
     def __search(self, imdb, isMovieSearch):
         try:

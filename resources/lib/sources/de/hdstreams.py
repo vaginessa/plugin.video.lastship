@@ -106,8 +106,10 @@ class source:
                 valid, hoster = source_utils.is_host_valid(sName, hostDict)
                 if not valid: continue
 
+                captcha = 'grecaptcha' in r
+
                 sources.append(
-                    {'source': hoster, 'quality': quali, 'language': 'de', 'url': (e, h, url), 'direct': False, 'debridonly': False, 'captcha': True})
+                    {'source': hoster, 'quality': quali, 'language': 'de', 'url': (e, h, url, captcha), 'info': "Recaptcha" if captcha else '', 'direct': False, 'debridonly': False, 'captcha': True})
 
             if len(sources) == 0:
                 raise Exception()
@@ -158,8 +160,14 @@ class source:
 
     def resolve(self, url):
         try:
-            e, h, url = url
-            return self.__getlinks(e, h, url, '')
+            e, h, url, recaptcha = url
+            key = ''
+            if recaptcha:
+                from resources.lib.modules.recaptcha import recaptcha_app
+                recap = recaptcha_app.recaptchaApp()
+                key = recap.getSolutionWithDialog(url, "6LdWQEUUAAAAAOLikUMWfs8JIJK2CAShlLzsPE9v", self.recapInfo)
+
+            return self.__getlinks(e, h, url, key)
         except:
             return
 

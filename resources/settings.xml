@@ -148,7 +148,7 @@
         <setting type="sep" />
         <setting type="lsep" label="Captcha9KW"/>
         <setting id="Captcha9kw.ApiKey" type="text" label="APIKey" default="" />
-        <setting id="Captcha9kw.SolveType" type="bool" label="SelfSolve" default="true" />
+        <setting id="Captcha9kw.SolveType" type="bool" label="Eigene Captcha lösen (SelfSolve)" default="true" />
         <setting type="sep" />
     </category>
     <category label="32541">

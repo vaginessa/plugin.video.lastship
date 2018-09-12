@@ -18,19 +18,17 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+import base64
 import json
 import re
-import base64
 from binascii import unhexlify
-from hashlib import md5
-from resources.lib.modules import pyaes, utils
 
 from resources.lib.modules import cfscrape
+from resources.lib.modules import cleantitle
 from resources.lib.modules import dom_parser
 from resources.lib.modules import source_faultlog
 from resources.lib.modules import source_utils
-from resources.lib.modules import cleantitle
-from resources.lib.modules.recaptcha import recaptcha_app
+from resources.lib.modules import utils
 
 
 class source:
@@ -84,7 +82,7 @@ class source:
 
             url = [i['url'] for i in url if 'season/' + season in i['url']]
 
-            return url[0]
+            return url[0], episode
         except:
             return
 
@@ -93,17 +91,16 @@ class source:
         try:
             if not url:
                 return sources
+
+            if isinstance(url, tuple):
+                url, episode = url
+
             r = self.scraper.get(url).content
 
-            links = dom_parser.parse_dom(r, "v-tabs")
-            links = [i for i in links if 'alt="de"' in dom_parser.parse_dom(i, "v-tab")[0].content]
-            links = dom_parser.parse_dom(links, "v-tab-item")
-            links = dom_parser.parse_dom(links, "v-flex")
-            links = [dom_parser.parse_dom(i, "v-btn") for i in links]
-            links = [[(a.attrs["@click"], re.findall("\n(.*)", a.content)[0].strip(), i[0].content) for a in i if "@click" in a.attrs] for i in links]
-            links = [item for sublist in links for item in sublist]
-            links = [(re.findall("\d+", i[0]), i[1], i[2]) for i in links]
-            links = [(i[0][0], i[0][1], i[1], i[2]) for i in links]
+            if "serie" in url:
+                links = self._getSeriesLinks(r, episode)
+            else:
+                links = self._getMovieLinks(r)
 
             for e, h, sName, quali in links:
                 valid, hoster = source_utils.is_host_valid(sName, hostDict)
@@ -197,3 +194,24 @@ class source:
 
     def setRecapInfo(self, info):
         self.recapInfo = info
+
+    def _getMovieLinks(self, content):
+        links = dom_parser.parse_dom(content, "v-tabs")
+        links = [i for i in links if 'alt="de"' in dom_parser.parse_dom(i, "v-tab")[0].content]
+        links = dom_parser.parse_dom(links, "v-tab-item")
+        links = dom_parser.parse_dom(links, "v-flex")
+        links = [dom_parser.parse_dom(i, "v-btn") for i in links]
+        links = [[(a.attrs["@click"], re.findall("\n(.*)", a.content)[0].strip(), i[0].content) for a in i if
+                  "@click" in a.attrs] for i in links]
+        links = [item for sublist in links for item in sublist]
+        links = [(re.findall("\d+", i[0]), i[1], i[2]) for i in links]
+        return [(i[0][0], i[0][1], i[1], i[2]) for i in links]
+
+    def _getSeriesLinks(self, content, episode):
+        links = dom_parser.parse_dom(content, "div", attrs={'class': "episode"})
+        links = [(dom_parser.parse_dom(i, "v-list-tile"), dom_parser.parse_dom(i, "p", attrs={'class': "episode-number"})[0]) for i in links]
+        links = [i[0] for i in links if episode == re.findall("\d+", i[1].content)[0]][0]
+        links = [(a.attrs["@click.native"], dom_parser.parse_dom(a.content, 'v-list-tile-title')[0].content) for a in links]
+
+        links = [(re.findall("'(.*?)'", i[0]), i[1]) for i in links]
+        return [(i[0][0], i[0][1], re.findall("(.*?)\d", i[1])[0].strip(), i[0][2]) for i in links]

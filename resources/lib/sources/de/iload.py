@@ -22,8 +22,7 @@ import re
 import urllib
 import urlparse
 
-from resources.lib.modules import cleantitle
-from resources.lib.modules import client
+from resources.lib.modules import cleantitle, cfscrape
 from resources.lib.modules import source_utils
 from resources.lib.modules import dom_parser
 from resources.lib.modules import source_faultlog
@@ -35,21 +34,21 @@ class source:
         self.language = ['de']
         self.domains = ['iload.to']
         self.base_link = 'http://iload.to'
-        self.search_link_mv = '/suche/%s/Filme'
-        self.search_link_tv = '/suche/%s/Serien'
+        self.search_link = '/suche/%s'
+        self.scraper = cfscrape.create_scraper()
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
-            url = self.__search(self.search_link_mv, imdb, [localtitle] + source_utils.aliases_to_array(aliases))
-            if not url and title != localtitle: url = self.__search(self.search_link_mv, imdb, [title] + source_utils.aliases_to_array(aliases))
+            url = self.__search(imdb, [localtitle] + source_utils.aliases_to_array(aliases))
+            if not url and title != localtitle: url = self.__search(imdb, [title] + source_utils.aliases_to_array(aliases))
             return url
         except:
             return
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
-            url = self.__search(self.search_link_tv, imdb, [localtvshowtitle] + source_utils.aliases_to_array(aliases))
-            if not url and tvshowtitle != localtvshowtitle: url = self.__search(self.search_link_tv, imdb, [tvshowtitle] + source_utils.aliases_to_array(aliases))
+            url = self.__search(imdb, [localtvshowtitle] + source_utils.aliases_to_array(aliases))
+            if not url and tvshowtitle != localtvshowtitle: url = self.__search(imdb, [tvshowtitle] + source_utils.aliases_to_array(aliases))
             return url
         except:
             return
@@ -61,10 +60,10 @@ class source:
 
             query = urlparse.urljoin(self.base_link, url)
 
-            r = client.request(query)
+            r = self.scraper.get(query).content
             r = dom_parser.parse_dom(r, 'td', attrs={'data-title-name': re.compile('Season %02d' % int(season))})
             r = dom_parser.parse_dom(r, 'a', req='href')[0].attrs['href']
-            r = client.request(urlparse.urljoin(self.base_link, r))
+            r = self.scraper.get(urlparse.urljoin(self.base_link, r)).content
             r = dom_parser.parse_dom(r, 'td', attrs={'data-title-name': re.compile('Episode %02d' % int(episode))})
             r = dom_parser.parse_dom(r, 'a', req='href')[0].attrs['href']
 
@@ -81,7 +80,7 @@ class source:
 
             query = urlparse.urljoin(self.base_link, url)
 
-            r = client.request(query)
+            r = self.scraper.get(query).content
             r = dom_parser.parse_dom(r, 'div', attrs={'id': 'Module'})
             r = [(r, dom_parser.parse_dom(r, 'a', attrs={'href': re.compile('[^\'"]*xrel_search_query[^\'"]*')}, req='href'))]
             r = [(i[0], i[1][0].attrs['href'] if i[1] else '') for i in r]
@@ -90,7 +89,7 @@ class source:
             if rels and len(rels) > 1:
                 r = []
                 for rel in rels:
-                    relData = client.request(urlparse.urljoin(self.base_link, rel.attrs['href']))
+                    relData = self.scraper.get(urlparse.urljoin(self.base_link, rel.attrs['href'])).content
                     relData = dom_parser.parse_dom(relData, 'table', attrs={'class': 'release-list'})
                     relData = dom_parser.parse_dom(relData, 'tr', attrs={'class': 'row'})
                     relData = [(dom_parser.parse_dom(i, 'td', attrs={'class': re.compile('[^\'"]*list-name[^\'"]*')}),
@@ -104,7 +103,7 @@ class source:
                     relData = dom_parser.parse_dom(relData, 'a', req='href')
 
                     for i in relData:
-                        i = client.request(urlparse.urljoin(self.base_link, i.attrs['href']))
+                        i = self.scraper.get(urlparse.urljoin(self.base_link, i.attrs['href'])).content
                         i = dom_parser.parse_dom(i, 'div', attrs={'id': 'Module'})
                         i = [(i, dom_parser.parse_dom(i, 'a', attrs={'href': re.compile('[^\'"]*xrel_search_query[^\'"]*')}, req='href'))]
                         r += [(x[0], x[1][0].attrs['href'] if x[1] else '') for x in i]
@@ -141,32 +140,32 @@ class source:
 
     def resolve(self, url):
         try:
-            url = client.request(urlparse.urljoin(self.base_link, url), output='geturl')
+            url = self.scraper.get(urlparse.urljoin(self.base_link, url)).url
             return url if self.base_link not in url else None
         except:
             return
 
-    def __search(self, search_link, imdb, titles):
+    def __search(self, imdb, titles):
         try:
-            query = search_link % (urllib.quote_plus(cleantitle.query(titles[0])))
+            query = self.search_link % (urllib.quote_plus(cleantitle.query(titles[0])))
             query = urlparse.urljoin(self.base_link, query)
 
             t = [cleantitle.get(i) for i in set(titles) if i]
 
-            r = client.request(query)
+            r = self.scraper.get(query).content
 
             r = dom_parser.parse_dom(r, 'div', attrs={'class': 'big-list'})
             r = dom_parser.parse_dom(r, 'table', attrs={'class': 'row'})
             r = dom_parser.parse_dom(r, 'td', attrs={'class': 'list-name'})
             r = dom_parser.parse_dom(r, 'a', req='href')
             r = [i.attrs['href']for i in r if i and cleantitle.get(i.content) in t]
-            if len(r) == 0 :
+            if len(r) == 0:
                 return None
             r = r[0]
 
             url = source_utils.strip_domain(r)
 
-            r = client.request(urlparse.urljoin(self.base_link, url))
+            r = self.scraper.get(urlparse.urljoin(self.base_link, url)).content
             r = dom_parser.parse_dom(r, 'a', attrs={'href': re.compile('.*/tt\d+.*')}, req='href')
             r = [re.findall('.+?(tt\d+).*?', i.attrs['href']) for i in r]
             r = [i[0] for i in r if i]

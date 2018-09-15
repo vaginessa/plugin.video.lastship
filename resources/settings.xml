@@ -68,7 +68,7 @@
         <setting id="provider.alleserien" type="bool" label="ALLESERIEN.COM" default="true" />
         <setting id="provider.animebase" type="bool" label="ANIMEBASE.NET" default="true" />
         <setting id="provider.animeloads" type="bool" label="ANIMELOADS.ORG" default="true" />
-        <setting id="provider.bsto" type="bool" label="BS.TO" default="true" />
+        <setting id="provider.bsto" type="bool" label="BS.TO (ReCaptcha)" default="true" />
         <setting id="provider.cinemaxx" type="bool" label="CINEMAXX.CC" default="true" />
         <setting id="provider.cinematrix" type="bool" label="CINEMATRIX.TO" default="true" />
         <setting id="provider.ddl" type="bool" label="DDL.ME" default="true" />

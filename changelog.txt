@@ -2,6 +2,8 @@
 - Update myjdownloader.py, recaptcha_app.py
 - Add Captcha9kw
 - Update HDStreams
+- Add bs.to mit Recaptcha
+- Fix Iload
 
 [B]3.0.2.2[/B]
   09.09.2018

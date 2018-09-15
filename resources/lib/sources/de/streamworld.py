@@ -132,6 +132,7 @@ class source:
                     r = [(l.attrs['href'], l.attrs['title']) for i in r for l in i if l.attrs['title']]
 
                     info = ' | '.join(info)
+                    info += " Recaptcha"
 
                     for stream_link, hoster in r:
                         valid, hoster = source_utils.is_host_valid(hoster, hostDict)
@@ -156,12 +157,12 @@ class source:
             url = urlparse.urljoin(self.base_link, url)
 
             recap = recaptcha_app.recaptchaApp()
+
             key = recap.getSolutionWithDialog(url, "6LeERkUUAAAAAJH4Yqk-gQH1N6psg0KCuEq_Lkxf", self.recapInfo)
             print "Recaptcha2 Key: " + key
-
             response = None
             if key != "" and "skipped" not in key.lower():
-                response = self.scraper.post(url, data={'g-recaptcha-response':key}, allow_redirects=True)
+                response = self.scraper.post(url, data={'g-recaptcha-response': key}, allow_redirects=True)
             elif not response or "skipped" in key.lower():
                 return
 

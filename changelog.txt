@@ -1,4 +1,4 @@
-[B]3.0.2.3~nightly[/B]
+[B]3.0.2.3[/B]
 - Update myjdownloader.py, recaptcha_app.py
 - Add Captcha9kw
 - Update HDStreams

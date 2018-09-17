@@ -203,7 +203,7 @@ def artPath():
 
 
 def appearance():
-    appearance = setting('appearance.1').lower() if condVisibility('System.HasAddon(script.lastship.artwork)') else setting('appearance.alt').lower()
+    appearance = setting('appearance.1') if condVisibility('System.HasAddon(script.lastship.artwork)') else setting('appearance.alt').lower()
     return appearance
 
 

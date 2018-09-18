@@ -479,7 +479,7 @@ msgstr "Nur SD Anbieter in Auto-Play"
 
 msgctxt "#32341"
 msgid "Hosters with captchas"
-msgstr "Dateianbieter mit Captchas"
+msgstr "Hoster mit Pairing"
 
 msgctxt "#32342"
 msgid "Sort by Provider"

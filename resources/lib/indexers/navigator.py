@@ -145,7 +145,7 @@ class navigator:
             if not control.setting('lists.widget') == '0':
                 self.addDirectoryItem(32003, 'mymovieliteNavigator', 'mymovies.png', 'DefaultVideoPlaylists.png')
 
-            self.addDirectoryItem(32028, 'moviePerson', 'people-search.png', 'DefaultMovies.png')
+            self.addDirectoryItem(32028, 'moviePerson', 'people-search.png', 'DefaultMovies.png', isFolder=False)
             self.addDirectoryItem(32010, 'movieSearch', 'search.png', 'DefaultMovies.png')
 
         self.endDirectory()
@@ -309,8 +309,8 @@ class navigator:
     def search(self):
         self.addDirectoryItem(32001, 'movieSearch', 'search.png', 'DefaultMovies.png')
         self.addDirectoryItem(32002, 'tvSearch', 'search.png', 'DefaultTVShows.png')
-        self.addDirectoryItem(32029, 'moviePerson', 'people-search.png', 'DefaultMovies.png')
-        self.addDirectoryItem(32030, 'tvPerson', 'people-search.png', 'DefaultTVShows.png')
+        self.addDirectoryItem(32029, 'moviePerson', 'people-search.png', 'DefaultMovies.png', isFolder=False)
+        self.addDirectoryItem(32030, 'tvPerson', 'people-search.png', 'DefaultTVShows.png', isFolder=False)
 
         self.endDirectory()
 

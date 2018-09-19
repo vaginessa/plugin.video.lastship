@@ -90,6 +90,7 @@
         <setting id="provider.movie4k-lt" type="bool" label="MOVIE4K.LT" default="true" />
         <setting id="provider.movie-gg" type="bool" label="MOVIE-GG" default="true" />
         <setting id="provider.movietown" type="bool" label="MOVIETOWN.ORG" default="true" />
+        <setting id="provider.nanime" type="bool" label="NANIME.TO" default="true" />
         <setting id="provider.netflix" type="bool" label="NETFLIX (Kodi18 Only)" default="false" />
         <setting id="provider.netzkino" type="bool" label="NETZKINO.DE" default="true" />
         <setting id="provider.proxer" type="bool" label="PROXER.ME" default="true" />

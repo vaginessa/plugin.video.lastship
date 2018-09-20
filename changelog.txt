@@ -1,5 +1,6 @@
 [B]3.0.2.4~nightly[/B]
 -Add naninme
+-Update HDKino (Add Duckduckgo)
 
 [B]3.0.2.3[/B]
 - Update myjdownloader.py, recaptcha_app.py

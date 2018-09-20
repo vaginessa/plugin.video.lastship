@@ -1,3 +1,6 @@
+[B]3.0.2.4~nightly[/B]
+-Add naninme
+
 [B]3.0.2.3[/B]
 - Update myjdownloader.py, recaptcha_app.py
 - Add Captcha9kw

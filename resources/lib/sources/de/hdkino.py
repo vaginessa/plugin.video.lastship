@@ -19,10 +19,10 @@
 """
 
 import re
-import urllib
 import urlparse
 
 from resources.lib.modules import cleantitle
+from resources.lib.modules import duckduckgo
 from resources.lib.modules import client
 from resources.lib.modules import dom_parser
 from resources.lib.modules import source_utils
@@ -37,11 +37,13 @@ class source:
         self.base_link = 'https://hdkino.to'
         self.search_link = '/search/%s'
         self.stream_link = '/embed.php?video_id=%s&provider=%s'
+        self.year_link = self.base_link + '/index.php?a=year&q=%s&page=%s'
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
-            url = self.__search([localtitle] + source_utils.aliases_to_array(aliases), year)
-            if not url and title != localtitle: url = self.__search([title] + source_utils.aliases_to_array(aliases), year)
+            url = duckduckgo.search([localtitle] + source_utils.aliases_to_array(aliases), year, self.domains[0], '<b>(.*?)\\(')
+            if not url:
+                url = self._getMovieLink([year, localtitle] + source_utils.aliases_to_array(aliases), year)
             return url
         except:
             return
@@ -69,7 +71,7 @@ class source:
                 raise Exception()
             return sources
         except:
-            source_faultlog.logFault(__name__,source_faultlog.tagScrape, url)
+            source_faultlog.logFault(__name__, source_faultlog.tagScrape, url)
             return sources
 
     def resolve(self, url):
@@ -80,26 +82,20 @@ class source:
             return dom_parser.parse_dom(content, 'iframe')[0].attrs['src']
 
         except:
-            source_faultlog.logFault(__name__,source_faultlog.tagResolve)
+            source_faultlog.logFault(__name__, source_faultlog.tagResolve)
             return
 
-    def __search(self, titles, year):
+    def _getMovieLink(self, titles, year):
         try:
             t = [cleantitle.get(i) for i in set(titles) if i]
 
-            for title in titles:
-                query = self.search_link
-                try:
-                    title.encode('UTF-8')
-                    query %= urllib.quote_plus(title)
-                except:
-                    query %= title.decode('UTF-8').encode('Windows-1252')
+            link = self.year_link % (year, "%s")
 
-                query = urlparse.urljoin(self.base_link, query)
+            for i in range(1, 100, 1):
+                content = client.request(link % str(i))
 
-                r = client.request(query)
-
-                links = dom_parser.parse_dom(r, 'div', attrs={'class': 'search_frame'})
+                links = dom_parser.parse_dom(content, 'div', attrs={'class': 'search_frame'})
+                if len(links) == 0: return
                 links = [dom_parser.parse_dom(i, 'a') for i in links]
                 links = [(i[1], i[2]) for i in links]
                 links = [(i[0].attrs['href'], re.findall('>(.*?)<', i[0].content)[0], i[1].content) for i in links]

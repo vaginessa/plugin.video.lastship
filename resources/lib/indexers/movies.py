@@ -189,7 +189,7 @@ class movies:
 
     def search(self):
 
-        navigator.navigator().addDirectoryItem(32603, 'movieSearchnew', 'search.png', 'DefaultMovies.png')
+        navigator.navigator().addDirectoryItem(32603, 'movieSearchnew', 'search.png', 'DefaultMovies.png', isFolder=False)
         try: from sqlite3 import dbapi2 as database
         except: from pysqlite2 import dbapi2 as database
 
@@ -208,7 +208,7 @@ class movies:
         for (id,term) in dbcur.fetchall():
             if term not in str(lst):
                 delete_option = True
-                navigator.navigator().addDirectoryItem(term, 'movieSearchterm&name=%s' % term, 'search.png', 'DefaultMovies.png')
+                navigator.navigator().addDirectoryItem(term, 'movieSearchterm&name=%s' % term, 'search.png', 'DefaultMovies.png', isFolder=False)
                 lst += [(term)]
         dbcur.close()
 

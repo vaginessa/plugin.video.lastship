@@ -12,7 +12,6 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['de']
-        self.genre_filter = ['animation', 'anime']
         self.domains = ['nanime.to']
         self.base_link = 'https://nanime.to'
         self.search_link = '/?s=%s'
@@ -45,7 +44,8 @@ class source:
             links = [i[1] for i in links if season == i[0]][0]
             links = dom_parser.parse_dom(links, 'div', attrs={'class': 'episodiotitle'})
             links = dom_parser.parse_dom(links, 'a')
-            links = [i.attrs['href'] for i in links if episode in re.findall('\d+', i.content)]
+            links = [(i.attrs['href'], re.findall("x(\d+)", i.attrs['href'])[0]) for i in links]
+            links = [i[0] for i in links if episode == i[1]]
 
             if len(links) > 0:
                 return source_utils.strip_domain(links[0])

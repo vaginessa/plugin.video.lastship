@@ -53,8 +53,8 @@ def getHDGOStreams(url):
         request = client.request(url, referer=url)
         request = dom_parser.parse_dom(request, 'iframe')[0].attrs['src']
         request = client.request(urlparse.urljoin('http://', request), referer=url)
-        pattern = "url:[^>]'([^']+)"
-        request = re.findall(pattern, request, re.DOTALL)
-        return request
+        request = re.findall("media:\s(\[.*?\])", request, re.DOTALL)[0]
+        request = re.findall("'(.*?\')", request)
+        return ["https:" + i.replace("'", "") for i in request if i[:2] == "//"]
     except:
         return None

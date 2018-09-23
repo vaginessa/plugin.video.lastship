@@ -5,6 +5,7 @@
 - Add cine.to mit ReCaptcha Funktion
 - Fix fehlende Icons unter Linux
 - Fix HDGO.py (Resolver)
+- Update kinox (new domains)
 
 [B]3.0.2.3[/B]
 - Update myjdownloader.py, recaptcha_app.py

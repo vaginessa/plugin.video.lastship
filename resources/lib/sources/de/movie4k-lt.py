@@ -51,25 +51,27 @@ class source:
         try:
             if not url:
                 return sources
-            r = client.request(url)
+            query = urlparse.urljoin(self.base_link, url)
+            r = client.request(query)
 
             links = dom_parser.parse_dom(r, 'div', attrs={'id': 'tab-plot_german'})
             links = dom_parser.parse_dom(links, 'tbody')
             links = dom_parser.parse_dom(links, 'tr')
-            links = [(dom_parser.parse_dom(i,'a')[0],
-                      dom_parser.parse_dom(i,'td', attrs={'class': 'votesCell'})[0])
+            links = [(dom_parser.parse_dom(i, 'a')[0],
+                      dom_parser.parse_dom(i, 'td', attrs={'class': 'votesCell'})[0])
                      for i in links if "gif" in i.content]
 
-            links = [(i[0][1], i[0].attrs['href'], source_utils.get_release_quality(i[1].content)) for i in links]
+            links = [(i[0][1], i[0].attrs['href'], source_utils.get_release_quality(i[1].content)[0]) for i in links]
 
             for hoster, link, quality in links:
                 valid, hoster = source_utils.is_host_valid(hoster, hostDict)
-
                 if not valid:
                     continue
                 if '?' in link:
-                    link = urlparse.urljoin(self.base_link, url, link)
-                sources.append({'source': hoster, 'quality': quality, 'language': 'de', 'url': link, 'direct': False, 'debridonly': False, 'checkquality': True})
+                    link = urlparse.urljoin(url, link)
+
+                sources.append({'source': hoster, 'quality': quality, 'language': 'de', 'url': link, 'direct': False,
+                                'debridonly': False, 'checkquality': True})
 
             if len(sources) == 0:
                 raise Exception()
@@ -80,12 +82,11 @@ class source:
 
     def resolve(self, url):
         try:
-            if self.base_link in url:
-                r = client.request(url)
+            if 'e_link' in url:
+                r = client.request(urlparse.urljoin(self.base_link,url))
                 s = re.findall("dingdong\('(.*?)'", r)[0]
                 s = base64.b64decode(s)
-                s = re.findall("src=\"(.*?)\"", s)[0]
-                url = s.strip('/')
+                return re.findall("src=\"(.*?)\"", s)[0]
             else:
                 return url
 

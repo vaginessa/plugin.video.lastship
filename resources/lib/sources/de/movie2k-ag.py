@@ -22,7 +22,7 @@ import re
 import urllib
 import urlparse
 
-from resources.lib.modules import cleantitle
+from resources.lib.modules import cleantitle, duckduckgo
 from resources.lib.modules import client
 from resources.lib.modules import source_utils
 from resources.lib.modules import dom_parser
@@ -35,33 +35,47 @@ class source:
         self.language = ['de']
         self.domains = ['movie2k.ag']
         self.base_link = 'https://www.movie2k.ag'
-        self.search_link = '?c=movie&m=filter&keyword=%s'
-        self.get_link = 'http://www.vodlocker.to/embed/movieStreams?lang=2&e=&id=%s&links=%s&cat=movie'
+        self.serie_link = 'http://www.vodlocker.to/embed?t=%s'
+        self.get_link = 'http://www.vodlocker.to/embed/movieStreams?lang=2&id=%s&server=alternate&cat=%s'
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
-            url = self.__search([localtitle] + source_utils.aliases_to_array(aliases))
-            if not url and title != localtitle: url = self.__search([title] + source_utils.aliases_to_array(aliases))
-            return url
+            url = duckduckgo.search([localtitle, title] + source_utils.aliases_to_array(aliases), year, self.domains[0], '(.*?)\(')
+            query = urlparse.urljoin(self.base_link, url)
+            content = client.request(query)
+            r = dom_parser.parse_dom(content, 'div', attrs={'id': 'player'})
+            r = dom_parser.parse_dom(r, 'iframe', req='src')
+            r = client.request(r[0].attrs['src'])
+            r = dom_parser.parse_dom(r, 'span', attrs={'class': 'server'})
+            r = dom_parser.parse_dom(r, 'a')[0].attrs['href']
+            return self.get_link % (re.findall('id=(\d+)', r)[0], 'movie')
+        except:
+            return
+
+    def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
+        try:
+            return self.serie_link % urllib.quote_plus(localtvshowtitle)
+        except:
+            return
+
+    def episode(self, url, imdb, tvdb, title, premiered, season, episode):
+        try:
+            if url is None:
+                return
+            url += '&season=%s&episode=%s&server=alternate&type=episode' % (season, episode)
+            r = client.request(url)
+            r = re.findall('check_link\?id=(\d+)', r)[0]
+            return self.get_link % (r, 'episode') + '&season=%s&episode=%s' % (season, episode)
+
         except:
             return
 
     def sources(self, url, hostDict, hostprDict):
         sources = []
-
         try:
             if not url:
                 return sources
-
-            query = urlparse.urljoin(self.base_link, url)
-            r = client.request(query)
-            r = dom_parser.parse_dom(r, 'div', attrs={'id': 'player'})
-            r = dom_parser.parse_dom(r, 'iframe', req='src')
-            r = client.request(r[0][0]['src'])
-            r = dom_parser.parse_dom(r, 'a', attrs={'class': 'play_container'}, req='href')
-            r = client.request(r[0][0]['href'])
-            link = self.get_link % (re.search('(?<=var id = \")(.*?)(?=\")', r).group(), re.search('(?<=var links = \")(.*?)(?=\")', r).group())
-            r = client.request(link)
+            r = client.request(url)
             r = dom_parser.parse_dom(r, 'ul', attrs={'id': 'articleList'})
             r = dom_parser.parse_dom(r, 'a')
 
@@ -87,33 +101,3 @@ class source:
 
     def resolve(self, url):
         return url
-
-    def __search(self, titles):
-        try:
-            query = self.search_link % (urllib.quote_plus(cleantitle.query(titles[0])))
-            query = urlparse.urljoin(self.base_link, query)
-
-            t = [cleantitle.get(i) for i in set(titles) if i]
-
-            r = client.request(query)
-
-            r = dom_parser.parse_dom(r, 'div', attrs={'class': 'nag'})
-            r = dom_parser.parse_dom(r, 'div', attrs={'class': 'item-video'})
-            r = dom_parser.parse_dom(r, 'h2', attrs={'class': 'entry-title'})
-            r = dom_parser.parse_dom(r, 'a', req='href')
-
-            for i in r:
-                title = i[1]
-                if re.search('\*(?:.*?)\*', title) is not None:
-                    title = re.sub('\*(?:.*?)\*', '', title)
-                title = cleantitle.get(title)
-                if title in t:
-                    return source_utils.strip_domain(i[0]['href'])
-                else:
-                    return
-        except:
-            try:
-                source_faultlog.logFault(__name__, source_faultlog.tagSearch, titles[0])
-            except:
-                return
-            return

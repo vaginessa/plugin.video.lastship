@@ -85,7 +85,7 @@
         <setting id="provider.kinoking" type="bool" label="KINOKING.TO" default="true" />
         <setting id="provider.kinox" type="bool" label="KINOX.TO" default="false" />
         <setting id="provider.moovie" type="bool" label="MOOVIE" default="true" />
-        <setting id="provider.movie2k-sc" type="bool" label="MOVIE2K.SC" default="true" />
+        <setting id="provider.movie2k-st" type="bool" label="MOVIE2K.ST" default="true" />
         <setting id="provider.movie2k-ag" type="bool" label="MOVIE2K.AG" default="true" />
         <setting id="provider.movie4k" type="bool" label="MOVIE4K.TO" default="true" />
         <setting id="provider.movie4k-lt" type="bool" label="MOVIE4K.LT" default="true" />

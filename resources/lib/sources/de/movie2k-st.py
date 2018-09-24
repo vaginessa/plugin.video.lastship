@@ -34,8 +34,8 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['de']
-        self.domains = ['movie2k.sc']
-        self.base_link = 'http://www.movie2k.sc'
+        self.domains = ['movie2k.st']
+        self.base_link = 'http://www.movie2k.st'
         self.search_link = '/search/%s'
 
     def movie(self, imdb, title, localtitle, aliases, year):
@@ -61,15 +61,14 @@ class source:
                       dom_parser.parse_dom(i, 'td', attrs={'class': 'votesCell'})[0])
                      for i in links if "gif" in i.content]
 
-            links = [(i[0][1], i[0].attrs['href'], source_utils.get_release_quality(i[1].content)) for i in links]
+            links = [(i[0][1], i[0].attrs['href'], source_utils.get_release_quality(i[1].content)[0]) for i in links]
 
             for hoster, link, quality in links:
                 valid, hoster = source_utils.is_host_valid(hoster, hostDict)
-
                 if not valid:
                     continue
                 if '?' in link:
-                    link = urlparse.urljoin(self.base_link, url, link)
+                    link = urlparse.urljoin(url, link)
 
                 sources.append({'source': hoster, 'quality': quality, 'language': 'de', 'url': link, 'direct': False,
                                 'debridonly': False, 'checkquality': True})
@@ -78,13 +77,13 @@ class source:
                 raise Exception()
             return sources
         except:
-            source_faultlog.logFault(__name__,source_faultlog.tagScrape, url)
+            source_faultlog.logFault(__name__, source_faultlog.tagScrape, url)
             return sources
 
     def resolve(self, url):
         try:
-            if self.base_link in url:
-                r = client.request(url)
+            if 'e_link' in url:
+                r = client.request(urlparse.urljoin(self.base_link,url))
                 s = re.findall("dingdong\('(.*?)'", r)[0]
                 s = base64.b64decode(s)
                 s = re.findall("src=\"(.*?)\"", s)[0]
@@ -97,7 +96,6 @@ class source:
             return url
 
     def __search(self, titles):
-
         try:
             query = self.search_link % (urllib.quote_plus(urllib.quote_plus(cleantitle.query(titles[0]))))
             query = urlparse.urljoin(self.base_link, query)
@@ -110,15 +108,12 @@ class source:
             r = dom_parser.parse_dom(r, 'li')
             r = dom_parser.parse_dom(r, 'span', attrs={'class': 'name'})
             r = dom_parser.parse_dom(r, 'a')
+            r = [(i.attrs['href'], i.attrs['title']) for i in r]
+            r = [(i[0], re.findall('(.*?)\(', i[1])[0]) for i in r]
+            r = [i[0] for i in r if cleantitle.get(i[1]) in t]
 
-            for i in r:
-                title = i[1]
-                title = cleantitle.get(title)
-                if title in t:
-                    return source_utils.strip_domain(i[0]['href'])
-                else:
-                    continue
-            return ""
+            return source_utils.strip_domain(r[0])
+
         except:
             try:
                 source_faultlog.logFault(__name__, source_faultlog.tagSearch, titles[0])

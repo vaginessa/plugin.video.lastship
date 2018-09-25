@@ -23,8 +23,8 @@ import re
 import urllib
 import urlparse
 
+from resources.lib.modules import cfscrape
 from resources.lib.modules import cleantitle
-from resources.lib.modules import client
 from resources.lib.modules import dom_parser
 from resources.lib.modules import source_utils
 from resources.lib.modules import source_faultlog
@@ -38,19 +38,20 @@ class source:
         self.base_link = 'http://filmpalast.to'
         self.search_link = '/search/title/%s'
         self.stream_link = 'stream/%s/1'
+        self.scraper = cfscrape.create_scraper()
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
-            url = self.__search([localtitle] + source_utils.aliases_to_array(aliases))
-            if not url and title != localtitle: url = self.__search([title] + source_utils.aliases_to_array(aliases))
+            url = self.__search(False, [localtitle] + source_utils.aliases_to_array(aliases))
+            if not url and title != localtitle: url = self.__search(False, [title] + source_utils.aliases_to_array(aliases))
             return url
         except:
             return
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
-            url = {'imdb': imdb, 'tvdb': tvdb, 'tvshowtitle': tvshowtitle, 'localtvshowtitle': localtvshowtitle, 'aliases': aliases, 'year': year}
-            url = urllib.urlencode(url)
+            url = self.__search(True, [localtvshowtitle] + source_utils.aliases_to_array(aliases))
+            if not url and tvshowtitle != localtvshowtitle: url = self.__search(True, [tvshowtitle] + source_utils.aliases_to_array(aliases))
             return url
         except:
             return
@@ -60,32 +61,22 @@ class source:
             if not url:
                 return
 
-            data = urlparse.parse_qs(url)
-            data = dict([(i, data[i][0]) if data[i] else (i, '') for i in data])
-            title = data['localtvshowtitle']
-            title += ' S%02dE%02d' % (int(season), int(episode))
-            aliases = source_utils.aliases_to_array(eval(data['aliases']))
-            aliases = [i + ' S%02dE%02d' % (int(season), int(episode)) for i in aliases]
+            episode = '0' + episode if int(episode) < 10 else episode
+            season = '0' + season if int(season) < 10 else season
 
-            url = self.__search([title] + aliases)
-            if not url and data['tvshowtitle'] != data['localtvshowtitle']:
-                title = data['tvshowtitle']
-                title += ' S%02dE%02d' % (int(season), int(episode))
-                url = self.__search([title] + aliases)
-            return url
+            return re.findall('(.*?)s\d', url)[0] + 's%se%s' % (season, episode)
         except:
             return
 
     def sources(self, url, hostDict, hostprDict):
         sources = []
-
         try:
             if not url:
                 return sources
 
             query = urlparse.urljoin(self.base_link, url)
 
-            r = client.request(query)
+            r = self.scraper.get(query).content
 
             quality = dom_parser.parse_dom(r, 'span', attrs={'id': 'release_text'})[0].content.split('&nbsp;')[0]
             quality, info = source_utils.get_release_quality(quality)
@@ -113,7 +104,7 @@ class source:
 
             for id in url:
                 query = urlparse.urljoin(self.base_link, self.stream_link % id)
-                r = client.request(query, XHR=True, post=urllib.urlencode({'streamID': id}))
+                r = self.scraper.get(query, XHR=True, post=urllib.urlencode({'streamID': id})).content
                 r = json.loads(r)
                 if 'error' in r and r['error'] == '0' and 'url' in r:
                     h_url.append(r['url'])
@@ -125,7 +116,7 @@ class source:
             source_faultlog.logFault(__name__,source_faultlog.tagResolve)
             return
 
-    def __search(self, titles):
+    def __search(self, isSerieSearch, titles):
         try:
             t = [cleantitle.get(i) for i in set(titles) if i]
 
@@ -133,12 +124,12 @@ class source:
                 query = self.search_link % (urllib.quote_plus(title))
                 query = urlparse.urljoin(self.base_link, query)
 
-                r = client.request(query)
+                r = self.scraper.get(query).content
 
                 r = dom_parser.parse_dom(r, 'article')
                 r = dom_parser.parse_dom(r, 'a', attrs={'class': 'rb'}, req='href')
                 r = [(i.attrs['href'], i.content) for i in r]
-                r = [i[0] for i in r if cleantitle.get(i[1]) in t]
+                r = [i[0] for i in r if cleantitle.get(i[1]) in t and not isSerieSearch or cleantitle.get(re.findall('(.*?)S\d', i[1])[0]) and isSerieSearch]
 
                 if len(r) > 0:
                     return source_utils.strip_domain(r[0])

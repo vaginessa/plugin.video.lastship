@@ -35,7 +35,7 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['de']
-        self.domains = ['movie4k.io', 'movie4k.tv', 'movie.to', 'movie4k.me', 'movie4k.org', 'movie4k.pe', 'movie2k.cm', 'movie2k.nu', 'movie4k.am']
+        self.domains = ['movie4k.sg', 'movie4k.lol', 'movie4k.pe', 'movie4k.tv', 'movie.to', 'movie4k.me', 'movie4k.org', 'movie2k.cm', 'movie2k.nu', 'movie4k.am', 'movie4k.io']
         self._base_link = None
         self.search_link = '/movies.php?list=search&search=%s'
         self.scraper = cfscrape.create_scraper()
@@ -48,17 +48,17 @@ class source:
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
-            url = self.__search(imdb, [localtitle] + source_utils.aliases_to_array(aliases), year)
-            if not url and title != localtitle: url = self.__search(imdb, [title] + source_utils.aliases_to_array(aliases), year)
+            url = self.__search(False, [localtitle] + source_utils.aliases_to_array(aliases), year)
+            if not url and title != localtitle: url = self.__search(False, [title] + source_utils.aliases_to_array(aliases), year)
             return url
         except:
             return
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
-            url = self.__search(imdb, [localtvshowtitle] + source_utils.aliases_to_array(aliases), year)
+            url = self.__search(True, [localtvshowtitle] + source_utils.aliases_to_array(aliases), year)
             if not url and tvshowtitle != localtvshowtitle:
-                url = self.__search(imdb, [tvshowtitle] + source_utils.aliases_to_array(aliases), year)
+                url = self.__search(True, [tvshowtitle] + source_utils.aliases_to_array(aliases), year)
             if url:
                 return url
         except:
@@ -66,7 +66,7 @@ class source:
 
     def episode(self, url, imdb, tvdb, title, premiered, season, episode):
         try:
-            if url == None:
+            if url is None:
                 return
 
             url = urlparse.urljoin(self.base_link, url)
@@ -82,7 +82,7 @@ class source:
             seasons = seasons[seasonIndex]
             episodes = dom_parser.parse_dom(seasons, 'option', req='value')
 
-            url = [i.attrs['value'] for i in episodes if episode in i.content]
+            url = [i.attrs['value'] for i in episodes if episode == re.findall('\d+', i.content)[0]]
             if len(url) > 0:
                 return url[0]
         except:
@@ -148,7 +148,7 @@ class source:
             source_faultlog.logFault(__name__,source_faultlog.tagResolve)
             return
 
-    def __search(self, imdb, titles, year):
+    def __search(self, isSerieSearch, titles, year):
         try:
             q = self.search_link % titles[0]
             q = urlparse.urljoin(self.base_link, q)
@@ -163,8 +163,10 @@ class source:
 
             tuplesSortByYear = [(i[0].attrs['href'], i[0].content) for i in tuples if year in i[1]]
 
-            if len(tuplesSortByYear) > 0:
+            if len(tuplesSortByYear) > 0 and not isSerieSearch:
                 tuples = tuplesSortByYear
+            elif isSerieSearch:
+                tuples = [(i[0].attrs['href'], i[0].content) for i in tuples if "serie" in i[0].content.lower()]
             else:
                 tuples = [(i[0].attrs['href'], i[0].content) for i in tuples]
 

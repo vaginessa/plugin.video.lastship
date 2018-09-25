@@ -271,7 +271,8 @@ class sources:
                         waiting_time = waiting_time - 0.5
                         if control.condVisibility('Window.IsActive(virtualkeyboard)') or \
                                 control.condVisibility('Window.IsActive(yesnoDialog)') or \
-                                control.condVisibility('Window.IsActive(PopupRecapInfoWindow)'):
+                                control.condVisibility('Window.IsActive(PopupRecapInfoWindow)') or \
+                                control.condVisibility('Window.IsActive(ProgressDialog)'):
                             waiting_time = waiting_time + 0.5 #dont count down while dialog is presented
 
                     if w.is_alive() == True: block = items[i]['source']
@@ -1008,7 +1009,8 @@ class sources:
                         waiting_time = waiting_time - 0.5
                         if control.condVisibility('Window.IsActive(virtualkeyboard)') or \
                                 control.condVisibility('Window.IsActive(yesnoDialog)') or \
-                                control.condVisibility('Window.IsActive(PopupRecapInfoWindow)'):
+                                control.condVisibility('Window.IsActive(PopupRecapInfoWindow)') or \
+                                control.condVisibility('Window.IsActive(ProgressDialog)'):
                             waiting_time = waiting_time + 0.5 #dont count down while dialog is presented
 
                     if w.is_alive() == True: block = items[i]['source']

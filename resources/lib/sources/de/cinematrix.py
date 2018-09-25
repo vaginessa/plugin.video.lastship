@@ -21,6 +21,7 @@ class source:
         self.hoster_link = self.base_link + 'ajax/getHoster%s.php'
         self.hoster_mirror_link = self.base_link + 'ajax/refresh%sMirror.php'
         self.stream_link = self.base_link + 'ajax/get%sStream.php'
+        self.get_Episodes = self.base_link + '/ajax/getEpisodes.php'
         self.scraper = cfscrape.create_scraper()
 
     def movie(self, imdb, title, localtitle, aliases, year):
@@ -61,6 +62,8 @@ class source:
                 params = self.getParams(content_id, cookies)
             else:
                 temp = re.findall('.*staffel\/(\d+).*?(\d+)', url)[0]
+                if not self.isEpisodeAvailable(content_id, url, cookies, temp[0], temp[1]):
+                    return sources
                 params = self.getParams(content_id, cookies, s=temp[0], e=temp[1])
 
             content = self.scraper.post(link, headers=self.getHeader(url), data=params).content
@@ -84,6 +87,12 @@ class source:
         except:
             source_faultlog.logFault(__name__, source_faultlog.tagScrape, url)
             return sources
+
+    def isEpisodeAvailable(self, content_id, url, cookies, season, episode):
+        params = {'c': cookies, 'v': content_id, 'st': season}
+        content = self.scraper.post(self.get_Episodes, headers=self.getHeader(url), data=params).content
+        episodes = dom_parser.parse_dom(content, 'option')
+        return any([i.attrs['value'] for i in episodes if i.attrs['value'] == episode])
 
     def resolve(self, url):
         try:

@@ -23,10 +23,9 @@ class source:
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
-            url = self.__search([localtitle] + source_utils.aliases_to_array(aliases), year)
-
+            url = self.__search(False, [localtitle] + source_utils.aliases_to_array(aliases))
             if not url and title != localtitle:
-                url = self.__search([title] + source_utils.aliases_to_array(aliases), year)
+                url = self.__search(False, [title] + source_utils.aliases_to_array(aliases))
             return urllib.urlencode({'url': url, 'imdb': re.sub('[^0-9]', '', imdb)}) if url else None
             
         except:
@@ -34,9 +33,9 @@ class source:
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
-            url = self.__search([localtvshowtitle] + source_utils.aliases_to_array(aliases), year)
+            url = self.__search(True, [localtvshowtitle] + source_utils.aliases_to_array(aliases))
             if not url and tvshowtitle != localtvshowtitle:
-                url = self.__search([tvshowtitle] + source_utils.aliases_to_array(aliases), year)
+                url = self.__search(True, [tvshowtitle] + source_utils.aliases_to_array(aliases))
             return urllib.urlencode({'url': url, 'imdb': re.sub('[^0-9]', '', imdb)}) if url else None
         except:
             return
@@ -67,7 +66,7 @@ class source:
             season = data.get('season')
             episode = data.get('episode')
 
-            sHtmlContent=self.scraper.get(url).content
+            sHtmlContent = self.scraper.get(url).content
 
             quality = "SD"
 
@@ -145,7 +144,7 @@ class source:
             source_faultlog.logFault(__name__, source_faultlog.tagResolve)
             return url
 
-    def __search(self, titles, year):
+    def __search(self, isSerieSearch, titles):
         try:
             t = [cleantitle.get(i) for i in set(titles) if i]
             url = self.search % titles[0]
@@ -155,14 +154,14 @@ class source:
             search_results = dom_parser.parse_dom(search_results, 'a')
             search_results = [(i.attrs['href'], i.content) for i in search_results]
             search_results = [(i[0], re.findall('(.*?)\((\d+)', i[1])[0]) for i in search_results]
-            search_results = [i[0] for i in search_results if cleantitle.get(i[1][0]) in t and i[1][1] in year]
+            search_results = [i[0] for i in search_results if cleantitle.get(i[1][0]) in t and not isSerieSearch or isSerieSearch and cleantitle.get(re.findall('(.*?)Staffel', i[1][0])[0])]
                 
             if len(search_results) > 0:
                 return source_utils.strip_domain(search_results[0])
             return
         except:
             try:
-                source_faultlog.logFault(__name__, source_faultlog.tagSearch, localtitle)
+                source_faultlog.logFault(__name__, source_faultlog.tagSearch, titles[0])
             except:
                 return
             return

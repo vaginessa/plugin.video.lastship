@@ -73,63 +73,20 @@ class source:
 
     def sources(self, url, hostDict, hostprDict):
         sources = []
-
         try:
             if not url:
                 return sources
 
             query = urlparse.urljoin(self.base_link, url)
+            content = self.scraper.get(query).content
+            quality = dom_parser.parse_dom(content, 'div', attrs={'class': 'tabformat'})
 
-            r = self.scraper.get(query).content
-            r = dom_parser.parse_dom(r, 'div', attrs={'id': 'Module'})
-            r = [(r, dom_parser.parse_dom(r, 'a', attrs={'href': re.compile('[^\'"]*xrel_search_query[^\'"]*')}, req='href'))]
-            r = [(i[0], i[1][0].attrs['href'] if i[1] else '') for i in r]
+            for quali in quality:
+                if len(quality) > 1:
+                    content = self.scraper.get(urlparse.urljoin(self.base_link, dom_parser.parse_dom(quali, 'a')[0].attrs['href'])).content
+                self.__getRelease(sources, content, hostDict)
 
-            rels = dom_parser.parse_dom(r[0][0], 'a', attrs={'href': re.compile('[^\'"]*ReleaseList[^\'"]*')}, req='href')
-            if rels and len(rels) > 1:
-                r = []
-                for rel in rels:
-                    relData = self.scraper.get(urlparse.urljoin(self.base_link, rel.attrs['href'])).content
-                    relData = dom_parser.parse_dom(relData, 'table', attrs={'class': 'release-list'})
-                    relData = dom_parser.parse_dom(relData, 'tr', attrs={'class': 'row'})
-                    relData = [(dom_parser.parse_dom(i, 'td', attrs={'class': re.compile('[^\'"]*list-name[^\'"]*')}),
-                                dom_parser.parse_dom(i, 'img', attrs={'class': 'countryflag'}, req='alt'),
-                                dom_parser.parse_dom(i, 'td', attrs={'class': 'release-types'})) for i in relData]
-                    relData = [(i[0][0].content, i[1][0].attrs['alt'].lower(), i[2][0].content) for i in relData if i[0] and i[1] and i[2]]
-                    relData = [(i[0], i[2]) for i in relData if i[1] == 'deutsch']
-                    relData = [(i[0], dom_parser.parse_dom(i[1], 'img', attrs={'class': 'release-type-stream'})) for i in relData]
-                    relData = [i[0] for i in relData if i[1]]
-                    #relData = dom_parser.parse_dom(relData, 'a', req='href')[:3]
-                    relData = dom_parser.parse_dom(relData, 'a', req='href')
-
-                    for i in relData:
-                        i = self.scraper.get(urlparse.urljoin(self.base_link, i.attrs['href'])).content
-                        i = dom_parser.parse_dom(i, 'div', attrs={'id': 'Module'})
-                        i = [(i, dom_parser.parse_dom(i, 'a', attrs={'href': re.compile('[^\'"]*xrel_search_query[^\'"]*')}, req='href'))]
-                        r += [(x[0], x[1][0].attrs['href'] if x[1] else '') for x in i]
-
-            r = [(dom_parser.parse_dom(i[0], 'div', attrs={'id': 'ModuleReleaseDownloads'}), i[1]) for i in r]
-            r = [(dom_parser.parse_dom(i[0][0], 'a', attrs={'class': re.compile('.*-stream.*')}, req='href'), i[1]) for i in r if len(i[0]) > 0]
-
-            for items, rel in r:
-                rel = urlparse.urlparse(rel).query
-                rel = urlparse.parse_qs(rel)['xrel_search_query'][0]
-
-                quality, info = source_utils.get_release_quality(rel)
-
-                items = [(i.attrs['href'], i.content) for i in items]
-                items = [(i[0], dom_parser.parse_dom(i[1], 'img', req='src')) for i in items]
-                items = [(i[0], i[1][0].attrs['src']) for i in items if i[1]]
-                items = [(i[0], re.findall('.+/(.+\.\w+)\.\w+', i[1])) for i in items]
-                items = [(i[0], i[1][0]) for i in items if i[1]]
-
-                info = ' | '.join(info)
-
-                for link, hoster in items:
-                    valid, hoster = source_utils.is_host_valid(hoster, hostDict)
-                    if not valid: continue
-
-                    sources.append({'source': hoster, 'quality': quality, 'language': 'de', 'url': link, 'info': info, 'direct': False, 'debridonly': False, 'checkquality': True})
+            self.__getRelease(sources, content, hostDict)
 
             if len(sources) == 0:
                 raise Exception()
@@ -137,6 +94,34 @@ class source:
         except:
             source_faultlog.logFault(__name__,source_faultlog.tagScrape, url)
             return sources
+
+    def __getRelease(self, sources, content, hostDict):
+        releases = dom_parser.parse_dom(content, 'table', attrs={'class': 'release-list'})
+        releases = dom_parser.parse_dom(releases, 'tr')
+        releases = [dom_parser.parse_dom(i, 'a')[0].attrs['href'] for i in releases if len(dom_parser.parse_dom(i, 'img', attrs={'class': 'release-type-stream'})) > 0]
+
+        if len(releases) > 0:
+            for release in releases:
+                content = self.scraper.get(urlparse.urljoin(self.base_link, release)).content
+                self.__getLinks(sources, content, hostDict, release)
+        else:
+            self.__getLinks(sources, content, hostDict, dom_parser.parse_dom(content, 'h1')[2].content)
+
+    def __getLinks(self, sources, content, hostDict, release):
+        quality, info = source_utils.get_release_quality(release)
+
+        links = dom_parser.parse_dom(content, 'div', attrs={'id': 'ModuleReleaseDownloads'})
+        links = dom_parser.parse_dom(links, 'a', attrs={'data-tooltip': 'abspielen'})
+        links = [(i.attrs['href'], dom_parser.parse_dom(i, 'img')[0].attrs['src']) for i in links]
+        links = [(i[0], re.findall('host/(.*)\.jpg', i[1])[0]) for i in links]
+
+        for link, hoster in links:
+            valid, hoster = source_utils.is_host_valid(hoster, hostDict)
+            if not valid: continue
+
+            sources.append(
+                {'source': hoster, 'quality': quality, 'language': 'de', 'url': link, 'info': info, 'direct': False,
+                 'debridonly': False, 'checkquality': True})
 
     def resolve(self, url):
         try:

@@ -22,7 +22,9 @@ import re
 import urllib
 import urlparse
 
-from resources.lib.modules import cleantitle, cfscrape
+from resources.lib.modules import cache
+from resources.lib.modules import cfscrape
+from resources.lib.modules import cleantitle
 from resources.lib.modules import source_utils
 from resources.lib.modules import dom_parser
 from resources.lib.modules import source_faultlog
@@ -60,10 +62,10 @@ class source:
 
             query = urlparse.urljoin(self.base_link, url)
 
-            r = self.scraper.get(query).content
+            r = cache.get(self.scraper.get, 4, query).content
             r = dom_parser.parse_dom(r, 'td', attrs={'data-title-name': re.compile('Season %02d' % int(season))})
             r = dom_parser.parse_dom(r, 'a', req='href')[0].attrs['href']
-            r = self.scraper.get(urlparse.urljoin(self.base_link, r)).content
+            r = cache.get(self.scraper.get, 4, urlparse.urljoin(self.base_link, r)).content
             r = dom_parser.parse_dom(r, 'td', attrs={'data-title-name': re.compile('Episode %02d' % int(episode))})
             r = dom_parser.parse_dom(r, 'a', req='href')[0].attrs['href']
 
@@ -78,12 +80,12 @@ class source:
                 return sources
 
             query = urlparse.urljoin(self.base_link, url)
-            content = self.scraper.get(query).content
+            content = cache.get(self.scraper.get, 4, query).content
             quality = dom_parser.parse_dom(content, 'div', attrs={'class': 'tabformat'})
 
             for quali in quality:
                 if len(quality) > 1:
-                    content = self.scraper.get(urlparse.urljoin(self.base_link, dom_parser.parse_dom(quali, 'a')[0].attrs['href'])).content
+                    content = cache.get(self.scraper.get, 4, urlparse.urljoin(self.base_link, dom_parser.parse_dom(quali, 'a')[0].attrs['href'])).content
                 self.__getRelease(sources, content, hostDict)
 
             self.__getRelease(sources, content, hostDict)
@@ -102,7 +104,7 @@ class source:
 
         if len(releases) > 0:
             for release in releases:
-                content = self.scraper.get(urlparse.urljoin(self.base_link, release)).content
+                content = cache.get(self.scraper.get, 4, urlparse.urljoin(self.base_link, release)).content
                 self.__getLinks(sources, content, hostDict, release)
         else:
             self.__getLinks(sources, content, hostDict, dom_parser.parse_dom(content, 'h1')[2].content)
@@ -125,7 +127,7 @@ class source:
 
     def resolve(self, url):
         try:
-            url = self.scraper.get(urlparse.urljoin(self.base_link, url)).url
+            url = cache.get(self.scraper.get, 4, urlparse.urljoin(self.base_link, url)).url
             return url if self.base_link not in url else None
         except:
             return
@@ -137,7 +139,7 @@ class source:
 
             t = [cleantitle.get(i) for i in set(titles) if i]
 
-            r = self.scraper.get(query).content
+            r = cache.get(self.scraper.get, 4, query).content
 
             r = dom_parser.parse_dom(r, 'div', attrs={'class': 'big-list'})
             r = dom_parser.parse_dom(r, 'table', attrs={'class': 'row'})
@@ -150,7 +152,7 @@ class source:
 
             url = source_utils.strip_domain(r)
 
-            r = self.scraper.get(urlparse.urljoin(self.base_link, url)).content
+            r = cache.get(self.scraper.get, 4, urlparse.urljoin(self.base_link, url)).content
             r = dom_parser.parse_dom(r, 'a', attrs={'href': re.compile('.*/tt\d+.*')}, req='href')
             r = [re.findall('.+?(tt\d+).*?', i.attrs['href']) for i in r]
             r = [i[0] for i in r if i]

@@ -23,6 +23,7 @@ import urllib
 import urlparse
 import base64
 
+from resources.lib.modules import cache
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
 from resources.lib.modules import source_utils
@@ -52,7 +53,7 @@ class source:
             if not url:
                 return sources
             query = urlparse.urljoin(self.base_link, url)
-            r = client.request(query)
+            r = cache.get(client.request, 4, query)
 
             links = dom_parser.parse_dom(r, 'div', attrs={'id': 'tab-plot_german'})
             links = dom_parser.parse_dom(links, 'tbody')
@@ -83,7 +84,7 @@ class source:
     def resolve(self, url):
         try:
             if 'e_link' in url:
-                r = client.request(urlparse.urljoin(self.base_link,url))
+                r = cache.get(client.request, 4, urlparse.urljoin(self.base_link,url))
                 s = re.findall("dingdong\('(.*?)'", r)[0]
                 s = base64.b64decode(s)
                 return re.findall("src=\"(.*?)\"", s)[0]
@@ -101,7 +102,7 @@ class source:
 
             t = [cleantitle.get(i) for i in set(titles) if i]
 
-            r = client.request(query)
+            r = cache.get(client.request, 4, query)
 
             links = dom_parser.parse_dom(r, 'a', attrs={'class': 'coverImage'})
             links = [(i.attrs['href'], re.findall('(.*?)\(', i.attrs['title'])[0]) for i in links if year in i.content]

@@ -18,10 +18,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-import re
 import urllib
 import urlparse
 
+from resources.lib.modules import cache
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
 from resources.lib.modules import dom_parser
@@ -61,7 +61,7 @@ class source:
 
             url = urlparse.urljoin(self.base_link, url)
 
-            r = client.request(url)
+            r = cache.get(client.request, 4, url)
             r = r.replace('\n', ' ')
             r = dom_parser.parse_dom(r, 'div', attrs={'class': 'fullstory'})
             r = dom_parser.parse_dom(r, 'div', attrs={'class': 'row'})
@@ -76,8 +76,6 @@ class source:
                 if not valid: continue
                 sources.append({'source': host, 'quality': 'SD', 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
 
-            if len(sources) == 0:
-                raise Exception()
             return sources
         except:
             source_faultlog.logFault(__name__, source_faultlog.tagScrape, url)
@@ -93,7 +91,7 @@ class source:
 
             t = [cleantitle.get(i) for i in set(titles) if i]
 
-            r = client.request(query)
+            r = cache.get(client.request, 4, query)
 
             body = dom_parser.parse_dom(r, 'div', attrs={'class': 'content_body'})[1].content
             r = dom_parser.parse_dom(body, 'a', req='href')

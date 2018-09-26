@@ -23,6 +23,7 @@ import urllib
 import urlparse
 import json
 
+from resources.lib.modules import cache
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
 from resources.lib.modules import tvmaze
@@ -84,14 +85,14 @@ class source:
             data = urlparse.parse_qs(url)
             data = dict([(i, data[i][0]) if data[i] else (i, '') for i in data])
 
-            token = dom_parser.parse_dom(client.request(urlparse.urljoin(self.base_link,url)), 'input', attrs={'id': 'proxerToken'})[0].attrs['value']
+            token = dom_parser.parse_dom(cache.get(client.request, 4, urlparse.urljoin(self.base_link,url)), 'input', attrs={'id': 'proxerToken'})[0].attrs['value']
 
             for item_id, episode, content_type in self.__get_episode(data.get('url'), token, data.get('episode')):
                 stream_link = urlparse.urljoin(self.base_link, '/watch/%s/%s/%s' % (item_id, episode, content_type))
 
                 info = 'subbed' if content_type.endswith('sub') else ''
 
-                r = client.request(stream_link)
+                r = cache.get(client.request, 4, stream_link)
 
                 r = dom_parser.parse_dom(r, 'script')
                 r = ' '.join([i.content for i in r if i.content])
@@ -103,7 +104,7 @@ class source:
                     if stream_link.startswith('/'): stream_link = 'http:%s' % stream_link
 
                     if self.domains[0] in stream_link:
-                        stream_link = client.request(stream_link, cookie=urllib.urlencode({'proxerstream_player': 'flash'}))
+                        stream_link = cache.get(client.request, 4, stream_link, cookie=urllib.urlencode({'proxerstream_player': 'flash'}))
 
                         i = [(match[0], match[1]) for match in re.findall('''["']?\s*file\s*["']?\s*[:=,]?\s*["'](?P<url>[^"']+)(?:[^}>\]]+)["']?\s*width\s*["']?\s*[:=]\s*["']?(?P<label>[^"',]+)''', stream_link, re.DOTALL)]
                         i = [(x[0].replace('\/', '/'), source_utils.label_to_quality(x[1])) for x in i]
@@ -116,8 +117,6 @@ class source:
 
                         sources.append({'source': host, 'quality': 'SD', 'language': 'de', 'url': stream_link, 'info': info, 'direct': False, 'debridonly': False})
 
-            if len(sources) == 0:
-                raise Exception()
             return sources
         except:
             source_faultlog.logFault(__name__,source_faultlog.tagScrape, url)
@@ -134,7 +133,7 @@ class source:
             item_id = re.findall('info/(\d+)', url)[0]
             url = urlparse.urljoin(self.base_link, '/info/%s/list?format=json&%s=1' % (item_id, token))
 
-            r = client.request(url)
+            r = cache.get(client.request, 4, url)
             r = json.loads(r).get('data', [])
             return [(item_id, episode, i.get('typ')) for i in r if int(i.get('no', '0')) == int(episode) and 'ger' in i.get('typ')]
         except:
@@ -149,7 +148,7 @@ class source:
                 t = [cleantitle.get(i) for i in set(titles) if i]
                 y = ['%s' % str(year), '%s' % str(int(year) + 1), '%s' % str(int(year) - 1), '0']
 
-                r = client.request(query)
+                r = cache.get(client.request, 4, query)
 
                 r = dom_parser.parse_dom(r, 'div', attrs={'id': 'search'})
                 r = dom_parser.parse_dom(r, 'table')

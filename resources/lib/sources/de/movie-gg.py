@@ -8,14 +8,12 @@ from resources.lib.modules import source_faultlog
 
 class source:
     def __init__(self):
-        ## Required Init ##
         self.priority = 1
         self.language = ['de']
         self.base_link_api = 'https://movies.gg/MovieAPI?'
         self.getimdb = 'movie_info_imdb=%s'
         self.getlinks = 'get_links=%s'
         self.key = base64.b64decode('JmtleT15a0RGS2JOSlpwSUF5NGZYc1dYWA==')
-        
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
@@ -40,24 +38,24 @@ class source:
 
             ## getmovieID & Quality from imdbID ##
             http = urllib3.PoolManager()
-            request = http.request('GET', url )
-            request_json=json.loads(request.data.decode('utf8'))
+            request = http.request('GET', url)
+            request_json = json.loads(request.data.decode('utf8'))
             request.release_conn()
-            movie_id=request_json['id']
-            movie_type=request_json['movie_type']
-                        
+            movie_id = request_json['id']
+            movie_type = request_json['movie_type']
+
             ## getlinks from movieID ##
-            link=(self.base_link_api+self.getlinks % movie_id+self.key)
+            link = (self.base_link_api + self.getlinks % movie_id + self.key)
             http = urllib3.PoolManager()
-            request = http.request('GET',link)
-            request_json=json.loads(request.data.decode('utf8'))
+            request = http.request('GET', link)
+            request_json = json.loads(request.data.decode('utf8'))
             request.release_conn()
 
-            if movie_type=='movie':
-                q='HD'
+            if movie_type == 'movie':
+                q = 'HD'
             else:
-                q='SD'
-                        
+                q = 'SD'
+
             ## return list with links ##
             
             for link in request_json:

@@ -89,7 +89,7 @@ class source:
             season = data.get('season')
             episode = data.get('episode')
 
-            r = self.scraper.get(url).content
+            r = cache.get(self.scraper.get, 4, url).content
 
             if season and episode:
                 r = dom_parser.parse_dom(r, 'select', attrs={'id': 'SeasonSelection'}, req='rel')[0]
@@ -126,7 +126,7 @@ class source:
     def resolve(self, url):
         try:
             url = urlparse.urljoin(self.base_link, url)
-            r = self.scraper.get(url).content
+            r = cache.get(self.scraper.get, 4, url).content
             r = json.loads(r)['Stream']
             r = [(dom_parser.parse_dom(r, 'a', req='href'), dom_parser.parse_dom(r, 'iframe', req='src'))]
             r = [i[0][0].attrs['href'] if i[0] else i[1][0].attrs['src'] for i in r if i[0] or i[1]][0]
@@ -141,7 +141,7 @@ class source:
 
     def __search(self, imdb):
         try:
-            r = self.scraper.get(urlparse.urljoin(self.base_link, self.search_link % imdb)).content
+            r = cache.get(self.scraper.get, 4, urlparse.urljoin(self.base_link, self.search_link % imdb)).content
             r = dom_parser.parse_dom(r, 'table', attrs={'id': 'RsltTableStatic'})
             r = dom_parser.parse_dom(r, 'tr')
             r = [(dom_parser.parse_dom(i, 'a', req='href'), dom_parser.parse_dom(i, 'img', attrs={'alt': 'language'}, req='src')) for i in r]

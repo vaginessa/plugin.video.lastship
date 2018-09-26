@@ -23,6 +23,7 @@ import re
 import urllib
 import urlparse
 
+from resources.lib.modules import cache
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
 from resources.lib.modules import source_utils
@@ -53,9 +54,9 @@ class source:
             if not url:
                 return sources
 
-            r = client.request(urlparse.urljoin(self.base_link, self.conf_link), XHR=True)
+            r = cache.get(client.request, 4, urlparse.urljoin(self.base_link, self.conf_link), XHR=True)
             r = json.loads(r).get('streamer')
-            r = client.request(r + '%s.mp4/master.m3u8' % url, XHR=True)
+            r = cache.get(client.request, 4, r + '%s.mp4/master.m3u8' % url, XHR=True)
 
             r = re.findall('RESOLUTION\s*=\s*\d+x(\d+).*?\n(http.*?)(?:\n|$)', r, re.IGNORECASE)
             r = [(source_utils.label_to_quality(i[0]), i[1]) for i in r]
@@ -63,8 +64,6 @@ class source:
             for quality, link in r:
                 sources.append({'source': 'CDN', 'quality': quality, 'language': 'de', 'url': link, 'direct': True, 'debridonly': False})
 
-            if len(sources) == 0:
-                raise Exception()
             return sources
         except:
             source_faultlog.logFault(__name__,source_faultlog.tagScrape, url)
@@ -81,7 +80,7 @@ class source:
             t = [cleantitle.get(i) for i in set(titles) if i]
             y = ['%s' % str(year), '%s' % str(int(year) + 1), '%s' % str(int(year) - 1), '0']
 
-            r = client.request(query, XHR=True)
+            r = cache.get(client.request, 4, query, XHR=True)
             r = json.loads(r)
 
             r = [(i.get('title'), i.get('custom_fields', {})) for i in r.get('posts', [])]

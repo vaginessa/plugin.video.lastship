@@ -22,6 +22,7 @@ import re
 import urllib
 import urlparse
 
+from resources.lib.modules import cache
 from resources.lib.modules import client
 from resources.lib.modules import dom_parser
 from resources.lib.modules import source_utils
@@ -80,9 +81,9 @@ class source:
 
             if season and episode:
                 r = urllib.urlencode({'imdbid': data['imdb'], 'language': 'de', 'season': season, 'episode': episode})
-                r = client.request(urlparse.urljoin(self.base_link, self.hoster_link), XHR=True, post=r)
+                r = cache.get(client.request, 4, urlparse.urljoin(self.base_link, self.hoster_link), XHR=True, post=r)
             else:
-                r = client.request(url)
+                r = cache.get(client.request, 4, url)
 
             r = dom_parser.parse_dom(r, 'div', attrs={'class': 'linkbox'})[0].content
             r = re.compile('(<a.+?/a>)', re.DOTALL).findall(r)
@@ -108,14 +109,14 @@ class source:
 
     def __search(self, imdb):
         try:
-            r = client.request(urlparse.urljoin(self.base_link, self.search_link % imdb))
+            r = cache.get(client.request, 4, urlparse.urljoin(self.base_link, self.search_link % imdb))
             r = dom_parser.parse_dom(r, 'a', req='href')
             r = [i.attrs['href'] for i in r if i]
 
             url = None
             if len(r) > 1:
                 for i in r:
-                    data = client.request(urlparse.urljoin(self.base_link, i))
+                    data = cache.get(client.request, 4, urlparse.urljoin(self.base_link, i))
                     data = re.compile('(imdbid\s*[=|:]\s*"%s"\s*,)' % imdb, re.DOTALL).findall(data)
 
                     if len(data) >= 1:

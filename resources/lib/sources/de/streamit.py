@@ -23,6 +23,7 @@ import re
 import urllib
 import urlparse
 
+from resources.lib.modules import cache
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
 from resources.lib.modules import source_utils
@@ -83,9 +84,9 @@ class source:
 
             if season and episode and imdb:
                 r = urllib.urlencode({'val': 's%se%s' % (season, episode), 'IMDB': imdb})
-                r = client.request(urlparse.urljoin(self.base_link, self.episode_link), XHR=True, post=r)
+                r = cache.get(client.request, 4, urlparse.urljoin(self.base_link, self.episode_link), XHR=True, post=r)
             else:
-                r = client.request(url)
+                r = cache.get(client.request, 4, url)
 
             l = dom_parser.parse_dom(r, 'select', attrs={'id': 'sel_sprache'})
             l = dom_parser.parse_dom(l, 'option', req='id')
@@ -115,8 +116,6 @@ class source:
                     except:
                         pass
 
-            if len(sources) == 0:
-                raise Exception()
             return sources
         except:
             source_faultlog.logFault(__name__,source_faultlog.tagScrape, url)
@@ -130,7 +129,7 @@ class source:
             t = [cleantitle.get(i) for i in set(titles) if i]
             y = ['%s' % str(year), '%s' % str(int(year) + 1), '%s' % str(int(year) - 1), '0']
 
-            r = client.request(urlparse.urljoin(self.base_link, self.search_link), post=urllib.urlencode({'val': cleantitle.query(titles[0])}), XHR=True)
+            r = cache.get(client.request, 4, urlparse.urljoin(self.base_link, self.search_link), post=urllib.urlencode({'val': cleantitle.query(titles[0])}), XHR=True)
             r = dom_parser.parse_dom(r, 'li')
             r = dom_parser.parse_dom(r, 'a', req='href')
             r = [(i.attrs['href'], i.content, re.findall('\((\d{4})', i.content)) for i in r]

@@ -21,6 +21,7 @@
 import re
 import urlparse
 
+from resources.lib.modules import cache
 from resources.lib.modules import cleantitle
 from resources.lib.modules import duckduckgo
 from resources.lib.modules import client
@@ -57,7 +58,7 @@ class source:
 
             query = urlparse.urljoin(self.base_link, url)
 
-            r = client.request(query)
+            r = cache.get(client.request, 4, query)
 
             links = re.findall('data-video-id="(.*?)"\sdata-provider="(.*?)"', r)
 
@@ -78,7 +79,7 @@ class source:
         try:
             link = self.stream_link % (url[0], url[1])
             link = urlparse.urljoin(self.base_link, link)
-            content = client.request(link)
+            content = cache.get(client.request, 4, link)
             return dom_parser.parse_dom(content, 'iframe')[0].attrs['src']
 
         except:
@@ -92,7 +93,7 @@ class source:
             link = self.year_link % (year, "%s")
 
             for i in range(1, 100, 1):
-                content = client.request(link % str(i))
+                content = cache.get(client.request, 4, link % str(i))
 
                 links = dom_parser.parse_dom(content, 'div', attrs={'class': 'search_frame'})
                 if len(links) == 0: return
@@ -104,7 +105,6 @@ class source:
 
                 if len(links) > 0:
                     return source_utils.strip_domain(links[0])
-
             return
         except:
             try:

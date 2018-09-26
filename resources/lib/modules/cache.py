@@ -22,11 +22,11 @@
 # Addon id: plugin.video.lastship
 # Addon Provider: LastShip
 
-import ast
 import hashlib
 import re
 import time
 from resources.lib.modules import control
+import pickle
 
 try:
     from sqlite3 import dbapi2 as db, OperationalError
@@ -39,7 +39,7 @@ This module is used to get/set cache for every action done in the system
 
 cache_table = 'cache'
 
-def get(function, duration, *args):
+def get(function, duration, *args, **kwargs):
     # type: (function, int, object) -> object or None
     """
     Gets cached value for provided function with optional arguments, or executes and stores the result
@@ -49,21 +49,24 @@ def get(function, duration, *args):
     """
 
     try:
-        key = _hash_function(function, args)
+        key = _hash_function(function, args, kwargs)
         cache_result = cache_get(key)
         if cache_result:
             if _is_cache_valid(cache_result['date'], duration):
-                return ast.literal_eval(cache_result['value'].encode('utf-8'))
+                return pickle.loads(cache_result['value'].encode('utf-8'))
+            else:
+                cache_delete(key)
 
-        fresh_result = repr(function(*args))
+        fresh_result = function(*args, **kwargs)
         if not fresh_result:
             # If the cache is old, but we didn't get fresh result, return the old cache
             if cache_result:
                 return cache_result
             return None
 
-        cache_insert(key, fresh_result)
-        return ast.literal_eval(fresh_result.encode('utf-8'))
+        cache_insert(key, pickle.dumps(fresh_result))
+
+        return fresh_result
     except Exception:
         return None
 
@@ -76,12 +79,22 @@ def timeout(function, *args):
     except Exception:
         return None
 
+
 def cache_get(key):
     # type: (str, str) -> dict or None
     try:
         cursor = _get_connection_cursor()
         cursor.execute("SELECT * FROM %s WHERE key = ?" % cache_table, [key])
         return cursor.fetchone()
+    except OperationalError:
+        return None
+
+def cache_delete(key):
+    # type: (str, str) -> dict or None
+    try:
+        cursor = _get_connection_cursor()
+        cursor.execute("DELETE FROM %s WHERE key = ?" % cache_table, [key])
+        cursor.connection.commit()
     except OperationalError:
         return None
 
@@ -120,6 +133,7 @@ def cache_clear():
     except:
         pass
 
+
 def cache_clear_meta():
     try:
         cursor = _get_connection_cursor_meta()
@@ -133,6 +147,7 @@ def cache_clear_meta():
                 pass
     except:
         pass
+
 
 def cache_clear_providers():
     try:
@@ -149,6 +164,7 @@ def cache_clear_providers():
     except:
         pass
 
+
 def cache_clear_search():
     try:
         cursor = _get_connection_cursor_search()
@@ -163,51 +179,40 @@ def cache_clear_search():
     except:
         pass
 
+
 def cache_clear_all():
     cache_clear()
     cache_clear_meta()
     cache_clear_providers()
     cache_clear_search()
-        
+
+
 def _get_connection_cursor():
-    conn = _get_connection()
+    conn = _get_connection(control.cacheFile)
     return conn.cursor()
 
-def _get_connection():
+
+def _get_connection(filename):
     control.makeFile(control.dataPath)
-    conn = db.connect(control.cacheFile)
+    conn = db.connect(filename)
     conn.row_factory = _dict_factory
     return conn
+
 
 def _get_connection_cursor_meta():
-    conn = _get_connection_meta()
+    conn = _get_connection(control.metacacheFile)
     return conn.cursor()
 
-def _get_connection_meta():
-    control.makeFile(control.dataPath)
-    conn = db.connect(control.metacacheFile)
-    conn.row_factory = _dict_factory
-    return conn
 
 def _get_connection_cursor_providers():
-    conn = _get_connection_providers()
+    conn = _get_connection(control.providercacheFile)
     return conn.cursor()
 
-def _get_connection_providers():
-    control.makeFile(control.dataPath)
-    conn = db.connect(control.providercacheFile)
-    conn.row_factory = _dict_factory
-    return conn
-    
+
 def _get_connection_cursor_search():
-    conn = _get_connection_search()
+    conn = _get_connection(control.searchFile)
     return conn.cursor()
 
-def _get_connection_search():
-    control.makeFile(control.dataPath)
-    conn = db.connect(control.searchFile)
-    conn.row_factory = _dict_factory
-    return conn
 
 def _dict_factory(cursor, row):
     d = {}
@@ -235,23 +240,28 @@ def _is_cache_valid(cached_time, cache_timeout):
     diff = now - cached_time
     return (cache_timeout * 3600) > diff
 
-def cache_version_check():
 
+def cache_version_check():
     if _find_cache_version():
         cache_clear(); cache_clear_meta(); cache_clear_providers(); cache_clear_search()
         control.infoDialog(control.lang(32057).encode('utf-8'), sound=True, icon='INFO')
-        
-def _find_cache_version():
 
+
+def _find_cache_version():
     import os
     versionFile = os.path.join(control.dataPath, 'cache.v')
-    try: 
-        with open(versionFile, 'rb') as fh: oldVersion = fh.read()
-    except: oldVersion = '0'
     try:
-        curVersion = control.addon('script.module.lastship').getAddonInfo('version')
-        if oldVersion != curVersion: 
-            with open(versionFile, 'wb') as fh: fh.write(curVersion)
+        with open(versionFile, 'rb') as fh:
+            oldVersion = fh.read()
+    except:
+        oldVersion = '0'
+    try:
+        curVersion = control.addon('plugin.video.lastship').getAddonInfo('version')
+        if oldVersion != curVersion:
+            with open(versionFile, 'wb') as fh:
+                fh.write(curVersion)
             return True
-        else: return False
-    except: return False
+        else:
+            return False
+    except:
+        return False

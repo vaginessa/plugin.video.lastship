@@ -22,7 +22,9 @@ import json
 import re
 import urlparse
 
-from resources.lib.modules import client, cfscrape
+from resources.lib.modules import cache
+from resources.lib.modules import cfscrape
+from resources.lib.modules import client
 from resources.lib.modules import source_utils
 from resources.lib.modules import source_faultlog
 from resources.lib.modules.recaptcha import recaptcha_app
@@ -51,7 +53,7 @@ class source:
                 return sources
             data = {'ID': re.findall('\d+', url)[0], 'lang': 2}
 
-            data = client.request(urlparse.urljoin(self.base_link, self.request_link), post=data, XHR=True)
+            data = cache.get(client.request, 4, urlparse.urljoin(self.base_link, self.request_link), post=data, XHR=True)
             data = json.loads(data)
 
             if data['status']:

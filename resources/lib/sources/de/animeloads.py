@@ -23,6 +23,7 @@ import urllib
 import urlparse
 
 from resources.lib.modules import anilist
+from resources.lib.modules import cache
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
 from resources.lib.modules import source_utils
@@ -79,7 +80,7 @@ class source:
             url = data.get('url')
             episode = int(data.get('episode', 1))
 
-            r = client.request(urlparse.urljoin(self.base_link, url))
+            r = cache.get(client.request, 4, urlparse.urljoin(self.base_link, url))
             r = dom_parser.parse_dom(r, 'div', attrs={'id': 'streams'})
 
             rels = dom_parser.parse_dom(r, 'ul', attrs={'class': 'nav'})
@@ -122,8 +123,7 @@ class source:
                             sources.append({'source': source, 'quality': quality, 'language': 'de', 'url': [enc, hoster], 'info': info, 'direct': False, 'debridonly': False, 'checkquality': True})
                     except:
                         pass
-            if len(sources) == 0:
-                raise Exception()
+
             return sources
         except:
             source_faultlog.logFault(__name__, source_faultlog.tagScrape, url)
@@ -143,7 +143,7 @@ class source:
 
             t = [cleantitle.get(i) for i in set(titles) if i]
 
-            r = client.request(query)
+            r = cache.get(client.request, 4, query)
             pageTitle = dom_parser.parse_dom(r, 'title')[0].content.lower()
             if "search" not in pageTitle and 'such' not in pageTitle:
                 if len([year in pageTitle and i in pageTitle for i in t]) > 0:

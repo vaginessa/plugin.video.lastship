@@ -3,7 +3,12 @@ import re
 import urllib
 import urlparse
 
-from resources.lib.modules import anilist, dom_parser, cfscrape, cleantitle, source_faultlog
+from resources.lib.modules import anilist
+from resources.lib.modules import cache
+from resources.lib.modules import cfscrape
+from resources.lib.modules import cleantitle
+from resources.lib.modules import dom_parser
+from resources.lib.modules import source_faultlog
 from resources.lib.modules import source_utils
 from resources.lib.modules import tvmaze
 
@@ -36,7 +41,7 @@ class source:
                 return
 
             query = urlparse.urljoin(self.base_link, url)
-            content = self.scraper.get(query).content
+            content = cache.get(self.scraper.get, 4, query).content
 
             links = dom_parser.parse_dom(content, 'div', attrs={'id': 'seasons'})
             links = dom_parser.parse_dom(links, 'div', attrs={'class': 'se-c'})
@@ -60,7 +65,7 @@ class source:
                 return sources
 
             query = urlparse.urljoin(self.base_link, url)
-            content = self.scraper.get(query).content
+            content = cache.get(self.scraper.get, 4, query).content
 
             quality = dom_parser.parse_dom(content, 'span', attrs={'class': 'qualityx'})[0].content
             links = dom_parser.parse_dom(content, 'div', attrs={'id': 'playex'})[0]
@@ -88,7 +93,7 @@ class source:
             query = self.search_link % (urllib.quote_plus(titles[0]))
             query = urlparse.urljoin(self.base_link, query)
 
-            content = self.scraper.get(query).content
+            content = cache.get(self.scraper.get, 4, query).content
 
             links = dom_parser.parse_dom(content, 'div', attrs={'class': 'result-item'})
             links = [(dom_parser.parse_dom(i, 'div', attrs={'class': 'title'})[0], dom_parser.parse_dom(i, 'span', attrs={'class': 'year'})[0].content) for i in links]

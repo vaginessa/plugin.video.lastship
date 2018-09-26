@@ -19,7 +19,9 @@
 """
 import urlparse
 
-from resources.lib.modules import cleantitle, dom_parser
+from resources.lib.modules import cache
+from resources.lib.modules import cleantitle
+from resources.lib.modules import dom_parser
 from resources.lib.modules import client
 from resources.lib.modules import source_faultlog
 from resources.lib.modules import source_utils
@@ -47,7 +49,7 @@ class source:
         try:
             if not url:
                 return
-            content = client.request(urlparse.urljoin(self.base_link, url) + "/" + season)
+            content = cache.get(client.request, 4, urlparse.urljoin(self.base_link, url) + "/" + season)
             link = dom_parser.parse_dom(content, 'table', attrs={'class': 'episodes'})
             link = dom_parser.parse_dom(link, 'a')
             link = [i.attrs['href'] for i in link if i.content == episode]
@@ -63,7 +65,7 @@ class source:
             if not url:
                 return sources
 
-            content = client.request(urlparse.urljoin(self.base_link, url))
+            content = cache.get(client.request, 4, urlparse.urljoin(self.base_link, url))
             links = dom_parser.parse_dom(content, 'a')
             links = [i for i in links if 'href' in i.attrs and url in i.attrs['href']]
             links = [(i.attrs['href'], i.attrs['title'].replace('HD', ''), '720p' if 'HD' in i.attrs['href'] else 'SD') for i in links if 'title' in i.attrs]
@@ -105,7 +107,7 @@ class source:
         try:
             t = [cleantitle.get(i) for i in set(titles) if i]
 
-            content = client.request(self.search_link)
+            content = cache.get(client.request, 4, self.search_link)
 
             links = dom_parser.parse_dom(content, 'div', attrs={'id': 'seriesContainer'})
             links = dom_parser.parse_dom(links, 'a')

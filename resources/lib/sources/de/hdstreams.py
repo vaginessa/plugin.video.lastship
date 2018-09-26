@@ -23,6 +23,7 @@ import json
 import re
 from binascii import unhexlify
 
+from resources.lib.modules import cache
 from resources.lib.modules import cfscrape
 from resources.lib.modules import cleantitle
 from resources.lib.modules import dom_parser
@@ -53,11 +54,7 @@ class source:
 
             for i in range(1, len(objects)):
                 if cleantitle.get(objects[i]['title']) in t:
-                    url = objects[i]['url']
-                    break
-
-            return url
-            
+                    return objects[i]['url']
         except:
             return
 
@@ -95,7 +92,7 @@ class source:
             if isinstance(url, tuple):
                 url, episode = url
 
-            r = self.scraper.get(url).content
+            r = cache.get(self.scraper.get, 3, url).content
 
             if "serie" in url:
                 links = self._getSeriesLinks(r, episode)
@@ -106,13 +103,9 @@ class source:
                 valid, hoster = source_utils.is_host_valid(sName, hostDict)
                 if not valid: continue
 
-                captcha = 'grecaptcha' in r
+                isCaptcha = 'grecaptcha' in r
+                sources.append({'source': hoster, 'quality': quali, 'language': 'de', 'url': (e, h, url, isCaptcha), 'info': "Recaptcha" if isCaptcha else '', 'direct': False, 'debridonly': False, 'captcha': True})
 
-                sources.append(
-                    {'source': hoster, 'quality': quali, 'language': 'de', 'url': (e, h, url, captcha), 'info': "Recaptcha" if captcha else '', 'direct': False, 'debridonly': False, 'captcha': True})
-
-            if len(sources) == 0:
-                raise Exception()
             return sources
         except Exception:
             source_faultlog.logFault(__name__, source_faultlog.tagScrape, url)

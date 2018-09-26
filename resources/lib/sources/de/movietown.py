@@ -22,6 +22,7 @@ import re
 import urllib
 import urlparse
 
+from resources.lib.modules import cache
 from resources.lib.modules import cfscrape
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
@@ -78,7 +79,7 @@ class source:
 
             query = urlparse.urljoin(self.base_link, url)
 
-            r = self.scraper.get(query).content
+            r = cache.get(self.scraper.get, 4, query).content
 
             r = dom_parser.parse_dom(r, 'div', attrs={'id': 'ko-bind'})
             r = dom_parser.parse_dom(r, 'table', attrs={'class': 'links-table'})
@@ -119,7 +120,7 @@ class source:
 
             t = [cleantitle.get(i) for i in set(titles) if i]
 
-            r = self.scraper.get(query).content
+            r = cache.get(self.scraper.get, 4, query).content
 
             r = dom_parser.parse_dom(r, 'figure', attrs={'class': 'pretty-figure'})
             r = dom_parser.parse_dom(r, 'figcaption')

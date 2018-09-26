@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import urllib
 import urlparse
 import re
 
+from resources.lib.modules import cache
 from resources.lib.modules import client
 from resources.lib.modules import dom_parser
 from resources.lib.modules import source_utils
@@ -56,7 +56,7 @@ class source:
                 season, episode, url = url
             url = urlparse.urljoin(self.base_link, url)
             
-            content = client.request(url)
+            content = cache.get(client.request, 4, url)
             link = dom_parser.parse_dom(content, 'div', attrs={'id': 'full-video'})
             if season:
                 link = re.findall("vk.show\(\d+,(.*?)\)", link[0].content)[0]
@@ -93,7 +93,7 @@ class source:
                     'story': title
                 }
 
-                result = client.request(self.base_link, post=params, headers={'Content-Type': 'application/x-www-form-urlencoded'}, error=True)
+                result = cache.get(client.request, 4, self.base_link, post=params, headers={'Content-Type': 'application/x-www-form-urlencoded'}, error=True)
 
                 links = dom_parser.parse_dom(result, 'div', attrs={'class': 'shortstory-in'})
                 links = [dom_parser.parse_dom(i, 'a')[0] for i in links]

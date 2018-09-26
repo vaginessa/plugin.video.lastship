@@ -22,6 +22,7 @@ import re
 import urllib
 import urlparse
 
+from resources.lib.modules import cache
 from resources.lib.modules import cfscrape
 from resources.lib.modules import directstream
 from resources.lib.modules.recaptcha import recaptcha_app
@@ -72,7 +73,7 @@ class source:
                         return
 
                     _url = urlparse.urljoin(self.base_link, _url)
-                    r = self.scraper.get(_url).content
+                    r = cache.get(self.scraper.get, 4, _url).content
 
                     r = re.findall('<h4>%s[^>]*</h4>(.*?)<div' % content, r, re.DOTALL | re.IGNORECASE)[0]
                     r = re.compile('(<a.+?/a>)', re.DOTALL).findall(''.join(r))
@@ -98,7 +99,7 @@ class source:
             if not url:
                 return sources
 
-            r = self.scraper.get(urlparse.urljoin(self.base_link, url)).content
+            r = cache.get(self.scraper.get, 4, urlparse.urljoin(self.base_link, url)).content
 
             if 'serie' not in url:
                 links = dom_parser.parse_dom(r, 'table')
@@ -114,7 +115,7 @@ class source:
             for link in links:
                 if '/englisch/' in link: continue
 
-                if link != url: r = self.scraper.get(urlparse.urljoin(self.base_link, link)).content
+                if link != url: r = cache.get(self.scraper.get, 4, urlparse.urljoin(self.base_link, link)).content
 
                 detail = dom_parser.parse_dom(r, 'th', attrs={'class': 'thlink'})
                 detail = [dom_parser.parse_dom(i, 'a', req='href') for i in detail]
@@ -145,8 +146,6 @@ class source:
 
                         sources.append({'source': hoster, 'quality': quality, 'language': 'de', 'url': stream_link, 'info': info, 'direct': direct, 'debridonly': False, 'checkquality': True, 'captcha': True})
 
-            if len(sources) == 0:
-                raise Exception()
             return sources
         except:
             source_faultlog.logFault(__name__,source_faultlog.tagScrape, url)

@@ -1,18 +1,15 @@
 # -*- coding: utf-8 -*-
 
-import base64
-import json
-import re
 import urllib
 import urlparse
-import requests
 
+from resources.lib.modules import cache
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
-from resources.lib.modules import directstream
-from resources.lib.modules import source_utils
 from resources.lib.modules import dom_parser
 from resources.lib.modules import source_faultlog
+from resources.lib.modules import source_utils
+
 
 class source:
     def __init__(self):
@@ -46,7 +43,7 @@ class source:
                 return sources
 
             url = urlparse.urljoin(self.base_link, url)
-            result = client.request(url)
+            result = cache.get(client.request, 4, url)
 
             links = dom_parser.parse_dom(result, 'div', attrs={'id': 'playeroptions'})
             links = dom_parser.parse_dom(links, 'li')
@@ -75,7 +72,7 @@ class source:
             'nume': nume
         }
 
-        result = client.request(url, post=params)
+        result = cache.get(client.request, 4, url, post=params)
         url = dom_parser.parse_dom(result, 'iframe')[0].attrs['src']
 
         return url
@@ -87,7 +84,7 @@ class source:
 
             t = [cleantitle.get(i) for i in set(titles) if i]
 
-            result = client.request(query)
+            result = cache.get(client.request, 4, query)
 
             entry = dom_parser.parse_dom(result, 'div', attrs={'class': 'result-item'})
             entry = [(dom_parser.parse_dom(i, 'a')[0], dom_parser.parse_dom(i, 'span', attrs={'class': 'year'})[0]) for i in entry]

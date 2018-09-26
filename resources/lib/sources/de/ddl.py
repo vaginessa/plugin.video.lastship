@@ -23,6 +23,7 @@ import re
 import urllib
 import urlparse
 
+from resources.lib.modules import cache
 from resources.lib.modules import client
 from resources.lib.modules import source_utils
 from resources.lib.modules import source_faultlog
@@ -108,7 +109,7 @@ class source:
     def __get_direct_url(self, imdb):
         try:
             query = urlparse.urljoin(self.base_link, self.search_link % imdb)
-            r = client.request(query, output='geturl')
+            r = cache.get(client.request, 4, query, output='geturl')
 
             if self.search_link in r: return
             return r
@@ -117,7 +118,7 @@ class source:
 
     def __get_json(self, url):
         try:
-            result = client.request(url)
+            result = cache.get(client.request, 4, url)
             result = re.compile('var\s+subcats\s+=\s*(.*?);').findall(result)[0]
             return json.loads(result)
         except:

@@ -23,6 +23,7 @@ import re
 import urllib
 import urlparse
 
+from resources.lib.modules import cache
 from resources.lib.modules import cleantitle
 from resources.lib.modules import duckduckgo
 from resources.lib.modules import client
@@ -76,7 +77,7 @@ class source:
             if not url:
                 return sources
 
-            r = client.request(urlparse.urljoin(self.base_link, url))
+            r = cache.get(client.request, 4, urlparse.urljoin(self.base_link, url))
 
             r = dom_parser.parse_dom(r, 'div', attrs={'class': 'hosterSiteVideo'})
             r = dom_parser.parse_dom(r, 'li', attrs={'data-lang-key': re.compile('[1|3]')})
@@ -94,8 +95,6 @@ class source:
                     {'source': host, 'quality': quality, 'language': 'de', 'url': link, 'info': info, 'direct': False,
                      'debridonly': False})
 
-            if len(sources) == 0:
-                raise Exception()
             return sources
         except:
             source_faultlog.logFault(__name__, source_faultlog.tagScrape, url)
@@ -103,7 +102,7 @@ class source:
 
     def resolve(self, url):
         try:
-            url = client.request(urlparse.urljoin(self.base_link, url), output='geturl')
+            url = cache.get(client.request, 4, urlparse.urljoin(self.base_link, url), output='geturl')
             if self.base_link not in url:
                 return url
 
@@ -113,7 +112,7 @@ class source:
             cookie = self.cookie
 
             try:
-                res = client.request(url, headers=header, cookie=cookie, redirect=False, output='geturl')
+                res = cache.get(client.request, 4, url, headers=header, cookie=cookie, redirect=False, output='geturl')
                 if self.base_link not in res:
                     url = res
                 else:
@@ -128,7 +127,7 @@ class source:
 
     def __search(self, titles, year):
         try:
-            r = client.request(urlparse.urljoin(self.base_link, self.search_link))
+            r = cache.get(client.request, 4, urlparse.urljoin(self.base_link, self.search_link))
 
             t = [cleantitle.get(i) for i in set(titles) if i]
 

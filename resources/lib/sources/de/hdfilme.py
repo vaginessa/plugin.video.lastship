@@ -7,6 +7,7 @@ import urllib
 import urlparse
 import requests
 
+from resources.lib.modules import cache
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
 from resources.lib.modules import directstream
@@ -58,7 +59,7 @@ class source:
             if not url and tvshowtitle != localtvshowtitle: url = self.__search([tvshowtitle] + aliases, data['year'], season)
             if not url: return
 
-            r = client.request(urlparse.urljoin(self.base_link, url), timeout='40')
+            r = cache.get(client.request, 4, urlparse.urljoin(self.base_link, url), timeout='40')
             r = dom_parser.parse_dom(r, 'ul', attrs={'class': ['list-inline', 'list-film']})
             r = dom_parser.parse_dom(r, 'li')
             r = dom_parser.parse_dom(r, 'a', req='href')
@@ -81,7 +82,7 @@ class source:
 
             r = re.findall('(\d+)-stream(?:\?episode=(\d+))?', url)
             r = [(i[0], i[1] if i[1] else '1') for i in r][0]
-            r = client.request(urlparse.urljoin(self.base_link, self.get_link % r), output='extended', timeout='40')
+            r = cache.get(client.request, 4, urlparse.urljoin(self.base_link, self.get_link % r), output='extended', timeout='40')
 
             headers = r[3]
             headers.update({'Cookie': r[2].get('Set-Cookie'), 'Referer': self.base_link,'Origin': self.base_link})
@@ -92,7 +93,7 @@ class source:
             r = json.loads(r)
             r = r['playinfo'][0]['file']
 
-            links = requests.get(r, headers=headers).content
+            links = cache.get(requests.get, 4, r, headers=headers).content
             links = re.findall('RESOLUTION=\d+x(\d+)\n(.*)', links)
 
             links = [(r.replace('playlist.m3u8', x[1]), source_utils.label_to_quality(x[0])) for x in links]
@@ -122,7 +123,7 @@ class source:
             t = [cleantitle.get(i) for i in set(titles) if i]
             y = ['%s' % str(year), '%s' % str(int(year) + 1), '%s' % str(int(year) - 1), '0']
 
-            r = client.request(query,timeout='40')
+            r = cache.get(client.request, 4, query, timeout='40')
 
             r = dom_parser.parse_dom(r, 'ul', attrs={'class': ['products', 'row']})
             r = dom_parser.parse_dom(r, 'div', attrs={'class': ['box-product', 'clearfix']})

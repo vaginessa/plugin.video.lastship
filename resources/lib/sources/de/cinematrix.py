@@ -4,6 +4,7 @@ import urlparse
 import re
 import requests
 
+from resources.lib.modules import cache
 from resources.lib.modules import cfscrape
 from resources.lib.modules import dom_parser
 from resources.lib.modules import source_utils
@@ -51,6 +52,7 @@ class source:
         try:
             if not url:
                 return sources
+
             url = urlparse.urljoin(self.base_link, url)
             content = self.scraper.get(url).content
             cookies = requests.utils.dict_from_cookiejar(self.scraper.cookies)
@@ -66,7 +68,7 @@ class source:
                     return sources
                 params = self.getParams(content_id, cookies, s=temp[0], e=temp[1])
 
-            content = self.scraper.post(link, headers=self.getHeader(url), data=params).content
+            content = cache.get(self.scraper.post, 4, link, headers=self.getHeader(url), data=params).content
 
             links = dom_parser.parse_dom(content, 'li')
             links = [(i.attrs['title'], i.attrs['onclick'], dom_parser.parse_dom(i, 'img')[0].attrs['title'], re.findall('/(\d+)', dom_parser.parse_dom(i, 'div', attrs={'class': 'col2'})[0].content)[0]) for i in links]
@@ -90,24 +92,24 @@ class source:
 
     def isEpisodeAvailable(self, content_id, url, cookies, season, episode):
         params = {'c': cookies, 'v': content_id, 'st': season}
-        content = self.scraper.post(self.get_Episodes, headers=self.getHeader(url), data=params).content
+        content = cache.get(self.scraper.post, 4, self.get_Episodes, headers=self.getHeader(url), data=params).content
         episodes = dom_parser.parse_dom(content, 'option')
         return any([i.attrs['value'] for i in episodes if i.attrs['value'] == episode])
 
     def resolve(self, url):
         try:
-            content = self.scraper.get(url['url']).content
+            self.scraper = cache.get(self.scraper.get, 4, url['url'])
             cookies = requests.utils.dict_from_cookiejar(self.scraper.cookies)
             link = self.hoster_mirror_link % ('Movie' if url['isMovie'] else 'Series')
 
             params = self.getParams(url['content_id'], cookies, h=url['h'], ut=url['ut'], zm=url['zm'], bq=url['bq'], sq=url['sq'], st=url['bq'], fo=url['sq'])
 
-            content = self.scraper.post(link, headers=self.getHeader(url['url']), data=params).content
+            content = cache.get(self.scraper.post, 4,link, headers=self.getHeader(url['url']), data=params).content
             link = self.stream_link % ('Movie' if url['isMovie'] else 'Series')
 
             params = self.getParams(url['content_id'], cookies, h=url['h'], m=content, s=url['bq'], e=url['sq'])
 
-            content = self.scraper.post(link, headers=self.getHeader(url['url']), data=params).content
+            content = cache.get(self.scraper.post, 4, link, headers=self.getHeader(url['url']), data=params).content
             link = re.findall('(http.*?)"', content)[0]
 
             return link
@@ -118,7 +120,7 @@ class source:
     def __search(self, imdb, titles):
         try:
             t = [cleantitle.get(i) for i in set(titles) if i]
-            result = self.scraper.get(urlparse.urljoin(self.base_link, self.search_link % imdb)).content
+            result = cache.get(self.scraper.get, 4, urlparse.urljoin(self.base_link, self.search_link % imdb)).content
 
             links = dom_parser.parse_dom(result, 'ul', attrs={'id': 'dataHover'})
             links = dom_parser.parse_dom(links, 'li')

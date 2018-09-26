@@ -22,6 +22,7 @@ import re
 import urllib
 import urlparse
 
+from resources.lib.modules import cache
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
 from resources.lib.modules import tvmaze
@@ -75,7 +76,7 @@ class source:
             url = data.get('url')
             episode = int(data.get('episode', 1))
 
-            r = client.request(urlparse.urljoin(self.base_link, url))
+            r = cache.get(client.request, 4, urlparse.urljoin(self.base_link, url))
             r = {'': dom_parser.parse_dom(r, 'div', attrs={'id': 'gerdub'}), 'subbed': dom_parser.parse_dom(r, 'div', attrs={'id': 'gersub'})}
 
             for info, data in r.iteritems():
@@ -92,8 +93,6 @@ class source:
 
                     sources.append({'source': hoster, 'quality': 'SD', 'language': 'de', 'url': link, 'info': info, 'direct': False, 'debridonly': False})
 
-            if len(sources) == 0:
-                raise Exception()
             return sources
         except:
             source_faultlog.logFault(__name__, source_faultlog.tagScrape, url)
@@ -104,7 +103,7 @@ class source:
             if not url.startswith('http'): url = urlparse.urljoin(self.base_link, url)
 
             if self.base_link in url:
-                r = client.request(url)
+                r = cache.get(client.request, 4, url)
                 r = dom_parser.parse_dom(r, 'meta', req='content')[0]
                 r = r.attrs['content']
                 r = re.findall('''url\s*=\s*([^'"]+)''', r, re.I)
@@ -120,7 +119,7 @@ class source:
         try:
             t = cleantitle.get(title)
 
-            r = client.request(urlparse.urljoin(self.base_link, self.search_link), post={'suchbegriff': title})
+            r = cache.get(client.request, 4, urlparse.urljoin(self.base_link, self.search_link), post={'suchbegriff': title})
             r = dom_parser.parse_dom(r, 'a', attrs={'class': 'ausgabe_1'}, req='href')
             r = [(i.attrs['href'], i.content) for i in r]
             r = [i[0] for i in r if cleantitle.get(i[1]) == t]

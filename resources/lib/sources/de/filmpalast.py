@@ -23,7 +23,7 @@ import re
 import urllib
 import urlparse
 
-from resources.lib.modules import cfscrape
+from resources.lib.modules import cfscrape, cache
 from resources.lib.modules import cleantitle
 from resources.lib.modules import dom_parser
 from resources.lib.modules import source_utils
@@ -76,7 +76,7 @@ class source:
 
             query = urlparse.urljoin(self.base_link, url)
 
-            r = self.scraper.get(query).content
+            r = cache.get(self.scraper.get, 4, query).content
 
             quality = dom_parser.parse_dom(r, 'span', attrs={'id': 'release_text'})[0].content.split('&nbsp;')[0]
             quality, info = source_utils.get_release_quality(quality)
@@ -104,7 +104,7 @@ class source:
 
             for id in url:
                 query = urlparse.urljoin(self.base_link, self.stream_link % id)
-                r = self.scraper.get(query, XHR=True, post=urllib.urlencode({'streamID': id})).content
+                r = cache.get(self.scraper.get, 4, query, XHR=True, post=urllib.urlencode({'streamID': id})).content
                 r = json.loads(r)
                 if 'error' in r and r['error'] == '0' and 'url' in r:
                     h_url.append(r['url'])
@@ -124,7 +124,7 @@ class source:
                 query = self.search_link % (urllib.quote_plus(title))
                 query = urlparse.urljoin(self.base_link, query)
 
-                r = self.scraper.get(query).content
+                r = cache.get(self.scraper.get, 4, query).content
 
                 r = dom_parser.parse_dom(r, 'article')
                 r = dom_parser.parse_dom(r, 'a', attrs={'class': 'rb'}, req='href')

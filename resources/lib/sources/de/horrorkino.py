@@ -21,6 +21,7 @@
 import re
 import urlparse
 
+from resources.lib.modules import cache
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
 from resources.lib.modules import dom_parser
@@ -52,7 +53,7 @@ class source:
             if not url:
                 return sources
 
-            r = client.request(urlparse.urljoin(self.base_link, url))
+            r = cache.get(client.request, 4, urlparse.urljoin(self.base_link, url))
             r = re.findall('''vicode\s*=\s*["'](.*?)["'];''', r)[0].decode('string_escape')
             r = dom_parser.parse_dom(r, 'iframe', req='src')
             r = [i.attrs['src'] for i in r]
@@ -78,7 +79,7 @@ class source:
             t = [cleantitle.get(i) for i in set(titles) if i]
             y = ['%s' % str(year), '%s' % str(int(year) + 1), '%s' % str(int(year) - 1), '0']
 
-            r = client.request(urlparse.urljoin(self.base_link, self.search_link), post={'query': cleantitle.query(titles[0])})
+            r = cache.get(client.request, 4, urlparse.urljoin(self.base_link, self.search_link), post={'query': cleantitle.query(titles[0])})
 
             r = dom_parser.parse_dom(r, 'li', attrs={'class': 'entTd'})
             r = dom_parser.parse_dom(r, 'div', attrs={'class': 've-screen'}, req='title')

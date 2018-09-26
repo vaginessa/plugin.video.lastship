@@ -19,7 +19,6 @@
 """
 
 import re
-import urllib
 import urlparse
 
 from resources.lib.modules import cache
@@ -71,7 +70,7 @@ class source:
 
             url = urlparse.urljoin(self.base_link, url)
 
-            r = self.scraper.get(url).content
+            r = cache.get(self.scraper.get, 4, url).content
 
             seasonMapping = dom_parser.parse_dom(r, 'select', attrs={'name': 'season'})
             seasonMapping = dom_parser.parse_dom(seasonMapping, 'option', req='value')
@@ -96,7 +95,7 @@ class source:
 
             url = urlparse.urljoin(self.base_link, url)
 
-            r = self.scraper.get(url).content
+            r = cache.get(self.scraper.get, 4, url).content
             r = r.replace('\\"', '"')
 
             links = dom_parser.parse_dom(r, 'tr', attrs={'id': 'tablemoviesindex2'})
@@ -130,7 +129,7 @@ class source:
         try:
             h = urlparse.urlparse(url.strip().lower()).netloc
 
-            r = self.scraper.get(url).content
+            r = cache.get(self.scraper.get, 4, url).content
             r = r.rsplit('"underplayer"')[0].rsplit("'underplayer'")[0]
 
             u = re.findall('\'(.+?)\'', r) + re.findall('\"(.+?)\"', r)
@@ -139,7 +138,7 @@ class source:
 
             url = u[-1].encode('utf-8')
             if 'bit.ly' in url:
-                url = self.scraper.get(url).url
+                url = cache.get(self.scraper.get, 4, url).url
             elif 'nullrefer.com' in url:
                 url = url.replace('nullrefer.com/?', '')
 
@@ -155,7 +154,7 @@ class source:
 
             t = [cleantitle.get(i) for i in set(titles) if i]
 
-            r = self.scraper.get(q).content
+            r = cache.get(self.scraper.get, 4, q).content
 
             links = dom_parser.parse_dom(r, 'tr', attrs={'id': re.compile('coverPreview.+?')})
             tds = [dom_parser.parse_dom(i, 'td') for i in links]
@@ -189,7 +188,7 @@ class source:
             for domain in self.domains:
                 try:
                     url = 'http://%s' % domain
-                    r = self.scraper.get(url).content
+                    r = cache.get(self.scraper.get, 4, url).content
                     r = dom_parser.parse_dom(r, 'meta', attrs={'name': 'author'}, req='content')
                     if r and 'movie4k.io' in r[0].attrs.get('content').lower():
                         return url

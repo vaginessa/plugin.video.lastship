@@ -25,7 +25,7 @@
 import re
 import urlparse
 
-from resources.lib.modules import cleantitle
+from resources.lib.modules import cache
 from resources.lib.modules import client
 from resources.lib.modules import dom_parser
 from resources.lib.modules import source_faultlog
@@ -61,7 +61,7 @@ class source:
                 return
             url = urlparse.urljoin(self.base_link, url)
 
-            r = client.request(url)
+            r = cache.get(client.request, 4, url)
 
             seasons = dom_parser.parse_dom(r, "div", attrs={"class": "section-watch-season"})
             seasons = seasons[len(seasons)-int(season)]
@@ -83,7 +83,7 @@ class source:
             if not url:
                 return sources
             url = urlparse.urljoin(self.base_link, url)
-            content = client.request(url)
+            content = cache.get(client.request, 4, url)
 
             links = dom_parser.parse_dom(content, 'tr', attrs={'class': 'partItem'})
             links = [(i.attrs['data-id'], i.attrs['data-controlid'], re.findall("(.*)\.png", i.content)[0].split("/")[-1]) for i in

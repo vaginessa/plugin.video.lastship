@@ -24,7 +24,7 @@ import re
 import urllib
 import urlparse
 
-from resources.lib.modules import anilist
+from resources.lib.modules import anilist, cache
 from resources.lib.modules import cfscrape
 from resources.lib.modules import dom_parser
 from resources.lib.modules import source_faultlog
@@ -67,7 +67,7 @@ class source:
             if not url:
                 return
             url = urlparse.urljoin(self.base_link, url)
-            r = self.scraper.get(url).content
+            r = cache.get(self.scraper.get, 4, url).content
 
             if season == 1 and episode == 1:
                 season = episode = ''
@@ -84,12 +84,12 @@ class source:
             if not url:
                 return sources
             url = urlparse.urljoin(self.base_link, url)
-            temp = self.scraper.get(url)
+            temp = cache.get(self.scraper.get, 4, url)
             link = re.findall('iframe\ssrc="(.*?view\.php.*?)"', temp.content)[0]
             if link.startswith('//'):
                 link = "https:" + link
 
-            r = self.scraper.get(link, headers={'referer': url}).content
+            r = cache.get(self.scraper.get, 4, link, headers={'referer': url}).content
             phrase = re.findall("(?:jbdaskgs|m3u8File)[^>]=[^>]'([^']+)", r)[0]
 
             if '\n' in phrase: return sources
@@ -121,7 +121,7 @@ class source:
             query = self.search_link % (urllib.quote_plus(titles[0]))
             query = urlparse.urljoin(self.base_link, query)
 
-            r = self.scraper.get(query).content
+            r = cache.get(self.scraper.get, 4, query).content
             dom_parsed = dom_parser.parse_dom(r, 'div', attrs={'class': 'details'})
             links = [(dom_parser.parse_dom(i, 'a')[0], dom_parser.parse_dom(i, 'span', attrs={'class' : 'year'})[0].content) for i in dom_parsed]
 
@@ -131,8 +131,7 @@ class source:
             if len(r) > 0:
                 return source_utils.strip_domain(r[0])
 
-            return ""
-
+            return
         except:
             try:
                 source_faultlog.logFault(__name__, source_faultlog.tagSearch, titles[0])

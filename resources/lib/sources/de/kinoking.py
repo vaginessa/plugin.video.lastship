@@ -22,6 +22,7 @@ import re
 import urllib
 import urlparse
 
+from resources.lib.modules import cache
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
 from resources.lib.modules import source_utils
@@ -76,7 +77,7 @@ class source:
 
             query = urlparse.urljoin(self.base_link, url)
 
-            r = client.request(query)
+            r = cache.get(client.request, 4, query)
 
             links = dom_parser.parse_dom(r, 'tbody')[0].content
             links = re.findall('domain=(.*?)".*?href=?"(.*?)".*?<td>(.*?)<.*?<td>(.*?)<', links)
@@ -100,7 +101,7 @@ class source:
             if not url:
                 return
 
-            r = client.request(url)
+            r = cache.get(client.request, 4, url)
             return dom_parser.parse_dom(r, 'a', req='href')[0].attrs['href']
         except:
             return
@@ -112,7 +113,7 @@ class source:
 
             t = [cleantitle.get(i) for i in set(titles) if i]
 
-            r = client.request(query)
+            r = cache.get(client.request, 4, query)
 
             r = dom_parser.parse_dom(r, 'article')
             r = dom_parser.parse_dom(r, 'div', attrs={'class': 'title'})

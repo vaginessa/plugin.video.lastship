@@ -22,11 +22,12 @@ import re
 import urllib
 import urlparse
 
-from resources.lib.modules import cleantitle, duckduckgo
+from resources.lib.modules import cache
 from resources.lib.modules import client
-from resources.lib.modules import source_utils
 from resources.lib.modules import dom_parser
+from resources.lib.modules import duckduckgo
 from resources.lib.modules import source_faultlog
+from resources.lib.modules import source_utils
 
 
 class source:
@@ -42,10 +43,10 @@ class source:
         try:
             url = duckduckgo.search([localtitle, title] + source_utils.aliases_to_array(aliases), year, self.domains[0], '(.*?)\(')
             query = urlparse.urljoin(self.base_link, url)
-            content = client.request(query)
+            content = cache.get(client.request, 4, query)
             r = dom_parser.parse_dom(content, 'div', attrs={'id': 'player'})
             r = dom_parser.parse_dom(r, 'iframe', req='src')
-            r = client.request(r[0].attrs['src'])
+            r = cache.get(client.request, 4, r[0].attrs['src'])
             r = dom_parser.parse_dom(r, 'span', attrs={'class': 'server'})
             r = dom_parser.parse_dom(r, 'a')[0].attrs['href']
             return self.get_link % (re.findall('id=(\d+)', r)[0], 'movie')
@@ -63,7 +64,7 @@ class source:
             if url is None:
                 return
             url += '&season=%s&episode=%s&server=alternate&type=episode' % (season, episode)
-            r = client.request(url)
+            r = cache.get(client.request, 4, url)
             r = re.findall('check_link\?id=(\d+)', r)[0]
             return self.get_link % (r, 'episode') + '&season=%s&episode=%s' % (season, episode)
 
@@ -75,7 +76,7 @@ class source:
         try:
             if not url:
                 return sources
-            r = client.request(url)
+            r = cache.get(client.request, 4, url)
             r = dom_parser.parse_dom(r, 'ul', attrs={'id': 'articleList'})
             r = dom_parser.parse_dom(r, 'a')
 
@@ -92,8 +93,6 @@ class source:
 
                 sources.append({'source': hoster, 'quality': 'SD', 'language': 'de', 'url': link, 'direct': False, 'debridonly': False})
 
-            if len(sources) == 0:
-                raise Exception()
             return sources
         except:
             source_faultlog.logFault(__name__,source_faultlog.tagScrape, url)

@@ -4,6 +4,7 @@ import urllib
 import urlparse
 import re
 
+from resources.lib.modules import cache
 from resources.lib.modules import cfscrape
 from resources.lib.modules import dom_parser
 from resources.lib.modules import source_utils
@@ -66,7 +67,7 @@ class source:
             season = data.get('season')
             episode = data.get('episode')
 
-            sHtmlContent = self.scraper.get(url).content
+            sHtmlContent = cache.get(self.scraper.get, 4, url).content
 
             quality = "SD"
 
@@ -135,7 +136,7 @@ class source:
     def resolve(self, url):
         try:
             if 'kinoger' in url:
-                request = self.scraper.get(url).content
+                request = cache.get(self.scraper.get, 4, url).content
                 pattern = 'src:  "(.*?)"'
                 request = re.compile(pattern, re.DOTALL).findall(request)
                 return request[0] + '|Referer=' + url
@@ -149,7 +150,7 @@ class source:
             t = [cleantitle.get(i) for i in set(titles) if i]
             url = self.search % titles[0]
 
-            sHtmlContent = self.scraper.get(url).content
+            sHtmlContent = cache.get(self.scraper.get, 4, url).content
             search_results = dom_parser.parse_dom(sHtmlContent, 'div', attrs={'class': 'title'})
             search_results = dom_parser.parse_dom(search_results, 'a')
             search_results = [(i.attrs['href'], i.content) for i in search_results]

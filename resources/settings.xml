@@ -5,7 +5,6 @@
         <setting type="lsep" label="Funktionen und Einstellungen" />
         <setting id="appearance.1" type="select" label="32311" values="Lastship|Lastship2|Exodus|Exuary" default="Lastship" visible="System.HasAddon(script.lastship.artwork)" />
         <setting id="scrapers.timeout.1" type="slider" label="32312" default="20" range="10,60" option="int" />
-        <setting id="trakt.user" type="text" default="" visible="false" />
         <setting id="indicators.alt" type="enum" label="32313" lvalues="32314|32315" default="1" visible="!eq(-1,)" />
         <setting id="indicators" type="enum" label="32313" lvalues="32314" default="0" visible="eq(-2,)" />
         <setting id="api.language" type="select" label="32316" values="AUTO|Bulgarian|Chinese|Croatian|Czech|Danish|Dutch|English|Finnish|French|German|Greek|Hebrew|Hungarian|Italian|Japanese|Korean|Norwegian|Polish|Portuguese|Romanian|Russian|Serbian|Slovak|Slovenian|Spanish|Swedish|Thai|Turkish|Ukrainian" default="AUTO" />
@@ -114,7 +113,8 @@
         <setting id="tm.user" type="text" option="hidden" label="32309" default="2ab10ff6afda491d22e70604dbdc6442" />
         <setting type="sep" />
         <setting type="lsep" label="Trakt" />
-        <setting id="trakt.user" type="action" label="32306" option="close" action="RunPlugin(plugin://plugin.video.lastship/?action=authTrakt)" />
+        <setting id="trakt.user" type="text" label="32303" visible="true" enable="false" default=""/>
+        <setting id="open_trakt_auth" type="action" label="32306" option="close" action="RunPlugin(plugin://plugin.video.lastship/?action=authTrakt)" />
         <setting id="trakt.token" type="text" visible="false" label="" default="" />
         <setting id="trakt.refresh" type="text" visible="false" label="" default="" />
         <setting type="sep" />

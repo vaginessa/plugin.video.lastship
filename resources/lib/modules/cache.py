@@ -53,7 +53,7 @@ def get(function, duration, *args, **kwargs):
         cache_result = cache_get(key)
         if cache_result:
             if _is_cache_valid(cache_result['date'], duration):
-                return pickle.loads(cache_result['value'].encode('utf-8'))
+                return pickle.loads(cache_result['value'])
             else:
                 cache_delete(key)
 
@@ -189,6 +189,7 @@ def cache_clear_all():
 
 def _get_connection_cursor():
     conn = _get_connection(control.cacheFile)
+    conn.text_factory = str
     return conn.cursor()
 
 

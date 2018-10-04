@@ -5,6 +5,7 @@ import xbmcgui
 from resources.lib.modules import control
 
 from resources.lib.modules.recaptcha import myJDownloader
+from resources.lib.modules.recaptcha import TwoCaptcha
 from resources.lib.modules.recaptcha import captcha9kw
 
 
@@ -14,11 +15,7 @@ class recaptchaApp:
         self.url = ""
         self.result = ""
 
-    def callMyJDownloader(self, recap):
-        self.result = recap.solve(self.url, self.siteKey)
-        control.execute('Dialog.Close(yesnoDialog)')
-
-    def call9kw(self, recap):
+    def callRecap(self, recap):
         self.result = recap.solve(self.url, self.siteKey)
         control.execute('Dialog.Close(yesnoDialog)')
 
@@ -29,10 +26,14 @@ class recaptchaApp:
         line1 = "Loese das Captcha in MyJDownloader!"
         if "0" == control.setting('Recaptcha2.Mode'):
             recap = myJDownloader.MyJDownloader()
-            t = threading.Thread(target=self.callMyJDownloader, args=(recap,))
+            t = threading.Thread(target=self.callRecap, args=(recap,))
+        elif "1" == control.setting('Recaptcha2.Mode'):
+            recap = TwoCaptcha.TwoCaptcha()
+            t = threading.Thread(target=self.callRecap, args=(recap,))
+            line1 = "Loese das Captcha mittels 2Captcha!"
         else:
             recap = captcha9kw.captcha9KW()
-            t = threading.Thread(target=self.call9kw, args=(recap,))
+            t = threading.Thread(target=self.callRecap, args=(recap,))
             line1 = "Loese das Captcha mittels Captcha9KW!"
 
         t.start()

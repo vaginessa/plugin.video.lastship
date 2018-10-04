@@ -141,7 +141,7 @@
         <setting id="emby.name" type="text" label="32720" default="Server" />
     </category>
     <category label="Recaptcha2">
-        <setting default="0" id="Recaptcha2.Mode" label="Recaptcha-Mode" type="enum" values="MyJDownloader|Captcha9KW" />
+        <setting default="0" id="Recaptcha2.Mode" label="Recaptcha-Mode" type="enum" values="MyJDownloader|2Captcha|Captcha9KW" />
         <setting id="Recaptcha2.TimeOut" type="slider" label="TimeOut" default="180" range="60,300" option="int" />
         <setting type="sep" />
         <setting type="lsep" label="MyJDownloader"/>
@@ -151,6 +151,9 @@
         <setting type="lsep" label="Captcha9KW"/>
         <setting id="Captcha9kw.ApiKey" type="text" label="APIKey" default="" />
         <setting id="Captcha9kw.SolveType" type="bool" label="Nur eigene Captchas lösen (SelfSolve)" default="true" />
+        <setting type="sep" />
+        <setting type="lsep" label="2Captcha"/>
+        <setting id="2Captcha.ApiKey" type="text" label="APIKey" default="" />
         <setting type="sep" />
     </category>
     <category label="32541">

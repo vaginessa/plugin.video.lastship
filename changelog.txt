@@ -8,7 +8,8 @@
 - Update kinox (new domains)
 - Cache optimiert
 - Fix Trakt Autentifizierung
-- add 
+- add TwoCaptcha
+- Update emby
 
 [B]3.0.2.3[/B]
 - Update myjdownloader.py, recaptcha_app.py

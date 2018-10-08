@@ -259,13 +259,22 @@ class player(xbmc.Player):
             else: break
             control.sleep(100)
 
-
+    # Kodi 17 relevant, broken in Kodi 18
+    # TODO: Remove when Kodi 18 is in stable
     def onPlayBackStarted(self):
         control.execute('Dialog.Close(all,true)')
         if not self.offset == '0': self.seekTime(float(self.offset))
         subtitles().get(self.name, self.imdb, self.season, self.episode)
         self.idleForPlayback()
 
+   # Exposed by kodi core in v18 when a video starts playing 
+   # https://forum.kodi.tv/showthread.php?tid=334929
+   def onAVStarted(self):
+        xbmc.sleep(1000)
+        control.execute('Dialog.Close(all,true)')
+        if not self.offset == '0': self.seekTime(float(self.offset))
+        subtitles().get(self.name, self.imdb, self.season, self.episode)
+        self.idleForPlayback()
 
     def onPlayBackStopped(self):
         bookmarks().reset(self.currentTime, self.totalTime, self.name, self.year)

@@ -311,7 +311,7 @@ elif action == 'queueItem':
 
 elif action == 'openSettings':
     from resources.lib.modules import control
-    control.openSettings(query)
+    control.openSettings()
 
 elif action == 'artwork':
     from resources.lib.modules import control

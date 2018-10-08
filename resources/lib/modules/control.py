@@ -295,14 +295,11 @@ def cdnImport(uri, name):
     return m
 
 
-def openSettings(query=None, id=addonInfo('id')):
+def openSettings():
     try:
         idle()
+        id = addonInfo('id')
         execute('Addon.OpenSettings(%s)' % id)
-        if query == None: raise Exception()
-        c, f = query.split('.')
-        execute('SetFocus(%i)' % (int(c) + 100))
-        execute('SetFocus(%i)' % (int(f) + 200))
     except:
         return
 

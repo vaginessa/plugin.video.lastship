@@ -185,30 +185,6 @@ msgctxt "#32042"
 msgid "No Trakt or IMDb account found."
 msgstr "Kein Trakt- oder IMDb-Konto gefunden"
 
-msgctxt "#32043"
-msgid "[B]SETTINGS[/B] : General"
-msgstr "[B]EINSTELLUNGEN[/B] : Allgemein"
-
-msgctxt "#32044"
-msgid "[B]SETTINGS[/B] : Accounts"
-msgstr "[B]EINSTELLUNGEN[/B] : Konten"
-
-msgctxt "#32045"
-msgid "[B]SETTINGS[/B] : Playback"
-msgstr "[B]EINSTELLUNGEN[/B] : Wiedergabe"
-
-msgctxt "#32046"
-msgid "[B]SETTINGS[/B] : Subtitles"
-msgstr "[B]EINSTELLUNGEN[/B] : Untertitel"
-
-msgctxt "#32047"
-msgid "[B]SETTINGS[/B] : Providers"
-msgstr "[B]EINSTELLUNGEN[/B] : Indexseiten"
-
-msgctxt "#32048"
-msgid "[B]LASTSHIP[/B] : Downloads"
-msgstr "[B]LASTSHIP[/B] : Downloads"
-
 msgctxt "#32049"
 msgid "[B]LASTSHIP[/B] : Viewtypes"
 msgstr "[B]LASTSHIP[/B] : Anzeige-Typen"
@@ -768,10 +744,6 @@ msgstr "Sind Sie sicher?"
 msgctxt "#32556"
 msgid "[B]LASTSHIP[/B] : Library"
 msgstr "[B]LASTSHIP[/B] : Bibliothek"
-
-msgctxt "#32557"
-msgid "[B]LIBRARY[/B] : Settings"
-msgstr "[B]BIBLIOTHEK[/B] : Einstellungen"
 
 msgctxt "#32558"
 msgid "[B]LASTSHIP[/B] : Update library..."

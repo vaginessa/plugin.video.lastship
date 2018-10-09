@@ -267,9 +267,9 @@ class player(xbmc.Player):
         subtitles().get(self.name, self.imdb, self.season, self.episode)
         self.idleForPlayback()
 
-   # Exposed by kodi core in v18 when a video starts playing 
-   # https://forum.kodi.tv/showthread.php?tid=334929
-   def onAVStarted(self):
+    # Exposed by kodi core in v18 when a video starts playing 
+    # https://forum.kodi.tv/showthread.php?tid=334929
+    def onAVStarted(self):
         xbmc.sleep(1000)
         control.execute('Dialog.Close(all,true)')
         if not self.offset == '0': self.seekTime(float(self.offset))

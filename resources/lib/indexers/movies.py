@@ -749,9 +749,7 @@ class movies:
 
             if self.meta: metacache.insert(self.meta)
 
-        self.list = [i for i in self.list if not i['imdb'] == '0']
-
-        self.list = metacache.local(self.list, self.tm_img_link, 'poster3', 'fanart2')
+        self.list = [i for i in self.list if not i['imdb'] == '0']        
 
         if self.fanart_tv_user == '':
             for i in self.list: i.update({'clearlogo': '0', 'clearart': '0'})

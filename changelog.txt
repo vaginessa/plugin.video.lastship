@@ -15,6 +15,7 @@
 - Dependence script.lastship.metadata entfernt
 
 [B]3.0.2.3[/B]
+  17.09.2018
 - Update myjdownloader.py, recaptcha_app.py
 - Add Captcha9kw
 - Update HDStreams

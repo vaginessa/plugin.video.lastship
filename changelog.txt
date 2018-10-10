@@ -10,7 +10,8 @@
 - Fix Trakt Autentifizierung
 - add TwoCaptcha
 - Update emby
-- Fix Fortsetzungspunkt in 
+- Fix Fortsetzungspunkt in Kodi18
+- Fix angefangen/nicht beendete Episoden werden nicht angezeigt wenn IMDb Key verwendet wir
 
 [B]3.0.2.3[/B]
 - Update myjdownloader.py, recaptcha_app.py

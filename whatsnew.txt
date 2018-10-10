@@ -24,6 +24,14 @@ INFO's dazu stehen in der FAQ
 
 [B][COLOR lime]Changelog plugin.video.lastship[/COLOR][/B]
 
+[B]3.0.2.3[/B]
+  17.09.2018
+- Update myjdownloader.py, recaptcha_app.py
+- Add Captcha9kw
+- Update HDStreams
+- Add bs.to mit Recaptcha
+- Fix Iload
+
 [B]3.0.2.2[/B]
   09.09.2018
 - Emby Debug Logging entfernt

@@ -185,6 +185,10 @@ msgctxt "#32042"
 msgid "No Trakt or IMDb account found."
 msgstr "Kein Trakt- oder IMDb-Konto gefunden"
 
+msgctxt "#32043"
+msgid "[B]SETTINGS[/B] : General"
+msgstr "[B]EINSTELLUNGEN[/B] : Allgemein"
+
 msgctxt "#32049"
 msgid "[B]LASTSHIP[/B] : Viewtypes"
 msgstr "[B]LASTSHIP[/B] : Anzeige-Typen"

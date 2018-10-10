@@ -29,8 +29,20 @@
     			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
 		<news>
-Add naninme
--Update HDKino (Add Duckduckgo)
+		- Add naninme
+		- Update HDKino (Add Duckduckgo)
+		- Fix Problem Suche in Kodi18
+		- Add cine.to mit ReCaptcha Funktion
+		- Fix fehlende Icons unter Linux
+		- Fix HDGO.py (Resolver)
+		- Update kinox (new domains)
+		- Cache optimiert
+		- Fix Trakt Autentifizierung
+		- add TwoCaptcha
+		- Update emby
+		- Fix Fortsetzungspunkt in Kodi18
+		- Fix angefangen/nicht beendete Episoden werden nicht angezeigt wenn IMDb Key verwendet wird
+		- Dependence script.lastship.metadata entfernt
 		</news>
 	</extension>
 </addon>

@@ -4,7 +4,6 @@
 		<import addon="xbmc.python" version="2.19.0" />
 		<import addon="repository.lastship" version="1.0.2" />
 		<import addon="script.lastship.artwork" />
-		<import addon="script.lastship.metadata" />
 		<import addon="script.module.urlresolver" />
 		<import addon="script.module.requests" />
 		<import addon="script.module.metahandler" version="1.0.0" />

@@ -40,4 +40,4 @@ def search(titles, year, site, titleRegex):
 
         return
     except:
-        source_faultlog.logFault(__name__, source_faultlog.tagSearch, titles[0] + '&' + site)
+        source_faultlog.logFault(site, source_faultlog.tagSearch, titles[0] + '&' + site)

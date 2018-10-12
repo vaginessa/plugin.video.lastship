@@ -24,6 +24,24 @@ INFO's dazu stehen in der FAQ
 
 [B][COLOR lime]Changelog plugin.video.lastship[/COLOR][/B]
 
+[B]3.0.2.4[/B]
+  12.10.2018
+- Add naninme
+- Update HDKino (Add Duckduckgo)
+- Fix Problem Suche in Kodi18
+- Add cine.to mit ReCaptcha Funktion
+- Fix fehlende Icons unter Linux
+- Fix HDGO.py (Resolver)
+- Update kinox (new domains)
+- Cache optimiert
+- Fix Trakt Autentifizierung
+- add TwoCaptcha
+- Update emby
+- Fix Fortsetzungspunkt in Kodi18
+- Fix angefangen/nicht beendete Episoden werden nicht angezeigt wenn IMDb Key verwendet wird
+- Dependence script.lastship.metadata entfernt
+- Fix duckduckgo (Provider werden oft geblockt)
+
 [B]3.0.2.3[/B]
   17.09.2018
 - Update myjdownloader.py, recaptcha_app.py

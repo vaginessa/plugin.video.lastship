@@ -12,6 +12,11 @@ Die Seite Emby ist Standardmäßig deaktiviert, da diese Seite eine Premium Seit
 Bei einigen IndexSeiten ist es möglich, Captcha in Lastship zu lösen. Infos dazu stehen in der FAQ / Konten / ReCaptcha2
 
 [B][COLOR blue]Aktuelles[/COLOR][/B]
+13.10.2018
+Zur Zeit gibt es zwei Trakt Probleme
+Eine Neuauthorisierung ist nicht möglich-Fehlermeldung
+Bei bestehender Trakt Verbindung kann seit dem Update 3.0.2.4 der Fortsetzungspunkt nicht  auf Trakt umgestellt werden
+
 11.08.2018
 INFO zu HDFilme: 
 Da die Server von HDFilme.tv sehr lahm sind, kann es sein, dass die Seite nicht funktioniert und dann wieder schon. Das ist KEIN Fehler von Lastship, sonder liegt an den langsamen Servern 

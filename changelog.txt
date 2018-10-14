@@ -1,4 +1,4 @@
-[B]3.0.2.5~nightly[/B]
+[B]3.0.2.5~nightly1[/B]
 - Fix Trakt Fortsetzungspunkt einstellen
 
 [B]3.0.2.4[/B]

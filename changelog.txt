@@ -1,4 +1,4 @@
-[B]3.0.2.5~nightly1[/B]
+[B]3.0.2.5~nightly2[/B]
 - Fix Trakt Fortsetzungspunkt einstellen -> enabled wenn trakt konto eingestellt
 - Fix bookmark settings 
 

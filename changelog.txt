@@ -1,5 +1,6 @@
 [B]3.0.2.5~nightly1[/B]
-- Fix Trakt Fortsetzungspunkt einstellen
+- Fix Trakt Fortsetzungspunkt einstellen -> enabled wenn trakt konto eingestellt
+- Fix bookmark settings 
 
 [B]3.0.2.4[/B]
   12.10.2018

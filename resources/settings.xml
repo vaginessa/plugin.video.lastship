@@ -5,8 +5,9 @@
         <setting type="lsep" label="Funktionen und Einstellungen" />
         <setting id="appearance.1" type="select" label="32311" values="Lastship|Lastship2|Exodus|Exuary" default="Lastship" visible="System.HasAddon(script.lastship.artwork)" />
         <setting id="scrapers.timeout.1" type="slider" label="32312" default="20" range="10,60" option="int" />
-        <setting id="indicators.alt" type="enum" label="32313" lvalues="32314|32315" default="1" visible="!eq(-1,true)" />
-        <setting id="indicators" type="enum" label="32313" lvalues="32314" default="0" visible="eq(-2,true)" />
+        <setting id="trakt.user" type="text" label="32303" default="" visible="false"/>
+        <setting id="indicators.alt" type="enum" label="32313" lvalues="32314|32315" default="1" visible="!eq(-1,)" />
+        <setting id="indicators" type="enum" label="32313" lvalues="32314" default="0" visible="eq(-2,)" enable="!eq(-2,)" />
         <setting id="api.language" type="select" label="32316" values="AUTO|Bulgarian|Chinese|Croatian|Czech|Danish|Dutch|English|Finnish|French|German|Greek|Hebrew|Hungarian|Italian|Japanese|Korean|Norwegian|Polish|Portuguese|Romanian|Russian|Serbian|Slovak|Slovenian|Spanish|Swedish|Thai|Turkish|Ukrainian" default="AUTO" />
         <setting id="providers.lang" type="select" label="32360" values="German" default="German" />
         <setting id="flatten.tvshows" type="bool" label="32317" default="false" />
@@ -52,7 +53,7 @@
         <setting id="no.subbed" type="bool" label="Filter Streams mit Untertitel" default="false" />
         <setting type="lsep" label="32343" />
         <setting id="bookmarks" type="bool" label="32344" default="true" />
-        <setting id="bookmarks.trakt" type="bool" label="Trakt Fortsetzungspunkt" default="true" enable="!eq(-1,false)" visible="false" />
+        <setting id="bookmarks.trakt" type="bool" label="Trakt Fortsetzungspunkt" default="false" enable="!eq(-1,false)" />
         <setting id="bookmarks.auto" type="bool" label="Automatisch Fortsetzen" default="false" enable="!eq(-2,false)" />
         <setting type="lsep" label="32372" />
         <setting id="crefresh" type="bool" label="32373" default="false" />

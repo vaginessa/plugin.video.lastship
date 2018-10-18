@@ -300,8 +300,9 @@ class libtvshows:
                     if self.block == True: raise Exception()
 
                 premiered = i.get('premiered', '0')
-                if (premiered != '0' and int(re.sub('[^0-9]', '', str(premiered))) > int(self.date)) or (premiered == '0' and not self.include_unknown):
-                    continue
+                if self.include_unknown == False:
+                    if (premiered != '0' and int(re.sub('[^0-9]', '', str(premiered))) > int(self.date)) or premiered == '0':
+                        continue
 
                 self.strmFile(i)
                 files_added += 1

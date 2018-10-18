@@ -12,22 +12,23 @@ Die Seite Emby ist Standardmäßig deaktiviert, da diese Seite eine Premium Seit
 Bei einigen IndexSeiten ist es möglich, Captcha in Lastship zu lösen. Infos dazu stehen in der FAQ / Konten / ReCaptcha2
 
 [B][COLOR blue]Aktuelles[/COLOR][/B]
-13.10.2018
-Zur Zeit gibt es zwei Trakt Probleme
-Eine Neuauthorisierung ist nicht möglich-Fehlermeldung
-Bei bestehender Trakt Verbindung kann seit dem Update 3.0.2.4 der Fortsetzungspunkt nicht  auf Trakt umgestellt werden
+18.10.2018
+Maxdome wurde hinzugefügt als Indexseite
 
-11.08.2018
-INFO zu HDFilme: 
-Da die Server von HDFilme.tv sehr lahm sind, kann es sein, dass die Seite nicht funktioniert und dann wieder schon. Das ist KEIN Fehler von Lastship, sonder liegt an den langsamen Servern 
-
-31.07.2018
-VodHD wurde umgestellt und umbenannt auf Emby. ALLE User müssen Ihre Benutzerdaten NEU in Lastship eintragen um VodHD Dienste weiterhin nutzen zu können
-INFO's dazu stehen in der FAQ
 
 [COLOR orange]-------------------------------------------------------------------------------------------------------[/COLOR]
 
 [B][COLOR lime]Changelog plugin.video.lastship[/COLOR][/B]
+
+[B]3.0.2.5[/B]
+  18.10.2018
+- Übersetzungen des nicht in der string.py befindlichen Textes
+- Add Maxdome
+- Fix "Resume/Fortsetzen" anzeige
+- Fix, noch nicht ausgestrahlte Episoden in die Bibliothek aufnehmen
+- Ausgabe der Downloadanzeige optimiert
+- Fix Trakt Fortsetzungspunkt einstellen -> enabled wenn trakt konto eingestellt
+- Fix bookmark settings 
 
 [B]3.0.2.4[/B]
   12.10.2018

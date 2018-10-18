@@ -141,7 +141,7 @@ def doDownload(url, dest, title, image, headers):
     resp = getResponse(url, headers, 0)
 
     if not resp:
-        xbmcgui.Dialog().ok(title, dest, 'Download failed', 'No response from server')
+        xbmcgui.Dialog().ok(title, dest, 'Download fehlgeschlagen', 'Keine Antwort vom Server')
         return
 
     try:    content = int(resp.headers['Content-Length'])
@@ -156,7 +156,7 @@ def doDownload(url, dest, title, image, headers):
         print "Download is resumable"
 
     if content < 1:
-        xbmcgui.Dialog().ok(title, file, 'Unknown filesize', 'Unable to download')
+        xbmcgui.Dialog().ok(title, file, 'Unbekannte Dateigröße', 'Download nicht möglich')
         return
 
     size = 1024 * 1024
@@ -172,7 +172,7 @@ def doDownload(url, dest, title, image, headers):
     resume = 0
     sleep = 0
 
-    if xbmcgui.Dialog().yesno(title + ' - Confirm Download', file, 'Complete file is %dMB' % mb, 'Continue with download?', 'Confirm',  'Cancel') == 1:
+    if xbmcgui.Dialog().yesno(title + ' - Download bestätigen', file, 'Dateigröße %dMB' % mb, 'Download fortsetzen?', 'Fortsetzen',  'Abbrechen') == 1:
         return
 
     print 'Download File Size : %dMB %s ' % (mb, dest)

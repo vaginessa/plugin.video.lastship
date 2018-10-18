@@ -1,4 +1,5 @@
-[B]3.0.2.5~nightly5[/B]
+[B]3.0.2.5~nightly6[/B]
+- Übersetzungen des nicht in der string.py befindlichen Textes
 - Add Maxdome
 - Fix "Resume/Fortsetzen" anzeige
 - Fix, noch nicht ausgestrahlte Episoden in die Bibliothek aufnehmen

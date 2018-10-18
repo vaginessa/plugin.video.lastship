@@ -401,6 +401,8 @@ class bookmarks:
                                 # Calculating Offset to seconds
                                 offset = (float(i['progress'] / 100) * int(i['movie']['runtime']) * 60)
 
+                    if offset == '0': raise Exception()
+
                     if control.setting('bookmarks.auto') == 'false':
                         try:
                             yes = control.dialog.contextmenu(["Resume", control.lang(32501).encode('utf-8'), ])

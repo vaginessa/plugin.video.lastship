@@ -17,6 +17,7 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['de']
+        self.genre_filter = ['animation', 'anime']
         self.domains = ['nanime.to']
         self.base_link = 'https://nanime.to'
         self.search_link = '/?s=%s'

@@ -1,4 +1,6 @@
-[B]3.0.2.5~nightly3[/B]
+[B]3.0.2.5~nightly4[/B]
+- Fix "Resume/Fortsetzen" anzeige
+- Fix, noch nicht ausgestrahlte Episoden in die Bibliothek aufnehmen
 - Ausgabe der Downloadanzeige optimiert
 - Fix Trakt Fortsetzungspunkt einstellen -> enabled wenn trakt konto eingestellt
 - Fix bookmark settings 

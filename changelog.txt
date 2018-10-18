@@ -1,4 +1,5 @@
-[B]3.0.2.6~nightly1[/B]
+[B]3.0.2.6~nightly2[/B]
+ - Fix Nanime Genre
  - nanime Standard: AUS
 
 [B]3.0.2.5[/B]

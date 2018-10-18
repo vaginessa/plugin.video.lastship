@@ -1,4 +1,5 @@
-[B]3.0.2.5~nightly4[/B]
+[B]3.0.2.5~nightly5[/B]
+- Add Maxdome
 - Fix "Resume/Fortsetzen" anzeige
 - Fix, noch nicht ausgestrahlte Episoden in die Bibliothek aufnehmen
 - Ausgabe der Downloadanzeige optimiert

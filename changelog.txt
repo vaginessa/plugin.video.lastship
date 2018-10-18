@@ -1,4 +1,4 @@
-[B]3.0.2.5~nightly6[/B]
+[B]3.0.2.5[/B]
 - Übersetzungen des nicht in der string.py befindlichen Textes
 - Add Maxdome
 - Fix "Resume/Fortsetzen" anzeige

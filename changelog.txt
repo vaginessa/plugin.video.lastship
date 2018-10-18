@@ -1,3 +1,6 @@
+[B]3.0.2.6~nightly1[/B]
+ - nanime Standard: AUS
+
 [B]3.0.2.5[/B]
   18.10.2018
 - Übersetzungen des nicht in der string.py befindlichen Textes

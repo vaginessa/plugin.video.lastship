@@ -195,15 +195,15 @@ msgstr "[B]LASTSHIP[/B] : Anzeige-Typen"
 
 msgctxt "#32050"
 msgid "[B]LASTSHIP[/B] : Clear providers..."
-msgstr "[B]LASTSHIP[/B] : Indexseiten-Cache leeren..."
+msgstr "[B]LASTSHIP[/B] : Indexseiten-Cache leeren"
 
 msgctxt "#32051"
 msgid "[B]LASTSHIP[/B] : Clear metadata..."
-msgstr "[B]LASTSHIP[/B] : Metadaten-Cache leeren..."
+msgstr "[B]LASTSHIP[/B] : Metadaten-Cache leeren"
 
 msgctxt "#32052"
 msgid "[B]LASTSHIP[/B] : Clear cache..."
-msgstr "[B]LASTSHIP[/B] : Cache leeren..."
+msgstr "[B]LASTSHIP[/B] : Cache leeren"
 
 msgctxt "#32053"
 msgid "[I]Next Page[/I]"
@@ -939,11 +939,11 @@ msgstr "Trakt Bibliothek automatisch aktualisieren"
 
 msgctxt "#32706"
 msgid "[B]LASTSHIP[/B] : Clear All Cache..."
-msgstr "[B]LASTSHIP[/B] : Lösche alle Speicher"
+msgstr "[B]LASTSHIP[/B] : Lösche alle Caches"
 
 msgctxt "#32707"
 msgid "[B]LASTSHIP[/B] : Clear Meta Cache..."
-msgstr "[B]LASTSHIP[/B] : Metadaten Speicher löschen"
+msgstr "[B]LASTSHIP[/B] : Metadaten-Cache löschen"
 
 msgctxt "#32708"
 msgid "Enable Quick Search"

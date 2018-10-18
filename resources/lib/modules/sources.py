@@ -172,21 +172,27 @@ class sources:
                 item.addContextMenuItems(cm)
                 item.setInfo(type='Video', infoLabels= meta)
 
+                ## Notwendig für Library Exporte ##
                 
                 ## Amazon Scraper Details ##
-                if "amazon" in label:
-                    #item.setProperty('IsPlayable','true')
+                if "amazon" in label.lower():
+                    item.setProperty('IsPlayable', 'true')                    
                     aid=re.search(r'asin%3D(.*?)%22%2C', sysurl)
                     sysurl='plugin://plugin.video.amazon-test/?mode=PlayVideo&asin=' + aid.group(1)
-                    item.setProperty('IsPlayable', 'true')
-                   
+                                       
                 ## Netflix Scraper Details ##
-                if "netflix" in label:
-                    #item.setProperty('IsPlayable','true')
-                    aid=re.search(r'video_id%3D(.*?)%22%2C', sysurl)
-                    print "print NF source REGEX",aid.group(1)
-                    sysurl='plugin://plugin.video.netflix/?action=play_video&video_id=' + aid.group(1)
+                if "netflix" in label.lower():
                     item.setProperty('IsPlayable', 'true')
+                    aid=re.search(r'video_id%3D(.*?)%22%2C', sysurl)                    
+                    sysurl='plugin://plugin.video.netflix/?action=play_video&video_id=' + aid.group(1)
+                    
+
+                ## Maxdome Scraper Details ##
+                if "maxdome" in label.lower():
+                    item.setProperty('IsPlayable', 'true')
+                    aid=re.search(r'id%3D(.*?)%22%2C', sysurl)                    
+                    sysurl='plugin://plugin.video.maxdome/?action=play&id=' + aid.group(1)
+                    
 
                 control.addItem(handle=syshandle, url=sysurl, listitem=item, isFolder=False)
             except:
@@ -888,7 +894,7 @@ class sources:
             else: self.sources[i]['label'] = label.upper()
 
             ## EMBY shown as premium link ##
-            if self.sources[i]['provider']=="emby" or self.sources[i]['provider']=="amazon" or self.sources[i]['provider']=="netflix":
+            if self.sources[i]['provider']=="emby" or self.sources[i]['provider']=="amazon" or self.sources[i]['provider']=="netflix" or self.sources[i]['provider']=="maxdome":
                 if not prem_identify == 'nocolor':
                     self.sources[i]['label'] = ('[COLOR %s]' % (prem_identify)) + label.upper() + '[/COLOR]'
             
@@ -1146,7 +1152,7 @@ class sources:
 
         self.hostprDict = ['1fichier.com', 'oboom.com', 'rapidgator.net', 'rg.to', 'uploaded.net', 'uploaded.to', 'ul.to', 'filefactory.com', 'nitroflare.com', 'turbobit.net', 'uploadrocket.net']
 
-        self.hostcapDict = ['flashx.tv', 'flashx.to', 'flashx.sx', 'flashx.bz', 'flashx.cc', 'hugefiles.net', 'kingfiles.net', 'openload.io', 'openload.co', 'oload.tv', 'thevideo.me', 'vidup.me', 'streamin.to', 'torba.se']
+        self.hostcapDict = ['flashx.tv', 'flashx.to', 'flashx.sx', 'flashx.bz', 'flashx.cc', 'hugefiles.net', 'kingfiles.net', 'thevideo.me', 'vidup.me', 'streamin.to', 'torba.se']
 
         self.hosthqDict = ['bitporno.com', 'cloudvideo.tv', 'filez.tv', 'fruitadblock.net', 'fruitstreams.com', 'google.com', 'gvideo', 'oload.download', 'oload.stream', 'oload.tv', 'oload.tv', 'oload.win', 'openload.co', 'openload.io', 'rapidvideo.com', 'rapidvideo.ws', 'raptu.com', 'streamango.com', 'streamcherry.com', 'thevideo.me', 'uptobox.com', 'uptostream.com', 'vidoza.net', 'vivo.sx']
 

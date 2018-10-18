@@ -184,7 +184,6 @@ def cache_clear_all():
     cache_clear()
     cache_clear_meta()
     cache_clear_providers()
-    cache_clear_search()
 
 
 def _get_connection_cursor():

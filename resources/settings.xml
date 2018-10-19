@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <settings>
-    <category label="32310">
-        <setting id="appearance.alt" type="action" label="32311" default="-" option="close" action="RunPlugin(plugin://plugin.video.lastship/?action=artwork)" visible="!System.HasAddon(script.lastship.artwork)" />
+    <category label="Allgemein">
+        <setting id="appearance.alt" type="action" label="Erscheinungsbild" default="-" option="close" action="RunPlugin(plugin://plugin.video.lastship/?action=artwork)" visible="!System.HasAddon(script.lastship.artwork)" />
         <setting type="lsep" label="Funktionen und Einstellungen" />
-        <setting id="appearance.1" type="select" label="32311" values="Lastship|Lastship2|Exodus|Exuary" default="Lastship" visible="System.HasAddon(script.lastship.artwork)" />
-        <setting id="scrapers.timeout.1" type="slider" label="32312" default="20" range="10,60" option="int" />
-        <setting id="trakt.user" type="text" label="32303" default="" visible="false"/>
-        <setting id="indicators.alt" type="enum" label="32313" lvalues="32314|32315" default="1" visible="!eq(-1,)" />
-        <setting id="indicators" type="enum" label="32313" lvalues="32314" default="0" visible="eq(-2,)" enable="!eq(-2,)" />
-        <setting id="api.language" type="select" label="32316" values="AUTO|Bulgarian|Chinese|Croatian|Czech|Danish|Dutch|English|Finnish|French|German|Greek|Hebrew|Hungarian|Italian|Japanese|Korean|Norwegian|Polish|Portuguese|Romanian|Russian|Serbian|Slovak|Slovenian|Spanish|Swedish|Thai|Turkish|Ukrainian" default="AUTO" />
-        <setting id="providers.lang" type="select" label="32360" values="German" default="German" />
-        <setting id="flatten.tvshows" type="bool" label="32317" default="false" />
-        <setting id="fanart" type="bool" label="32318" default="true" />
-        <setting id="movies.extrainfo" type="enum" label="32714" lvalues="32715|32716|32717" default="1" visible="false" />
-        <setting id="showunaired" type="bool" label="32570" default="true" />
-        <setting id="unaired.identify" type="enum" label="32608" lvalues="32589|32590|32591|32592|32593|32594|32595|32596|32597|32598" default="1" />
-        <setting id="hidecinema" type="bool" label="32571" default="false" />
-        <setting id="filter.movies.byyear" type="bool" label="32700" default="false" />
-        <setting type="lsep" label="32701" visible="eq(-1,true)" />
-        <setting id="movies.byyear.from" type="slider" label="32702" default="1980" range="1900,2017" option="int" visible="eq(-2,true)" />
-        <setting id="movies.byyear.to" type="slider" label="32703" default="2017" range="1900,2018" option="int" visible="eq(-3,true)" />
-        <setting type="lsep" label="32319" />
-        <setting id="movie.widget" type="enum" label="32320" lvalues="32302|32321|32322|32323|32324|32580" default="1" />
-        <setting id="tv.widget.alt" type="enum" label="32325" lvalues="32302|32326|32327|32328" default="2" visible="!eq(-16,)" />
-        <setting id="tv.widget" type="enum" label="32325" lvalues="32302|32326" default="1" visible="eq(-17,)" />
-        <setting id="prgr.sortorder" type="enum" label="32584" lvalues="32585|32586" default="1" visible="!eq(-18,)" />
-        <setting id="lists.widget" type="enum" label="32329" lvalues="32302|32301" default="1" />
-        <setting id="search.quick" type="enum" label="32708" lvalues="32302|32301" default="0" />
+        <setting id="appearance.1" type="select" label="Erscheinungsbild" values="Lastship|Lastship2|Exodus|Exuary" default="Lastship" visible="System.HasAddon(script.lastship.artwork)" />
+        <setting id="scrapers.timeout.1" type="slider" label="Zeitlimit für Indexseiten" default="20" range="10,60" option="int" />
+        <setting id="trakt.user" type="text" label="Benutzer" default="" visible="false"/>
+        <setting id="indicators.alt" type="enum" label="Gesehen / Fortsetzungspunkte" lvalues="Lokal|Trakt" default="1" visible="!eq(-1,)" />
+        <setting id="indicators" type="enum" label="Gesehen / Fortsetzungspunkte" lvalues="Lokal" default="0" visible="eq(-2,)" enable="!eq(-2,)" />
+        <setting id="api.language" type="select" label="Sprache für Informationen" values="AUTO|Bulgarian|Chinese|Croatian|Czech|Danish|Dutch|English|Finnish|French|German|Greek|Hebrew|Hungarian|Italian|Japanese|Korean|Norwegian|Polish|Portuguese|Romanian|Russian|Serbian|Slovak|Slovenian|Spanish|Swedish|Thai|Turkish|Ukrainian" default="AUTO" />
+        <setting id="providers.lang" type="select" label="Sprache für Indexseiten" values="German" default="German" />
+        <setting id="flatten.tvshows" type="bool" label="Serien-Staffeln reduzieren" default="false" />
+        <setting id="fanart" type="bool" label="Fanart verwenden" default="true" />
+        <setting id="movies.extrainfo" type="enum" label="Zusatzinfos für Filme holen" lvalues="AUS|TMDB|TMDB & TRAKT.TV" default="1" visible="false" />
+        <setting id="showunaired" type="bool" label="Noch nicht gesendete Staffeln/Episoden anzeigen" default="true" />
+        <setting id="unaired.identify" type="enum" label="Farbe für noch nicht gesendete Staffeln/Episoden" lvalues="Blau|Rot|Gelb|Altrosa|Cyan|Grasgrün|Gold|Magenta|Gelbgrün|Ohne Farbe" default="1" />
+        <setting id="hidecinema" type="bool" label="Nur Filme älter als 90 Tage anzeigen" default="false" />
+        <setting id="filter.movies.byyear" type="bool" label="Filme nach Jahrgang filtern" default="false" />
+        <setting type="lsep" label="Inkl. Oscar-Sieger, Beste Einspieler, Genres und Am populärsten" visible="eq(-1,true)" />
+        <setting id="movies.byyear.from" type="slider" label="Von" default="1980" range="1900,2017" option="int" visible="eq(-2,true)" />
+        <setting id="movies.byyear.to" type="slider" label="Bis" default="2017" range="1900,2018" option="int" visible="eq(-3,true)" />
+        <setting type="lsep" label="Menü" />
+        <setting id="movie.widget" type="enum" label="Neue Filme" lvalues="Deaktiviert|Empfohlen|Aktive Betrachter|Am populärsten|In Kinos|Neue Releases" default="1" />
+        <setting id="tv.widget.alt" type="enum" label="Neue Episoden" lvalues="Deaktiviert|Episoden|Trakt-Fortschritt|Trakt-Episoden" default="2" visible="!eq(-16,)" />
+        <setting id="tv.widget" type="enum" label="Neue Episoden" lvalues="Deaktiviert|Episoden" default="1" visible="eq(-17,)" />
+        <setting id="prgr.sortorder" type="enum" label="Trakt-Fortschritt sortieren nach" lvalues="kürzlich gesendet|kürzlich gesehen" default="1" visible="!eq(-18,)" />
+        <setting id="lists.widget" type="enum" label="Meine Listen" lvalues="Deaktiviert|Aktiviert" default="1" />
+        <setting id="search.quick" type="enum" label="Schnelle Suche" lvalues="Deaktiviert|Aktiviert" default="0" />
         <setting type="lsep" label="Trakt Bibliothek - Automatische Synchronisierung" />
         <setting id="autoTraktOnStart" type="bool" label="Synchronisierung bei Kodi Start" default="False" />
         <setting id="schedTraktTime" type="slider" label="Geplante Updates jede - Stunde/n" default="0" range="0,24" option="int" />
         <setting type="lsep" label="0 Geplantes Update deaktiviert" />
-        <setting id="DevUpdate" type="bool" label="32075" default="false" />
-        <setting type="lsep" label="32711" />
-        <setting id="FaultLogger.enabled" type="bool" label="32711" default="true" />
-        <setting id="FaultLogger.numErrors" type="slider" label="32712" default="5" range="1,30" visible="eq(-1,true)"  option="int" />
-        <setting id="FaultLogger.recheckHours" type="slider" label="32713" default="24" range="12,72" visible="eq(-2,true)" option="int" />
+        <setting id="DevUpdate" type="bool" label="Nightly Update" default="false" />
+        <setting type="lsep" label="Fehlerhafte Provider erkennen" />
+        <setting id="FaultLogger.enabled" type="bool" label="Fehlerhafte Provider erkennen" default="true" />
+        <setting id="FaultLogger.numErrors" type="slider" label="Anzahl Errors für Deaktivierung" default="5" range="1,30" visible="eq(-1,true)"  option="int" />
+        <setting id="FaultLogger.recheckHours" type="slider" label="Deaktivierten Provider überprüfen nach Stunden" default="24" range="12,72" visible="eq(-2,true)" option="int" />
     </category>
     <category label="32330">
         <setting id="hosts.mode" type="enum" label="32331" lvalues="32332|32333|32334" default="1" />

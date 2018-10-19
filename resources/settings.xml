@@ -131,10 +131,6 @@
         <setting id="serienstream.user" type="text" label="32304" default="" />
         <setting id="serienstream.pass" type="text" label="32307" default="" />
         <setting type="sep" />
-        <setting type="lsep" label="Seriesever.net" />
-        <setting id="seriesever.user" type="text" label="32303" default="" />
-        <setting id="seriesever.pass" type="text" label="32307" default="" />
-        <setting type="sep" />
         <setting type="lsep" label="EMBY" />
         <setting id="emby.user" type="text" label="32303" default="" />
         <setting id="emby.pass" type="text" label="32307" option="hidden" default="" />

@@ -1,4 +1,4 @@
-[B]3.0.2.6~nightly5[/B]
+[B]3.0.2.6[/B]
  - Fix Nanime Genre
  - nanime Standard: AUS
  - Fix noch nicht ausgestrahlte Episoden in die Bibliothek aufnehmen

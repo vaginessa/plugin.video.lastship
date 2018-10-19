@@ -1,9 +1,10 @@
-[B]3.0.2.6~nightly4[/B]
+[B]3.0.2.6~nightly5[/B]
  - Fix Nanime Genre
  - nanime Standard: AUS
  - Fix noch nicht ausgestrahlte Episoden in die Bibliothek aufnehmen
  - Fix 9kw liefert Timeoutwert mit / Performance Tuning
  - Reihenfolge der Caches geändert, damit „Suchverlauf löschen“ nicht mittendrin steht
+ - Vereinheitlichung der Übersetzung "Cache" in string.po
 
 [B]3.0.2.5[/B]
   18.10.2018

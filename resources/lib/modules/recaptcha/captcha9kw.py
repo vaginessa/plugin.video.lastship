@@ -27,7 +27,8 @@ class captcha9KW:
             'json': '1',
             'file-upload-01': siteKey,
             'oldsource': 'recaptchav2',
-            'pageurl': url
+            'pageurl': url,
+            'maxtimeout': self.time
         }
 
         if self.SolveType == 'true':

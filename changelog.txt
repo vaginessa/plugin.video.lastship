@@ -1,7 +1,8 @@
-[B]3.0.2.6~nightly3[/B]
+[B]3.0.2.6~nightly4[/B]
  - Fix Nanime Genre
  - nanime Standard: AUS
  - Fix noch nicht ausgestrahlte Episoden in die Bibliothek aufnehmen
+ - 9kw liefert timeoutwert mit / performance tuning
 
 [B]3.0.2.5[/B]
   18.10.2018

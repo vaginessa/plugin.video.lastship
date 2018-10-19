@@ -1,5 +1,6 @@
-[B]3.0.2.7~nightly1[/B]
+[B]3.0.2.7~nightly2[/B]
 - Seriesever Konto entfernt
+- [settings.xml] Begonnen mit Aufhebung der Verknüpfungen zur string.po um den Code leichter lesbar zu machen 
 
 [B]3.0.2.6[/B]
  - Fix Nanime Genre

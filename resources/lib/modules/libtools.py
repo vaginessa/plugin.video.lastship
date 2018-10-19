@@ -300,7 +300,7 @@ class libtvshows:
                     if self.block == True: raise Exception()
 
                 premiered = i.get('premiered', '0')
-                if self.include_unknown == False:
+                if self.include_unknown == 'false':
                     if (premiered != '0' and int(re.sub('[^0-9]', '', str(premiered))) > int(self.date)) or premiered == '0':
                         continue
 
@@ -533,8 +533,9 @@ class libepisodes:
                     if xbmc.abortRequested == True: return sys.exit()
 
                     premiered = i.get('premiered', '0')
-                    if (premiered != '0' and int(re.sub('[^0-9]', '', str(premiered))) > int(self.date)) or (premiered == '0' and not self.include_unknown):
-                        continue
+                    if self.include_unknown == 'false':
+                        if (premiered != '0' and int(re.sub('[^0-9]', '', str(premiered))) > int(self.date)) or premiered == '0':
+                            continue
 
                     libtvshows().strmFile(i)
                     files_added += 1

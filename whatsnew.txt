@@ -14,11 +14,22 @@ Bei einigen IndexSeiten ist es möglich, Captcha in Lastship zu lösen. Infos da
 [B][COLOR blue]Aktuelles[/COLOR][/B]
 18.10.2018
 Maxdome wurde hinzugefügt als Indexseite
+Für Maxdome, Amazon und Netflix ist ein Benutzerkonto der jeweiligen Anbieterseite erforderlich
+Die Änderung für Nanime war notwendig, da die Seite wegen unnötiger Abfragen überlastet war
 
 
 [COLOR orange]-------------------------------------------------------------------------------------------------------[/COLOR]
 
 [B][COLOR lime]Changelog plugin.video.lastship[/COLOR][/B]
+
+[B]3.0.2.6[/B]
+   19.10.2018
+ - Fix Nanime Genre
+ - nanime Standard: AUS
+ - Fix noch nicht ausgestrahlte Episoden in die Bibliothek aufnehmen
+ - Fix 9kw liefert Timeoutwert mit / Performance Tuning
+ - Reihenfolge der Caches geändert, damit „Suchverlauf löschen“ nicht mittendrin steht
+ - Vereinheitlichung der Übersetzung "Cache" in string.po
 
 [B]3.0.2.5[/B]
   18.10.2018

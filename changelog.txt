@@ -1,3 +1,6 @@
+[B]3.0.2.7~nightly1[/B]
+- Seriesever Konto entfernt
+
 [B]3.0.2.6[/B]
  - Fix Nanime Genre
  - nanime Standard: AUS

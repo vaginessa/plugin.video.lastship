@@ -12,7 +12,7 @@
         <setting id="providers.lang" type="select" label="Sprache für Indexseiten" values="German" default="German" />
         <setting id="flatten.tvshows" type="bool" label="Serien-Staffeln reduzieren" default="false" />
         <setting id="fanart" type="bool" label="Fanart verwenden" default="true" />
-        <setting id="movies.extrainfo" type="enum" label="Zusatzinfos für Filme holen" lvalues="AUS|TMDB|TMDB & TRAKT.TV" default="1" visible="false" />
+        <setting id="movies.extrainfo" type="enum" label="Zusatzinfos für Filme holen" lvalues="AUS|TMDB|TMDB und TRAKT.TV" default="1" visible="false" />
         <setting id="showunaired" type="bool" label="Noch nicht gesendete Staffeln/Episoden anzeigen" default="true" />
         <setting id="unaired.identify" type="enum" label="Farbe für noch nicht gesendete Staffeln/Episoden" lvalues="Blau|Rot|Gelb|Altrosa|Cyan|Grasgrün|Gold|Magenta|Gelbgrün|Ohne Farbe" default="1" />
         <setting id="hidecinema" type="bool" label="Nur Filme älter als 90 Tage anzeigen" default="false" />

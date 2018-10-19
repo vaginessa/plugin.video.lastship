@@ -1,6 +1,7 @@
-[B]3.0.2.6~nightly2[/B]
+[B]3.0.2.6~nightly3[/B]
  - Fix Nanime Genre
  - nanime Standard: AUS
+ - Fix noch nicht ausgestrahlte Episoden in die Bibliothek aufnehmen
 
 [B]3.0.2.5[/B]
   18.10.2018

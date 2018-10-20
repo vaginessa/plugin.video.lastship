@@ -23,18 +23,18 @@ class recaptchaApp:
         time = int(control.setting('Recaptcha2.TimeOut'))
         self.url = url
         self.siteKey = siteKey
-        line1 = "Loese das Captcha in MyJDownloader!"
+        line1 = "Löse das Captcha in MyJDownloader!"
         if "0" == control.setting('Recaptcha2.Mode'):
             recap = myJDownloader.MyJDownloader()
             t = threading.Thread(target=self.callRecap, args=(recap,))
         elif "1" == control.setting('Recaptcha2.Mode'):
             recap = TwoCaptcha.TwoCaptcha()
             t = threading.Thread(target=self.callRecap, args=(recap,))
-            line1 = "Loese das Captcha mittels 2Captcha!"
+            line1 = "Löse das Captcha mittels 2Captcha!"
         else:
             recap = captcha9kw.captcha9KW()
             t = threading.Thread(target=self.callRecap, args=(recap,))
-            line1 = "Loese das Captcha mittels Captcha9KW!"
+            line1 = "Löse das Captcha mittels Captcha9KW!"
 
         t.start()
 

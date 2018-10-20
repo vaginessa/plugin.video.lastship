@@ -405,10 +405,10 @@ class bookmarks:
 
                     if control.setting('bookmarks.auto') == 'false':
                         try:
-                            yes = control.dialog.contextmenu(["Resume", control.lang(32501).encode('utf-8'), ])
+                            yes = control.dialog.contextmenu(["Fortsetzen", "Vom Anfang abspielen", ])
                         except:
-                            yes = control.yesnoDialog("Resume", '', '', str(name), control.lang(32503).encode('utf-8'),
-                                                      control.lang(32501).encode('utf-8'))
+                            yes = control.yesnoDialog("Fortsetzen", '', '', str(name), "Fortsetzen",
+                                                      "Vom Anfang abspielen")
                         if yes: offset = '0'
 
                     return offset
@@ -442,10 +442,10 @@ class bookmarks:
                     if control.setting('bookmarks.auto') == 'false':
 
                         try:
-                            yes = control.dialog.contextmenu([label, control.lang(32501).encode('utf-8'), ])
+                            yes = control.dialog.contextmenu([label, "Vom Anfang abspielen", ])
                         except:
-                            yes = control.yesnoDialog(label, '', '', str(name), control.lang(32503).encode('utf-8'),
-                                                      control.lang(32501).encode('utf-8'))
+                            yes = control.yesnoDialog(label, '', '', str(name), "Fortsetzen",
+                                                      "Vom Anfang abspielen")
                         if yes: self.offset = '0'
 
                     return self.offset

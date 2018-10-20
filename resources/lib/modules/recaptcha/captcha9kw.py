@@ -16,7 +16,7 @@ class captcha9KW:
     def solve(self, url, siteKey):
 
         if self.ApiKey == "":
-            control.infoDialog("Kein Captcha9KW APIKEY Eingetragen!")
+            control.infoDialog("Kein Captcha9KW API-Key eingetragen!")
             return
 
         token = ''

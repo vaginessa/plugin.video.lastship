@@ -113,9 +113,9 @@ def done(title, dest, downloaded):
         text += '[CR]'
 
     if downloaded:
-        text += '%s : %s' % (dest.rsplit(os.sep)[-1], '[COLOR forestgreen]Download succeeded[/COLOR]')
+        text += '%s : %s' % (dest.rsplit(os.sep)[-1], '[COLOR forestgreen]Download erfolgreich[/COLOR]')
     else:
-        text += '%s : %s' % (dest.rsplit(os.sep)[-1], '[COLOR red]Download failed[/COLOR]')
+        text += '%s : %s' % (dest.rsplit(os.sep)[-1], '[COLOR red]Download fehlgeschlagen[/COLOR]')
 
     xbmcgui.Window(10000).setProperty('GEN-DOWNLOADED', text)
 

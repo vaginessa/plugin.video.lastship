@@ -14,7 +14,7 @@ class TwoCaptcha:
 
     def solve(self, url, siteKey):
         if self.ApiKey == "":
-            control.infoDialog("Kein 2Captcha APIKEY Eingetragen!")
+            control.infoDialog("Kein 2Captcha API-Key eingetragen!")
             return
 
         token = ''

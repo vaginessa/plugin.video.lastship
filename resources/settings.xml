@@ -41,8 +41,8 @@
         <setting id="hosts.mode" type="enum" label="Standard-Aktion" lvalues="Dialog|Verzeichnis|Autoplay" default="1" />
         <setting id="progress.dialog" type="enum" label="Fortschrittsdialog" lvalues="Vordergrund|Hintergrund" default="0" />
         <setting id="prem.identify" type="enum" label="Textfarbe für Premium-Links" lvalues="Blau|Rot|Gelb|Altrosa|Cyan|Grasgrün|Gold|Magenta|Gelbgrün|Ohne Farbe" default="0" />
-        <setting id="preemptive.termination" type="bool" label="Streamsuche vorzeitig abbrechen" default="False" visible="false"/>
-        <setting id="preemptive.limit" type="slider" label="Abbruch-Limit Streamsuche" default="10" range="1,50" option="int" visible="false" />
+        <setting id="preemptive.termination" type="bool" label="Streamsuche vorzeitig abbrechen" default="False" />
+        <setting id="preemptive.limit" type="slider" label="Abbruch-Limit Streamsuche" default="10" range="1,50" option="int" />
         <setting type="lsep" label="Dateinanbieter-Filter" />
         <setting id="hosts.quality" type="enum" label="Höchste Qualität" values="4K|1440p|1080p|720p|480p" default="0" />
         <setting id="autoplay.sd" type="bool" label="Nur SD-Anbieter in Auto-Play" default="false" />

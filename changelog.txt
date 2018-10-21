@@ -6,7 +6,7 @@
 - [downloader.py] DE Übersetzung ergänzt
 
 - string.po Zahlenverweis, durch Klartext ersetzt:
-   - [trakt.py] string.po Verweis, durch Klartext ersetzt
+   - [trakt.py] 
    - [player.py]
    - [libtools.py]
    - [cache.py]
@@ -20,6 +20,7 @@
  Rückgängig gemacht in nightly6:
     - [lastship.py]
     - [libtools.py]
+    - [trakt.py]
 
 [B]3.0.2.6[/B]
  - Fix Nanime Genre

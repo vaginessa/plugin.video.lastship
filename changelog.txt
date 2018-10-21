@@ -3,7 +3,9 @@
 - [settings.xml] Begonnen mit Aufhebung der Verknüpfungen zur string.po um den Code leichter lesbar zu machen 
 - Bereits implementierte Einstellung sichtbar gemacht: "Streamsuche vorzeitig abbrechen" 
 - [downloader.py] DE Übersetzung ergänzt
-- [trakt.py] string.po Verweis, durch Klartext ersetzt
+- string.po Verweis, durch Klartext ersetzt:
+   - [trakt.py] string.po Verweis, durch Klartext ersetzt
+   - [player.py] 
 
 [B]3.0.2.6[/B]
  - Fix Nanime Genre

@@ -19,6 +19,7 @@
    
  Rückgängig gemacht in nightly6:
     - [lastship.py]
+    - [libtools.py]
 
 [B]3.0.2.6[/B]
  - Fix Nanime Genre

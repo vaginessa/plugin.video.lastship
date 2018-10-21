@@ -5,7 +5,8 @@
 - [downloader.py] DE Übersetzung ergänzt
 - string.po Verweis, durch Klartext ersetzt:
    - [trakt.py] string.po Verweis, durch Klartext ersetzt
-   - [player.py] 
+   - [player.py]
+   - [libtools.py]
 
 [B]3.0.2.6[/B]
  - Fix Nanime Genre

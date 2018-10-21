@@ -1,4 +1,5 @@
-[B]3.0.2.7~nightly4[/B]
+[B]3.0.2.7~nightly5[/B]
+- [cache.py] Suchverlauf löschen“ aus „Clear all Caches“ entfernt
 - Seriesever Konto entfernt
 - [settings.xml] Begonnen mit Aufhebung der Verknüpfungen zur string.po um den Code leichter lesbar zu machen 
 - Bereits implementierte Einstellung sichtbar gemacht: "Streamsuche vorzeitig abbrechen" 

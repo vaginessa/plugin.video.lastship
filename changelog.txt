@@ -7,6 +7,7 @@
    - [trakt.py] string.po Verweis, durch Klartext ersetzt
    - [player.py]
    - [libtools.py]
+   - [cache.py]
 
 [B]3.0.2.6[/B]
  - Fix Nanime Genre

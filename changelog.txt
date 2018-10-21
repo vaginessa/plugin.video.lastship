@@ -10,6 +10,7 @@
    - [libtools.py]
    - [cache.py]
    - [settings.xml]
+   - [TwoCaptcha.py]
    
 - Rechtschreibung aktualisiert:
    - [captcha9kw.py]

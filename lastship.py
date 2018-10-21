@@ -126,12 +126,12 @@ elif action == 'searchNavigator':
     import xbmcgui
 
     if not control.setting('search.quick') == '0':
-        searchSelect = xbmcgui.Dialog().select("Suche",
+        searchSelect = xbmcgui.Dialog().select(control.lang(32010).encode('utf-8'),
                                                [
-                                                   "Filme",
-                                                   "TV-Serien",
-                                                   "Darteller/Crew (Filme)",
-                                                   "Darsteller/Crew (Serien)"
+                                                   control.lang(32001).encode('utf-8'),
+                                                   control.lang(32002).encode('utf-8'),
+                                                   control.lang(32029).encode('utf-8'),
+                                                   control.lang(32030).encode('utf-8')
                                                ])
         if searchSelect == 0:
             movies.movies().search()
@@ -415,14 +415,14 @@ elif action == 'random':
         try: r += '&meta='+urllib.quote_plus(json.dumps(rlist[rand]))
         except: r += '&meta='+urllib.quote_plus("{}")
         if rtype == "movie":
-            try: control.infoDialog(rlist[rand]['title'], "Spiele", time=30000)
+            try: control.infoDialog(rlist[rand]['title'], control.lang(32536).encode('utf-8'), time=30000)
             except: pass
         elif rtype == "episode":
-            try: control.infoDialog(rlist[rand]['tvshowtitle']+" - Season "+rlist[rand]['season']+" - "+rlist[rand]['title'], "Spiele", time=30000)
+            try: control.infoDialog(rlist[rand]['tvshowtitle']+" - Season "+rlist[rand]['season']+" - "+rlist[rand]['title'], control.lang(32536).encode('utf-8'), time=30000)
             except: pass
         control.execute('RunPlugin(%s)' % r)
     except:
-        control.infoDialog("Nichts gefunden zum Abspielen", time=8000)
+        control.infoDialog(control.lang(32537).encode('utf-8'), time=8000)
 
 elif action == 'movieToLibrary':
     from resources.lib.modules import libtools

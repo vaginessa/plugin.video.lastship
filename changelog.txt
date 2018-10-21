@@ -17,7 +17,7 @@
    - [captcha9kw.py]
    - [TwoCaptcha.py] 
    
- Rückgängig gemacht in nightly6:
+ Rückgängig gemacht in nightly6, wegen Fehler:
     - [lastship.py]
     - [libtools.py]
     - [trakt.py]

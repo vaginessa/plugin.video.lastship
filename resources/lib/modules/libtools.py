@@ -130,7 +130,7 @@ class libmovies:
     def add(self, name, title, year, imdb, tmdb, range=False):
         if not control.condVisibility('Window.IsVisible(infodialog)') and not control.condVisibility('Player.HasVideo')\
                 and self.silentDialog is False:
-            control.infoDialog("Hinzufügen zur Bibliothek..."), time=10000000)
+            control.infoDialog(control.lang(32552).encode('utf-8'), time=10000000)
             self.infoDialog = True
 
         try:
@@ -161,7 +161,7 @@ class libmovies:
         if range == True: return
 
         if self.infoDialog == True:
-            control.infoDialog("Vorgang abgeschlossen", time=1)
+            control.infoDialog(control.lang(32554).encode('utf-8'), time=1)
 
         if self.library_setting == 'true' and not control.condVisibility('Library.IsScanningVideo') and files_added > 0:
             control.execute('UpdateLibrary(video)')
@@ -170,7 +170,7 @@ class libmovies:
         control.idle()
 
         if not control.condVisibility('Window.IsVisible(infodialog)') and not control.condVisibility('Player.HasVideo'):
-            control.infoDialog("Hinzufügen zur Bibliothek...", time=10000000)
+            control.infoDialog(control.lang(32552).encode('utf-8'), time=10000000)
             self.infoDialog = True
             self.silentDialog = True
 
@@ -192,11 +192,11 @@ class libmovies:
     def range(self, url):
         control.idle()
 
-        yes = control.yesnoDialog("Sind Sie sicher?", '', '')
+        yes = control.yesnoDialog(control.lang(32555).encode('utf-8'), '', '')
         if not yes: return
 
         if not control.condVisibility('Window.IsVisible(infodialog)') and not control.condVisibility('Player.HasVideo'):
-            control.infoDialog("Hinzufügen zur Bibliothek...", time=10000000)
+            control.infoDialog(control.lang(32552).encode('utf-8'), time=10000000)
             self.infoDialog = True
 
         from resources.lib.indexers import movies
@@ -211,7 +211,7 @@ class libmovies:
                 pass
 
         if self.infoDialog == True:
-            control.infoDialog("Vorgang abgeschlossen", time=1)
+            control.infoDialog(control.lang(32554).encode('utf-8'), time=1)
 
         if self.library_setting == 'true' and not control.condVisibility('Library.IsScanningVideo'):
             control.execute('UpdateLibrary(video)')
@@ -257,7 +257,7 @@ class libtvshows:
     def add(self, tvshowtitle, year, imdb, tvdb, range=False):
         if not control.condVisibility('Window.IsVisible(infodialog)') and not control.condVisibility('Player.HasVideo')\
                 and self.silentDialog is False:
-            control.infoDialog("Hinzufügen zur Bibliothek...", time=10000000)
+            control.infoDialog(control.lang(32552).encode('utf-8'), time=10000000)
             self.infoDialog = True
 
         from resources.lib.indexers import episodes
@@ -312,7 +312,7 @@ class libtvshows:
         if range == True: return
 
         if self.infoDialog is True:
-            control.infoDialog("Vorgang abgeschlossen", time=1)
+            control.infoDialog(control.lang(32554).encode('utf-8'), time=1)
 
         if self.library_setting == 'true' and not control.condVisibility('Library.IsScanningVideo') and files_added > 0:
             control.execute('UpdateLibrary(video)')
@@ -321,7 +321,7 @@ class libtvshows:
         control.idle()
 
         if not control.condVisibility('Window.IsVisible(infodialog)') and not control.condVisibility('Player.HasVideo'):
-            control.infoDialog("Farbe für noch nicht gesendete Staffeln/Episoden", time=10000000)
+            control.infoDialog(control.lang(32608).encode('utf-8'), time=10000000)
             self.infoDialog = True
             self.silentDialog = True
 
@@ -338,17 +338,17 @@ class libtvshows:
 
         if self.infoDialog is True:
             self.silentDialog = False
-            control.infoDialog("Trakt-Sychronisierung abgeschlossen", time=1)
+            control.infoDialog("Trakt TV Show Sync Complete", time=1)
 
 
     def range(self, url):
         control.idle()
 
-        yes = control.yesnoDialog("Sind Sie sicher?", '', '')
+        yes = control.yesnoDialog(control.lang(32555).encode('utf-8'), '', '')
         if not yes: return
 
         if not control.condVisibility('Window.IsVisible(infodialog)') and not control.condVisibility('Player.HasVideo'):
-            control.infoDialog("Hinzufügen zur Bibliothek...", time=10000000)
+            control.infoDialog(control.lang(32552).encode('utf-8'), time=10000000)
             self.infoDialog = True
 
         from resources.lib.indexers import tvshows
@@ -363,7 +363,7 @@ class libtvshows:
                 pass
 
         if self.infoDialog == True:
-            control.infoDialog("Vorgang abgeschlossen", time=1)
+            control.infoDialog(control.lang(32554).encode('utf-8'), time=1)
 
         if self.library_setting == 'true' and not control.condVisibility('Library.IsScanningVideo'):
             control.execute('UpdateLibrary(video)')
@@ -543,7 +543,7 @@ class libepisodes:
                     pass
 
         if self.infoDialog == True:
-            control.infoDialog("Vorgang abgeschlossen", time=1)
+            control.infoDialog(control.lang(32554).encode('utf-8'), time=1)
 
         if self.library_setting == 'true' and not control.condVisibility('Library.IsScanningVideo') and files_added > 0:
             control.execute('UpdateLibrary(video)')

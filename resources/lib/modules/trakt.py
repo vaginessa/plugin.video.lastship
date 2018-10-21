@@ -102,15 +102,15 @@ def authTrakt():
     from resources.lib.modules import client
     try:
         if getTraktCredentialsInfo() == True:
-            if control.yesnoDialog("Konto bereits vorhanden", "Möchten Sie das Konto zurücksetzen?, '', 'Trakt'):
+            if control.yesnoDialog(control.lang(32511).encode('utf-8'), control.lang(32512).encode('utf-8'), '', 'Trakt'):
                 control.setSetting(id='trakt.user', value='')
                 control.setSetting(id='trakt.token', value='')
                 control.setSetting(id='trakt.refresh', value='')
             raise Exception()
 
         result = getTraktAsJson('/oauth/device/code', {'client_id': V2_API_KEY})
-        verification_url = "Besuche: [COLOR skyblue]%s[/COLOR]" % result['verification_url']).encode('utf-8')
-        user_code = "Wenn angewiesen, bitte eingeben: [COLOR skyblue]%s[/COLOR]" % result['user_code']).encode('utf-8')
+        verification_url = (control.lang(32513) % result['verification_url']).encode('utf-8')
+        user_code = (control.lang(32514) % result['user_code']).encode('utf-8')
         expires_in = int(result['expires_in'])
         device_code = result['device_code']
         interval = result['interval']
@@ -189,41 +189,41 @@ def manager(name, imdb, tvdb, content):
     try:
         post = {"movies": [{"ids": {"imdb": imdb}}]} if content == 'movie' else {"shows": [{"ids": {"tvdb": tvdb}}]}
 
-        items = [("Zur [B]Sammlung[/B] hinzufügen", '/sync/collection')]
-        items += ["Aus [B]Sammlung[/B] entfernen", '/sync/collection/remove')]
-        items += ["Zur [B]Merkliste[/B] hinzufügen", '/sync/watchlist')]
-        items += ["Aus [B]Merkliste[/B] entfernen", '/sync/watchlist/remove')]
-        items += ["Zu [B]neuer Liste[/B] hinzufügen", '/users/me/lists/%s/items')]
+        items = [(control.lang(32516).encode('utf-8'), '/sync/collection')]
+        items += [(control.lang(32517).encode('utf-8'), '/sync/collection/remove')]
+        items += [(control.lang(32518).encode('utf-8'), '/sync/watchlist')]
+        items += [(control.lang(32519).encode('utf-8'), '/sync/watchlist/remove')]
+        items += [(control.lang(32520).encode('utf-8'), '/users/me/lists/%s/items')]
 
         result = getTraktAsJson('/users/me/lists')
         lists = [(i['name'], i['ids']['slug']) for i in result]
         lists = [lists[i//2] for i in range(len(lists)*2)]
         for i in range(0, len(lists), 2):
-            lists[i] = (("Zu [B]%s[/B] hinzufügen" % lists[i][0]).encode('utf-8'), '/users/me/lists/%s/items' % lists[i][1])
+            lists[i] = ((control.lang(32521) % lists[i][0]).encode('utf-8'), '/users/me/lists/%s/items' % lists[i][1])
         for i in range(1, len(lists), 2):
-            lists[i] = (("Aus [B]%s[/B] entfernen" % lists[i][0]).encode('utf-8'), '/users/me/lists/%s/items/remove' % lists[i][1])
+            lists[i] = ((control.lang(32522) % lists[i][0]).encode('utf-8'), '/users/me/lists/%s/items/remove' % lists[i][1])
         items += lists
 
-        select = control.selectDialog([i[0] for i in items], "Trakt-Manager")
+        select = control.selectDialog([i[0] for i in items], control.lang(32515).encode('utf-8'))
 
         if select == -1:
             return
         elif select == 4:
-            t = "Zu [B]neuer Liste[/B] hinzufügen"
+            t = control.lang(32520).encode('utf-8')
             k = control.keyboard('', t) ; k.doModal()
             new = k.getText() if k.isConfirmed() else None
             if (new == None or new == ''): return
             result = __getTrakt('/users/me/lists', post={"name": new, "privacy": "private"})[0]
 
             try: slug = utils.json_loads_as_str(result)['ids']['slug']
-            except: return control.infoDialog("Trakt-Manager", heading=str(name), sound=True, icon='ERROR')
+            except: return control.infoDialog(control.lang(32515).encode('utf-8'), heading=str(name), sound=True, icon='ERROR')
             result = __getTrakt(items[select][1] % slug, post=post)[0]
         else:
             result = __getTrakt(items[select][1], post=post)[0]
 
         icon = control.infoLabel('ListItem.Icon') if not result == None else 'ERROR'
 
-        control.infoDialog("Trakt-Manager", heading=str(name), sound=True, icon=icon)
+        control.infoDialog(control.lang(32515).encode('utf-8'), heading=str(name), sound=True, icon=icon)
     except:
         return
 

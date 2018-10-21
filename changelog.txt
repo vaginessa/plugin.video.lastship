@@ -9,6 +9,7 @@
    - [player.py]
    - [libtools.py]
    - [cache.py]
+   - [settings.xml]
    
 - Rechtschreibung aktualisiert:
    - [captcha9kw.py]

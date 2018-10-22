@@ -322,7 +322,7 @@ class sources:
 
         sourceDict = self.sourceDict
         
-        progressDialog.update(0, control.lang(32600).encode('utf-8'))
+        progressDialog.update(0, "Quellen werden vorbereitet")
 
         content = 'movie' if tvshowtitle == None else 'episode'
         if content == 'movie':

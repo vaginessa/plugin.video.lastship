@@ -6,7 +6,7 @@
 - [downloader.py] DE Übersetzung ergänzt
 
 - string.po Zahlenverweis, durch Klartext ersetzt:
-   - [trakt.py] 
+   - [trakt.py] Verweise teilweise entfernt
    - [player.py]
    - [libtools.py]
    - [cache.py]

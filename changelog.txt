@@ -1,4 +1,4 @@
-[B]3.0.2.7~nightly6[/B]
+[B]3.0.2.7~nightly7[/B]
 - [cache.py] Suchverlauf löschen“ aus „Clear all Caches“ entfernt
 - Seriesever Konto entfernt
 - [settings.xml] Begonnen mit Aufhebung der Verknüpfungen zur string.po um den Code leichter lesbar zu machen 
@@ -16,11 +16,6 @@
 - Rechtschreibung aktualisiert:
    - [captcha9kw.py]
    - [TwoCaptcha.py] 
-   
- Rückgängig gemacht in nightly6, wegen Fehler:
-    - [lastship.py]
-    - [libtools.py]
-    - [trakt.py]
 
 [B]3.0.2.6[/B]
  - Fix Nanime Genre

@@ -378,7 +378,7 @@ class sources:
         [i.start() for i in threads]
 
         string3 = "Verbleibende Indexseiten: %s"
-        string4 = ""
+        string4 = "Total"
 
         string6 = "Prem"
         string7 = "Normal"

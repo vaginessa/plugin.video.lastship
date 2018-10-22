@@ -12,10 +12,12 @@
    - [cache.py]
    - [settings.xml]
    - [lastship.py]
+   - [sources.py]
    
 - Rechtschreibung aktualisiert:
    - [captcha9kw.py]
    - [TwoCaptcha.py] 
+   - [recaptcha_app.py]
 
 [B]3.0.2.6[/B]
  - Fix Nanime Genre

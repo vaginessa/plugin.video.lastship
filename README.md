@@ -1,6 +1,6 @@
 # plugin.video.lastship
-German Team
 
 Video Addon
 
+FAQ im Forum
 

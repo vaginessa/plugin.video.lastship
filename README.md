@@ -1,6 +1,6 @@
-# Rework-plugin.video.lastship
+# plugin.video.lastship
 German Team
 
-Zurück zum Ursprung
+Video Addon
 
-Aus den beiden Modulen script.module.lastship und plugin.video.lastship wird wieder eine Modul
+

@@ -377,11 +377,11 @@ class sources:
 
         [i.start() for i in threads]
 
-        string3 = control.lang(32406).encode('utf-8')
-        string4 = control.lang(32601).encode('utf-8')
+        string3 = "Verbleibende Indexseiten: %s"
+        string4 = ""
 
-        string6 = control.lang(32606).encode('utf-8')
-        string7 = control.lang(32607).encode('utf-8')
+        string6 = "Prem"
+        string7 = "Normal"
 
         try: timeout = int(control.setting('scrapers.timeout.1'))
         except: pass
@@ -735,9 +735,9 @@ class sources:
         try:
             control.idle()
 
-            if control.yesnoDialog(control.lang(32407).encode('utf-8'), '', ''):
+            if control.yesnoDialog("Sind Sie sicher?", '', ''):
                 cache.cache_clear_providers()
-                control.infoDialog(control.lang(32408).encode('utf-8'), sound=True, icon='INFO')
+                control.infoDialog("Vorgang abgeschlossen", sound=True, icon='INFO')
         except:
             pass
 
@@ -1091,7 +1091,7 @@ class sources:
         return u
 
     def errorForSources(self):
-        control.infoDialog(control.lang(32401).encode('utf-8'), sound=False, icon='INFO')
+        control.infoDialog("Keine Streams verfügbar", sound=False, icon='INFO')
 
 
     def getLanguage(self):

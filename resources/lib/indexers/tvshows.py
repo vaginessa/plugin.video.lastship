@@ -147,7 +147,7 @@ class tvshows:
 
             if self.list == None or len(self.list) == 0:
                 control.idle()
-                control.infoDialog(control.lang(32709).encode('utf-8'), time=8000)
+                control.infoDialog("Nichts gefunden", time=8000)
             elif idx == True and create_directory == True: self.tvshowDirectory(self.list)
             return self.list
         except:
@@ -155,7 +155,7 @@ class tvshows:
 
     def search(self):
 
-        navigator.navigator().addDirectoryItem(32603, 'tvSearchnew', 'search.png', 'DefaultTVShows.png', isFolder=False)
+        navigator.navigator().addDirectoryItem("Neue Suche", 'tvSearchnew', 'search.png', 'DefaultTVShows.png', isFolder=False)
         try: from sqlite3 import dbapi2 as database
         except: from pysqlite2 import dbapi2 as database
 
@@ -180,14 +180,14 @@ class tvshows:
         dbcur.close()
 
         if delete_option:
-            navigator.navigator().addDirectoryItem(32605, 'clearCacheSearch', 'tools.png', 'DefaultAddonProgram.png')
+            navigator.navigator().addDirectoryItem("Suchverlauf löschen", 'clearCacheSearch', 'tools.png', 'DefaultAddonProgram.png')
 
         navigator.navigator().endDirectory()
 
     def search_new(self):
             control.idle()
 
-            t = control.lang(32010).encode('utf-8')
+            t = "Suche"
             k = control.keyboard('', t) ; k.doModal()
             q = k.getText() if k.isConfirmed() else None
 
@@ -216,7 +216,7 @@ class tvshows:
         try:
             control.idle()
 
-            t = control.lang(32010).encode('utf-8')
+            t = "Suche"
             k = control.keyboard('', t) ; k.doModal()
             q = k.getText() if k.isConfirmed() else None
 
@@ -398,7 +398,7 @@ class tvshows:
 
         if self.list == None or len(self.list) == 0:
             control.idle()
-            control.infoDialog(control.lang(32709).encode('utf-8'), time=8000)
+            control.infoDialog("Nichts gefunden", time=8000)
         else:
             self.addDirectory(self.list)
         return self.list
@@ -1095,19 +1095,19 @@ class tvshows:
 
         flatten = True if control.setting('flatten.tvshows') == 'true' else False
 
-        watchedMenu = control.lang(32068).encode('utf-8') if trakt.getTraktIndicatorsInfo() == True else control.lang(32066).encode('utf-8')
+        watchedMenu = "In Trakt [I]Gesehen[/I]" if trakt.getTraktIndicatorsInfo() == True else "In Lastship [I]Gesehen[/I]"
 
-        unwatchedMenu = control.lang(32069).encode('utf-8') if trakt.getTraktIndicatorsInfo() == True else control.lang(32067).encode('utf-8')
+        unwatchedMenu = "In Trakt [I]Ungesehen[/I]" if trakt.getTraktIndicatorsInfo() == True else "In Lastship [I]Ungesehen[/I]"
 
-        queueMenu = control.lang(32065).encode('utf-8')
+        queueMenu = "Eintrag zur Warteschlange hinzufügen"
 
-        traktManagerMenu = control.lang(32070).encode('utf-8')
+        traktManagerMenu = "[B]Trakt-Manager[/B]"
 
-        nextMenu = control.lang(32053).encode('utf-8')
+        nextMenu = "Nächste Seite"
 
-        playRandom = control.lang(32535).encode('utf-8')
+        playRandom = "Zufallswiedergabe"
 
-        addToLibrary = control.lang(32551).encode('utf-8')
+        addToLibrary = "Zur Bibliothek hinzufügen"
 
         for i in items:
             try:
@@ -1232,11 +1232,11 @@ class tvshows:
 
         addonFanart, addonThumb, artPath = control.addonFanart(), control.addonThumb(), control.artPath()
 
-        queueMenu = control.lang(32065).encode('utf-8')
+        queueMenu = "Zur Warteschlange hinzufügen"
 
-        playRandom = control.lang(32535).encode('utf-8')
+        playRandom = "Zufallswiedergabe"
 
-        addToLibrary = control.lang(32551).encode('utf-8')
+        addToLibrary = "Zur Bibliothek hinzufügen"
 
         for i in items:
             try:

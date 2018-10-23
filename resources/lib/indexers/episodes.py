@@ -432,19 +432,19 @@ class seasons:
         try: indicators = playcount.getSeasonIndicators(items[0]['imdb'])
         except: pass
 
-        watchedMenu = control.lang(32068).encode('utf-8') if trakt.getTraktIndicatorsInfo() == True else control.lang(32066).encode('utf-8')
+        watchedMenu = "In Trakt [I]Gesehen[/I]" if trakt.getTraktIndicatorsInfo() == True else "In Lastship [I]Gesehen[/I]"
 
-        unwatchedMenu = control.lang(32069).encode('utf-8') if trakt.getTraktIndicatorsInfo() == True else control.lang(32067).encode('utf-8')
+        unwatchedMenu = "In Trakt [I]Ungesehen[/I]" if trakt.getTraktIndicatorsInfo() == True else "In Lastship [I]Ungesehen[/I]"
 
-        queueMenu = control.lang(32065).encode('utf-8')
+        queueMenu = "Eintrag zur Warteschlange hinzufügen"
 
-        traktManagerMenu = control.lang(32070).encode('utf-8')
+        traktManagerMenu = "[B]Trakt-Manager[/B]"
 
-        labelMenu = control.lang(32055).encode('utf-8')
+        labelMenu = "Staffel"
 
-        playRandom = control.lang(32535).encode('utf-8')
+        playRandom = "Zufallswiedergabe"
 
-        addToLibrary = control.lang(32551).encode('utf-8')
+        addToLibrary = "Zur Bibliothek hinzufügen"
 
         for i in items:
             try:
@@ -1424,19 +1424,19 @@ class episodes:
 
         isFolder = False if not sysaction == 'episodes' else True
 
-        playbackMenu = control.lang(32063).encode('utf-8') if control.setting('hosts.mode') == '2' else control.lang(32064).encode('utf-8')
+        playbackMenu = "Abspielen mit..." if control.setting('hosts.mode') == '2' else "Auto-Play"
 
-        watchedMenu = control.lang(32068).encode('utf-8') if trakt.getTraktIndicatorsInfo() == True else control.lang(32066).encode('utf-8')
+        watchedMenu = "In Trakt [I]Gesehen[/I]" if trakt.getTraktIndicatorsInfo() == True else "In Lastship [I]Gesehen[/I]"
 
-        unwatchedMenu = control.lang(32069).encode('utf-8') if trakt.getTraktIndicatorsInfo() == True else control.lang(32067).encode('utf-8')
+        unwatchedMenu = "In Trakt [I]Ungesehen[/I]" if trakt.getTraktIndicatorsInfo() == True else "In Lastship [I]Ungesehen[/I]"
 
-        queueMenu = control.lang(32065).encode('utf-8')
+        queueMenu = "Eintrag zur Warteschlange hinzufügen"
 
-        traktManagerMenu = control.lang(32070).encode('utf-8')
+        traktManagerMenu = "[B]Trakt-Manager[/B]"
 
-        tvshowBrowserMenu = control.lang(32071).encode('utf-8')
+        tvshowBrowserMenu = "TV-Serien durchsuchen"
 
-        addToLibrary = control.lang(32551).encode('utf-8')
+        addToLibrary = "Zur Bibliothek hinzufügen"
 
         for i in items:
             try:

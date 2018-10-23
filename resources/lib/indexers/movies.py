@@ -165,7 +165,7 @@ class movies:
 
             if self.list == None or len(self.list) == 0:
                 control.idle()
-                control.infoDialog(control.lang(32709).encode('utf-8'), time=8000)
+                control.infoDialog("Nichts gefunden", time=8000)
             elif idx == True and create_directory == True:
                     self.movieDirectory(self.list)
             return self.list
@@ -189,7 +189,7 @@ class movies:
 
     def search(self):
 
-        navigator.navigator().addDirectoryItem(32603, 'movieSearchnew', 'search.png', 'DefaultMovies.png', isFolder=False)
+        navigator.navigator().addDirectoryItem("Neue Suche", 'movieSearchnew', 'search.png', 'DefaultMovies.png', isFolder=False)
         try: from sqlite3 import dbapi2 as database
         except: from pysqlite2 import dbapi2 as database
 
@@ -213,14 +213,14 @@ class movies:
         dbcur.close()
 
         if delete_option:
-            navigator.navigator().addDirectoryItem(32605, 'clearCacheSearch', 'tools.png', 'DefaultAddonProgram.png')
+            navigator.navigator().addDirectoryItem("Suchverlauf löschen", 'clearCacheSearch', 'tools.png', 'DefaultAddonProgram.png')
 
         navigator.navigator().endDirectory()
 
     def search_new(self):
             control.idle()
 
-            t = control.lang(32010).encode('utf-8')
+            t = "Suche"
             k = control.keyboard('', t) ; k.doModal()
             q = k.getText() if k.isConfirmed() else None
 
@@ -249,7 +249,7 @@ class movies:
         try:
             control.idle()
 
-            t = control.lang(32010).encode('utf-8')
+            t = "Suche"
             k = control.keyboard('', t) ; k.doModal()
             q = k.getText() if k.isConfirmed() else None
 
@@ -366,7 +366,7 @@ class movies:
         for i in range(0, len(self.list)): self.list[i].update({'action': 'movies'})
         if self.list == None or len(self.list) == 0:
             control.idle()
-            control.infoDialog(control.lang(32709).encode('utf-8'), time=8000)
+            control.infoDialog("Nichts gefunden", time=8000)
         else:
             self.addDirectory(self.list)
         return self.list
@@ -934,19 +934,19 @@ class movies:
 
         indicators = playcount.getMovieIndicators(refresh=True) if action == 'movies' else playcount.getMovieIndicators()
 
-        playbackMenu = control.lang(32063).encode('utf-8') if control.setting('hosts.mode') == '2' else control.lang(32064).encode('utf-8')
+        playbackMenu = "Abspielen mit..." if control.setting('hosts.mode') == '2' else "Auto-Play"
 
-        watchedMenu = control.lang(32068).encode('utf-8') if trakt.getTraktIndicatorsInfo() == True else control.lang(32066).encode('utf-8')
+        watchedMenu = "In Trakt [I]Gesehen[/I]" if trakt.getTraktIndicatorsInfo() == True else "In Lastship [I]Gesehen[/I]"
 
-        unwatchedMenu = control.lang(32069).encode('utf-8') if trakt.getTraktIndicatorsInfo() == True else control.lang(32067).encode('utf-8')
+        unwatchedMenu = "In Trakt [I]Ungesehen[/I]" if trakt.getTraktIndicatorsInfo() == True else "In Lastship [I]Ungesehen[/I]"
 
-        queueMenu = control.lang(32065).encode('utf-8')
+        queueMenu = "Eintrag zur Warteschlange hinzufügen"
 
-        traktManagerMenu = control.lang(32070).encode('utf-8')
+        traktManagerMenu = "[B]Trakt-Manager[/B]"
 
-        nextMenu = control.lang(32053).encode('utf-8')
+        nextMenu = "Nächste Seite"
 
-        addToLibrary = control.lang(32551).encode('utf-8')
+        addToLibrary = "Zur Bibliothek hinzufügen"
 
         for i in items:
             try:
@@ -1066,11 +1066,11 @@ class movies:
 
         addonFanart, addonThumb, artPath = control.addonFanart(), control.addonThumb(), control.artPath()
 
-        queueMenu = control.lang(32065).encode('utf-8')
+        queueMenu = "Eintrag zur Warteschlange hinzufügen"
 
-        playRandom = control.lang(32535).encode('utf-8')
+        playRandom = "Zufallswiedergabe"
 
-        addToLibrary = control.lang(32551).encode('utf-8')
+        addToLibrary = "Zur Bibliothek hinzufügen"
 
         for i in items:
             try:

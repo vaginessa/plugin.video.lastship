@@ -109,8 +109,8 @@ def authTrakt():
             raise Exception()
 
         result = getTraktAsJson('/oauth/device/code', {'client_id': V2_API_KEY})
-        verification_url = (control.lang(32513) % result['verification_url']).encode('utf-8')
-        user_code = (control.lang(32514) % result['user_code']).encode('utf-8')
+        verification_url = ("Besuche: [COLOR skyblue]%s[/COLOR]" % result['verification_url'])
+        user_code = ("Wenn angewiesen, bitte eingeben: [COLOR skyblue]%s[/COLOR]" % result['user_code'])
         expires_in = int(result['expires_in'])
         device_code = result['device_code']
         interval = result['interval']
@@ -199,9 +199,9 @@ def manager(name, imdb, tvdb, content):
         lists = [(i['name'], i['ids']['slug']) for i in result]
         lists = [lists[i//2] for i in range(len(lists)*2)]
         for i in range(0, len(lists), 2):
-            lists[i] = ((control.lang(32521) % lists[i][0]).encode('utf-8'), '/users/me/lists/%s/items' % lists[i][1])
+            lists[i] = (("Zu [B]%s[/B] hinzufügen" % lists[i][0]), '/users/me/lists/%s/items' % lists[i][1])
         for i in range(1, len(lists), 2):
-            lists[i] = ((control.lang(32522) % lists[i][0]).encode('utf-8'), '/users/me/lists/%s/items/remove' % lists[i][1])
+            lists[i] = (("Aus [B]%s[/B] entfernen" % lists[i][0]), '/users/me/lists/%s/items/remove' % lists[i][1])
         items += lists
 
         select = control.selectDialog([i[0] for i in items], "Trakt-Manager")

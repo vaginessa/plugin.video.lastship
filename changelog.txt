@@ -1,3 +1,9 @@
+[B]3.0.2.7~nightly9[/B]
+- UTF-8 code (# -*- coding: UTF-8 -*-) hinzugefügt
+  - recaptcha_app.py
+  - captcha9kw.py
+  - TwoCaptcha.py
+
 [B]3.0.2.7~nightly8[/B]
 - [cache.py] Suchverlauf löschen“ aus „Clear all Caches“ entfernt
 - Seriesever Konto entfernt

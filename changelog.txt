@@ -1,3 +1,12 @@
+[B]3.0.2.7~nightly10[/B]
+-[recaptcha_app.py] Umlaute entfernt
+- string.po Zahlenverweis, durch Klartext ersetzt:
+  - [episodes.py]
+  - [movies.py]
+  - [tvshows.py]
+  - [trakt.py]
+  - [serienstream.py]
+
 [B]3.0.2.7~nightly9[/B]
 - UTF-8 code (# -*- coding: UTF-8 -*-) hinzugefügt
   - recaptcha_app.py

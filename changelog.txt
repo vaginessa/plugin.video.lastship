@@ -1,3 +1,7 @@
+[B]3.0.2.7~nightly11[/B]
+- [settings.xml] Einstellung für Sprache entfernt
+- [navigator.py] string.po Zahlenverweis, durch Klartext ersetzt
+
 [B]3.0.2.7~nightly10[/B]
 -[recaptcha_app.py] Umlaute entfernt
 - string.po Zahlenverweis, durch Klartext ersetzt:

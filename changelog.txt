@@ -1,3 +1,6 @@
+[B]3.0.2.7~nightly12[/B]
+- [navigator.py] imdbCredentials deaktiviert
+
 [B]3.0.2.7~nightly11[/B]
 - [settings.xml] Einstellung für Sprache entfernt
 - [navigator.py] string.po Zahlenverweis, durch Klartext ersetzt

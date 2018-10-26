@@ -1,3 +1,6 @@
+[B]3.0.2.7~nightly13[/B]
+- [language] string.po komplett entfernt
+
 [B]3.0.2.7~nightly12[/B]
 - [navigator.py] imdbCredentials deaktiviert
 

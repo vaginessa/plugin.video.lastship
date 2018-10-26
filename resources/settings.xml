@@ -6,27 +6,27 @@
         <setting id="appearance.1" type="select" label="Erscheinungsbild" values="Lastship|Lastship2|Exodus|Exuary" default="Lastship" visible="System.HasAddon(script.lastship.artwork)" />
         <setting id="scrapers.timeout.1" type="slider" label="Zeitlimit für Indexseiten" default="20" range="10,60" option="int" />
         <setting id="trakt.user" type="text" label="Benutzer" default="" visible="false"/>
-        <setting id="indicators.alt" type="enum" label="Gesehen / Fortsetzungspunkte" lvalues="Lokal|Trakt" default="1" visible="!eq(-1,)" />
-        <setting id="indicators" type="enum" label="Gesehen / Fortsetzungspunkte" lvalues="Lokal" default="0" visible="eq(-2,)" enable="!eq(-2,)" />
+        <setting id="indicators.alt" type="enum" label="Gesehen / Fortsetzungspunkte" values="Lokal|Trakt" default="1" visible="!eq(-1,)" />
+        <setting id="indicators" type="enum" label="Gesehen / Fortsetzungspunkte" values="Lokal" default="0" visible="eq(-2,)" enable="!eq(-2,)" />
         <setting id="api.language" type="select" label="Sprache für Informationen" values="AUTO|Bulgarian|Chinese|Croatian|Czech|Danish|Dutch|English|Finnish|French|German|Greek|Hebrew|Hungarian|Italian|Japanese|Korean|Norwegian|Polish|Portuguese|Romanian|Russian|Serbian|Slovak|Slovenian|Spanish|Swedish|Thai|Turkish|Ukrainian" default="German" visible="false" />
         <setting id="providers.lang" type="select" label="Sprache für Indexseiten" values="German" default="German" visible="false" />
         <setting id="flatten.tvshows" type="bool" label="Serien-Staffeln reduzieren" default="false" />
         <setting id="fanart" type="bool" label="Fanart verwenden" default="true" />
-        <setting id="movies.extrainfo" type="enum" label="Zusatzinfos für Filme holen" lvalues="AUS|TMDB|TMDB und TRAKT.TV" default="1" visible="false" />
+        <setting id="movies.extrainfo" type="enum" label="Zusatzinfos für Filme holen" values="AUS|TMDB|TMDB und TRAKT.TV" default="1" visible="false" />
         <setting id="showunaired" type="bool" label="Noch nicht gesendete Staffeln/Episoden anzeigen" default="true" />
-        <setting id="unaired.identify" type="enum" label="Farbe für noch nicht gesendete Staffeln/Episoden" lvalues="Blau|Rot|Gelb|Altrosa|Cyan|Grasgrün|Gold|Magenta|Gelbgrün|Ohne Farbe" default="1" />
+        <setting id="unaired.identify" type="enum" label="Farbe für noch nicht gesendete Staffeln/Episoden" values="Blau|Rot|Gelb|Altrosa|Cyan|Grasgrün|Gold|Magenta|Gelbgrün|Ohne Farbe" default="1" />
         <setting id="hidecinema" type="bool" label="Nur Filme älter als 90 Tage anzeigen" default="false" />
         <setting id="filter.movies.byyear" type="bool" label="Filme nach Jahrgang filtern" default="false" />
         <setting type="lsep" label="Inkl. Oscar-Sieger, Beste Einspieler, Genres und Am populärsten" visible="eq(-1,true)" />
         <setting id="movies.byyear.from" type="slider" label="Von" default="1980" range="1900,2017" option="int" visible="eq(-2,true)" />
         <setting id="movies.byyear.to" type="slider" label="Bis" default="2017" range="1900,2018" option="int" visible="eq(-3,true)" />
         <setting type="lsep" label="Menü" />
-        <setting id="movie.widget" type="enum" label="Neue Filme" lvalues="Deaktiviert|Empfohlen|Aktive Betrachter|Am populärsten|In Kinos|Neue Releases" default="1" />
-        <setting id="tv.widget.alt" type="enum" label="Neue Episoden" lvalues="Deaktiviert|Episoden|Trakt-Fortschritt|Trakt-Episoden" default="2" visible="!eq(-16,)" />
-        <setting id="tv.widget" type="enum" label="Neue Episoden" lvalues="Deaktiviert|Episoden" default="1" visible="eq(-17,)" />
-        <setting id="prgr.sortorder" type="enum" label="Trakt-Fortschritt sortieren nach" lvalues="kürzlich gesendet|kürzlich gesehen" default="1" visible="!eq(-18,)" />
-        <setting id="lists.widget" type="enum" label="Meine Listen" lvalues="Deaktiviert|Aktiviert" default="1" />
-        <setting id="search.quick" type="enum" label="Schnelle Suche" lvalues="Deaktiviert|Aktiviert" default="0" />
+        <setting id="movie.widget" type="enum" label="Neue Filme" values="Deaktiviert|Empfohlen|Aktive Betrachter|Am populärsten|In Kinos|Neue Releases" default="1" />
+        <setting id="tv.widget.alt" type="enum" label="Neue Episoden" values="Deaktiviert|Episoden|Trakt-Fortschritt|Trakt-Episoden" default="2" visible="!eq(-16,)" />
+        <setting id="tv.widget" type="enum" label="Neue Episoden" values="Deaktiviert|Episoden" default="1" visible="eq(-17,)" />
+        <setting id="prgr.sortorder" type="enum" label="Trakt-Fortschritt sortieren nach" values="kürzlich gesendet|kürzlich gesehen" default="1" visible="!eq(-18,)" />
+        <setting id="lists.widget" type="enum" label="Meine Listen" values="Deaktiviert|Aktiviert" default="1" />
+        <setting id="search.quick" type="enum" label="Schnelle Suche" values="Deaktiviert|Aktiviert" default="0" />
         <setting type="lsep" label="Trakt Bibliothek - Automatische Synchronisierung" />
         <setting id="autoTraktOnStart" type="bool" label="Synchronisierung bei Kodi Start" default="False" />
         <setting id="schedTraktTime" type="slider" label="Geplante Updates jede - Stunde/n" default="0" range="0,24" option="int" />
@@ -38,9 +38,9 @@
         <setting id="FaultLogger.recheckHours" type="slider" label="Deaktivierten Provider überprüfen nach Stunden" default="24" range="12,72" visible="eq(-2,true)" option="int" />
     </category>
     <category label="Wiedergabe">
-        <setting id="hosts.mode" type="enum" label="Standard-Aktion" lvalues="Dialog|Verzeichnis|Autoplay" default="1" />
-        <setting id="progress.dialog" type="enum" label="Fortschrittsdialog" lvalues="Vordergrund|Hintergrund" default="0" />
-        <setting id="prem.identify" type="enum" label="Textfarbe für Premium-Links" lvalues="Blau|Rot|Gelb|Altrosa|Cyan|Grasgrün|Gold|Magenta|Gelbgrün|Ohne Farbe" default="0" />
+        <setting id="hosts.mode" type="enum" label="Standard-Aktion" values="Dialog|Verzeichnis|Autoplay" default="1" />
+        <setting id="progress.dialog" type="enum" label="Fortschrittsdialog" values="Vordergrund|Hintergrund" default="0" />
+        <setting id="prem.identify" type="enum" label="Textfarbe für Premium-Links" values="Blau|Rot|Gelb|Altrosa|Cyan|Grasgrün|Gold|Magenta|Gelbgrün|Ohne Farbe" default="0" />
         <setting id="preemptive.termination" type="bool" label="Streamsuche vorzeitig abbrechen" default="False" />
         <setting id="preemptive.limit" type="slider" label="Abbruch-Limit Streamsuche" default="10" range="1,50" option="int" />
         <setting type="lsep" label="Dateinanbieter-Filter" />

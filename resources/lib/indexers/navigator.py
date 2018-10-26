@@ -256,7 +256,7 @@ class navigator:
         self.addDirectoryItem("[B]LASTSHIP[/B]: Anzeige-Typen", 'viewsNavigator', 'tools.png', 'DefaultAddonProgram.png')
         if control.setting('FaultLogger.enabled') == 'true':
             self.addDirectoryItem("[B]LASTSHIP[/B]: Fehlerhafte Provider anzeigen", 'showFaultyProvider', 'tools.png', 'DefaultAddonProgram.png')
-        self.addDirectoryItem("[B]LASTSHIP[/B]: Suchverlauf löschen", 'clearCacheSearch', 'tools.png', 'DefaultAddonProgram.png')
+        self.addDirectoryItem("[B]LASTSHIP[/B]: Suchverlauf leeren", 'clearCacheSearch', 'tools.png', 'DefaultAddonProgram.png')
         self.addDirectoryItem("[B]LASTSHIP[/B]: Cache leeren", 'clearCache', 'tools.png', 'DefaultAddonProgram.png')
         self.addDirectoryItem("[B]LASTSHIP[/B]: Indexseiten-Cache leeren", 'clearSources', 'tools.png', 'DefaultAddonProgram.png')
         self.addDirectoryItem("[B]LASTSHIP[/B]: Metadaten-Cache leeren", 'clearCacheMeta', 'tools.png', 'DefaultAddonProgram.png')

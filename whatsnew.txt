@@ -12,6 +12,10 @@ Die Seite Emby ist Standardmäßig deaktiviert, da diese Seite eine Premium Seit
 Bei einigen IndexSeiten ist es möglich, Captcha in Lastship zu lösen. Infos dazu stehen in der FAQ / Konten / ReCaptcha2
 
 [B][COLOR blue]Aktuelles[/COLOR][/B]
+26.10.2018
+Wer die nightly nützt,hier eine wichtige Info
+Es kommt immer wieder vor,dass nach dem nightly Update Menüpunkte fehlen oder nicht mehr angewählt werden können
+Hier hilft ein Kodineustart,eventuell Lastship Cache und Kodi Cache auch noch 
 18.10.2018
 Maxdome wurde hinzugefügt als Indexseite
 Für Maxdome, Amazon und Netflix ist ein Benutzerkonto der jeweiligen Anbieterseite erforderlich

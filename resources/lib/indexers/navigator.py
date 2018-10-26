@@ -166,9 +166,9 @@ class navigator:
             self.addDirectoryItem("[B]Trakt[/B]-Merkliste", 'movies&url=traktwatchlist', 'trakt.png', 'DefaultMovies.png', queue=True,
                                   context=("Zur Bibliothek hinzufügen", 'moviesToLibrary&url=traktwatchlist'))
 
-        elif imdbCredentials == True:
-            self.addDirectoryItem(32032, 'movies&url=imdbwatchlist', 'imdb.png', 'DefaultMovies.png', queue=True)
-            self.addDirectoryItem(32033, 'movies&url=imdbwatchlist2', 'imdb.png', 'DefaultMovies.png', queue=True)
+        #elif imdbCredentials == True:
+            #self.addDirectoryItem("[B]IMDb[/B]-Merkliste", 'movies&url=imdbwatchlist', 'imdb.png', 'DefaultMovies.png', queue=True)
+            #self.addDirectoryItem("[B]IMDb[/B]-Merkliste", 'movies&url=imdbwatchlist2', 'imdb.png', 'DefaultMovies.png', queue=True)
 
         if traktCredentials == True:
             self.addDirectoryItem("Empfohlen", 'movies&url=traktfeatured', 'trakt.png', 'DefaultMovies.png', queue=True)
@@ -224,9 +224,9 @@ class navigator:
             if imdbCredentials == True:
                 self.addDirectoryItem("[B]IMDb[/B]-Merkliste", 'tvshows&url=imdbwatchlist', 'imdb.png', 'DefaultTVShows.png')
 
-        if traktCredentials == False and imdbCredentials == True:
-            self.addDirectoryItem(32032, 'tvshows&url=imdbwatchlist', 'imdb.png', 'DefaultTVShows.png')
-            self.addDirectoryItem(32033, 'tvshows&url=imdbwatchlist2', 'imdb.png', 'DefaultTVShows.png')
+        #if traktCredentials == False and imdbCredentials == True:
+            #self.addDirectoryItem("[B]IMDb[/B]-Merkliste", 'tvshows&url=imdbwatchlist', 'imdb.png', 'DefaultTVShows.png')
+            #self.addDirectoryItem("[B]IMDb[/B]-Merkliste", 'tvshows&url=imdbwatchlist2', 'imdb.png', 'DefaultTVShows.png')
       
         if traktCredentials == True:
             self.addDirectoryItem("Empfohlen", 'tvshows&url=traktfeatured', 'trakt.png', 'DefaultTVShows.png')

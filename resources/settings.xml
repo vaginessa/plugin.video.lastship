@@ -8,8 +8,8 @@
         <setting id="trakt.user" type="text" label="Benutzer" default="" visible="false"/>
         <setting id="indicators.alt" type="enum" label="Gesehen / Fortsetzungspunkte" lvalues="Lokal|Trakt" default="1" visible="!eq(-1,)" />
         <setting id="indicators" type="enum" label="Gesehen / Fortsetzungspunkte" lvalues="Lokal" default="0" visible="eq(-2,)" enable="!eq(-2,)" />
-        <setting id="api.language" type="select" label="Sprache für Informationen" values="AUTO|Bulgarian|Chinese|Croatian|Czech|Danish|Dutch|English|Finnish|French|German|Greek|Hebrew|Hungarian|Italian|Japanese|Korean|Norwegian|Polish|Portuguese|Romanian|Russian|Serbian|Slovak|Slovenian|Spanish|Swedish|Thai|Turkish|Ukrainian" default="AUTO" />
-        <setting id="providers.lang" type="select" label="Sprache für Indexseiten" values="German" default="German" />
+        <setting id="api.language" type="select" label="Sprache für Informationen" values="AUTO|Bulgarian|Chinese|Croatian|Czech|Danish|Dutch|English|Finnish|French|German|Greek|Hebrew|Hungarian|Italian|Japanese|Korean|Norwegian|Polish|Portuguese|Romanian|Russian|Serbian|Slovak|Slovenian|Spanish|Swedish|Thai|Turkish|Ukrainian" default="German" visible="false" />
+        <setting id="providers.lang" type="select" label="Sprache für Indexseiten" values="German" default="German" visible="false" />
         <setting id="flatten.tvshows" type="bool" label="Serien-Staffeln reduzieren" default="false" />
         <setting id="fanart" type="bool" label="Fanart verwenden" default="true" />
         <setting id="movies.extrainfo" type="enum" label="Zusatzinfos für Filme holen" lvalues="AUS|TMDB|TMDB und TRAKT.TV" default="1" visible="false" />

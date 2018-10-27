@@ -1,4 +1,4 @@
-[B][B]3.0.2.7~nightly14[/B][/B]
+[B][B]3.0.2.7~nightly15[/B][/B]
 - [navigator.py] Deaktivierung imdbCredentials rückgängig gemacht
 
 [B]3.0.2.7~nightly14[/B]

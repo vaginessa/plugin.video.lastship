@@ -1,3 +1,6 @@
+[B][B]3.0.2.7~nightly14[/B][/B]
+- [navigator.py] Deaktivierung imdbCredentials rückgängig gemacht
+
 [B]3.0.2.7~nightly14[/B]
 -- updste settings lvalue suf value
 

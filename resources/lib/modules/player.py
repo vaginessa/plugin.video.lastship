@@ -437,7 +437,7 @@ class bookmarks:
                     minutes, seconds = divmod(float(self.offset), 60);
                     hours, minutes = divmod(minutes, 60)
                     label = '%02d:%02d:%02d' % (hours, minutes, seconds)
-                    label = 'Fortsetzen ab : %s' % label
+                    label = "Fortsetzen ab: %s" % label
 
                     if control.setting('bookmarks.auto') == 'false':
 

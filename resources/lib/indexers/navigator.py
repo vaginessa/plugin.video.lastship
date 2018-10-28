@@ -202,7 +202,7 @@ class navigator:
         self.addDirectoryItem("Neue TV-Serien", 'tvshows&url=premiere', 'new-tvshows.png', 'DefaultTVShows.png')
         self.addDirectoryItem("Neue Episoden", 'calendar&url=added', 'latest-episodes.png', 'DefaultRecentlyAddedEpisodes.png',
                               queue=True)
-        self.addDirectoryItem("TV-Kalender", 'calendars', 'calendar.png', 'DefaultRecentlyAddedEpisodes.png')
+        # self.addDirectoryItem("TV-Kalender", 'calendars', 'calendar.png', 'DefaultRecentlyAddedEpisodes.png')
 
         if lite == False:
             if not control.setting('lists.widget') == '0':
@@ -382,16 +382,12 @@ class navigator:
         control.infoDialog("Vorgang abgeschlossen", sound=True, icon='INFO')
 
     def addDirectoryItem(self, name, query, thumb, icon, context=None, queue=False, isAction=True, isFolder=True):
-        try:
-            name = control.lang(name).encode('utf-8')
-        except:
-            pass
         url = '%s?action=%s' % (sysaddon, query) if isAction == True else query
         thumb = os.path.join(artPath, thumb) if not artPath == None else icon
         cm = []
         if queue == True: cm.append((queueMenu, 'RunPlugin(%s?action=queueItem)' % sysaddon))
         if not context == None: cm.append(
-            (control.lang(context[0]).encode('utf-8'), 'RunPlugin(%s?action=%s)' % (sysaddon, context[1])))
+            (context[0], 'RunPlugin(%s?action=%s)' % (sysaddon, context[1])))
         item = control.item(label=name)
         item.addContextMenuItems(cm)
         item.setArt({'icon': thumb, 'thumb': thumb})

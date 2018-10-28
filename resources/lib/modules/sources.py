@@ -145,8 +145,6 @@ class sources:
 
         sysimage = urllib.quote_plus(poster.encode('utf-8'))
 
-        downloadMenu = control.lang(32403).encode('utf-8')
-
         for i in range(len(items)):
             try:
                 label = items[i]['label']
@@ -158,7 +156,7 @@ class sources:
                 cm = []
 
                 if downloads == True:
-                    cm.append((downloadMenu, 'RunPlugin(%s?action=download&name=%s&image=%s&source=%s)' % (sysaddon, sysname, sysimage, syssource)))
+                    cm.append(("Download", 'RunPlugin(%s?action=download&name=%s&image=%s&source=%s)' % (sysaddon, sysname, sysimage, syssource)))
 
                 item = control.item(label=label)
 

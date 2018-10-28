@@ -462,7 +462,7 @@ class libepisodes:
             return
 
         if info == 'true' and not control.condVisibility('Window.IsVisible(infodialog)') and not control.condVisibility('Player.HasVideo'):
-            control.infoDialog(control.lang(32553).encode('utf-8'), time=10000000)
+            control.infoDialog('Aktualisiere TV-Serien...', time=10000000)
             self.infoDialog = True
 
         try:

@@ -670,18 +670,13 @@ class episodes:
 
 
     def calendars(self, idx=True):
-        m = control.lang(32060).encode('utf-8').split('|')
-        try: months = [(m[0], 'January'), (m[1], 'February'), (m[2], 'March'), (m[3], 'April'), (m[4], 'May'), (m[5], 'June'), (m[6], 'July'), (m[7], 'August'), (m[8], 'September'), (m[9], 'October'), (m[10], 'November'), (m[11], 'December')]
-        except: months = []
-
-        d = control.lang(32061).encode('utf-8').split('|')
-        try: days = [(d[0], 'Monday'), (d[1], 'Tuesday'), (d[2], 'Wednesday'), (d[3], 'Thursday'), (d[4], 'Friday'), (d[5], 'Saturday'), (d[6], 'Sunday')]
-        except: days = []
+        months = [('Januar', 'January'), ('Februar', 'February'), ('März', 'March'), ('April', 'April'), ('Mai', 'May'), ('Juni', 'June'), ('Juli', 'July'), ('August', 'August'), ('September', 'September'), ('Oktober', 'October'), ('November', 'November'), ('Dezember', 'December')]
+        days = [('Montag', 'Monday'), ('Dienstag', 'Tuesday'), ('Mittwoch', 'Wednesday'), ('Donnerstag', 'Thursday'), ('Freitag', 'Friday'), ('Samstag', 'Saturday'), ('Sonntag', 'Sunday')]
 
         for i in range(0, 30):
             try:
                 name = (self.datetime - datetime.timedelta(days = i))
-                name = (control.lang(32062) % (name.strftime('%A'), name.strftime('%d %B'))).encode('utf-8')
+                name = ('[B]%s[/B] : %s' % (name.strftime('%A'), name.strftime('%d %B')))
                 for m in months: name = name.replace(m[1], m[0])
                 for d in days: name = name.replace(d[1], d[0])
                 try: name = name.encode('utf-8')

@@ -1,3 +1,6 @@
+[B]3.0.2.7~nightly18[/B]
+- "TV-Kalender" wieder sichtbar und die Übersetzung angepasst
+
 [B]3.0.2.7~nightly17[/B]
 - [player.py] richtige string schreibweise
 

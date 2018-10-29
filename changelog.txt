@@ -1,9 +1,12 @@
-[B][B]3.0.2.7~nightly16[/B][/B]
+[B]3.0.2.7~nightly17[/B]
+- [player.py] richtige string schreibweise
+
+[B]3.0.2.7~nightly16[/B]
 - Fix Download Context Menü
 - letzte Abhängigkeiten zu strings.po entfernt
 - "TV-Kalender" Menüeintrag unter Serien entfernt
 
-[B][B]3.0.2.7~nightly15[/B][/B]
+[B]3.0.2.7~nightly15[/B]
 - [navigator.py] Deaktivierung imdbCredentials rückgängig gemacht
 
 [B]3.0.2.7~nightly14[/B]

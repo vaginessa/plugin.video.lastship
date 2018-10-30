@@ -19,6 +19,9 @@ Die Seite Emby ist Standardmäßig deaktiviert, da diese Seite eine Premium Seit
 Bei einigen IndexSeiten ist es möglich, Captcha in Lastship zu lösen. Infos dazu stehen in der FAQ / Konten / ReCaptcha2
 
 [B][COLOR blue]Aktuelles[/COLOR][/B]
+30.10.2018
+Durch Serverarbeiten kommt es zu Ausfälllen. Daher ist das Forum zeitweise nicht erreichbar
+
 18.10.2018
 Maxdome wurde hinzugefügt als Indexseite
 Für Maxdome, Amazon und Netflix ist ein Benutzerkonto der jeweiligen Anbieterseite erforderlich

@@ -8,9 +8,9 @@ Die Gründer und auch die Entwickler von Lastship sind nur in unserem Lastship F
 
 [B]INFO Allgemein:[/B]
 
-Wer die nightly nutzt,hier eine wichtige Info
-Es kommt immer wieder vor,dass nach dem nightly Update Menüpunkte fehlen oder nicht mehr angewählt werden können
-Hier hilft ein Kodineustart,eventuell Lastship Cache und Kodi Cache auch noch löschen
+Wer die nightly nutzt, hier eine wichtige Info:
+Es kommt immer wieder vor, dass nach dem nightly Update Menüpunkte fehlen oder nicht mehr angewählt werden können
+Hier hilft ein Kodineustart, eventuell Lastship Cache und Kodi Cache auch noch löschen
 
 Für die Seite Serienstream ist ein Benutzerkonto auf der jeweiligen Betreiberseite erforderlich (kann auch Wegwerf E-Mailadresse sein)
 

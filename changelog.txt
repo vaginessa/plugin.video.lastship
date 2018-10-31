@@ -1,3 +1,6 @@
+[B]3.0.2.7~nightly19[/B]
+- movies.py fix „In den Kinos
+
 [B]3.0.2.7~nightly18[/B]
 - "TV-Kalender" wieder sichtbar und die Übersetzung angepasst
 

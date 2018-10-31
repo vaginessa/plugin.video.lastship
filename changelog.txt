@@ -19,7 +19,7 @@
 - [navigator.py] Deaktivierung imdbCredentials rückgängig gemacht
 
 [B]3.0.2.7~nightly14[/B]
--- updste settings lvalue suf value
+-- updste settings lvalue auf value
 
 [B]3.0.2.7~nightly13[/B]
 - [language] string.po komplett entfernt

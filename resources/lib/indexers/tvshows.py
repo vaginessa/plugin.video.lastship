@@ -84,7 +84,7 @@ class tvshows:
         self.genre_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&release_date=,date[0]&genres=%s&sort=moviemeter,asc&count=40&start=1'
         self.keyword_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&release_date=,date[0]&keywords=%s&sort=moviemeter,asc&count=40&start=1'
         self.language_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=100,&production_status=released&primary_language=%s&sort=moviemeter,asc&count=40&start=1'
-        self.certification_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&release_date=,date[0]&certificates=us:%s&sort=moviemeter,asc&count=40&start=1'
+        self.certification_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&certificates=DE:%s&moviemeter=100,&adult=include'
         self.trending_link = 'http://api.trakt.tv/shows/trending?limit=40&page=1'
 
         self.traktlists_link = 'http://api.trakt.tv/users/me/lists'
@@ -379,9 +379,9 @@ class tvshows:
 
 
     def certifications(self):
-        certificates = ['TV-G', 'TV-PG', 'TV-14', 'TV-MA']
+        certificates = ['0', '6', '12', '16', '18']
 
-        for i in certificates: self.list.append({'name': str(i), 'url': self.certification_link % str(i).replace('-', '_').lower(), 'image': 'certificates.png', 'action': 'tvshows'})
+        for i in certificates: self.list.append({'name': str(i), 'url': self.certification_link % str(i).replace('_', '_').lower(), 'image': 'certificates.png', 'action': 'tvshows'})
         self.addDirectory(self.list)
         return self.list
 

@@ -86,7 +86,7 @@ class movies:
                 self.featured_link = start_link + '&num_votes=1000,&production_status=released&sort=moviemeter,asc&count=40&start=1'
                 self.genre_link = start_link + ',documentary&num_votes=100,&genres=%s&sort=moviemeter,asc&count=40&start=1'
                 self.language_link = start_link + '&num_votes=100,&production_status=released&primary_language=%s&sort=moviemeter,asc&count=40&start=1'
-                self.certification_link = start_link + '&num_votes=100,&production_status=released&certificates=us:%s&sort=moviemeter,asc&count=40&start=1'
+                self.certification_link = start_link + '&certificates=DE:%s&moviemeter=100,&adult=include'
                 self.boxoffice_link = start_link + '&production_status=released&sort=boxoffice_gross_us,desc&count=40&start=1'
         else:
             self.popular_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&num_votes=1000,&production_status=released&groups=top_1000&sort=moviemeter,asc&count=40&start=1'
@@ -94,7 +94,7 @@ class movies:
             self.featured_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&num_votes=1000,&production_status=released&release_date=date[365],date[60]&sort=moviemeter,asc&count=40&start=1'
             self.genre_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&num_votes=100,&release_date=,date[0]&genres=%s&sort=moviemeter,asc&count=40&start=1'
             self.language_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&num_votes=100,&production_status=released&primary_language=%s&sort=moviemeter,asc&count=40&start=1'
-            self.certification_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&num_votes=100,&production_status=released&certificates=us:%s&sort=moviemeter,asc&count=40&start=1'
+            self.certification_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&certificates=DE:%s&moviemeter=100,&adult=include'
             self.boxoffice_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&production_status=released&sort=boxoffice_gross_us,desc&count=40&start=1'
 
 		# Filter Movies By Year
@@ -342,9 +342,9 @@ class movies:
 
 
     def certifications(self):
-        certificates = ['G', 'PG', 'PG-13', 'R', 'NC-17']
+        certificates = ['0', '6', '12', '16', '18']
 
-        for i in certificates: self.list.append({'name': str(i), 'url': self.certification_link % str(i).replace('-', '_').lower(), 'image': 'certificates.png', 'action': 'movies'})
+        for i in certificates: self.list.append({'name': str(i), 'url': self.certification_link % str(i).replace('_', '_').lower(), 'image': 'certificates.png', 'action': 'movies'})
         self.addDirectory(self.list)
         return self.list
 

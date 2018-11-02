@@ -1,3 +1,9 @@
+[B]3.0.2.7~nightly21[/B]
+- [navigator.py] FSK anstelle Freigabe
+- [tvshows.py] FSK Update
+- [movies.py] FSK Update
+- Fix Emby (No Cache)
+
 [B]3.0.2.7~nightly20[/B]
 - [animeloads] fixx https
 

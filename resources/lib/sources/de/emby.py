@@ -6,6 +6,8 @@ import httplib
 import urllib
 import urllib3
 from resources.lib.modules import control
+try: from sqlite3 import dbapi2 as database
+except: from pysqlite2 import dbapi2 as database
 
 
 '''
@@ -42,7 +44,17 @@ class source:
 
         # 2 static heads, 1 pre-auth, 1 post-auth being set in def __self.auth..
         self.header_preauth={'Content-Type': 'application/json','Accept-Charset': 'UTF-8,*', 'X-Emby-Authorization': 'MediaBrowser Client="Kodi Lastship",Device="LAssthi",DeviceId="xxx",Version="1.0"', 'Accept-encoding': 'gzip', 'Authorization': 'MediaBrowser Client="Kodi Lasthip",Device="Lastship",DeviceId="xxx",Version="1.0.0"'}
-        self.header_postauth={}                
+        self.header_postauth={}
+
+        # disable caching: dirty method
+        self.sourceFile = control.providercacheFile
+        dbcon = database.connect(self.sourceFile)
+        dbcur = dbcon.cursor()
+        dbcur.execute("DELETE FROM rel_src WHERE source = 'emby'")
+        dbcur.execute("DELETE FROM rel_url WHERE source = 'emby'")
+        dbcon.commit()
+        dbcon.close()
+
         
 
     def movie(self, imdb, title, localtitle, aliases, year):
@@ -293,11 +305,11 @@ class source:
             
             
             ### urllib3 Search Request ###
-            http = urllib3.PoolManager()           
-            r = http.request(
-                'GET',
-                url,
-                headers=self.header_postauth)
+            
+            http =urllib3.PoolManager()      
+
+            r = http.request('GET',url,headers=self.header_postauth)
+                      
             r.release_conn()
 
             resp = json.loads(r.data)

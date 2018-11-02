@@ -389,7 +389,7 @@ class tvshows:
         ('Unbewertet', 'Unrated') #Achtung Unrated ist nicht identisch zu Not+Rated!
         ]
 
-        for i in certificates: self.list.append({'name': str(i[0]), 'url': self.certification_link % str(i[1]).replace('_', '_').lower(), 'image': 'certificates.png', 'action': 'movies'})
+        for i in certificates: self.list.append({'name': str(i[0]), 'url': self.certification_link % str(i[1]).replace('_', '_').lower(), 'image': 'certificates.png', 'action': 'tvshows'})
         self.addDirectory(self.list)
         return self.list
 

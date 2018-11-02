@@ -342,9 +342,17 @@ class movies:
 
 
     def certifications(self):
-        certificates = ['0', '6', '12', '16', '18']
+        certificates = [
+        ('FSK - 0', '0'), 
+        ('FSK - 6', '6'), 
+        ('FSK - 12', '12'), 
+        ('FSK - 16', '16'), 
+        ('FSK - 18', '18'), 
+        #('SPIO / JK', 'Not+Rated'), #Funktioniert noch nicht. Wie packt er das + korrekt in die URL?
+        ('Unbewertet', 'Unrated') #Achtung Unrated ist nicht identisch zu Not+Rated!
+        ]
 
-        for i in certificates: self.list.append({'name': str(i), 'url': self.certification_link % str(i).replace('_', '_').lower(), 'image': 'certificates.png', 'action': 'movies'})
+        for i in certificates: self.list.append({'name': str(i[0]), 'url': self.certification_link % str(i[1]).replace('_', '_').lower(), 'image': 'certificates.png', 'action': 'movies'})
         self.addDirectory(self.list)
         return self.list
 

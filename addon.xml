@@ -29,22 +29,49 @@
     			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
 		<news>
-- [cache.py] Suchverlauf aus „Clear all Caches“ entfernt
+- [navigator.py] FSK anstelle Freigabe
+- [tvshows.py] FSK Update
+- [movies.py] FSK Update
+- Fix Emby (No Cache)
+- [animeloads] fixx https
+- [movies.py] fix In den Kinos
+- [player.py] richtige string schreibweise
+- Fix Download Context Menue
+- upadate settings, lvalue auf value
+- [language] string.po komplett entfernt
+- [settings.xml] Einstellung für Sprache entfernt
+- [recaptcha_app.py] Umlaute entfernt
+- [cache.py] Suchverlauf leeren aus Alle Speicher leeren entfernt
 - Seriesever Konto entfernt
-- Bereits implementierte Einstellung sichtbar gemacht: "Streamsuche vorzeitig abbrechen" 
-- [downloader.py] DE Translation
+- Bereits implementierte Einstellung sichtbar gemacht: Streamsuche vorzeitig abbrechen
+- [downloader.py] Update DE Translation
 
-- string.po Zahlenverweis, durch Klartext ersetzt:
-   - [trakt.py] 
-   - [player.py]
-   - [libtools.py]
-   - [cache.py]
-   - [settings.xml]
-   - [lastship.py]
+-  Add UTF-8 code 
+  - recaptcha_app.py
+  - captcha9kw.py
+  - TwoCaptcha.py
+
+- Lastship Menue Geschwindigkeit verbessert:
+	- string.po Zahlenverweis, durch Klartext ersetzt:
+	   - [trakt.py] 
+	   - [player.py]
+	   - [libtools.py]
+	   - [cache.py]
+	   - [settings.xml]
+	   - [lastship.py]
+	   - [sources.py]
+	   - [settings.xml]
+	   - [episodes.py]
+	   - [movies.py]
+	   - [tvshows.py]
+	   - [trakt.py]
+	   - [serienstream.py]
+	   - [navigator.py]
    
 - Rechtschreibung aktualisiert:
    - [captcha9kw.py]
    - [TwoCaptcha.py] 
+   - [recaptcha_app.py]
 		</news>
 	</extension>
 </addon>

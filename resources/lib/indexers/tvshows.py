@@ -385,11 +385,12 @@ class tvshows:
         ('FSK - 12', '12'), 
         ('FSK - 16', '16'), 
         ('FSK - 18', '18'), 
-        #('SPIO / JK', 'Not+Rated'), #Funktioniert noch nicht. Wie packt er das + korrekt in die URL?
-        ('Unbewertet', 'Unrated') #Achtung Unrated ist nicht identisch zu Not+Rated!
+        ('Unbewertet', 'Unrated'), #Achtung Unrated ist nicht identisch zu Not+Rated!
+        ('SPIO / JK', 'Not+Rated'),
+        ('BPjM / Indiziert', 'BPjM+Restricted')
         ]
 
-        for i in certificates: self.list.append({'name': str(i[0]), 'url': self.certification_link % str(i[1]).replace('_', '_').lower(), 'image': 'certificates.png', 'action': 'tvshows'})
+        for i in certificates: self.list.append({'name': str(i[0]), 'url': self.certification_link % str(i[1]), 'image': 'certificates.png', 'action': 'tvshows'})
         self.addDirectory(self.list)
         return self.list
 

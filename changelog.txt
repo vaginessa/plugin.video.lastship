@@ -1,3 +1,6 @@
+[B]3.0.2.7~nightly22[/B]
+- [movies und tvshows.py] Update SPIO/JK und BPjM
+
 [B]3.0.2.7~nightly21[/B]
 - [navigator.py] FSK anstelle Freigabe
 - [tvshows.py] FSK Update

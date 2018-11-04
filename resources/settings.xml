@@ -97,7 +97,7 @@
         <setting id="provider.netzkino" type="bool" label="NETZKINO.DE" default="true" />
         <setting id="provider.proxer" type="bool" label="PROXER.ME" default="true" />
         <setting id="provider.moviedream" type="bool" label="MOVIEDREAM.WS" default="true" />
-        <setting id="provider.serienstream" type="bool" label="SERIENSTREAM.TO" default="true" />
+        <setting id="provider.serienstream" type="bool" label="SERIENSTREAM.TO" default="false" />
         <setting id="provider.streamit" type="bool" label="STREAMIT.WS" default="true" />
         <setting id="provider.streamworld" type="bool" label="STREAMWORLD.TO (ReCaptcha)" default="false" />
         <setting id="provider.stream-to" type="bool" label="STREAM.TO (ReCaptcha)" default="false" />

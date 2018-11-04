@@ -264,29 +264,30 @@ class movies:
 
     def genres(self):
         genres = [
-            ('Action', 'action', True),
             ('Adventure', 'adventure', True),
+            ('Action', 'action', True),
             ('Animation', 'animation', True),
-            ('Anime', 'anime', False),
+            ('Anime', 'anime', True),
             ('Biography', 'biography', True),
-            ('Comedy', 'comedy', True),
-            ('Crime', 'crime', True),
             ('Documentary', 'documentary', True),
             ('Drama', 'drama', True),
             ('Family', 'family', True),
             ('Fantasy', 'fantasy', True),
             ('History', 'history', True),
             ('Horror', 'horror', True),
-            ('Music ', 'music', True),
-            ('Musical', 'musical', True),
-            ('Mystery', 'mystery', True),
+            ('Comedy', 'comedy', True),
+            ('War', 'war', True),
+            ('Crime', 'crime', True),
             ('Romance', 'romance', True),
+            ('Musical', 'musical', True),
+            ('Music', 'music', True),
+            ('Mystery', 'mystery', True),
             ('Science Fiction', 'sci_fi', True),
             ('Sport', 'sport', True),
             ('Thriller', 'thriller', True),
-            ('War', 'war', True),
             ('Western', 'western', True)
         ]
+
 
         for i in genres: self.list.append(
             {

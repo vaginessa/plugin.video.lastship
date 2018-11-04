@@ -1,3 +1,7 @@
+[B]3.0.2.7~nightly23[/B]
+- serienstream wieder default false
+- [episodes.py] Update string.po 
+
 [B]3.0.2.7~nightly22[/B]
 - [movies und tvshows.py] Update SPIO/JK und BPjM
 

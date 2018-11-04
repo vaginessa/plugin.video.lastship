@@ -267,7 +267,7 @@ class movies:
             ('Adventure', 'adventure', True),
             ('Action', 'action', True),
             ('Animation', 'animation', True),
-            ('Anime', 'anime', True),
+            ('Anime', 'anime', False),
             ('Biography', 'biography', True),
             ('Documentary', 'documentary', True),
             ('Drama', 'drama', True),

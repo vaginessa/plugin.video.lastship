@@ -1566,7 +1566,7 @@ class episodes:
 
         addonFanart, addonThumb, artPath = control.addonFanart(), control.addonThumb(), control.artPath()
 
-        queueMenu = control.lang(32065).encode('utf-8')
+        queueMenu = "Eintrag zur Warteschlange hinzufügen"
 
         for i in items:
             try:

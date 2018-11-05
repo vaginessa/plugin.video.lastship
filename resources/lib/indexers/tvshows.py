@@ -83,7 +83,6 @@ class tvshows:
         self.person_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&release_date=,date[0]&role=%s&sort=year,desc&count=40&start=1'
         self.genre_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&release_date=,date[0]&genres=%s&sort=moviemeter,asc&count=40&start=1'
         self.keyword_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&release_date=,date[0]&keywords=%s&sort=moviemeter,asc&count=40&start=1'
-        self.language_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=100,&production_status=released&primary_language=%s&sort=moviemeter,asc&count=40&start=1'
         self.certification_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&certificates=DE:%s&moviemeter=100,&adult=include'
         self.trending_link = 'http://api.trakt.tv/shows/trending?limit=40&page=1'
 
@@ -336,45 +335,6 @@ class tvshows:
         ]
 
         for i in networks: self.list.append({'name': i[0], 'url': self.tvmaze_link + i[1], 'image': i[2], 'action': 'tvshows'})
-        self.addDirectory(self.list)
-        return self.list
-
-
-    def languages(self):
-        languages = [
-        ('Arabic', 'ar'),
-        ('Bosnian', 'bs'),
-        ('Bulgarian', 'bg'),
-        ('Chinese', 'zh'),
-        ('Croatian', 'hr'),
-        ('Dutch', 'nl'),
-        ('English', 'en'),
-        ('Finnish', 'fi'),
-        ('French', 'fr'),
-        ('German', 'de'),
-        ('Greek', 'el'),
-        ('Hebrew', 'he'),
-        ('Hindi ', 'hi'),
-        ('Hungarian', 'hu'),
-        ('Icelandic', 'is'),
-        ('Italian', 'it'),
-        ('Japanese', 'ja'),
-        ('Korean', 'ko'),
-        ('Norwegian', 'no'),
-        ('Persian', 'fa'),
-        ('Polish', 'pl'),
-        ('Portuguese', 'pt'),
-        ('Punjabi', 'pa'),
-        ('Romanian', 'ro'),
-        ('Russian', 'ru'),
-        ('Serbian', 'sr'),
-        ('Spanish', 'es'),
-        ('Swedish', 'sv'),
-        ('Turkish', 'tr'),
-        ('Ukrainian', 'uk')
-        ]
-
-        for i in languages: self.list.append({'name': str(i[0]), 'url': self.language_link % i[1], 'image': 'languages.png', 'action': 'tvshows'})
         self.addDirectory(self.list)
         return self.list
 

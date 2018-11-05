@@ -1,3 +1,12 @@
+[B]3.0.2.7~nightly24[/B]
+
+- [cleangenre.py]
+Nicht supportete Sprachen entfernt
+unnötige Unicode-Codierung entfernt
+Genres alphabetisch sortiert (deutsch)
+- [tvshows und movies.py]
+Genres alphabetisch geordnet
+
 [B]3.0.2.7~nightly23[/B]
 - serienstream wieder default false
 - [episodes.py] Update string.po 

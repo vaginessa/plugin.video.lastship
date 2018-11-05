@@ -131,7 +131,6 @@ class navigator:
         self.addDirectoryItem("Genres", 'movieGenres', 'genres.png', 'DefaultMovies.png')
         self.addDirectoryItem("Jahr", 'movieYears', 'years.png', 'DefaultMovies.png')
         self.addDirectoryItem("Personen", 'moviePersons', 'people.png', 'DefaultMovies.png')
-        self.addDirectoryItem("Sprachen", 'movieLanguages', 'languages.png', 'DefaultMovies.png')
         self.addDirectoryItem("FSK", 'movieCertificates', 'certificates.png', 'DefaultMovies.png')
         self.addDirectoryItem("Aktive Betrachter", 'movies&url=trending', 'people-watching.png', 'DefaultRecentlyAddedMovies.png')
         self.addDirectoryItem("Am populärsten", 'movies&url=popular', 'most-popular.png', 'DefaultMovies.png')
@@ -191,7 +190,6 @@ class navigator:
     def tvshows(self, lite=False):
         self.addDirectoryItem("Genres", 'tvGenres', 'genres.png', 'DefaultTVShows.png')
         self.addDirectoryItem("TV-Sender", 'tvNetworks', 'networks.png', 'DefaultTVShows.png')
-        self.addDirectoryItem("Sprachen", 'tvLanguages', 'languages.png', 'DefaultTVShows.png')
         self.addDirectoryItem("FSK", 'tvCertificates', 'certificates.png', 'DefaultTVShows.png')
         self.addDirectoryItem("Aktive Betrachter", 'tvshows&url=trending', 'people-watching.png', 'DefaultRecentlyAddedEpisodes.png')
         self.addDirectoryItem("Am populärsten", 'tvshows&url=popular', 'most-popular.png', 'DefaultTVShows.png')

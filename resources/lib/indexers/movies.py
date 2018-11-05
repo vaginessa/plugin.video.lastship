@@ -85,7 +85,6 @@ class movies:
                 self.views_link =  start_link + '&num_votes=1000,&production_status=released&sort=num_votes,desc&count=40&start=1'
                 self.featured_link = start_link + '&num_votes=1000,&production_status=released&sort=moviemeter,asc&count=40&start=1'
                 self.genre_link = start_link + ',documentary&num_votes=100,&genres=%s&sort=moviemeter,asc&count=40&start=1'
-                self.language_link = start_link + '&num_votes=100,&production_status=released&primary_language=%s&sort=moviemeter,asc&count=40&start=1'
                 self.certification_link = start_link + '&certificates=DE:%s&moviemeter=100,&adult=include'
                 self.boxoffice_link = start_link + '&production_status=released&sort=boxoffice_gross_us,desc&count=40&start=1'
         else:
@@ -93,7 +92,6 @@ class movies:
             self.views_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&num_votes=1000,&production_status=released&sort=num_votes,desc&count=40&start=1'
             self.featured_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&num_votes=1000,&production_status=released&release_date=date[365],date[60]&sort=moviemeter,asc&count=40&start=1'
             self.genre_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&num_votes=100,&release_date=,date[0]&genres=%s&sort=moviemeter,asc&count=40&start=1'
-            self.language_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&num_votes=100,&production_status=released&primary_language=%s&sort=moviemeter,asc&count=40&start=1'
             self.certification_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&certificates=DE:%s&moviemeter=100,&adult=include'
             self.boxoffice_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&production_status=released&sort=boxoffice_gross_us,desc&count=40&start=1'
 
@@ -297,47 +295,6 @@ class movies:
                 'action': 'movies'
             })
 
-        self.addDirectory(self.list)
-        return self.list
-
-
-    def languages(self):
-        languages = [
-            ('Arabic', 'ar'),
-            ('Bosnian', 'bs'),
-            ('Bulgarian', 'bg'),
-            ('Chinese', 'zh'),
-            ('Croatian', 'hr'),
-            ('Dutch', 'nl'),
-            ('English', 'en'),
-            ('Finnish', 'fi'),
-            ('French', 'fr'),
-            ('German', 'de'),
-            ('Greek', 'el'),
-            ('Hebrew', 'he'),
-            ('Hindi ', 'hi'),
-            ('Hungarian', 'hu'),
-            ('Icelandic', 'is'),
-            ('Italian', 'it'),
-            ('Japanese', 'ja'),
-            ('Korean', 'ko'),
-            ('Macedonian', 'mk'),
-            ('Norwegian', 'no'),
-            ('Persian', 'fa'),
-            ('Polish', 'pl'),
-            ('Portuguese', 'pt'),
-            ('Punjabi', 'pa'),
-            ('Romanian', 'ro'),
-            ('Russian', 'ru'),
-            ('Serbian', 'sr'),
-            ('Slovenian', 'sl'),
-            ('Spanish', 'es'),
-            ('Swedish', 'sv'),
-            ('Turkish', 'tr'),
-            ('Ukrainian', 'uk')
-        ]
-
-        for i in languages: self.list.append({'name': str(i[0]), 'url': self.language_link % i[1], 'image': 'languages.png', 'action': 'movies'})
         self.addDirectory(self.list)
         return self.list
 

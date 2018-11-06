@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 """
-    Lastship Add-on (C) 2017
+    Lastship Add-on (C) 2019
     Credits to Placenta and Covenant; our thanks go to their creators
 
     This program is free software: you can redistribute it and/or modify

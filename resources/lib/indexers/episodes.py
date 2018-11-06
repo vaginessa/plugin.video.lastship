@@ -84,7 +84,7 @@ class seasons:
             if create_directory == True: self.seasonDirectory(self.list)
             return self.list
         else:
-            self.list = self.tvdb_list(tvshowtitle, year, imdb, tvdb, 'en')
+            self.list = self.tvdb_list(tvshowtitle, year, imdb, tvdb, 'de')
             return self.list
 
 
@@ -140,11 +140,11 @@ class seasons:
         try:
             if tvdb == '0': return
 
-            url = self.tvdb_info_link % (tvdb, 'en')
+            url = self.tvdb_info_link % (tvdb, 'de')
             data = urllib2.urlopen(url, timeout=30).read()
 
             zip = zipfile.ZipFile(StringIO.StringIO(data))
-            result = zip.read('%s.xml' % 'en')
+            result = zip.read('%s.xml' % 'de')
             artwork = zip.read('banners.xml')
             zip.close()
 
@@ -154,15 +154,15 @@ class seasons:
             if len(dupe) > 0:
                 tvdb = str(dupe[0]).encode('utf-8')
 
-                url = self.tvdb_info_link % (tvdb, 'en')
+                url = self.tvdb_info_link % (tvdb, 'de')
                 data = urllib2.urlopen(url, timeout=30).read()
 
                 zip = zipfile.ZipFile(StringIO.StringIO(data))
-                result = zip.read('%s.xml' % 'en')
+                result = zip.read('%s.xml' % 'de')
                 artwork = zip.read('banners.xml')
                 zip.close()
 
-            if not lang == 'en':
+            if not lang == 'de':
                 url = self.tvdb_info_link % (tvdb, lang)
                 data = urllib2.urlopen(url, timeout=30).read()
 
@@ -174,7 +174,7 @@ class seasons:
 
 
             artwork = artwork.split('<Banner>')
-            artwork = [i for i in artwork if '<Language>en</Language>' in i and '<BannerType>season</BannerType>' in i]
+            artwork = [i for i in artwork if '<Language>de</Language>' in i and '<BannerType>season</BannerType>' in i]
             artwork = [i for i in artwork if not 'seasonswide' in re.findall('<BannerPath>(.+?)</BannerPath>', i)[0]]
 
 
@@ -603,7 +603,7 @@ class episodes:
                 if create_directory == True: self.episodeDirectory(self.list)
                 return self.list
             else:
-                self.list = seasons().tvdb_list(tvshowtitle, year, imdb, tvdb, 'en', '-1')
+                self.list = seasons().tvdb_list(tvshowtitle, year, imdb, tvdb, 'de', '-1')
                 return self.list
         except:
             pass
@@ -804,7 +804,7 @@ class episodes:
                 plot = client.replaceHTMLCodes(plot)
 
                 try:
-                    if self.lang == 'en': raise Exception()
+                    if self.lang == 'de': raise Exception()
 
                     item = trakt.getTVShowTranslation(imdb, lang=self.lang, season=season, episode=episode,  full=True)
 

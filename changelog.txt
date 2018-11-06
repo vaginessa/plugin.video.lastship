@@ -1,3 +1,6 @@
+[B]3.0.2.7~nightly26[/B]
+- [episodes.py] Umstellung auf primär deutsch (außer TVMaze/Kalender da deutsch nicht möglich)
+
 [B]3.0.2.7~nightly25[/B]
 - [navigator, movies, tvshows.py] Kategorie Sprachen entfernt (da nur deutsche Sprache verwendet wird)
 

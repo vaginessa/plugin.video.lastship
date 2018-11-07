@@ -1,3 +1,6 @@
+[B]3.0.2.7~nightly28[/B]
+- Bug fix Tabs entfernt
+
 [B]3.0.2.7~nightly27[/B]
 - Lizenzen erneuert
 - 24h Verzögerung bevor Episoden Importiert werden und Spezial Episoden:

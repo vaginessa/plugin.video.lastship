@@ -945,11 +945,11 @@ class movies:
                 sysurl = urllib.quote_plus(url)
 
                 cm = []
-				
-				cm.append(('Find similar', 'ActivateWindow(10025,%s?action=movies&url=https://api.trakt.tv/movies/%s/related,return)' % (sysaddon, imdb)))
-				
-				cm.append((queueMenu, 'RunPlugin(%s?action=queueItem)' % sysaddon))
 
+                cm = []
+                cm.append(('Find similar', 'ActivateWindow(10025,%s?action=movies&url=https://api.trakt.tv/movies/%s/related,return)' % (sysaddon, imdb)))
+                cm.append((queueMenu, 'RunPlugin(%s?action=queueItem)' % sysaddon))
+                
                 try:
                     overlay = int(playcount.getMovieOverlay(indicators, imdb))
                     if overlay == 7:

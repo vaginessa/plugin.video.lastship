@@ -1,7 +1,7 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 
 """
-    Lastship Add-on (C) 2019
+    Lastship Add-on (C) 2017
     Credits to Placenta and Covenant; our thanks go to their creators
 
     This program is free software: you can redistribute it and/or modify
@@ -17,10 +17,6 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-
-# Addon Name: Lastship
-# Addon id: plugin.video.lastship
-# Addon Provider: LastShip
 
 
 try:
@@ -252,7 +248,10 @@ class libtvshows:
         self.dupe_setting = control.setting('library.check') or 'true'
 
         self.datetime = (datetime.datetime.utcnow() - datetime.timedelta(hours = 5))
-        self.date = (self.datetime - datetime.timedelta(hours = 24)).strftime('%Y%m%d')
+        if control.setting('library.importdelay') != 'true':
+            self.date = (self.datetime - datetime.timedelta(hours = 24)).strftime('%Y%m%d')
+        else:
+            self.date = (self.datetime - datetime.timedelta(hours = 24)).strftime('%Y%m%d')
         self.silentDialog = False
         self.infoDialog = False
         self.block = False
@@ -405,7 +404,10 @@ class libepisodes:
         self.property = '%s_service_property' % control.addonInfo('name').lower()
 
         self.datetime = (datetime.datetime.utcnow() - datetime.timedelta(hours = 5))
-        self.date = (self.datetime - datetime.timedelta(hours = 24)).strftime('%Y%m%d')
+        if control.setting('library.importdelay') != 'true':
+            self.date = (self.datetime - datetime.timedelta(hours = 24)).strftime('%Y%m%d')
+        else:
+            self.date = (self.datetime - datetime.timedelta(hours = 24)).strftime('%Y%m%d')
 
         self.infoDialog = False
 
@@ -486,7 +488,10 @@ class libepisodes:
 
         # __init__ doesn't get called from services so self.date never gets updated and new episodes are not added to the library
         self.datetime = (datetime.datetime.utcnow() - datetime.timedelta(hours = 5))
-        self.date = (self.datetime - datetime.timedelta(hours = 24)).strftime('%Y%m%d')
+        if control.setting('library.importdelay') != 'true':
+            self.date = (self.datetime - datetime.timedelta(hours = 24)).strftime('%Y%m%d')
+        else:
+            self.date = (self.datetime - datetime.timedelta(hours = 24)).strftime('%Y%m%d')
         
         for item in items:
             it = None

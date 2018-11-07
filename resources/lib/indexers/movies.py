@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 """
-    Lastship Add-on (C) 2019
+    Lastship Add-on (C) 2017
     Credits to Placenta and Covenant; our thanks go to their creators
 
     This program is free software: you can redistribute it and/or modify
@@ -18,7 +18,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-# Addon Name: Lastship
+# Addon Name: lastship
 # Addon id: plugin.video.lastship
 # Addon Provider: LastShip
 
@@ -944,7 +944,11 @@ class movies:
                 url = '%s?action=play&title=%s&year=%s&imdb=%s&meta=%s&t=%s' % (sysaddon, systitle, year, imdb, sysmeta, self.systime)
                 sysurl = urllib.quote_plus(url)
 
-                cm = [(queueMenu, 'RunPlugin(%s?action=queueItem)' % sysaddon)]
+                cm = []
+				
+				cm.append(('Find similar', 'ActivateWindow(10025,%s?action=movies&url=https://api.trakt.tv/movies/%s/related,return)' % (sysaddon, imdb)))
+				
+				cm.append((queueMenu, 'RunPlugin(%s?action=queueItem)' % sysaddon))
 
                 try:
                     overlay = int(playcount.getMovieOverlay(indicators, imdb))

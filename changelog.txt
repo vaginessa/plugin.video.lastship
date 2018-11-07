@@ -1,3 +1,12 @@
+[B]3.0.2.7~nightly27[/B]
+- Lizenzen erneuert
+- 24h Verzögerung bevor Episoden Importiert werden und Spezial Episoden:
+	- episodes.py (tv.specials)
+	- tvshows.py  (Kontexmenü "Finde ähnliche)
+	- movies.py  (Kontexmenü "Finde ähnliche)
+	- libtools.py (24hdelay)
+	- settings.xml (24h Verzögerung, Spezial Episoden, Menü neu/übersichtlich angeordnet)
+	
 [B]3.0.2.7~nightly26[/B]
 - [episodes.py] Umstellung auf primär deutsch (außer TVMaze/Kalender da deutsch nicht möglich)
 

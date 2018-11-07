@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 """
-    Lastship Add-on (C) 2019
+    Lastship Add-on (C) 2017
     Credits to Placenta and Covenant; our thanks go to their creators
 
     This program is free software: you can redistribute it and/or modify
@@ -18,7 +18,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-# Addon Name: Lastship
+# Addon Name: lastship
 # Addon id: plugin.video.lastship
 # Addon Provider: LastShip
 
@@ -1111,6 +1111,8 @@ class tvshows:
                     url = '%s?action=seasons&tvshowtitle=%s&year=%s&imdb=%s&tvdb=%s' % (sysaddon, systitle, year, imdb, tvdb)
 
                 cm = []
+				
+				cm.append(('Find similar', 'ActivateWindow(10025,%s?action=tvshows&url=https://api.trakt.tv/shows/%s/related,return)' % (sysaddon, imdb)))
 
                 cm.append((playRandom, 'RunPlugin(%s?action=random&rtype=season&tvshowtitle=%s&year=%s&imdb=%s&tvdb=%s)' % (sysaddon, urllib.quote_plus(systitle), urllib.quote_plus(year), urllib.quote_plus(imdb), urllib.quote_plus(tvdb))))
 

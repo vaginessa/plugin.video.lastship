@@ -184,8 +184,8 @@ class seasons:
             item = result[0] ; item2 = result2[0]
 
             episodes = [i for i in result if '<EpisodeNumber>' in i]
-
-			if control.setting('tv.specials') == 'true':
+            
+            if control.setting('tv.specials') == 'true':
                 episodes = [i for i in episodes]
             else:
                 episodes = [i for i in episodes if not '<SeasonNumber>0</SeasonNumber>' in i]
@@ -193,6 +193,7 @@ class seasons:
 
             seasons = [i for i in episodes if '<EpisodeNumber>1</EpisodeNumber>' in i]
 
+            locals = [i for i in result2 if '<EpisodeNumber>' in i]
             locals = [i for i in result2 if '<EpisodeNumber>' in i]
 
             if limit == '':

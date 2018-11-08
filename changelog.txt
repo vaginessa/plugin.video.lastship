@@ -1,6 +1,6 @@
 [B]3.0.2.7~nightly30[/B]
 - movies.py doppelten code entfernt
-- settings.xml Bug Fix
+- settings.xml update
 
 
 [B]3.0.2.7~nightly29[/B]

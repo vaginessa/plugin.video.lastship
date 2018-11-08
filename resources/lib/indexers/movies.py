@@ -945,8 +945,6 @@ class movies:
                 sysurl = urllib.quote_plus(url)
 
                 cm = []
-
-                cm = []
                 cm.append(("Finde Ähnliches", 'ActivateWindow(10025,%s?action=movies&url=https://api.trakt.tv/movies/%s/related,return)' % (sysaddon, imdb)))
                 cm.append((queueMenu, 'RunPlugin(%s?action=queueItem)' % sysaddon))
                 

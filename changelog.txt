@@ -1,3 +1,7 @@
+[B]3.0.2.7~nightly29[/B]
+- Tabs in settings.xml entfernt
+- Find similary übersetzt 
+
 [B]3.0.2.7~nightly28[/B]
 - Bug fix Tabs entfernt
 

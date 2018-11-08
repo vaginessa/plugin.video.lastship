@@ -171,7 +171,7 @@
         <setting id="library.check_episode" type="bool" label="Erste Episode vor dem Hinzufügen prüfen" default="false" />
         <setting type="sep" />
         <setting id="library.include_unknown" type="bool" label="Episoden mit unbekanntem Ausstrahlungsdatum einbeziehen" default="false" />
-        <setting id="library.importdelay" type="bool" label="24h-Verzögerung für Episoden-Importierung " default="true" />
+        <setting id="library.importdelay" type="bool" label="24h-Verzögerung für Episoden-Importierung" default="true" />
     </category>
     <category label="Downloads">
         <setting id="downloads" type="bool" label="Herunterladen aktivieren" default="false" />

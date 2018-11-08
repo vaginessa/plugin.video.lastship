@@ -31,7 +31,7 @@
         <setting id="lists.widget" type="enum" label="Meine Listen" values="Deaktiviert|Aktiviert" default="1" />
         <setting id="prgr.sortorder" type="enum" label="Trakt-Fortschritt sortieren nach" values="kürzlich gesendet|kürzlich gesehen" default="1" visible="!eq(-23,)" />
         <setting id="autoTraktOnStart" type="bool" label="Synchronisierung bei Kodi Start" default="False" />
-        <setting id="schedTraktTime" type="slider" label="Geplante Updates jede - Stunde/n" default="0" range="0,24" option="int" />
+        <setting id="schedTraktTime" type="slider" label="Geplante Updates jede Stunde/n" default="0" range="0,24" option="int" />
         <setting type="lsep" label="Entwicklung / Debugging" />
         <setting id="DevUpdate" type="bool" label="Nightly Update" default="false" />
         <setting id="FaultLogger.enabled" type="bool" label="Fehlerhafte Provider erkennen" default="true" />

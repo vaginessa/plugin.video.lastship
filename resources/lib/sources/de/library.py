@@ -32,7 +32,7 @@ from resources.lib.modules import source_faultlog
 class source:
     def __init__(self):
         self.priority = 1
-        self.language = ['en', 'de', 'fr', 'ko', 'pl', 'pt', 'ru']
+        self.language = ['de', 'en', 'fr', 'ko', 'pl', 'pt', 'ru']
         self.domains = []
 
     def movie(self, imdb, title, localtitle, aliases, year):
@@ -154,7 +154,7 @@ class source:
             info = info.encode('utf-8')
 
             sources.append(
-                {'source': '0', 'quality': quality, 'language': 'en', 'url': url, 'info': info, 'local': True,
+                {'source': '0', 'quality': quality, 'language': 'de', 'url': url, 'info': info, 'local': True,
                  'direct': True, 'debridonly': False})
 
             return sources

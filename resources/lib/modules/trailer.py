@@ -94,7 +94,7 @@ class trailer:
         try:
             apiLang = control.apiLanguage().get('youtube', 'de')
 
-            if apiLang != 'en':
+            if apiLang != 'de':
                 url += "&relevanceLanguage=%s" % apiLang
 
             result = client.request(url)

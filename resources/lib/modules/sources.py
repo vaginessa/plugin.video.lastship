@@ -770,7 +770,7 @@ class sources:
         local = sorted(local, key=lambda k: k['quality'],reverse=True)
         ## END ##
         
-        for i in local: i.update({'language': self._getPrimaryLang() or 'en'})
+        for i in local: i.update({'language': self._getPrimaryLang() or 'de'})
         self.sources = [i for i in self.sources if not i in local]
 
         filter = []
@@ -835,7 +835,7 @@ class sources:
         multi = True if len(multi) > 1 else False
 
         if multi == True:
-            self.sources = [i for i in self.sources if not i['language'] == 'en'] + [i for i in self.sources if i['language'] == 'en']
+            self.sources = [i for i in self.sources if not i['language'] == 'de'] + [i for i in self.sources if i['language'] == 'en']
         
         self.sources = self.sources[:2000]
 
@@ -1116,7 +1116,7 @@ class sources:
 
         try:
             t = trakt.getMovieAliases(imdb) if content == 'movie' else trakt.getTVShowAliases(imdb)
-            t = [i for i in t if i.get('country', '').lower() in [lang, '', 'us'] and i.get('title', '').lower() != localtitle.lower()]
+            t = [i for i in t if i.get('country', '').lower() in [lang, '', 'de'] and i.get('title', '').lower() != localtitle.lower()]
             return t
         except:
             return []

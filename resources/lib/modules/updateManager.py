@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 """
-    Lastship Add-on (C) 2019
+    Lastship Add-on (C) 2017
     Credits to Placenta and Covenant; our thanks go to their creators
 
     This program is free software: you can redistribute it and/or modify
@@ -18,19 +18,23 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-# Addon Name: Lastship
+# Addon Name: lastship
 # Addon id: plugin.video.lastship
 # Addon Provider: LastShip
 
 import urllib
 import os
 import json
-import zipfile
 import xbmc
 from xbmc import translatePath
 from resources.lib.modules import control
 from resources.lib.modules import log_utils
 import xbmcgui
+
+## Android K18 ZIP Fix.
+if xbmc.getCondVisibility('system.platform.android') and int(xbmc.getInfoLabel('System.BuildVersion')[:2]) >= 18:
+    import fixetzipfile as zipfile
+else:import zipfile
 
 ## plugin.video.lastship
 REMOTE_PLUGIN_COMMITS = "https://api.github.com/repos/lastship/plugin.video.lastship/commits/nightly"
@@ -69,7 +73,7 @@ def update(LocalDir, REMOTE_PATH, Title, localFileName):
         f = urlopen(REMOTE_PATH)
 
         # Open our local file for writing
-        with open(localFileName, "wb") as local_file:
+        with open(localFileName,"wb") as local_file:
             local_file.write(f.read())
     except:
         log_utils.log("DevUpdate not possible due download error")

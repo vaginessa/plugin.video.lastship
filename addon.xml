@@ -29,49 +29,33 @@
     			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
 		<news>
-- [navigator.py] FSK anstelle Freigabe
-- [tvshows.py] FSK Update
-- [movies.py] FSK Update
+- Finde similary Kontex Menue
+- [settings.xml] 
+	- Update für Kodi18beta5
+	- Menue neu angeordnet
+- Lizenzen erneuert
+- 24h Delay bevor Episoden Importiert werden und Spezial Episoden
+- [episodes.py] 
+	- Umstellung auf only deutsch
+- Kategorie Sprachen entfernt (da nur deutsche Sprache verwendet wird)
+- [cleangenre.py]
+	- Nicht supportete Sprachen entfernt
+	- Unicode-Codierung entfernt
+	- Genres alphabetisch sortiert (deutsch)
+- [tvshows und movies.py]
+	- Genres alphabetisch geordnet
+- FSK Update
 - Fix Emby (No Cache)
 - [animeloads] fixx https
-- [movies.py] fix In den Kinos
-- [player.py] richtige string schreibweise
+- Fix In den Kinos
 - Fix Download Context Menue
-- upadate settings, lvalue auf value
-- [language] string.po komplett entfernt
-- [settings.xml] Einstellung für Sprache entfernt
-- [recaptcha_app.py] Umlaute entfernt
-- [cache.py] Suchverlauf leeren aus Alle Speicher leeren entfernt
+- Einstellung für Sprache entfernt
+- Lastship Menue Geschwindigkeit verbessert:
+	- string.po Verweise komplett entfernt
+- Suchverlauf leeren“ aus „Alle Speicher leeren“ entfernt
 - Seriesever Konto entfernt
 - Bereits implementierte Einstellung sichtbar gemacht: Streamsuche vorzeitig abbrechen
-- [downloader.py] Update DE Translation
-
--  Add UTF-8 code 
-  - recaptcha_app.py
-  - captcha9kw.py
-  - TwoCaptcha.py
-
-- Lastship Menue Geschwindigkeit verbessert:
-	- string.po Zahlenverweis, durch Klartext ersetzt:
-	   - [trakt.py] 
-	   - [player.py]
-	   - [libtools.py]
-	   - [cache.py]
-	   - [settings.xml]
-	   - [lastship.py]
-	   - [sources.py]
-	   - [settings.xml]
-	   - [episodes.py]
-	   - [movies.py]
-	   - [tvshows.py]
-	   - [trakt.py]
-	   - [serienstream.py]
-	   - [navigator.py]
-   
-- Rechtschreibung aktualisiert:
-   - [captcha9kw.py]
-   - [TwoCaptcha.py] 
-   - [recaptcha_app.py]
+- Add UTF-8 Code  in einigen Dateien
 		</news>
 	</extension>
 </addon>

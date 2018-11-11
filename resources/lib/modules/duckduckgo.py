@@ -44,7 +44,7 @@ def search(titles, year, site, titleRegex):
             's': '0'
         }
 
-        result = client.request(base_url, post=params, headers={'Content-Type': 'application/x-www-form-urlencoded'}, error=True)
+        result = client.request(base_url, post=params, headers={'Content-Type': 'application/x-www-form-urlencoded','Referer':'https://duckduckgo.com/','Origin':'https://duckduckgo.com'}, error=True)
         if cleantitle.get(params['q'].lower()) in cleantitle.get(result.lower()):
             links = dom_parser.parse_dom(result, 'h2', attrs={'class': 'result__title'})
             links = dom_parser.parse_dom(links, 'a')

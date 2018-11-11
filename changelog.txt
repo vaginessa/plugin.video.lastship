@@ -1,118 +1,61 @@
-[B]3.0.2.7~nightly31[/B]
-- settings.xml update
-
-[B]3.0.2.7~nightly30[/B]
-- movies.py doppelten code entfernt
-- settings.xml update
-
-
-[B]3.0.2.7~nightly29[/B]
-- Tabs in settings.xml entfernt
-- Find similary übersetzt 
-
-[B]3.0.2.7~nightly28[/B]
-- Bug fix Tabs entfernt
-
-[B]3.0.2.7~nightly27[/B]
+[B]3.0.2.7[/B]
+- [settings.xml] Update für Kodi18beta5
 - Lizenzen erneuert
+- "Finde ähnliches" Kontexmenü hinzugefügt
 - 24h Verzögerung bevor Episoden Importiert werden und Spezial Episoden:
 	- episodes.py (tv.specials)
 	- tvshows.py  (Kontexmenü "Finde ähnliche)
 	- movies.py  (Kontexmenü "Finde ähnliche)
-	- libtools.py (24hdelay)
-	- settings.xml (24h Verzögerung, Spezial Episoden, Menü neu/übersichtlich angeordnet)
-	
-[B]3.0.2.7~nightly26[/B]
-- [episodes.py] Umstellung auf primär deutsch (außer TVMaze/Kalender da deutsch nicht möglich)
-
-[B]3.0.2.7~nightly25[/B]
-- [navigator, movies, tvshows.py] Kategorie Sprachen entfernt (da nur deutsche Sprache verwendet wird)
-
-[B]3.0.2.7~nightly24[/B]
-
+	- libtools.py (24h Verzögerung vor Episoden Imprtierung)
+- settings.xml (24h Verzögerung, Spezial Episoden, Menü neu/übersichtlich angeordnet)
+- [episodes.py] 
+	- Umstellung auf primär deutsch (außer TVMaze/Kalender da deutsch nicht möglich)
+- [navigator, movies, tvshows.py] 
+	- Kategorie Sprachen entfernt (da nur deutsche Sprache verwendet wird)
 - [cleangenre.py]
-Nicht supportete Sprachen entfernt
-unnötige Unicode-Codierung entfernt
-Genres alphabetisch sortiert (deutsch)
+	- Nicht supportete Sprachen entfernt
+	- unnötige Unicode-Codierung entfernt
+	- Genres alphabetisch sortiert (deutsch)
 - [tvshows und movies.py]
-Genres alphabetisch geordnet
-
-[B]3.0.2.7~nightly23[/B]
-- serienstream wieder default false
-- [episodes.py] Update string.po 
-
-[B]3.0.2.7~nightly22[/B]
-- [movies und tvshows.py] Update SPIO/JK und BPjM
-
-[B]3.0.2.7~nightly21[/B]
+	- Genres alphabetisch geordnet
 - [navigator.py] FSK anstelle Freigabe
 - [tvshows.py] FSK Update
 - [movies.py] FSK Update
 - Fix Emby (No Cache)
-
-[B]3.0.2.7~nightly20[/B]
 - [animeloads] fixx https
-
-[B]3.0.2.7~nightly19[/B]
 - [movies.py] fix "In den Kinos"
-
-[B]3.0.2.7~nightly18[/B]
-- "TV-Kalender" wieder sichtbar und die Übersetzung angepasst
-
-[B]3.0.2.7~nightly17[/B]
 - [player.py] richtige string schreibweise
-
-[B]3.0.2.7~nightly16[/B]
 - Fix Download Context Menü
-- letzte Abhängigkeiten zu strings.po entfernt
-- "TV-Kalender" Menüeintrag unter Serien entfernt
-
-[B]3.0.2.7~nightly15[/B]
-- [navigator.py] Deaktivierung imdbCredentials rückgängig gemacht
-
-[B]3.0.2.7~nightly14[/B]
--- updste settings lvalue auf value
-
-[B]3.0.2.7~nightly13[/B]
+- upadate settings, lvalue auf value
 - [language] string.po komplett entfernt
-
-[B]3.0.2.7~nightly12[/B]
-- [navigator.py] imdbCredentials deaktiviert
-
-[B]3.0.2.7~nightly11[/B]
 - [settings.xml] Einstellung für Sprache entfernt
-- [navigator.py] string.po Zahlenverweis, durch Klartext ersetzt
+- [recaptcha_app.py] Umlaute entfernt
+- [cache.py] Suchverlauf leeren“ aus „Alle Speicher leeren“ entfernt
+- Seriesever Konto entfernt
+- Bereits implementierte Einstellung sichtbar gemacht: "Streamsuche vorzeitig abbrechen" 
+- [downloader.py] DE Übersetzung ergänzt
 
-[B]3.0.2.7~nightly10[/B]
--[recaptcha_app.py] Umlaute entfernt
-- string.po Zahlenverweis, durch Klartext ersetzt:
-  - [episodes.py]
-  - [movies.py]
-  - [tvshows.py]
-  - [trakt.py]
-  - [serienstream.py]
-
-[B]3.0.2.7~nightly9[/B]
 - UTF-8 code (# -*- coding: UTF-8 -*-) hinzugefügt
   - recaptcha_app.py
   - captcha9kw.py
   - TwoCaptcha.py
 
-[B]3.0.2.7~nightly8[/B]
-- [cache.py] Suchverlauf löschen“ aus „Clear all Caches“ entfernt
-- Seriesever Konto entfernt
-- [settings.xml] Begonnen mit Aufhebung der Verknüpfungen zur string.po um den Code leichter lesbar zu machen 
-- Bereits implementierte Einstellung sichtbar gemacht: "Streamsuche vorzeitig abbrechen" 
-- [downloader.py] DE Übersetzung ergänzt
-
-- string.po Zahlenverweis, durch Klartext ersetzt:
-   - [trakt.py] Verweise teilweise entfernt
-   - [player.py]
-   - [libtools.py]
-   - [cache.py]
-   - [settings.xml]
-   - [lastship.py]
-   - [sources.py]
+- Lastship Menü Geschwindigkeit verbessert:
+	- string.po Zahlenverweis, durch Klartext ersetzt:
+	   - [trakt.py] Verweise teilweise entfernt
+	   - [player.py]
+	   - [libtools.py]
+	   - [cache.py]
+	   - [settings.xml]
+	   - [lastship.py]
+	   - [sources.py]
+	   - [settings.xml]
+	   - [episodes.py]
+	   - [movies.py]
+	   - [tvshows.py]
+	   - [trakt.py]
+	   - [serienstream.py]
+	   - [navigator.py]
    
 - Rechtschreibung aktualisiert:
    - [captcha9kw.py]
@@ -135,7 +78,8 @@ Genres alphabetisch geordnet
 - Fix, noch nicht ausgestrahlte Episoden in die Bibliothek aufnehmen
 - Ausgabe der Downloadanzeige optimiert
 - Fix Trakt Fortsetzungspunkt einstellen -> enabled wenn trakt konto eingestellt
-- Fix bookmark settings 
+- Fix bookmark settings
+- Kodi18 Nightly Update Fix (fixzip und updatemanager.py)
 
 [B]3.0.2.4[/B]
   12.10.2018

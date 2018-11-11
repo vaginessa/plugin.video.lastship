@@ -1,3 +1,6 @@
+[B]3.0.2.8~nightly1[/B]
+- [duckduckgo.py] orion header und referer Update
+
 [B]3.0.2.7[/B]
   11.11.2018
 - [settings.xml] Update für Kodi18beta5

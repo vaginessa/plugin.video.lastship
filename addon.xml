@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.lastship" version="3.0.2.7" name="Lastship" provider-name="Lastship">
+<addon id="plugin.video.lastship" version="3.0.2.8~nightly1" name="Lastship" provider-name="Lastship">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0" />
 		<import addon="repository.lastship" version="1.0.2" />
@@ -29,33 +29,7 @@
     			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
 		<news>
-- Finde similary Kontex Menue
-- [settings.xml] 
-	- Update für Kodi18beta5
-	- Menue neu angeordnet
-- Lizenzen erneuert
-- 24h Delay bevor Episoden Importiert werden und Spezial Episoden
-- [episodes.py] 
-	- Umstellung auf only deutsch
-- Kategorie Sprachen entfernt (da nur deutsche Sprache verwendet wird)
-- [cleangenre.py]
-	- Nicht supportete Sprachen entfernt
-	- Unicode-Codierung entfernt
-	- Genres alphabetisch sortiert (deutsch)
-- [tvshows und movies.py]
-	- Genres alphabetisch geordnet
-- FSK Update
-- Fix Emby (No Cache)
-- [animeloads] fixx https
-- Fix In den Kinos
-- Fix Download Context Menue
-- Einstellung für Sprache entfernt
-- Lastship Menue Geschwindigkeit verbessert:
-	- string.po Verweise komplett entfernt
-- Suchverlauf leeren“ aus „Alle Speicher leeren“ entfernt
-- Seriesever Konto entfernt
-- Bereits implementierte Einstellung sichtbar gemacht: Streamsuche vorzeitig abbrechen
-- Add UTF-8 Code  in einigen Dateien
+- [duckduckgo.py] orion header und referer Update
 		</news>
 	</extension>
 </addon>

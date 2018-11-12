@@ -1,3 +1,15 @@
+[B]3.0.2.8~nightly2[/B]
+-Umstellung auf Deutsch:
+	- metacache.py
+	- sources.py
+	- trailer.py
+	- library.py
+	- libtools.py
+- Lizenz Update
+	- episodes.py
+	- movies.py
+	- tvshows.py
+
 [B]3.0.2.8~nightly1[/B]
 - [duckduckgo.py] orion header und referer Update
 

@@ -157,6 +157,7 @@
         <setting id="library.movie" type="folder" label="Filme" default="special://userdata/addon_data/plugin.video.lastship/Movies" />
         <setting id="library.tv" type="folder" label="TV-Serien" default="special://userdata/addon_data/plugin.video.lastship/TVShows" />
         <setting type="text" label="[COLOR blue]Zum Importieren als Medienquelle hinzufügen.[/COLOR]" />
+        <setting id="Ordnerstruktur.auf.Deutsch" type="bool" label="Ordner- und Dateistrukur der Bibliothek auf Deutsch" default="false" />
         <setting type="sep" />
         <setting id="library.service.update" type="bool" label="TV-Serien automatisch aktualisieren" default="true" />
         <setting id="library.service.notification" type="bool" label="Benachrichtigung während des Updates zeigen" default="true" />

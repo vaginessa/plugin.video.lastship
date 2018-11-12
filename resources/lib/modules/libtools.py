@@ -35,6 +35,7 @@ import xbmc
 
 from resources.lib.modules import control
 from resources.lib.modules import cleantitle
+from resources.lib.modules import trakt
 
 class lib_tools:
     @staticmethod
@@ -222,9 +223,12 @@ class libmovies:
             name, title, year, imdb, tmdb = i['name'], i['title'], i['year'], i['imdb'], i['tmdb']
 
             sysname, systitle = urllib.quote_plus(name), urllib.quote_plus(title)
-
-            transtitle = cleantitle.normalize(title.translate(None, '\/:*?"<>|'))
-
+            if control.setting('Ordnerstruktur.auf.Deutsch') != 'false':
+                lang = 'de'
+                germantitle = trakt.getMovieTranslation(imdb, lang)
+                transtitle = cleantitle.normalize(germantitle.translate(None, '\/:*?"<>|'))
+            else:
+                transtitle = cleantitle.normalize(title.translate(None, '\/:*?"<>|'))
             content = '%s?action=play&name=%s&title=%s&year=%s&imdb=%s&tmdb=%s' % (sys.argv[0], sysname, systitle, year, imdb, tmdb)
 
             folder = lib_tools.make_path(self.library_folder, transtitle, year)
@@ -378,8 +382,13 @@ class libtvshows:
 
             episodetitle = urllib.quote_plus(title)
             systitle, syspremiered = urllib.quote_plus(tvshowtitle), urllib.quote_plus(premiered)
-
-            transtitle = cleantitle.normalize(tvshowtitle.translate(None, '\/:*?"<>|'))
+            
+            if control.setting('Ordnerstruktur.auf.Deutsch') != 'false':
+                lang = 'de'
+                germantvshowtitle = trakt.getTVShowTranslation(imdb, lang)
+                transtitle = cleantitle.normalize(germantvshowtitle.translate(None, '\/:*?"<>|'))
+            else:
+                transtitle = cleantitle.normalize(tvshowtitle.translate(None, '\/:*?"<>|'))
 
             content = '%s?action=play&title=%s&year=%s&imdb=%s&tvdb=%s&season=%s&episode=%s&tvshowtitle=%s&date=%s' % (sys.argv[0], episodetitle, year, imdb, tvdb, season, episode, systitle, syspremiered)
 
@@ -404,7 +413,7 @@ class libepisodes:
         self.property = '%s_service_property' % control.addonInfo('name').lower()
 
         self.datetime = (datetime.datetime.utcnow() - datetime.timedelta(hours = 5))
-        if control.setting('library.importdelay') != 'true':
+        if control.setting('library.importdelay') != 'false':
             self.date = (self.datetime - datetime.timedelta(hours = 24)).strftime('%Y%m%d')
         else:
             self.date = (self.datetime - datetime.timedelta(hours = 24)).strftime('%Y%m%d')

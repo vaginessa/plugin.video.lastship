@@ -253,7 +253,7 @@ class libtvshows:
         self.dupe_setting = control.setting('library.check') or 'true'
 
         self.datetime = (datetime.datetime.utcnow() - datetime.timedelta(hours = 5))
-        if control.setting('library.importdelay') != 'true':
+        if control.setting('library.importdelay') != 'false':
             self.date = (self.datetime - datetime.timedelta(hours = 24)).strftime('%Y%m%d')
         else:
             self.date = (self.datetime - datetime.timedelta(hours = 24)).strftime('%Y%m%d')

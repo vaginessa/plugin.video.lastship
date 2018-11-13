@@ -1,3 +1,9 @@
+[B]3.0.2.8~nightly3[/B]
+
+- Option für deutsche Datei- und Ordnerstruktur:
+- settings.xml
+- libtools.py
+
 [B]3.0.2.8~nightly2[/B]
 -Umstellung auf Deutsch:
 	- metacache.py

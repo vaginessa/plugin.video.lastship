@@ -178,6 +178,7 @@
         <setting id="tv.download.path" type="folder" label="TV-Serien" enable="!eq(-3,false)" default="" />
         <setting type="text" label="[COLOR blue]Herunterladen ist standardmäßig deaktiviert.[/COLOR]" />
         <setting type="text" label="[COLOR blue]Bitte geben sie Ihre Ordnerpfade an, um sie zu aktivieren.[/COLOR]" />
+        <setting id="Download.auf.Deutsch" type="bool" label="Benennung der Filmdateien und Ordner auf Deutsch" default="false" />
     </category>
     <category label="Untertitel">
         <setting id="subtitles" type="bool" label="Untertitel aktivieren" default="false" />

@@ -38,6 +38,7 @@ def download(name, image, url):
     if url == None: return
 
     from resources.lib.modules import control
+    from resources.lib.modules import trakt
 
     try: headers = dict(urlparse.parse_qsl(url.rsplit('|', 1)[1]))
     except: headers = dict('')
@@ -45,9 +46,41 @@ def download(name, image, url):
     url = url.split('|')[0]
 
     content = re.compile('(.+?)\sS(\d*)E\d*$').findall(name)
-    transname = name.translate(None, '\/:*?"<>|').strip('.')
+    
+    if control.setting('Download.auf.Deutsch') != 'false':
+        if len(content) == 0:
+            title = name [:-7]
+            transyear = name.replace("(","").replace(")","")
+            year = transyear [-4:]
+            imdb = trakt.SearchMovie(title, year, full=False)[0]
+            imdb = imdb.get('movie', '0')
+            imdb = imdb.get('ids', {}).get('imdb', '0')
+            imdb = 'tt' + re.sub('[^0-9]', '', str(imdb))
+            lang = 'de'
+            germantitle = trakt.getMovieTranslation(imdb, lang)
+            transname = germantitle.translate(None, '\/:*?"<>|').strip('.') + ' ' + '(' + str(year) + ')'
+        else:
+            title = name [:-7]
+            transyear = name.replace("(","").replace(")","")
+            year = transyear [-4:]
+            imdb = trakt.SearchTVShow(title, year, full=False)[0]
+            imdb = imdb.get('show', '0')
+            imdb = imdb.get('ids', {}).get('imdb', '0')
+            imdb = 'tt' + re.sub('[^0-9]', '', str(imdb))
+            lang = 'de'
+            germantitle = trakt.getTVShowTranslation(imdb, lang)
+            #transname = germantitle.translate(None, '\/:*?"<>|').strip('.') ### Warum nicht möglich?
+            transname = name.translate(None, '\/:*?"<>|').strip('.')
+            transtvshowtitle = content[0][0].translate(None, '\/:*?"<>|').strip('.')
+    else:
+        if len(content) == 0:
+            transname = name.translate(None, '\/:*?"<>|').strip('.')
+        else:
+            transname = name.translate(None, '\/:*?"<>|').strip('.')
+            transtvshowtitle = content[0][0].translate(None, '\/:*?"<>|').strip('.')
+            
     levels =['../../../..', '../../..', '../..', '..']
-
+    
     if len(content) == 0:
         dest = control.setting('movie.download.path')
         dest = control.transPath(dest)
@@ -64,7 +97,6 @@ def download(name, image, url):
             try: control.makeFile(os.path.abspath(os.path.join(dest, level)))
             except: pass
         control.makeFile(dest)
-        transtvshowtitle = content[0][0].translate(None, '\/:*?"<>|').strip('.')
         dest = os.path.join(dest, transtvshowtitle)
         control.makeFile(dest)
         dest = os.path.join(dest, 'Season %01d' % int(content[0][1]))
@@ -268,5 +300,3 @@ def doDownload(url, dest, title, image, headers):
 if __name__ == '__main__':
     if 'downloader.py' in sys.argv[0]:
         doDownload(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
-
-

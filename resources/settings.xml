@@ -129,7 +129,7 @@
         <setting type="lsep" label="SerienStream.to" />
         <setting id="serienstream.user" type="text" label="e-Mail" default="" />
         <setting id="serienstream.pass" type="text" label="Passwort" default="" />
-        <setting type="text" label="[COLOR blue]Geschützter Link:.[/COLOR]" />
+        <setting type="text" label="[COLOR blue]Geschützter Link:[/COLOR]" />
         <setting type="text" label="[COLOR blue]Diese Meldung kann trotz eingetragener Kontodaten erfolgen.[/COLOR]" />
         <setting type="text" label="[COLOR blue]Ursache kann das schnelle Abrufen mehrerer Streams von s.to sein.[/COLOR]" />
         <setting type="text" label="[COLOR blue]Die Sperre verschwindet nach einiger Zeit von selbst.[/COLOR]" />

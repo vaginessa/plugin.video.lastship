@@ -1,5 +1,12 @@
-[B]3.0.2.8~nightly3[/B]
+[B]3.0.2.8~nightly4[/B]
+- Update navigator.py
+- settings.xml
+- downloader.py (Filme und Ordner werden beim Download in Deutsch angelegt)
+	Egal ob die Option aktiviert oder deaktiviert ist werden Serien vorerst in Englisch benannt
+	Downloadanzeige gibt vorerst bei Filmen und Serien den englischen Namen aus
+- Update serienstream (Anzeigetext geändert, bei nicht eingetragenem Konto bzw. Recpatcha)
 
+[B]3.0.2.8~nightly3[/B]
 - Option für deutsche Datei- und Ordnerstruktur:
 - settings.xml
 - libtools.py

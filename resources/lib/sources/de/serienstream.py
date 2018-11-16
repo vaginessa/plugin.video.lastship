@@ -120,7 +120,7 @@ class source:
                 if self.base_link not in res:
                     url = res
                 else:
-                    control.infoDialog("Geschützter Link. Bitte Accountdaten in den Einstellungen eintragen", sound=True, icon='WARNING')
+                    control.infoDialog("Geschützter Link: Erklärung unter Werkzeuge/Allgemein/Konten", sound=True, icon='WARNING')
             except:
                 return
 

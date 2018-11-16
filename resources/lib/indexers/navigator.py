@@ -249,7 +249,7 @@ class navigator:
         self.endDirectory()
 
     def tools(self):
-        self.addDirectoryItem("[B]EINSTELLUNGEN[/B]: Allgemein", 'openSettings', 'tools.png', 'DefaultAddonProgram.png')
+        self.addDirectoryItem("[B]EINSTELLUNGEN[/B]", 'openSettings', 'tools.png', 'DefaultAddonProgram.png')
         self.addDirectoryItem("[B]LASTSHIP[/B]: Bibliothek", 'libraryNavigator', 'tools.png', 'DefaultAddonProgram.png')
         self.addDirectoryItem("[B]LASTSHIP[/B]: Anzeige-Typen", 'viewsNavigator', 'tools.png', 'DefaultAddonProgram.png')
         if control.setting('FaultLogger.enabled') == 'true':

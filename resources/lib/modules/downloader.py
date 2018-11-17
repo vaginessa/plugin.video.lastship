@@ -45,10 +45,10 @@ def download(name, image, url):
 
     url = url.split('|')[0]
 
-    content = re.compile('(.+?)\sS(\d*)E\d*$').findall(name)
+    sorter = re.compile('(.+?)\sS(\d*)E\d*$').findall(name)
     
-    if control.setting('Download.auf.Deutsch') != 'false':
-        if len(content) == 0:
+    if control.setting('Download.auf.Deutsch') != 'false': #Option für Benennung auf Deutsch EIN
+        if len(sorter) == 0: #Filme
             title = name [:-7]
             transyear = name.replace("(","").replace(")","")
             year = transyear [-4:]
@@ -59,53 +59,83 @@ def download(name, image, url):
             lang = 'de'
             germantitle = trakt.getMovieTranslation(imdb, lang)
             transname = germantitle.translate(None, '\/:*?"<>|').strip('.') + ' ' + '(' + str(year) + ')'
-        else:
+            name = transname
+            levels =['../../../..', '../../..', '../..', '..']
+            dest = control.setting('movie.download.path')
+            dest = control.transPath(dest)
+            for level in levels:
+                try: control.makeFile(os.path.abspath(os.path.join(dest, level)))
+                except: pass
+            control.makeFile(dest)
+            dest = os.path.join(dest, transname)
+            control.makeFile(dest)
+            ext = os.path.splitext(urlparse.urlparse(url).path)[1][1:]
+            if not ext in ['mp4', 'mkv', 'flv', 'avi', 'mpg']: ext = 'mp4'
+            dest = os.path.join(dest, transname + '.' + ext)
+        else: #Serien
             title = name [:-7]
             transyear = name.replace("(","").replace(")","")
-            year = transyear [-4:]
+            year = transyear [-4:] #dirty year.... but working)
+            episode = name [-6:]
             imdb = trakt.SearchTVShow(title, year, full=False)[0]
             imdb = imdb.get('show', '0')
             imdb = imdb.get('ids', {}).get('imdb', '0')
             imdb = 'tt' + re.sub('[^0-9]', '', str(imdb))
             lang = 'de'
             germantitle = trakt.getTVShowTranslation(imdb, lang)
-            #transname = germantitle.translate(None, '\/:*?"<>|').strip('.') ### Warum nicht möglich?
-            transname = name.translate(None, '\/:*?"<>|').strip('.')
+            transname = germantitle.translate(None, '\/:*?"<>|').strip('.')
+            content = re.compile('(.+?)\sS(\d*)E\d*$').findall(name)
             transtvshowtitle = content[0][0].translate(None, '\/:*?"<>|').strip('.')
-    else:
-        if len(content) == 0:
+            name = transname
+            levels =['../../../..', '../../..', '../..', '..']
+            dest = control.setting('tv.download.path')
+            dest = control.transPath(dest)
+            for level in levels:
+                try: control.makeFile(os.path.abspath(os.path.join(dest, level)))
+                except: pass
+            control.makeFile(dest)
+            dest = os.path.join(dest, transname)
+            control.makeFile(dest)
+            ext = os.path.splitext(urlparse.urlparse(url).path)[1][1:]
+            if not ext in ['mp4', 'mkv', 'flv', 'avi', 'mpg']: ext = 'mp4'
+            dest = os.path.join(dest, 'Season %01d' % int(content[0][1]))
+            control.makeFile(dest)
+            dest = os.path.join(dest, transname + ' ' + episode + '.' + ext)
+    else: #Option für Benennung auf Deutsch AUS
+        if len(sorter) == 0: #Filme
             transname = name.translate(None, '\/:*?"<>|').strip('.')
-        else:
+            levels =['../../../..', '../../..', '../..', '..']
+            dest = control.setting('movie.download.path')
+            dest = control.transPath(dest)
+            for level in levels:
+                try: control.makeFile(os.path.abspath(os.path.join(dest, level)))
+                except: pass
+            control.makeFile(dest)
+            dest = os.path.join(dest, transname)
+            control.makeFile(dest)
+            ext = os.path.splitext(urlparse.urlparse(url).path)[1][1:]
+            if not ext in ['mp4', 'mkv', 'flv', 'avi', 'mpg']: ext = 'mp4'
+            dest = os.path.join(dest, transname + '.' + ext)
+        else: #Serien
             transname = name.translate(None, '\/:*?"<>|').strip('.')
+            content = re.compile('(.+?)\sS(\d*)E\d*$').findall(name)
             transtvshowtitle = content[0][0].translate(None, '\/:*?"<>|').strip('.')
+            name = transname
+            levels =['../../../..', '../../..', '../..', '..']
+            dest = control.setting('tv.download.path')
+            dest = control.transPath(dest)
+            for level in levels:
+                try: control.makeFile(os.path.abspath(os.path.join(dest, level)))
+                except: pass
+            control.makeFile(dest)
+            dest = os.path.join(dest, transtvshowtitle)
+            control.makeFile(dest)
+            dest = os.path.join(dest, 'Season %01d' % int(content[0][1]))
+            control.makeFile(dest)
+            ext = os.path.splitext(urlparse.urlparse(url).path)[1][1:]
+            if not ext in ['mp4', 'mkv', 'flv', 'avi', 'mpg']: ext = 'mp4'
+            dest = os.path.join(dest, transname + '.' + ext)
             
-    levels =['../../../..', '../../..', '../..', '..']
-    
-    if len(content) == 0:
-        dest = control.setting('movie.download.path')
-        dest = control.transPath(dest)
-        for level in levels:
-            try: control.makeFile(os.path.abspath(os.path.join(dest, level)))
-            except: pass
-        control.makeFile(dest)
-        dest = os.path.join(dest, transname)
-        control.makeFile(dest)
-    else:
-        dest = control.setting('tv.download.path')
-        dest = control.transPath(dest)
-        for level in levels:
-            try: control.makeFile(os.path.abspath(os.path.join(dest, level)))
-            except: pass
-        control.makeFile(dest)
-        dest = os.path.join(dest, transtvshowtitle)
-        control.makeFile(dest)
-        dest = os.path.join(dest, 'Season %01d' % int(content[0][1]))
-        control.makeFile(dest)
-
-    ext = os.path.splitext(urlparse.urlparse(url).path)[1][1:]
-    if not ext in ['mp4', 'mkv', 'flv', 'avi', 'mpg']: ext = 'mp4'
-    dest = os.path.join(dest, transname + '.' + ext)
-
     sysheaders = urllib.quote_plus(json.dumps(headers))
 
     sysurl = urllib.quote_plus(url)

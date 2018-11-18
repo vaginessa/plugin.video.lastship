@@ -1,3 +1,11 @@
+[B]3.0.2.8~nightly5[/B]
+- [updatemanager.py] Lizenz Update
+- Update downloader.py und settings.xml:
+	- Benennung der Downloads (Dateien und Ordner) in Deutsch ist nun vollständig für Serien und Filme möglich 
+	  (inkl. Downloadanzeige)
+	  Code übersichtlicher gestaltet (downloader.py, settings.xml)
+- Fake-Genre Superhelden hinzugefügt (movies.py, tvshows.py, cleangenre.py)
+
 [B]3.0.2.8~nightly4[/B]
 - Update navigator.py
 - settings.xml

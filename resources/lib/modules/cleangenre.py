@@ -50,6 +50,7 @@ def lang(i, lang):
         i = i.replace('Science Fiction', 'Science-Fiction')
         i = i.replace('Sci-Fi', 'Science-Fiction')
         i = i.replace('Sport', 'Sport')
+        i = i.replace('Superhero', 'Superhelden')
         i = i.replace('Talk-Show', 'Talk-Show')
         i = i.replace('Thriller', 'Thriller')
         i = i.replace('Western', 'Western')

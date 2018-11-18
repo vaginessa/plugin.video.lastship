@@ -76,7 +76,7 @@ def download(name, image, url):
             title = name [:-7]
             transyear = name.replace("(","").replace(")","")
             year = transyear [-4:] #dirty year.... but working)
-            episode = name [-6:]
+            episode = name.rsplit(' ', 1)
             imdb = trakt.SearchTVShow(title, year, full=False)[0]
             imdb = imdb.get('show', '0')
             imdb = imdb.get('ids', {}).get('imdb', '0')

@@ -69,12 +69,13 @@ class movies:
         self.fanart_tv_level_link = 'http://webservice.fanart.tv/v3/level'
         self.tm_art_link = 'http://api.themoviedb.org/3/movie/%s/images?api_key=%s&language=en-US&include_image_language=en,%s,null' % ('%s', self.tm_user, self.lang)
         self.tm_img_link = 'https://image.tmdb.org/t/p/w%s%s'
-
+        
+        self.clear_link = '%s'
         self.persons_link = 'http://www.imdb.com/search/name?count=100&name='
         self.personlist_link = 'http://www.imdb.com/search/name?count=100&gender=male,female'
         self.person_link = 'http://www.imdb.com/search/title?title_type=movie,short,tvMovie&production_status=released&role=%s&sort=year,desc&count=40&start=1'
         self.keyword_link = 'https://www.imdb.com/search/title?keywords=%s&title_type=movie,short,tvMovie&adult=include'
-        self.oscars_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&production_status=released&groups=oscar_best_picture_winners&sort=year,desc&count=40&start=1'
+        self.award_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&groups=%s&adult=include'
         self.theaters_link = 'http://www.imdb.com/search/title?release_date=date[365],date[0]&num_votes=1000,&groups=now-playing-us&adult=include'
         self.year_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&num_votes=100,&production_status=released&year=%s,%s&sort=moviemeter,asc&count=40&start=%s'
 
@@ -295,6 +296,38 @@ class movies:
                 'action': 'movies'
             })
 
+        self.addDirectory(self.list)
+        return self.list
+        
+    def award(self):
+        awards = [
+            ('Meistbewertet', self.featured_link, False),
+            ('Populär', self.popular_link, False),
+            ('Bestes Einspielergebnis', self.boxoffice_link, False),
+            ('Aktive Betrachter', self.views_link, False),
+            ('Oskar-Gewinner: Bester Film', 'best_picture_winner', True),
+            ('Oskar-Gewinner: Bester Regisseur', 'best_director_winner', True),
+            ('Oskar-Gewinner', 'oscar_winner', True), 
+            ('Oskar-Nominierung', 'oscar_nominee', True), 
+            ('Emmy-Gewinner', 'emmy_winner', True),
+            ('Emmy-Nominierung', 'emmy_nominee', True),
+            ('Golden-Globe-Gewinner', 'golden_globe_winner', True),
+            ('Golden-Globe-Nominierung', 'golden_globe_nominee', True),
+            ('Goldene-Himbeere-Gewinner', 'razzie_winner', True),
+            ('Goldene-Himbeere-Nominierung', 'razzie_nominee', True),
+            ('imDb Top 250', 'top_250', True),
+            ('imDb Top 1000', 'top_1000', True),
+            ('imDb Bottom 250', 'bottom_250', True),
+            ('imDb Bottom 1000', 'bottom_1000', True)
+            ]
+        for i in awards: self.list.append(
+            {
+                'name': str(i[0]),
+                'url': self.award_link % i[1] if i[2] else self.clear_link % i[1],
+                'image': 'oscar_winners.png',
+                'action': 'movies'
+            })
+            
         self.addDirectory(self.list)
         return self.list
 

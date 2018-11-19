@@ -129,16 +129,12 @@ class navigator:
 
     def movies(self, lite=False):
         self.addDirectoryItem("Genres", 'movieGenres', 'genres.png', 'DefaultMovies.png')
+        self.addDirectoryItem("FSK", 'movieCertificates', 'certificates.png', 'DefaultMovies.png')
+        self.addDirectoryItem("Neue Filme", 'movieWidget', 'latest-movies.png', 'DefaultRecentlyAddedMovies.png')
+        self.addDirectoryItem("In den Kinos", 'movies&url=theaters', 'in-theaters.png', 'DefaultRecentlyAddedMovies.png')
+        self.addDirectoryItem("Auszeichnungen & Co", 'movieAwards', 'oscar-winners.png', 'DefaultMovies.png')
         self.addDirectoryItem("Jahr", 'movieYears', 'years.png', 'DefaultMovies.png')
         self.addDirectoryItem("Personen", 'moviePersons', 'people.png', 'DefaultMovies.png')
-        self.addDirectoryItem("FSK", 'movieCertificates', 'certificates.png', 'DefaultMovies.png')
-        self.addDirectoryItem("Aktive Betrachter", 'movies&url=trending', 'people-watching.png', 'DefaultRecentlyAddedMovies.png')
-        self.addDirectoryItem("Am populärsten", 'movies&url=popular', 'most-popular.png', 'DefaultMovies.png')
-        self.addDirectoryItem("Meist bewertet", 'movies&url=views', 'most-voted.png', 'DefaultMovies.png')
-        self.addDirectoryItem("Bestes Einspielergebnis", 'movies&url=boxoffice', 'box-office.png', 'DefaultMovies.png')
-        self.addDirectoryItem("Oskar-Gewinner", 'movies&url=oscars', 'oscar-winners.png', 'DefaultMovies.png')
-        self.addDirectoryItem("In den Kinos", 'movies&url=theaters', 'in-theaters.png', 'DefaultRecentlyAddedMovies.png')
-        self.addDirectoryItem("Neue Filme", 'movieWidget', 'latest-movies.png', 'DefaultRecentlyAddedMovies.png')
 
         if lite == False:
             if not control.setting('lists.widget') == '0':
@@ -189,17 +185,16 @@ class navigator:
 
     def tvshows(self, lite=False):
         self.addDirectoryItem("Genres", 'tvGenres', 'genres.png', 'DefaultTVShows.png')
-        self.addDirectoryItem("TV-Sender", 'tvNetworks', 'networks.png', 'DefaultTVShows.png')
         self.addDirectoryItem("FSK", 'tvCertificates', 'certificates.png', 'DefaultTVShows.png')
-        self.addDirectoryItem("Aktive Betrachter", 'tvshows&url=trending', 'people-watching.png', 'DefaultRecentlyAddedEpisodes.png')
-        self.addDirectoryItem("Am populärsten", 'tvshows&url=popular', 'most-popular.png', 'DefaultTVShows.png')
-        self.addDirectoryItem("Am besten bewertet", 'tvshows&url=rating', 'highly-rated.png', 'DefaultTVShows.png')
-        self.addDirectoryItem("Meist bewertet", 'tvshows&url=views', 'most-voted.png', 'DefaultTVShows.png')
-        self.addDirectoryItem("Heute auf Sendung", 'tvshows&url=airing', 'airing-today.png', 'DefaultTVShows.png')
-        # self.addDirectoryItem("Wiederkehrende Serien", 'tvshows&url=active', 'returning-tvshows.png', 'DefaultTVShows.png')
         self.addDirectoryItem("Neue TV-Serien", 'tvshows&url=premiere', 'new-tvshows.png', 'DefaultTVShows.png')
-        self.addDirectoryItem("Neue Episoden", 'calendar&url=added', 'latest-episodes.png', 'DefaultRecentlyAddedEpisodes.png',
-                              queue=True)
+        self.addDirectoryItem("Neue Episoden", 'calendar&url=added', 'latest-episodes.png', 'DefaultRecentlyAddedEpisodes.png', queue=True)
+        self.addDirectoryItem("TV-Sender", 'tvNetworks', 'networks.png', 'DefaultTVShows.png')
+        self.addDirectoryItem("Auszeichnungen & Co", 'tvAwards', 'oscar-winners.png', 'DefaultTVShows.png')
+#         self.addDirectoryItem("Aktive Betrachter", 'tvshows&url=trending', 'people-watching.png', 'DefaultRecentlyAddedEpisodes.png')
+#         self.addDirectoryItem("Am populärsten", 'tvshows&url=popular', 'most-popular.png', 'DefaultTVShows.png')
+#         self.addDirectoryItem("Am besten bewertet", 'tvshows&url=rating', 'highly-rated.png', 'DefaultTVShows.png')
+#         self.addDirectoryItem("Meist bewertet", 'tvshows&url=views', 'most-voted.png', 'DefaultTVShows.png')
+        self.addDirectoryItem("Heute auf Sendung", 'tvshows&url=airing', 'airing-today.png', 'DefaultTVShows.png')
         self.addDirectoryItem("TV-Kalender", 'calendars', 'calendar.png', 'DefaultRecentlyAddedEpisodes.png')
 
         if lite == False:

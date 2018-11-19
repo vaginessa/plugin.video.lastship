@@ -213,6 +213,10 @@ elif action == 'movieCertificates':
     from resources.lib.indexers import movies
     movies.movies().certifications()
 
+elif action == 'movieAwards':
+    from resources.lib.indexers import movies
+    movies.movies().award()
+
 elif action == 'movieYears':
     from resources.lib.indexers import movies
     movies.movies().years()
@@ -268,6 +272,10 @@ elif action == 'tvLanguages':
 elif action == 'tvCertificates':
     from resources.lib.indexers import tvshows
     tvshows.tvshows().certifications()
+
+elif action == 'tvAwards':
+    from resources.lib.indexers import tvshows
+    tvshows.tvshows().award()
 
 elif action == 'tvPersons':
     from resources.lib.indexers import tvshows

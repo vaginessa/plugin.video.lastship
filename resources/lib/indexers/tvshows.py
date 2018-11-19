@@ -71,12 +71,13 @@ class tvshows:
         self.tvdb_by_query = 'http://thetvdb.com/api/GetSeries.php?seriesname=%s'
         self.tvdb_image = 'http://thetvdb.com/banners/'
 
+        self.clear_link= '%s'
+        self.award_link = 'https://www.imdb.com/search/title?title_type=tv_series,tv_miniseries&groups=%s&adult=include'
         self.persons_link = 'http://www.imdb.com/search/name?count=100&name='
         self.personlist_link = 'http://www.imdb.com/search/name?count=100&gender=male,female'
         self.popular_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=100,&release_date=,date[0]&sort=moviemeter,asc&count=40&start=1'
         self.airing_link = 'http://www.imdb.com/search/title?title_type=tv_episode&release_date=date[1],date[0]&sort=moviemeter,asc&count=40&start=1'
         self.active_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=10,&production_status=active&sort=moviemeter,asc&count=40&start=1'
-        #self.premiere_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&languages=en&num_votes=10,&release_date=date[60],date[0]&sort=moviemeter,asc&count=40&start=1'
         self.premiere_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&languages=en&num_votes=10,&release_date=date[60],date[0]&sort=release_date,desc&count=40&start=1'
         self.rating_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=5000,&release_date=,date[0]&sort=user_rating,desc&count=40&start=1'
         self.views_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=100,&release_date=,date[0]&sort=num_votes,desc&count=40&start=1'
@@ -84,8 +85,8 @@ class tvshows:
         self.genre_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&release_date=,date[0]&genres=%s&sort=moviemeter,asc&count=40&start=1'
         self.keyword_link = 'https://www.imdb.com/search/title?keywords=%s&title_type=tv_series,mini_series&adult=include'
         self.certification_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&certificates=DE:%s&moviemeter=100,&adult=include'
+        
         self.trending_link = 'http://api.trakt.tv/shows/trending?limit=40&page=1'
-
         self.traktlists_link = 'http://api.trakt.tv/users/me/lists'
         self.traktlikedlists_link = 'http://api.trakt.tv/users/likes/lists?limit=1000000'
         self.traktlist_link = 'http://api.trakt.tv/users/%s/lists/%s/items'
@@ -267,6 +268,27 @@ class tvshows:
                 'action': 'tvshows'
             })
 
+        self.addDirectory(self.list)
+        return self.list
+        
+    def award(self):
+        awards = [
+            ('Bestbewertet', self.rating_link, False),
+            ('Populär', self.popular_link, False),
+            ('Aktive Betrachter', self.views_link, False),
+            ('imDb Top 250', 'top_250', True),
+            ('imDb Top 1000', 'top_1000', True),
+            ('imDb Bottom 250', 'bottom_250', True),
+            ('imDb Bottom 1000', 'bottom_1000', True)
+            ]
+        for i in awards: self.list.append(
+            {
+                'name': str(i[0]),
+                'url': self.award_link % i[1] if i[2] else self.clear_link % i[1],
+                'image': 'oscar_winners.png',
+                'action': 'tvshows'
+            })
+            
         self.addDirectory(self.list)
         return self.list
 

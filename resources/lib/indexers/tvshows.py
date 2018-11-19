@@ -72,7 +72,7 @@ class tvshows:
         self.tvdb_image = 'http://thetvdb.com/banners/'
 
         self.clear_link= '%s'
-        self.award_link = 'https://www.imdb.com/search/title?title_type=tv_series,tv_miniseries&groups=%s&adult=include'
+        self.award_link = 'http://www.imdb.com/search/title?title_type=tv_series,tv_miniseries&groups=%s&adult=include'
         self.persons_link = 'http://www.imdb.com/search/name?count=100&name='
         self.personlist_link = 'http://www.imdb.com/search/name?count=100&gender=male,female'
         self.popular_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=100,&release_date=,date[0]&sort=moviemeter,asc&count=40&start=1'
@@ -83,7 +83,7 @@ class tvshows:
         self.views_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=100,&release_date=,date[0]&sort=num_votes,desc&count=40&start=1'
         self.person_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&release_date=,date[0]&role=%s&sort=year,desc&count=40&start=1'
         self.genre_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&release_date=,date[0]&genres=%s&sort=moviemeter,asc&count=40&start=1'
-        self.keyword_link = 'https://www.imdb.com/search/title?keywords=%s&title_type=tv_series,mini_series&adult=include'
+        self.keyword_link = 'http://www.imdb.com/search/title?keywords=%s&title_type=tv_series,mini_series&adult=include'
         self.certification_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&certificates=DE:%s&moviemeter=100,&adult=include'
         
         self.trending_link = 'http://api.trakt.tv/shows/trending?limit=40&page=1'

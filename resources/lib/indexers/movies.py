@@ -68,13 +68,13 @@ class movies:
         self.fanart_tv_art_link = 'http://webservice.fanart.tv/v3/movies/%s'
         self.fanart_tv_level_link = 'http://webservice.fanart.tv/v3/level'
         self.tm_art_link = 'http://api.themoviedb.org/3/movie/%s/images?api_key=%s&language=en-US&include_image_language=en,%s,null' % ('%s', self.tm_user, self.lang)
-        self.tm_img_link = 'https://image.tmdb.org/t/p/w%s%s'
+        self.tm_img_link = 'http://image.tmdb.org/t/p/w%s%s'
         
         self.clear_link = '%s'
         self.persons_link = 'http://www.imdb.com/search/name?count=100&name='
         self.personlist_link = 'http://www.imdb.com/search/name?count=100&gender=male,female'
         self.person_link = 'http://www.imdb.com/search/title?title_type=movie,short,tvMovie&production_status=released&role=%s&sort=year,desc&count=40&start=1'
-        self.keyword_link = 'https://www.imdb.com/search/title?keywords=%s&title_type=movie,short,tvMovie&adult=include'
+        self.keyword_link = 'http://www.imdb.com/search/title?keywords=%s&title_type=movie,short,tvMovie&adult=include'
         self.award_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&groups=%s&adult=include'
         self.theaters_link = 'http://www.imdb.com/search/title?release_date=date[365],date[0]&num_votes=1000,&groups=now-playing-us&adult=include'
         self.year_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&num_votes=100,&production_status=released&year=%s,%s&sort=moviemeter,asc&count=40&start=%s'

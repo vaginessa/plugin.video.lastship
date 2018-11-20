@@ -1,3 +1,12 @@
+[B]3.0.2.8~nightly6[/B]
+- Übersicht in movies.py, tvshows.py, navigator.py umsortiert
+- Mehr Auszeichnungen und Bewertungen unter einen Punkt vereint um die Übersichtlichkeit zu steigern
+- Bewertungen/Auszeichnungen ergänzt
+- Filter by year für Genres, FSK, Auszeichnungen möglich. Allerdings nicht für populär, boxoffice, aktive Betrachter und   
+  besten bewertet (hier muss jemand dran der Python kann)
+- https einheitlich (in bearbeiteten Dateien) zu http geändert
+- Cleanup von auskommentierten Funktionen und weitere Kleinigkeiten
+
 [B]3.0.2.8~nightly5[/B]
 - [updatemanager.py] Lizenz Update
 - Update downloader.py und settings.xml:

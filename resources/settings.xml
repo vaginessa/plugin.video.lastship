@@ -24,7 +24,7 @@
         <setting id="movies.extrainfo" type="enum" label="Zusatzinfos für Filme holen" values="AUS|TMDB|TMDB und TRAKT.TV" default="1" visible="false" />
         <setting id="hidecinema" type="bool" label="Nur Filme älter als 90 Tage anzeigen" default="false" />
         <setting id="filter.movies.byyear" type="bool" label="Filme nach Jahrgang filtern" default="false" />
-        <setting type="text" label="[COLOR blue]Inkl. Oscar-Sieger, Beste Einspieler, Genres und am populärsten[/COLOR]" visible="eq(-1,true)" />
+        <setting type="text" label="[COLOR blue]Inkl. Genres, FSK und Auszeichnungen[/COLOR]" visible="eq(-1,true)" />
         <setting id="movies.byyear.from" type="slider" label="Von" default="1980" range="1900,2017" option="int" visible="eq(-2,true)" />
         <setting id="movies.byyear.to" type="slider" label="Bis" default="2017" range="1900,2018" option="int" visible="eq(-3,true)" />
         <setting type="lsep" label="Trakt-Bibliothek und Automatische Synchronisierung" />

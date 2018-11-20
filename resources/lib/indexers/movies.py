@@ -81,11 +81,11 @@ class movies:
 
         if self.hidecinema == 'true':
                 delay = (date.today() - timedelta(90))
-                start_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&release_date=,%s' % (delay)
+                start_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&release_date=,%s' % (delay)
                 self.popular_link = start_link + '&num_votes=1000,&production_status=released&groups=top_1000&sort=moviemeter,asc&count=40&start=1'
                 self.views_link =  start_link + '&num_votes=1000,&production_status=released&sort=num_votes,desc&count=40&start=1'
                 self.featured_link = start_link + '&num_votes=1000,&production_status=released&sort=moviemeter,asc&count=40&start=1'
-                self.genre_link = start_link + ',documentary&num_votes=100,&genres=%s&sort=moviemeter,asc&count=40&start=1'
+                self.genre_link = start_link + '&num_votes=100,&genres=%s&sort=moviemeter,asc&count=40&start=1'
                 self.certification_link = start_link + '&certificates=DE:%s&moviemeter=100,&adult=include'
                 self.boxoffice_link = start_link + '&production_status=released&sort=boxoffice_gross_us,desc&count=40&start=1'
         else:
@@ -96,14 +96,18 @@ class movies:
             self.certification_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&certificates=DE:%s&moviemeter=100,&adult=include'
             self.boxoffice_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&production_status=released&sort=boxoffice_gross_us,desc&count=40&start=1'
 
-		# Filter Movies By Year
         if self.filterbyyear == 'true':
             from_year = control.setting('movies.byyear.from')
             to_year = control.setting('movies.byyear.to')
+            self.clear_link = ('%s', str(from_year), str(to_year))
             self.genre_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&num_votes=100,&genres=%s&year=%s,%s&sort=moviemeter,asc&count=40&start=1' % ('%s', str(from_year), str(to_year))
-            self.oscars_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&production_status=released&groups=oscar_best_picture_winners&year=%s,%s&sort=year,desc&count=40&start=1' % (str(from_year), str(to_year))
+            self.award_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&groups=%s&year=%s,%s&sort=year,desc&adult=include' % ('%s', str(from_year), str(to_year))
             self.boxoffice_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&production_status=released&sort=boxoffice_gross_us,desc&year=%s,%s&count=40&start=1' % (str(from_year), str(to_year))
             self.popular_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&num_votes=1000,&production_status=released&groups=top_1000&year=%s,%s&sort=moviemeter,asc&count=40&start=1' % (str(from_year), str(to_year))
+            self.genre_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&num_votes=100,&release_date=,date[0]&genres=%s&year=%s,%s&sort=moviemeter,asc&count=40&start=1' % ('%s', str(from_year), str(to_year))
+            self.certification_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&certificates=DE:%s&moviemeter=100,&year=%s,%s&adult=include' % ('%s', str(from_year), str(to_year))
+            self.keyword_link = 'http://www.imdb.com/search/title?keywords=%s&title_type=movie,short,tvMovie&year=%s,%s&adult=include' % ('%s', str(from_year), str(to_year))
+
 
         self.added_link  = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&languages=en&num_votes=500,&production_status=released&release_date=%s,%s&sort=release_date,desc&count=20&start=1' % (self.year_date, self.today_date)
         self.trending_link = 'http://api.trakt.tv/movies/trending?limit=40&page=1'
@@ -300,7 +304,30 @@ class movies:
         return self.list
         
     def award(self):
-        awards = [
+        if self.filterbyyear == 'true':
+            awards = [
+            #Folgende 4 noch nicht mögich. Darf gefixt werden.
+            #('Meistbewertet', self.featured_link, False),
+            #('Populär', self.popular_link, False),
+            #('Bestes Einspielergebnis', self.boxoffice_link, False),
+            #('Aktive Betrachter', self.views_link, False),
+            ('Oskar-Gewinner: Bester Film', 'best_picture_winner', True),
+            ('Oskar-Gewinner: Bester Regisseur', 'best_director_winner', True),
+            ('Oskar-Gewinner', 'oscar_winner', True), 
+            ('Oskar-Nominierung', 'oscar_nominee', True), 
+            ('Emmy-Gewinner', 'emmy_winner', True),
+            ('Emmy-Nominierung', 'emmy_nominee', True),
+            ('Golden-Globe-Gewinner', 'golden_globe_winner', True),
+            ('Golden-Globe-Nominierung', 'golden_globe_nominee', True),
+            ('Goldene-Himbeere-Gewinner', 'razzie_winner', True),
+            ('Goldene-Himbeere-Nominierung', 'razzie_nominee', True),
+            ('imDb Top 250', 'top_250', True),
+            ('imDb Top 1000', 'top_1000', True),
+            ('imDb Bottom 250', 'bottom_250', True),
+            ('imDb Bottom 1000', 'bottom_1000', True)
+            ]
+        else:
+            awards = [
             ('Meistbewertet', self.featured_link, False),
             ('Populär', self.popular_link, False),
             ('Bestes Einspielergebnis', self.boxoffice_link, False),
@@ -320,6 +347,7 @@ class movies:
             ('imDb Bottom 250', 'bottom_250', True),
             ('imDb Bottom 1000', 'bottom_1000', True)
             ]
+
         for i in awards: self.list.append(
             {
                 'name': str(i[0]),

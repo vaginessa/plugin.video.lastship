@@ -273,18 +273,18 @@ class tvshows:
         
     def award(self):
         awards = [
-            ('Bestbewertet', self.rating_link, False),
-            ('Aktive Betrachter', self.views_link, False),
-            ('imDb Top 250', 'top_250', True),
-            ('imDb Top 1000', 'top_1000', True),
-            ('imDb Bottom 250', 'bottom_250', True),
-            ('imDb Bottom 1000', 'bottom_1000', True)
+            ('Bestbewertet', self.rating_link, False, 'highly-rated.png'),
+            ('Aktive Betrachter', self.views_link, False, 'people-watching.png'),
+            ('imDb Top 250', 'top_250', True, 'most-popular.png'),
+            ('imDb Top 1000', 'top_1000', True, 'most-popular.png'),
+            ('imDb Bottom 250', 'bottom_250', True, 'most-popular.png'),
+            ('imDb Bottom 1000', 'bottom_1000', True, 'most-popular.png')
             ]
         for i in awards: self.list.append(
             {
                 'name': str(i[0]),
                 'url': self.award_link % i[1] if i[2] else self.clear_link % i[1],
-                'image': 'oscar_winners.png',
+                'image': i[3],
                 'action': 'tvshows'
             })
             

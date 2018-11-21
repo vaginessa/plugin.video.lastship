@@ -306,51 +306,51 @@ class movies:
     def award(self):
         if self.filterbyyear == 'true':
             awards = [
-            #Folgende 3 noch nicht mögich. Darf gefixt werden.
-            #('Meistbewertet', self.featured_link, False),
-            #('Bestes Einspielergebnis', self.boxoffice_link, False),
-            #('Aktive Betrachter', self.views_link, False),
-            ('Oskar-Gewinner: Bester Film', 'best_picture_winner', True),
-            ('Oskar-Gewinner: Bester Regisseur', 'best_director_winner', True),
-            ('Oskar-Gewinner', 'oscar_winner', True), 
-            ('Oskar-Nominierung', 'oscar_nominee', True), 
-            ('Emmy-Gewinner', 'emmy_winner', True),
-            ('Emmy-Nominierung', 'emmy_nominee', True),
-            ('Golden-Globe-Gewinner', 'golden_globe_winner', True),
-            ('Golden-Globe-Nominierung', 'golden_globe_nominee', True),
-            ('Goldene-Himbeere-Gewinner', 'razzie_winner', True),
-            ('Goldene-Himbeere-Nominierung', 'razzie_nominee', True),
-            ('imDb Top 250', 'top_250', True),
-            ('imDb Top 1000', 'top_1000', True),
-            ('imDb Bottom 250', 'bottom_250', True),
-            ('imDb Bottom 1000', 'bottom_1000', True)
+#             Folgende 3 noch nicht anzeigbar.. Vorgesehen ist, da vorher so gewesen, das Boxoffice noch gefiltert wird. Darf gefixt werden.
+#             ('Meistbewertet', self.featured_link, False, 'most-voted.png'),
+#             ('Aktive Betrachter', self.views_link, False, 'people-watching.png'),
+#             ('Bestes Einspielergebnis', self.boxoffice_link, False, 'box-office.png'),
+            ('Oskar-Gewinner: Bester Film', 'best_picture_winner', True, 'oscar-winners.png'),
+            ('Oskar-Gewinner: Bester Regisseur', 'best_director_winner', True, 'oscar-winners.png'),
+            ('Oskar-Gewinner', 'oscar_winner', True, 'oscar-winners.png'),
+            ('Oskar-Nominierung', 'oscar_nominee', True, 'oscar-winners.png'),
+            ('Emmy-Gewinner', 'emmy_winner', True, 'oscar-winners.png'),
+            ('Emmy-Nominierung', 'emmy_nominee', True, 'oscar-winners.png'),
+            ('Golden-Globe-Gewinner', 'golden_globe_winner', True, 'oscar-winners.png'),
+            ('Golden-Globe-Nominierung', 'golden_globe_nominee', True, 'oscar-winners.png'),
+            ('Goldene-Himbeere-Gewinner', 'razzie_winner', True, 'oscar-winners.png'),
+            ('Goldene-Himbeere-Nominierung', 'razzie_nominee', True, 'oscar-winners.png'),
+            ('imDb Top 250', 'top_250', True, 'most-popular.png'),
+            ('imDb Top 1000', 'top_1000', True, 'most-popular.png'),
+            ('imDb Bottom 250', 'bottom_250', True, 'most-popular.png'),
+            ('imDb Bottom 1000', 'bottom_1000', True, 'most-popular.png')
             ]
         else:
             awards = [
-            ('Meistbewertet', self.featured_link, False),
-            ('Bestes Einspielergebnis', self.boxoffice_link, False),
-            ('Aktive Betrachter', self.views_link, False),
-            ('Oskar-Gewinner: Bester Film', 'best_picture_winner', True),
-            ('Oskar-Gewinner: Bester Regisseur', 'best_director_winner', True),
-            ('Oskar-Gewinner', 'oscar_winner', True), 
-            ('Oskar-Nominierung', 'oscar_nominee', True), 
-            ('Emmy-Gewinner', 'emmy_winner', True),
-            ('Emmy-Nominierung', 'emmy_nominee', True),
-            ('Golden-Globe-Gewinner', 'golden_globe_winner', True),
-            ('Golden-Globe-Nominierung', 'golden_globe_nominee', True),
-            ('Goldene-Himbeere-Gewinner', 'razzie_winner', True),
-            ('Goldene-Himbeere-Nominierung', 'razzie_nominee', True),
-            ('imDb Top 250', 'top_250', True),
-            ('imDb Top 1000', 'top_1000', True),
-            ('imDb Bottom 250', 'bottom_250', True),
-            ('imDb Bottom 1000', 'bottom_1000', True)
+            ('Meistbewertet', self.featured_link, False, 'most-voted.png'),
+            ('Aktive Betrachter', self.views_link, False, 'people-watching.png'),
+            ('Bestes Einspielergebnis', self.boxoffice_link, False, 'box-office.png'),
+            ('Oskar-Gewinner: Bester Film', 'best_picture_winner', True, 'oscar-winners.png'),
+            ('Oskar-Gewinner: Bester Regisseur', 'best_director_winner', True, 'oscar-winners.png'),
+            ('Oskar-Gewinner', 'oscar_winner', True, 'oscar-winners.png'), 
+            ('Oskar-Nominierung', 'oscar_nominee', True, 'oscar-winners.png'), 
+            ('Emmy-Gewinner', 'emmy_winner', True, 'oscar-winners.png'),
+            ('Emmy-Nominierung', 'emmy_nominee', True, 'oscar-winners.png'),
+            ('Golden-Globe-Gewinner', 'golden_globe_winner', True, 'oscar-winners.png'),
+            ('Golden-Globe-Nominierung', 'golden_globe_nominee', True, 'oscar-winners.png'),
+            ('Goldene-Himbeere-Gewinner', 'razzie_winner', True, 'oscar-winners.png'),
+            ('Goldene-Himbeere-Nominierung', 'razzie_nominee', True, 'oscar-winners.png'),
+            ('imDb Top 250', 'top_250', True, 'most-popular.png'),
+            ('imDb Top 1000', 'top_1000', True, 'most-popular.png'),
+            ('imDb Bottom 250', 'bottom_250', True, 'most-popular.png'),
+            ('imDb Bottom 1000', 'bottom_1000', True, 'most-popular.png')
             ]
 
         for i in awards: self.list.append(
             {
                 'name': str(i[0]),
                 'url': self.award_link % i[1] if i[2] else self.clear_link % i[1],
-                'image': 'oscar_winners.png',
+                'image': i[3],
                 'action': 'movies'
             })
             

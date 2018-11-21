@@ -306,9 +306,8 @@ class movies:
     def award(self):
         if self.filterbyyear == 'true':
             awards = [
-            #Folgende 4 noch nicht mögich. Darf gefixt werden.
+            #Folgende 3 noch nicht mögich. Darf gefixt werden.
             #('Meistbewertet', self.featured_link, False),
-            #('Populär', self.popular_link, False),
             #('Bestes Einspielergebnis', self.boxoffice_link, False),
             #('Aktive Betrachter', self.views_link, False),
             ('Oskar-Gewinner: Bester Film', 'best_picture_winner', True),
@@ -329,7 +328,6 @@ class movies:
         else:
             awards = [
             ('Meistbewertet', self.featured_link, False),
-            ('Populär', self.popular_link, False),
             ('Bestes Einspielergebnis', self.boxoffice_link, False),
             ('Aktive Betrachter', self.views_link, False),
             ('Oskar-Gewinner: Bester Film', 'best_picture_winner', True),

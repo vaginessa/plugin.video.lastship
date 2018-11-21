@@ -110,7 +110,7 @@
         <setting type="text" label="[COLOR blue]Persönliche API-Keys verkürzen die Antwortzeiten.[/COLOR]" default="" />
         <setting id="fanart.tv.user" type="text" label="API-Key" default="" />
         <setting type="sep" />
-        <setting type="lsep" label="TMDb" />
+        <setting type="lsep" label="TMDB" />
         <setting id="tm.user" type="text" option="hidden" label="API-Key" default="2ab10ff6afda491d22e70604dbdc6442" />
         <setting type="sep" />
         <setting type="lsep" label="Trakt" />
@@ -119,7 +119,7 @@
         <setting id="trakt.token" type="text" visible="false" label="" default="" />
         <setting id="trakt.refresh" type="text" visible="false" label="" default="" />
         <setting type="sep" />
-        <setting type="lsep" label="IMDb" />
+        <setting type="lsep" label="IMDB" />
         <setting id="imdb.user" type="text" label="Benutzer" default="" />
         <setting type="sep" />
         <setting type="lsep" label="Debrid-Service" />

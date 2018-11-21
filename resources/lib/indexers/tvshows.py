@@ -275,10 +275,10 @@ class tvshows:
         awards = [
             ('Bestbewertet', self.rating_link, False, 'highly-rated.png'),
             ('Aktive Betrachter', self.views_link, False, 'people-watching.png'),
-            ('imDb Top 250', 'top_250', True, 'most-popular.png'),
-            ('imDb Top 1000', 'top_1000', True, 'most-popular.png'),
-            ('imDb Bottom 250', 'bottom_250', True, 'most-popular.png'),
-            ('imDb Bottom 1000', 'bottom_1000', True, 'most-popular.png')
+            ('IMDB Top 250', 'top_250', True, 'most-popular.png'),
+            ('IMDB Top 1000', 'top_1000', True, 'most-popular.png'),
+            ('IMDB Bottom 250', 'bottom_250', True, 'most-popular.png'),
+            ('IMDB Bottom 1000', 'bottom_1000', True, 'most-popular.png')
             ]
         for i in awards: self.list.append(
             {

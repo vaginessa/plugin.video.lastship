@@ -99,6 +99,7 @@ class movies:
         if self.filterbyyear == 'true':
             from_year = control.setting('movies.byyear.from')
             to_year = control.setting('movies.byyear.to')
+            self.views_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&year=%s,%s&num_votes=1000,&production_status=released&sort=num_votes,desc&count=40&start=1' % (str(from_year), str(to_year))
             self.genre_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&num_votes=100,&genres=%s&year=%s,%s&sort=moviemeter,asc&count=40&start=1' % ('%s', str(from_year), str(to_year))
             self.award_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&groups=%s&year=%s,%s&sort=year,desc&adult=include' % ('%s', str(from_year), str(to_year))
             self.boxoffice_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&production_status=released&sort=boxoffice_gross_us,desc&year=%s,%s&count=40&start=1' % (str(from_year), str(to_year))

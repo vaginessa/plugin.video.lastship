@@ -307,8 +307,8 @@ class movies:
         if self.filterbyyear == 'true':
             awards = [
 #             Folgende 3 werden nicht gefiltert!
-            ('Meistbewertet', self.featured_link, False, 'most-voted.png'),
-            ('Aktive Betrachter', self.views_link, False, 'people-watching.png'),
+            ('Meistbewertet', self.views_link, False, 'most-voted.png'),
+            ('Aktive Betrachter', self.trending_link, False, 'people-watching.png'),
             ('Bestes Einspielergebnis', self.boxoffice_link, False, 'box-office.png'),
             ('Oskar-Gewinner: Bester Film', 'best_picture_winner', True, 'oscar-winners.png'),
             ('Oskar-Gewinner: Bester Regisseur', 'best_director_winner', True, 'oscar-winners.png'),
@@ -327,8 +327,8 @@ class movies:
             ]
         else:
             awards = [
-            ('Meistbewertet', self.featured_link, False, 'most-voted.png'),
-            ('Aktive Betrachter', self.views_link, False, 'people-watching.png'),
+            ('Meistbewertet', self.views_link, False, 'most-voted.png'),
+            ('Aktive Betrachter', self.trending_link, False, 'people-watching.png'),
             ('Bestes Einspielergebnis', self.boxoffice_link, False, 'box-office.png'),
             ('Oskar-Gewinner: Bester Film', 'best_picture_winner', True, 'oscar-winners.png'),
             ('Oskar-Gewinner: Bester Regisseur', 'best_director_winner', True, 'oscar-winners.png'),

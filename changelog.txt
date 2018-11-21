@@ -1,9 +1,17 @@
+[B]3.0.2.8~nightly7[/B]
+- Populär aus „Auszeichnungen & Co“ gelöscht da identisch zu „IMDB Top 1000“
+  Links bleiben bestehen wegen Movie Widget
+- Aktive Betrachter wird bei Filter by Year nicht gefiltert (wie vorher) und Boxoffice sowie Meistbewertet wird nun auch   
+  gefiltert
+- Icons hinzugefügt
+- Schreibweise zu einer optischen schöneren geändert
+
 [B]3.0.2.8~nightly6[/B]
 - Übersicht in movies.py, tvshows.py, navigator.py umsortiert
 - Mehr Auszeichnungen und Bewertungen unter einen Punkt vereint um die Übersichtlichkeit zu steigern
 - Bewertungen/Auszeichnungen ergänzt
 - Filter by year für Genres, FSK, Auszeichnungen möglich. Allerdings nicht für populär, boxoffice, aktive Betrachter und   
-  besten bewertet (hier muss jemand dran der Python kann)
+  besten bewertet (hier muss jemand dan der besser Python kann)
 - https einheitlich (in bearbeiteten Dateien) zu http geändert
 - Cleanup von auskommentierten Funktionen und weitere Kleinigkeiten
 

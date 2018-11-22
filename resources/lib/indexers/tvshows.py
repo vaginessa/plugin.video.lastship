@@ -273,6 +273,7 @@ class tvshows:
         
     def award(self):
         awards = [
+            ('Populär', self.popular_link, False, 'most-popular.png'),
             ('Bestbewertet', self.rating_link, False, 'highly-rated.png'),
             ('Aktive Betrachter', self.trending_link, False, 'people-watching.png')
 #             ('IMDB Top 250', 'top_250', True, 'most-popular.png'),

@@ -1,3 +1,26 @@
+[B]3.0.2.8~nightly8[/B]
+- movies.py / tvshows.py:
+  Alle IMDB-Links aktualisiert/bereinigt, Moviemeter in Links entfernt da von IMDB nicht mehr unterstützt. Alle IMDB-Links 
+  auf „include=adult“ gesetzt und unnötige Teile entfernt. Nahezu alle Ergebnisse der Kategorien werden jetzt, wie standardmäßig  
+  in IMDB, nach Popularität sortiert
+- tvshows.py:
+  Populär“ wieder hergestellt als Ersatz für IMDB-Top-Listen
+- movies.py:
+  Kategorie „Studios“ hinzugefügt (Filterbar mit „Filter by Years“), Code bereinigt/reduziert
+  tvshows.py: Top/Bottom wird zwar von IMDB angeboten aber liefert auch auf der Website keine Ergebnisse
+  Über Alternativen, die über IMDB realisierbar sind, wird nachgedacht. Funktion somit deaktiviert
+- navigator.py:
+  Punkt „Studios“ hinzugefügt. Icon für „Infos und Updates“ geändert um auch besser mit dem Exuary-Skin von Lastship zum 
+  harmonieren (vorheriges Logo war störend)
+- lastship.py:
+  Anpassung für Kategorie „Studios“
+
+- settings.xml:
+  Anpassung des Hinweises für „Filter by Year“
+
+- Weiteres:
+  Kleinigkeiten wie unnötige Zeichen, kleine Fixes...
+  
 [B]3.0.2.8~nightly7[/B]
 - Populär aus „Auszeichnungen & Co“ gelöscht da identisch zu „IMDB Top 1000“
   Links bleiben bestehen wegen Movie Widget

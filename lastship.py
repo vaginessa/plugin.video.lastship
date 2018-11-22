@@ -217,6 +217,10 @@ elif action == 'movieAwards':
     from resources.lib.indexers import movies
     movies.movies().award()
 
+elif action == 'movieStudios':
+    from resources.lib.indexers import movies
+    movies.movies().studios()
+    
 elif action == 'movieYears':
     from resources.lib.indexers import movies
     movies.movies().years()

@@ -75,16 +75,16 @@ class tvshows:
         self.award_link = 'http://www.imdb.com/search/title?title_type=tv_series,tv_miniseries&groups=%s&adult=include'
         self.persons_link = 'http://www.imdb.com/search/name?count=100&name='
         self.personlist_link = 'http://www.imdb.com/search/name?count=100&gender=male,female'
-        self.popular_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=100,&release_date=,date[0]&sort=moviemeter,asc&count=40&start=1'
-        self.airing_link = 'http://www.imdb.com/search/title?title_type=tv_episode&release_date=date[1],date[0]&sort=moviemeter,asc&count=40&start=1'
-        self.active_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=10,&production_status=active&sort=moviemeter,asc&count=40&start=1'
-        self.premiere_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&languages=en&num_votes=10,&release_date=date[60],date[0]&sort=release_date,desc&count=40&start=1'
-        self.rating_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=5000,&release_date=,date[0]&sort=user_rating,desc&count=40&start=1'
-        self.views_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=100,&release_date=,date[0]&sort=num_votes,desc&count=40&start=1'
-        self.person_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&release_date=,date[0]&role=%s&sort=year,desc&count=40&start=1'
-        self.genre_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&release_date=,date[0]&genres=%s&sort=moviemeter,asc&count=40&start=1'
+        self.popular_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=100,&release_date=,date[0]&adult=include'
+        self.airing_link = 'http://www.imdb.com/search/title?title_type=tv_episode&release_date=date[1],date[0]&adult=include'
+        self.active_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=10,&production_status=active&adult=include'
+        self.premiere_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&languages=en&num_votes=10,&release_date=date[60],date[0]&sort=release_date,desc&adult=include'
+        self.rating_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=5000,&release_date=,date[0]&sort=user_rating,desc&adult=include'
+        self.views_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=100,&release_date=,date[0]&sort=num_votes,desc&adult=include'
+        self.person_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&release_date=,date[0]&role=%s'
+        self.genre_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&release_date=,date[0]&genres=%s&adult=include'
         self.keyword_link = 'http://www.imdb.com/search/title?keywords=%s&title_type=tv_series,mini_series&adult=include'
-        self.certification_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&certificates=DE:%s&moviemeter=100,&adult=include'
+        self.certification_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&certificates=DE:%s&adult=include'
         
         self.trending_link = 'http://api.trakt.tv/shows/trending?limit=40&page=1'
         self.traktlists_link = 'http://api.trakt.tv/users/me/lists'
@@ -274,11 +274,11 @@ class tvshows:
     def award(self):
         awards = [
             ('Bestbewertet', self.rating_link, False, 'highly-rated.png'),
-            ('Aktive Betrachter', self.trending_link, False, 'people-watching.png'),
-            ('IMDB Top 250', 'top_250', True, 'most-popular.png'),
-            ('IMDB Top 1000', 'top_1000', True, 'most-popular.png'),
-            ('IMDB Bottom 250', 'bottom_250', True, 'most-popular.png'),
-            ('IMDB Bottom 1000', 'bottom_1000', True, 'most-popular.png')
+            ('Aktive Betrachter', self.trending_link, False, 'people-watching.png')
+#             ('IMDB Top 250', 'top_250', True, 'most-popular.png'),
+#             ('IMDB Top 1000', 'top_1000', True, 'most-popular.png'),
+#             ('IMDB Bottom 250', 'bottom_250', True, 'most-popular.png'),
+#             ('IMDB Bottom 1000', 'bottom_1000', True, 'most-popular.png')
             ]
         for i in awards: self.list.append(
             {

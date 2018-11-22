@@ -73,40 +73,43 @@ class movies:
         self.clear_link = '%s'
         self.persons_link = 'http://www.imdb.com/search/name?count=100&name='
         self.personlist_link = 'http://www.imdb.com/search/name?count=100&gender=male,female'
-        self.person_link = 'http://www.imdb.com/search/title?title_type=movie,short,tvMovie&production_status=released&role=%s&sort=year,desc&count=40&start=1'
-        self.keyword_link = 'http://www.imdb.com/search/title?keywords=%s&title_type=movie,short,tvMovie&adult=include'
-        self.award_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&groups=%s&adult=include'
+        self.person_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&production_status=released&role=%s'
+        self.keyword_link = 'http://www.imdb.com/search/title?keywords=%s&title_type=feature,tv_movie,documentary&adult=include'
+        self.award_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&groups=%s&adult=include'
+        self.studio_link ='http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&companies=%s&adult=include'
         self.theaters_link = 'http://www.imdb.com/search/title?release_date=date[365],date[0]&num_votes=1000,&groups=now-playing-us&adult=include'
-        self.year_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&num_votes=100,&production_status=released&year=%s,%s&sort=moviemeter,asc&count=40&start=%s'
+        self.year_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&production_status=released&year=%s,%s&adult=include&start=%s'
+        self.boxoffice_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&production_status=released&sort=boxoffice_gross_us,desc'
 
         if self.hidecinema == 'true':
                 delay = (date.today() - timedelta(90))
                 start_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&release_date=,%s' % (delay)
-                self.popular_link = start_link + '&num_votes=1000,&production_status=released&groups=top_1000&sort=moviemeter,asc&count=40&start=1'
-                self.views_link =  start_link + '&num_votes=1000,&production_status=released&sort=num_votes,desc&count=40&start=1'
-                self.featured_link = start_link + '&num_votes=1000,&production_status=released&sort=moviemeter,asc&count=40&start=1'
-                self.genre_link = start_link + '&num_votes=100,&genres=%s&sort=moviemeter,asc&count=40&start=1'
-                self.certification_link = start_link + '&certificates=DE:%s&moviemeter=100,&adult=include'
-                self.boxoffice_link = start_link + '&production_status=released&sort=boxoffice_gross_us,desc&count=40&start=1'
+                self.popular_link = start_link + '&num_votes=1000,&production_status=released&groups=top_1000&adult=include'
+                self.views_link =  start_link + '&num_votes=1000,&production_status=released&sort=num_votes,desc&adult=include'
+                self.featured_link = start_link + '&production_status=released&adult=include'
+                self.genre_link = start_link + '&producion_status=released&genres=%s&adult=include'
+                self.studio_link = start_link + '&companies=%s&adult=include'
+                self.certification_link = start_link + '&certificates=DE:%s&adult=include'
+                self.boxoffice_link = start_link + '&production_status=released&sort=boxoffice_gross_us&adult=include'
         else:
-            self.popular_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&num_votes=1000,&production_status=released&groups=top_1000&sort=moviemeter,asc&count=40&start=1'
-            self.views_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&num_votes=1000,&production_status=released&sort=num_votes,desc&count=40&start=1'
-            self.featured_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&num_votes=1000,&production_status=released&release_date=date[365],date[60]&sort=moviemeter,asc&count=40&start=1'
-            self.genre_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&num_votes=100,&release_date=,date[0]&genres=%s&sort=moviemeter,asc&count=40&start=1'
-            self.certification_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&certificates=DE:%s&moviemeter=100,&adult=include'
-            self.boxoffice_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&production_status=released&sort=boxoffice_gross_us,desc&count=40&start=1'
+            self.popular_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&num_votes=1000,&groups=top_1000&adult=include'
+            self.views_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&num_votes=1000,&sort=num_votes,desc&adult=include'
+            self.featured_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&num_votes=1000,&production_status=released&release_date=date[365],date[60]&adult=include'
+            self.genre_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&num_votes=100,&release_date=,date[0]&genres=%s&adult=include'
+            self.certification_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&certificates=DE:%s&adult=include'
 
         if self.filterbyyear == 'true':
             from_year = control.setting('movies.byyear.from')
             to_year = control.setting('movies.byyear.to')
-            self.views_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&year=%s,%s&num_votes=1000,&production_status=released&sort=num_votes,desc&count=40&start=1' % (str(from_year), str(to_year))
-            self.genre_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&num_votes=100,&genres=%s&year=%s,%s&sort=moviemeter,asc&count=40&start=1' % ('%s', str(from_year), str(to_year))
-            self.award_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&groups=%s&year=%s,%s&sort=year,desc&adult=include' % ('%s', str(from_year), str(to_year))
-            self.boxoffice_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&production_status=released&sort=boxoffice_gross_us,desc&year=%s,%s&count=40&start=1' % (str(from_year), str(to_year))
-            self.popular_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&num_votes=1000,&production_status=released&groups=top_1000&year=%s,%s&sort=moviemeter,asc&count=40&start=1' % (str(from_year), str(to_year))
-            self.genre_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&num_votes=100,&release_date=,date[0]&genres=%s&year=%s,%s&sort=moviemeter,asc&count=40&start=1' % ('%s', str(from_year), str(to_year))
-            self.certification_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&certificates=DE:%s&moviemeter=100,&year=%s,%s&adult=include' % ('%s', str(from_year), str(to_year))
-            self.keyword_link = 'http://www.imdb.com/search/title?keywords=%s&title_type=movie,short,tvMovie&year=%s,%s&adult=include' % ('%s', str(from_year), str(to_year))
+            self.views_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&year=%s,%s&num_votes=1000,&production_status=released&sort=num_votes,desc&adult=include' % (str(from_year), str(to_year))
+            self.genre_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&num_votes=100,&genres=%s&year=%s,%s&adult=include' % ('%s', str(from_year), str(to_year))
+            self.award_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&groups=%s&year=%s,%s&sort=year,desc&adult=include' % ('%s', str(from_year), str(to_year))
+            self.boxoffice_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&production_status=released&sort=boxoffice_gross_us,desc&year=%s,%s&adult=include' % (str(from_year), str(to_year))
+            self.popular_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&num_votes=1000,&production_status=released&groups=top_1000&year=%s,%s&adult=include' % (str(from_year), str(to_year))
+            self.genre_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary,documentary&num_votes=100,&release_date=,date[0]&genres=%s&year=%s,%s&adult=include' % ('%s', str(from_year), str(to_year))
+            self.studio_link ='http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&companies=%s&year=%s,%s&adult=include' % ('%s', str(from_year), str(to_year))
+            self.certification_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&certificates=DE:%s&year=%s,%s&adult=include' % ('%s', str(from_year), str(to_year))
+            self.keyword_link = 'http://www.imdb.com/search/title?keywords=%s&title_type=feature,tv_movie,documentary&year=%s,%s&adult=include' % ('%s', str(from_year), str(to_year))
 
 
         self.added_link  = 'http://www.imdb.com/search/title?title_type=feature,tv_movie&languages=en&num_votes=500,&production_status=released&release_date=%s,%s&sort=release_date,desc&count=20&start=1' % (self.year_date, self.today_date)
@@ -304,9 +307,8 @@ class movies:
         return self.list
         
     def award(self):
-        if self.filterbyyear == 'true':
             awards = [
-#             Folgende 3 werden nicht gefiltert!
+#             Folgende 2 Punkte werden nicht gefiltert!
             ('Meistbewertet', self.views_link, False, 'most-voted.png'),
             ('Aktive Betrachter', self.trending_link, False, 'people-watching.png'),
             ('Bestes Einspielergebnis', self.boxoffice_link, False, 'box-office.png'),
@@ -325,28 +327,7 @@ class movies:
             ('IMDB Bottom 250', 'bottom_250', True, 'most-popular.png'),
             ('IMDB Bottom 1000', 'bottom_1000', True, 'most-popular.png')
             ]
-        else:
-            awards = [
-            ('Meistbewertet', self.views_link, False, 'most-voted.png'),
-            ('Aktive Betrachter', self.trending_link, False, 'people-watching.png'),
-            ('Bestes Einspielergebnis', self.boxoffice_link, False, 'box-office.png'),
-            ('Oskar-Gewinner: Bester Film', 'best_picture_winner', True, 'oscar-winners.png'),
-            ('Oskar-Gewinner: Bester Regisseur', 'best_director_winner', True, 'oscar-winners.png'),
-            ('Oskar-Gewinner', 'oscar_winner', True, 'oscar-winners.png'), 
-            ('Oskar-Nominierung', 'oscar_nominee', True, 'oscar-winners.png'), 
-            ('Emmy-Gewinner', 'emmy_winner', True, 'oscar-winners.png'),
-            ('Emmy-Nominierung', 'emmy_nominee', True, 'oscar-winners.png'),
-            ('Golden-Globe-Gewinner', 'golden_globe_winner', True, 'oscar-winners.png'),
-            ('Golden-Globe-Nominierung', 'golden_globe_nominee', True, 'oscar-winners.png'),
-            ('Goldene-Himbeere-Gewinner', 'razzie_winner', True, 'oscar-winners.png'),
-            ('Goldene-Himbeere-Nominierung', 'razzie_nominee', True, 'oscar-winners.png'),
-            ('IMDB Top 250', 'top_250', True, 'most-popular.png'),
-            ('IMDB Top 1000', 'top_1000', True, 'most-popular.png'),
-            ('IMDB Bottom 250', 'bottom_250', True, 'most-popular.png'),
-            ('IMDB Bottom 1000', 'bottom_1000', True, 'most-popular.png')
-            ]
-
-        for i in awards: self.list.append(
+            for i in awards: self.list.append(
             {
                 'name': str(i[0]),
                 'url': self.award_link % i[1] if i[2] else self.clear_link % i[1],
@@ -354,23 +335,38 @@ class movies:
                 'action': 'movies'
             })
             
-        self.addDirectory(self.list)
-        return self.list
-
+            self.addDirectory(self.list)
+            return self.list
 
     def certifications(self):
         certificates = [
-        ('FSK - 0', '0'), 
-        ('FSK - 6', '6'), 
-        ('FSK - 12', '12'), 
-        ('FSK - 16', '16'), 
-        ('FSK - 18', '18'), 
-        ('Unbewertet', 'Unrated'), #Achtung Unrated ist nicht identisch zu Not+Rated!
+        ('FSK - 0', '0'),
+        ('FSK - 6', '6'),
+        ('FSK - 12', '12'),
+        ('FSK - 16', '16'),
+        ('FSK - 18', '18'),
+        ('Unbewertet', 'Unrated'),#Achtung Unrated ist nicht identisch zu Not+Rated!
         ('SPIO / JK', 'Not+Rated'),
         ('BPjM / Indiziert', 'BPjM+Restricted')
         ]
 
         for i in certificates: self.list.append({'name': str(i[0]), 'url': self.certification_link % str(i[1]), 'image': 'certificates.png', 'action': 'movies'})
+        self.addDirectory(self.list)
+        return self.list
+        
+    def studios(self):
+        studios = [
+        ('20th Century Fox', 'fox'),
+        ('Dreamworks', 'dreamworks'),
+        ('MGM', 'mgm'),
+        ('Paramount', 'paramount'),
+        ('Sony', 'sony'),
+        ('Universal', 'universal'),
+        ('Walt Disney', 'disney'),
+        ('Warner Bros.', 'warner'),
+        ]
+        
+        for i in studios: self.list.append({'name': str(i[0]), 'url': self.studio_link % str(i[1]), 'image': 'movies.png', 'action': 'movies'})
         self.addDirectory(self.list)
         return self.list
 

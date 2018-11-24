@@ -1,3 +1,25 @@
+[B]3.0.2.8~nightly9[/B]
+- movies.py:
+  Kategorie „Herkunftsland“ hinzugefügt (dient als sinnvollerer „Ersatz“ für „Sprachen“)
+  Wird von „Filter by Year“ beeinflusst (Anmerkung: Oft gibt es mehrere „Herkunftsländer“ und somit Überschneidungen; Dies ist 
+  auf IMDB nicht anders)
+  Symbole angepasst
+
+- tvshows.py:
+  Kategorie „Herkunftsland“ hinzugefügt (dient als sinnvollerer „Ersatz“ für „Sprachen“). (Anmerkung: Oft gibt es mehrere „    
+  Herkunftsländer und somit Überschneidungen; Dies ist auf IMDB nicht anders)
+  Emmy und „Golden Globe“ unter „Auszeichnungen & Co“ hinzugefügt. (Anmerkung: Auf Grund der Vielzahl verliehener Preise sehen   
+  die Liste auf dem ersten Blick identisch aus, sie sind es aber nicht)
+  Symbole angepasst
+
+- navigator.py:
+  Anpassungen für neue Kategorien
+  Anzeige der Versionsnummer im Bereich Infos und Updates
+
+- settings.xml/lastship.py:
+  Anpassungen
+
+
 [B]3.0.2.8~nightly8[/B]
 - movies.py / tvshows.py:
   Alle IMDB-Links aktualisiert/bereinigt, Moviemeter in Links entfernt da von IMDB nicht mehr unterstützt. Alle IMDB-Links 

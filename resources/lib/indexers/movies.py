@@ -76,6 +76,7 @@ class movies:
         self.person_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&production_status=released&role=%s'
         self.keyword_link = 'http://www.imdb.com/search/title?keywords=%s&title_type=feature,tv_movie,documentary&adult=include'
         self.award_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&groups=%s&adult=include'
+        self.countryoforigin_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&country_of_origin=%s&adult=include'
         self.studio_link ='http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&companies=%s&adult=include'
         self.theaters_link = 'http://www.imdb.com/search/title?release_date=date[365],date[0]&num_votes=1000,&groups=now-playing-us&adult=include'
         self.year_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&production_status=released&year=%s,%s&adult=include&start=%s'
@@ -87,6 +88,7 @@ class movies:
                 self.popular_link = start_link + '&num_votes=1000,&production_status=released&groups=top_1000&adult=include'
                 self.views_link =  start_link + '&num_votes=1000,&production_status=released&sort=num_votes,desc&adult=include'
                 self.featured_link = start_link + '&production_status=released&adult=include'
+                self.countryoforigin_link = '&production_status=released&country_of_origin=%s&adult=include'
                 self.genre_link = start_link + '&producion_status=released&genres=%s&adult=include'
                 self.studio_link = start_link + '&companies=%s&adult=include'
                 self.certification_link = start_link + '&certificates=DE:%s&adult=include'
@@ -103,7 +105,8 @@ class movies:
             to_year = control.setting('movies.byyear.to')
             self.views_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&year=%s,%s&num_votes=1000,&production_status=released&sort=num_votes,desc&adult=include' % (str(from_year), str(to_year))
             self.genre_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&num_votes=100,&genres=%s&year=%s,%s&adult=include' % ('%s', str(from_year), str(to_year))
-            self.award_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&groups=%s&year=%s,%s&sort=year,desc&adult=include' % ('%s', str(from_year), str(to_year))
+            self.award_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&groups=%s&year=%s,%s&adult=include' % ('%s', str(from_year), str(to_year))
+            self.countryoforigin_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&country_of_origin=%s&year=%s,%s&adult=include' % ('%s', str(from_year), str(to_year))
             self.boxoffice_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&production_status=released&sort=boxoffice_gross_us,desc&year=%s,%s&adult=include' % (str(from_year), str(to_year))
             self.popular_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&num_votes=1000,&production_status=released&groups=top_1000&year=%s,%s&adult=include' % (str(from_year), str(to_year))
             self.genre_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary,documentary&num_votes=100,&release_date=,date[0]&genres=%s&year=%s,%s&adult=include' % ('%s', str(from_year), str(to_year))
@@ -322,10 +325,10 @@ class movies:
             ('Golden-Globe-Nominierung', 'golden_globe_nominee', True, 'oscar-winners.png'),
             ('Goldene-Himbeere-Gewinner', 'razzie_winner', True, 'oscar-winners.png'),
             ('Goldene-Himbeere-Nominierung', 'razzie_nominee', True, 'oscar-winners.png'),
-            ('IMDB Top 250', 'top_250', True, 'most-popular.png'),
-            ('IMDB Top 1000', 'top_1000', True, 'most-popular.png'),
-            ('IMDB Bottom 250', 'bottom_250', True, 'most-popular.png'),
-            ('IMDB Bottom 1000', 'bottom_1000', True, 'most-popular.png')
+            ('IMDB Top 250', 'top_250', True, 'featured.png'),
+            ('IMDB Top 1000', 'top_1000', True, 'featured.png'),
+            ('IMDB Bottom 250', 'bottom_250', True, 'featured.png'),
+            ('IMDB Bottom 1000', 'bottom_1000', True, 'featured.png')
             ]
             for i in awards: self.list.append(
             {
@@ -337,6 +340,42 @@ class movies:
             
             self.addDirectory(self.list)
             return self.list
+
+    def countryoforigin(self):
+        countries = [
+            ('Australien', 'au', True, 'languages.png'),
+            ('Belgien', 'be', True, 'languages.png'),
+            ('China', 'cn', True, 'languages.png'),
+            ('Deutschland', 'de', True, 'languages.png'),
+            ('Finnland', 'fi', True, 'languages.png'),
+            ('Frankreich', 'fr', True, 'languages.png'),
+            ('Großbritannien', 'gb', True, 'languages.png'),
+            ('Indien', 'in', True, 'languages.png'),
+            ('Israel', 'il', True, 'languages.png'),
+            ('Italien', 'it', True, 'languages.png'),
+            ('Japan', 'jp', True, 'languages.png'),
+            ('Neuseeland', 'nz', True, 'languages.png'),
+            ('Nigeria', 'ng', True, 'languages.png'),
+            ('Norwegen', 'no', True, 'languages.png'),
+            ('Russland', 'ru', True, 'languages.png'),
+            ('Schweden', 'se', True, 'languages.png'),
+            ('Schweiz', 'ch', True, 'languages.png'),
+            ('Spanien', 'es', True, 'languages.png'),
+            ('Südkorea', 'kr', True, 'languages.png'),
+            ('Tschechische Republik', 'cz', True, 'languages.png'),
+            ('USA', 'us', True, 'languages.png'),
+            ('Österreich', 'at', True, 'languages.png')
+            ]
+        for i in countries: self.list.append(
+            {
+                'name': str(i[0]),
+                'url': self.countryoforigin_link % i[1] if i[2] else self.clear_link % i[1],
+                'image': i[3],
+                'action': 'movies'
+            })
+            
+        self.addDirectory(self.list)
+        return self.list
 
     def certifications(self):
         certificates = [

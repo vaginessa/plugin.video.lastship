@@ -72,6 +72,7 @@ class tvshows:
         self.tvdb_image = 'http://thetvdb.com/banners/'
 
         self.clear_link= '%s'
+        self.countryoforigin_link = 'http://www.imdb.com/search/title?title_type=tv_series,tv_miniseries&country_of_origin=%s&adult=include'
         self.award_link = 'http://www.imdb.com/search/title?title_type=tv_series,tv_miniseries&groups=%s&adult=include'
         self.persons_link = 'http://www.imdb.com/search/name?count=100&name='
         self.personlist_link = 'http://www.imdb.com/search/name?count=100&gender=male,female'
@@ -273,13 +274,13 @@ class tvshows:
         
     def award(self):
         awards = [
-            ('Populär', self.popular_link, False, 'most-popular.png'),
+            ('Populär', self.popular_link, False, 'featured.png'),
             ('Bestbewertet', self.rating_link, False, 'highly-rated.png'),
-            ('Aktive Betrachter', self.trending_link, False, 'people-watching.png')
-#             ('IMDB Top 250', 'top_250', True, 'most-popular.png'),
-#             ('IMDB Top 1000', 'top_1000', True, 'most-popular.png'),
-#             ('IMDB Bottom 250', 'bottom_250', True, 'most-popular.png'),
-#             ('IMDB Bottom 1000', 'bottom_1000', True, 'most-popular.png')
+            ('Aktive Betrachter', self.trending_link, False, 'people-watching.png'),
+            ('Emmy-Gewinner', 'emmy_winner', True, 'oscar-winners.png'),
+            ('Emmy-Nominierung', 'emmy_nominee', True, 'oscar-winners.png'),
+            ('Golden-Globe-Gewinner', 'golden_globe_winner', True, 'oscar-winners.png'),
+            ('Golden-Globe-Nominierung', 'golden_globe_nominee', True, 'oscar-winners.png')
             ]
         for i in awards: self.list.append(
             {
@@ -291,7 +292,43 @@ class tvshows:
             
         self.addDirectory(self.list)
         return self.list
-
+        
+    def countryoforigin(self):
+        countries = [
+            ('Australien', 'au', True, 'languages.png'),
+            ('Belgien', 'be', True, 'languages.png'),
+            ('China', 'cn', True, 'languages.png'),
+            ('Deutschland', 'de', True, 'languages.png'),
+            ('Finnland', 'fi', True, 'languages.png'),
+            ('Frankreich', 'fr', True, 'languages.png'),
+            ('Großbritannien', 'gb', True, 'languages.png'),
+            ('Indien', 'in', True, 'languages.png'),
+            ('Israel', 'il', True, 'languages.png'),
+            ('Italien', 'it', True, 'languages.png'),
+            ('Japan', 'jp', True, 'languages.png'),
+            ('Neuseeland', 'nz', True, 'languages.png'),
+            ('Nigeria', 'ng', True, 'languages.png'),
+            ('Norwegen', 'no', True, 'languages.png'),
+            ('Russland', 'ru', True, 'languages.png'),
+            ('Schweden', 'se', True, 'languages.png'),
+            ('Schweiz', 'ch', True, 'languages.png'),
+            ('Spanien', 'es', True, 'languages.png'),
+            ('Südkorea', 'kr', True, 'languages.png'),
+            ('Tschechische Republik', 'cz', True, 'languages.png'),
+            ('USA', 'us', True, 'languages.png'),
+            ('Österreich', 'at', True, 'languages.png')
+            ]
+        for i in countries: self.list.append(
+            {
+                'name': str(i[0]),
+                'url': self.countryoforigin_link % i[1] if i[2] else self.clear_link % i[1],
+                'image': i[3],
+                'action': 'tvshows'
+            })
+            
+        self.addDirectory(self.list)
+        return self.list
+        
     def networks(self):
         networks = [
         ('A&E', '/networks/29/ae', 'https://i.imgur.com/xLDfHjH.png'),

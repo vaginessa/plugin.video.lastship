@@ -86,6 +86,7 @@ class navigator:
     #######################################################################
     # News and Update Code
     def news(self):
+        AddonVersion = control.addon('plugin.video.lastship').getAddonInfo('version')
         message = self.open_news_url(self.NEWSFILE)
         r = open(self.LOCALNEWS)
         compfile = r.read()
@@ -97,7 +98,7 @@ class navigator:
                 text_file.write(message)
                 text_file.close()
                 compfile = message
-        self.showText('[B][COLOR springgreen]Latest Updates and Information[/COLOR][/B]', compfile)
+        self.showText('[B][COLOR springgreen]Infos und Updates[/COLOR][/B]' + ' ' + '---' + ' ' + '(Version: ' + AddonVersion + ')', compfile)
 
     def open_news_url(self, url):
         req = urllib2.Request(url)
@@ -132,9 +133,10 @@ class navigator:
         self.addDirectoryItem("FSK", 'movieCertificates', 'certificates.png', 'DefaultMovies.png')
         self.addDirectoryItem("Neue Filme", 'movieWidget', 'latest-movies.png', 'DefaultRecentlyAddedMovies.png')
         self.addDirectoryItem("In den Kinos", 'movies&url=theaters', 'in-theaters.png', 'DefaultRecentlyAddedMovies.png')
-        self.addDirectoryItem("Auszeichnungen & Co", 'movieAwards', 'oscar-winners.png', 'DefaultMovies.png')
+        self.addDirectoryItem("Auszeichnungen & Co", 'movieAwards', 'featured.png', 'DefaultMovies.png')
         self.addDirectoryItem("Studios", 'movieStudios', 'movies.png', 'DefaultMovies.png')
         self.addDirectoryItem("Jahr", 'movieYears', 'years.png', 'DefaultMovies.png')
+        self.addDirectoryItem("Herkunftsland", 'movieCountryOfOrigin', 'languages.png', 'DefaultMovies.png')
         self.addDirectoryItem("Personen", 'moviePersons', 'people.png', 'DefaultMovies.png')
 
         if lite == False:
@@ -190,7 +192,8 @@ class navigator:
         self.addDirectoryItem("Neue TV-Serien", 'tvshows&url=premiere', 'new-tvshows.png', 'DefaultTVShows.png')
         self.addDirectoryItem("Neue Episoden", 'calendar&url=added', 'latest-episodes.png', 'DefaultRecentlyAddedEpisodes.png', queue=True)
         self.addDirectoryItem("TV-Sender", 'tvNetworks', 'networks.png', 'DefaultTVShows.png')
-        self.addDirectoryItem("Auszeichnungen & Co", 'tvAwards', 'oscar-winners.png', 'DefaultTVShows.png')
+        self.addDirectoryItem("Auszeichnungen & Co", 'tvAwards', 'featured.png', 'DefaultTVShows.png')
+        self.addDirectoryItem("Herkunftsland", 'tvCountryOfOrigin', 'languages.png', 'DefaultTVShows.png')
         self.addDirectoryItem("Heute auf Sendung", 'tvshows&url=airing', 'airing-today.png', 'DefaultTVShows.png')
         self.addDirectoryItem("TV-Kalender", 'calendars', 'calendar.png', 'DefaultRecentlyAddedEpisodes.png')
 

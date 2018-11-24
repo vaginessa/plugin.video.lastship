@@ -82,7 +82,6 @@
         <setting id="provider.iload" type="bool" label="ILOAD.TO" default="true" />
         <setting id="provider.kinoger" type="bool" label="KINOGER.COM" default="true" />
         <setting id="provider.kino-cx" type="bool" label="KINO.CX" default="true" />
-        <setting id="provider.kinoking" type="bool" label="KINOKING.TO" default="true" />
         <setting id="provider.kinox" type="bool" label="KINOX.TO" default="false" />
         <setting id="provider.moovie" type="bool" label="MOOVIE" default="true" />
         <setting id="provider.maxdome" type="bool" label="MAXDOME.DE" default="false" />

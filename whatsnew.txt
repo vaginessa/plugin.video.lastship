@@ -6,24 +6,20 @@ Unser Chatroom: https://gitter.im/Lastship_Chat/Lobby
 
 Die Gründer und auch die Entwickler von Lastship sind nur in unserem Lastship Forum anzutreffen
 
+[B][COLOR blue]Aktuelles[/COLOR][/B]
+Derzeit keine Neuigkeiten
+
 [B]INFO Allgemein:[/B]
 
 Wer die nightly nutzt, hier eine wichtige Info:
 Es kommt immer wieder vor, dass nach dem nightly Update Menüpunkte fehlen oder nicht mehr angewählt werden können
-Hier hilft ein Kodineustart, eventuell Lastship Cache und Kodi Cache auch noch löschen
+Hier hilft ein Kodi Neustart, eventuell Lastship Cache und Kodi Cache auch noch löschen
 
 Für die Seite Serienstream ist ein Benutzerkonto auf der jeweiligen Betreiberseite erforderlich (kann auch Wegwerf E-Mailadresse sein)
 
 Die Seite Emby ist Standardmäßig deaktiviert, da diese Seite eine Premium Seite ist, dass heißt es muss für die Nutzung bezahlt werden. Infos zu Bezahlung und Anmeldung auf https://vodhd.to/
 
-Bei einigen IndexSeiten ist es möglich, Captcha in Lastship zu lösen. Infos dazu stehen in der FAQ / Konten / ReCaptcha2
-
-[B][COLOR blue]Aktuelles[/COLOR][/B]
-18.10.2018
-Maxdome wurde hinzugefügt als Indexseite
-Für Maxdome, Amazon und Netflix ist ein Benutzerkonto der jeweiligen Anbieterseite erforderlich
-Die Änderung für Nanime war notwendig, da die Seite wegen unnötiger Abfragen überlastet war
-
+Bei einigen IndexSeiten ist es möglich, Captcha in Lastship zu lösen. Infos dazu stehen in der FAQ
 
 [COLOR orange]-------------------------------------------------------------------------------------------------------[/COLOR]
 

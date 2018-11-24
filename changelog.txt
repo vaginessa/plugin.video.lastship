@@ -1,3 +1,6 @@
+[B]3.0.2.8~nightly10[/B]
+- kinoking entfernt (Seite gibt es nicht mehr)
+
 [B]3.0.2.8~nightly9[/B]
 - movies.py:
   Kategorie „Herkunftsland“ hinzugefügt (dient als sinnvollerer „Ersatz“ für „Sprachen“)

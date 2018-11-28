@@ -1,3 +1,6 @@
+[B]3.0.2.8~nightly11[/B]
+- [kinox] Domain Update (kinox.nu)
+
 [B]3.0.2.8~nightly10[/B]
 - kinoking entfernt (Seite gibt es nicht mehr)
 

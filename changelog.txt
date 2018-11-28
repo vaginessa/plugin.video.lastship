@@ -1,3 +1,6 @@
+[B]3.0.2.8~nightly12[/B]
+- Watchbox neu hinzugefügt (nur Filme)
+
 [B]3.0.2.8~nightly11[/B]
 - [kinox] Domain Update (kinox.nu)
 

@@ -102,6 +102,7 @@
         <setting id="provider.stream-to" type="bool" label="STREAM.TO (ReCaptcha)" default="false" />
         <setting id="provider.szene-streamz" type="bool" label="SZENE-STREAMZ.COM" default="true" />
         <setting id="provider.view4u" type="bool" label="VIEW4U.CO" default="true" />
+        <setting id="provider.watchbox" type="bool" label="WATCHBOX.DE" default="true" />
         <setting type="sep" />
     </category>
     <category label="Konten">

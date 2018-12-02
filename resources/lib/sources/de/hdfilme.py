@@ -41,7 +41,7 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['de']
-        self.domains = ['hdfilme.tv']
+        self.domains = ['hdfilme.net']
         self.base_link = 'http://hdfilme.tv'
         self.search_link = '/movie-search?key=%s'
         self.get_link = '/movie/getlink/%s/%s'

@@ -86,7 +86,7 @@
         <setting id="provider.ddl" type="bool" label="DDL.ME" default="true" />
         <setting id="provider.filmpalast" type="bool" label="FILMPALAST.TO" default="true" />
         <setting id="provider.foxx" type="bool" label="FOXX.TO" default="true" />
-        <setting id="provider.hdfilme" type="bool" label="HDFILME.TV" default="true" />
+        <setting id="provider.hdfilme" type="bool" label="HDFILME.NET" default="true" />
         <setting id="provider.hdkino" type="bool" label="HDKINO.TO" default="true" />
         <setting id="provider.hdstreams" type="bool" label="HD-STREAMS.ORG" default="false" />
         <setting id="provider.iload" type="bool" label="ILOAD.TO" default="true" />

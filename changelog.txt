@@ -1,3 +1,7 @@
+[B]3.0.2.8~nightly13[/B]
+- [settings.xml] Menü neu sortiert
+- [HDFilme] Update auf Domain Endung .net
+
 [B]3.0.2.8~nightly12[/B]
 - Watchbox neu hinzugefügt (nur Filme)
 

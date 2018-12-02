@@ -42,7 +42,7 @@ class source:
         self.priority = 1
         self.language = ['de']
         self.domains = ['hdfilme.net']
-        self.base_link = 'http://hdfilme.tv'
+        self.base_link = 'http://hdfilme.net'
         self.search_link = '/movie-search?key=%s'
         self.get_link = '/movie/getlink/%s/%s'
 

@@ -42,7 +42,7 @@ class source:
         self.language = ['de']
         self.domains = ['foxx.to']
         self.base_link = 'http://foxx.to'
-        self.search_link = '/?s=%s'
+        self.search_link = '/eu/?s=%s'
         self.scraper = cfscrape.create_scraper()
 
     def movie(self, imdb, title, localtitle, aliases, year):

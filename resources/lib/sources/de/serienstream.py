@@ -139,7 +139,8 @@ class source:
             links = dom_parser.parse_dom(links, "a")
             links = [(i.attrs["href"], i.content) for i in links]
 
-            links = [i[0] for i in links if cleantitle.get(i[1]) in t]
+            
+            links = [i[0] for i in links if any(title in cleantitle.get(i[1]) for title in t)]
 
             if len(links) > 0:
                 return source_utils.strip_domain(links[0])

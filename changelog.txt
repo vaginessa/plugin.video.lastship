@@ -1,3 +1,11 @@
+[B]3.0.2.8~nightly15[/B]
+- Update cinemaxx.to (erste Staffel fix)
+- Update foxx
+- Update serienstream.to (Suche angepasst)
+
+- Persönliche Genres hinzugefügt:
+  - [movies.py], [tvshows.py], [settings.xml]
+
 [B]3.0.2.8~nightly14[/B]
 - [settings.xml] Untertitel Standard Deutsch
 

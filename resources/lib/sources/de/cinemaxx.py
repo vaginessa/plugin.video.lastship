@@ -81,10 +81,21 @@ class source:
             content = cache.get(client.request, 4, url)
             link = dom_parser.parse_dom(content, 'div', attrs={'id': 'full-video'})
             if season:
-                link = re.findall("vk.show\(\d+,(.*?)\)", link[0].content)[0]
-                link = re.findall("\[(.*?)\]", link)[int(season)-1]
-                link = re.findall("'(.*?)'", link)
-                sources = hdgo.getStreams(link[int(episode)-1], sources)
+                try:
+                    link = re.findall("vk.show\(\d+,(.*?)\)", link[0].content)[0]
+                    link = re.findall("\[(.*?)\]", link)[int(season)-1]
+                    link = re.findall("'(.*?)'", link)
+                    sources = hdgo.getStreams(link[int(episode)-1], sources)
+                except:
+                    #we have a tvshow, but no seasons to choose
+                    #cinemaxx can host specific seasons, its stated in the url (i.e. http://cinemaxx.cc/serien/743-homeland-7-staffel.html)
+                    if season+"-staffel" in url:
+                        link = dom_parser.parse_dom(link, 'iframe')
+                        episode_links = hdgo.getPlaylistLinks(link[0].attrs['src'])
+                        hdgo.getStreams(episode_links[int(episode)-1],sources,skiplast=False)
+                    else:
+                        pass
+
             else:
                 link = dom_parser.parse_dom(link, 'iframe')
                 sources = hdgo.getStreams(link[0].attrs['src'], sources)
@@ -95,6 +106,7 @@ class source:
         except:
             source_faultlog.logFault(__name__, source_faultlog.tagScrape, url)
             return sources
+
 
 
     def resolve(self, url):

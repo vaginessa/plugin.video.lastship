@@ -40,10 +40,10 @@ def getPlaylistLinks(url):
     return
 
 
-def getStreams(url, sources):
+def getStreams(url, sources, skiplast=True):
     hdgostreams = getHDGOStreams(url)
     if hdgostreams is not None:
-        if len(hdgostreams) > 1:
+        if len(hdgostreams) > 1 and skiplast:
             hdgostreams.pop(0)
         quality = ["SD", "HD", "1080p", "2K", "4K"]
         for i, stream in enumerate(hdgostreams):

@@ -231,7 +231,57 @@ class tvshows:
             return
 
     def genres(self):
-        genres = [
+        self.PersonalTVShowGenre = control.setting('PersonalTVShowGenre')
+        if self.PersonalTVShowGenre == "true":
+            self.PersonalTVShowGenre1 = control.setting('PersonalTVShowGenre1')
+            self.PersonalTVShowGenre2 = control.setting('PersonalTVShowGenre2')
+            self.PersonalTVShowGenre3 = control.setting('PersonalTVShowGenre3')
+            self.PersonalTVShowGenre4 = control.setting('PersonalTVShowGenre4')
+            self.PersonalTVShowGenre5 = control.setting('PersonalTVShowGenre5')
+            
+            genres = [
+            ('Adventure', 'adventure', True),
+            ('Action', 'action', True),
+            ('Animation', 'animation', True),
+            ('Anime', 'anime', False),
+            ('Biography', 'biography', True),
+            ('Documentary', 'documentary', True),
+            ('Drama', 'drama', True),
+            ('Family', 'family', True),
+            ('Fantasy', 'fantasy', True),
+            ('Game-Show', 'game_show', True),
+            ('History', 'history', True),
+            ('Horror', 'horror', True),
+            ('Comedy', 'comedy', True),
+            ('War', 'war', True),
+            ('Crime', 'crime', True),
+            ('Romance', 'romance', True),
+            ('Musical', 'musical', True),
+            ('Music', 'music', True),
+            ('Mystery', 'mystery', True),
+            ('News', 'news', True),
+            ('Reality-TV', 'reality_tv', True),
+            ('Science Fiction', 'sci_fi', True),
+            ('Sport', 'sport', True),
+            ('Superhelden', 'superhero', False),
+            ('Talk-Show', 'talk_show', True),
+            ('Thriller', 'thriller', True),
+            ('Western', 'western', True),
+            (self.PersonalTVShowGenre1, self.PersonalTVShowGenre1, False),
+            (self.PersonalTVShowGenre2, self.PersonalTVShowGenre2, False),
+            (self.PersonalTVShowGenre3, self.PersonalTVShowGenre3, False),
+            (self.PersonalTVShowGenre4, self.PersonalTVShowGenre4, False),
+            (self.PersonalTVShowGenre5, self.PersonalTVShowGenre5, False)
+            ]
+            for i in genres: self.list.append(
+            {
+                'name': cleangenre.lang(i[0], self.lang),
+                'url': self.genre_link % i[1] if i[2] else self.keyword_link % i[1],
+                'image': 'genres.png',
+                'action': 'tvshows'
+            })
+        else:
+            genres = [
             ('Adventure', 'adventure', True),
             ('Action', 'action', True),
             ('Animation', 'animation', True),
@@ -260,14 +310,14 @@ class tvshows:
             ('Thriller', 'thriller', True),
             ('Western', 'western', True)
             ]
-
-        for i in genres: self.list.append(
+            for i in genres: self.list.append(
             {
                 'name': cleangenre.lang(i[0], self.lang),
                 'url': self.genre_link % i[1] if i[2] else self.keyword_link % i[1],
                 'image': 'genres.png',
                 'action': 'tvshows'
             })
+
 
         self.addDirectory(self.list)
         return self.list

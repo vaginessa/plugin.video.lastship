@@ -364,12 +364,12 @@ class movies:
             ('Oskar-Gewinner: Bester Regisseur', 'best_director_winner', True, 'oscar-winners.png'),
             ('Oskar-Gewinner', 'oscar_winner', True, 'oscar-winners.png'),
             ('Oskar-Nominierung', 'oscar_nominee', True, 'oscar-winners.png'),
-            ('Emmy-Gewinner', 'emmy_winner', True, 'oscar-winners.png'),
-            ('Emmy-Nominierung', 'emmy_nominee', True, 'oscar-winners.png'),
-            ('Golden-Globe-Gewinner', 'golden_globe_winner', True, 'oscar-winners.png'),
-            ('Golden-Globe-Nominierung', 'golden_globe_nominee', True, 'oscar-winners.png'),
-            ('Goldene-Himbeere-Gewinner', 'razzie_winner', True, 'oscar-winners.png'),
-            ('Goldene-Himbeere-Nominierung', 'razzie_nominee', True, 'oscar-winners.png'),
+            ('Emmy-Gewinner', 'emmy_winner', True, 'emmy.png'),
+            ('Emmy-Nominierung', 'emmy_nominee', True, 'emmy.png'),
+            ('Golden-Globe-Gewinner', 'golden_globe_winner', True, 'globe.png'),
+            ('Golden-Globe-Nominierung', 'golden_globe_nominee', True, 'globe.png'),
+            ('Goldene-Himbeere-Gewinner', 'razzie_winner', True, 'beere.png'),
+            ('Goldene-Himbeere-Nominierung', 'razzie_nominee', True, 'beere.png'),
             ('IMDB Top 250', 'top_250', True, 'featured.png'),
             ('IMDB Top 1000', 'top_1000', True, 'featured.png'),
             ('IMDB Bottom 250', 'bottom_250', True, 'featured.png'),
@@ -440,17 +440,17 @@ class movies:
         
     def studios(self):
         studios = [
-        ('20th Century Fox', 'fox'),
-        ('Dreamworks', 'dreamworks'),
-        ('MGM', 'mgm'),
-        ('Paramount', 'paramount'),
-        ('Sony', 'sony'),
-        ('Universal', 'universal'),
-        ('Walt Disney', 'disney'),
-        ('Warner Bros.', 'warner'),
+        ('20th Century Fox', 'fox', 'century_fox.png'),
+        ('Dreamworks', 'dreamworks', 'dreamworks.png'),
+        ('MGM', 'mgm', 'mgm.png'),
+        ('Paramount', 'paramount', 'paramount.png'),
+        ('Sony', 'sony', 'sony.png'),
+        ('Universal', 'universal', 'universal.png'),
+        ('Walt Disney', 'disney', 'disney.png'),
+        ('Warner Bros.', 'warner', 'warner_bros.png'),
         ]
         
-        for i in studios: self.list.append({'name': str(i[0]), 'url': self.studio_link % str(i[1]), 'image': 'movies.png', 'action': 'movies'})
+        for i in studios: self.list.append({'name': str(i[0]), 'url': self.studio_link % str(i[1]), 'image': str(i[2]), 'action': 'movies'})
         self.addDirectory(self.list)
         return self.list
 

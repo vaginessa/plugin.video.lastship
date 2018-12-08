@@ -133,7 +133,7 @@ class navigator:
         self.addDirectoryItem("FSK", 'movieCertificates', 'certificates.png', 'DefaultMovies.png')
         self.addDirectoryItem("Neue Filme", 'movieWidget', 'latest-movies.png', 'DefaultRecentlyAddedMovies.png')
         self.addDirectoryItem("In den Kinos", 'movies&url=theaters', 'in-theaters.png', 'DefaultRecentlyAddedMovies.png')
-        self.addDirectoryItem("Auszeichnungen & Co", 'movieAwards', 'featured.png', 'DefaultMovies.png')
+        self.addDirectoryItem("Auszeichnungen & Co", 'movieAwards', 'auszeichnungen.png', 'DefaultMovies.png')
         self.addDirectoryItem("Studios", 'movieStudios', 'movies.png', 'DefaultMovies.png')
         self.addDirectoryItem("Jahr", 'movieYears', 'years.png', 'DefaultMovies.png')
         self.addDirectoryItem("Herkunftsland", 'movieCountryOfOrigin', 'languages.png', 'DefaultMovies.png')

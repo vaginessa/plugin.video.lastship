@@ -1,3 +1,6 @@
+[B]3.0.2.8~nightly17[/B]
+- [watchbox] Serien werden jetzt auch gefunden
+
 [B]3.0.2.8~nightly16[/B]
 - Update Icons Verweis für Studio und Auszeichnungen
   [settings.xml], [movies.py], [navigator.py]

@@ -1,3 +1,7 @@
+[B]3.0.2.8~nightly16[/B]
+- Update Icons Verweis für Studio und Auszeichnungen
+  [settings.xml], [movies.py], [navigator.py]
+
 [B]3.0.2.8~nightly15[/B]
 - Update cinemaxx.to (erste Staffel fix)
 - Update foxx

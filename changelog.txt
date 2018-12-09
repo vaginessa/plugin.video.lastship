@@ -1,3 +1,7 @@
+[B]3.0.2.8~nightly19[/B]
+- Fix TV Sender (nächste Seite)
+- DuckDuckgo als Fallback Suche entfernt
+
 [B]3.0.2.8~nightly18[/B]
 - Personal Generes Code Optimierung
 - Fix HDFilme

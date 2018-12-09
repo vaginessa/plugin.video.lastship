@@ -270,55 +270,9 @@ class movies:
         except:
             return
 
-
     def genres(self):
-        self.PersonalMovieGenre = control.setting('PersonalMovieGenre')
-        if self.PersonalMovieGenre == "true":
-            self.PersonalMovieGenre1 = control.setting('PersonalMovieGenre1')
-            self.PersonalMovieGenre2 = control.setting('PersonalMovieGenre2')
-            self.PersonalMovieGenre3 = control.setting('PersonalMovieGenre3')
-            self.PersonalMovieGenre4 = control.setting('PersonalMovieGenre4')
-            self.PersonalMovieGenre5 = control.setting('PersonalMovieGenre5')
-            genres = [
-            ('Adventure', 'adventure', True),
-            ('Action', 'action', True),
-            ('Animation', 'animation', True),
-            ('Anime', 'anime', False),
-            ('Biography', 'biography', True),
-            ('Documentary', 'documentary', True),
-            ('Drama', 'drama', True),
-            ('Family', 'family', True),
-            ('Fantasy', 'fantasy', True),
-            ('History', 'history', True),
-            ('Horror', 'horror', True),
-            ('Comedy', 'comedy', True),
-            ('War', 'war', True),
-            ('Crime', 'crime', True),
-            ('Romance', 'romance', True),
-            ('Musical', 'musical', True),
-            ('Music', 'music', True),
-            ('Mystery', 'mystery', True),
-            ('Science Fiction', 'sci_fi', True),
-            ('Sport', 'sport', True),
-            ('Superhelden', 'superhero', False),
-            ('Thriller', 'thriller', True),
-            ('Western', 'western', True),
-            (self.PersonalMovieGenre1, self.PersonalMovieGenre1, False),
-            (self.PersonalMovieGenre2, self.PersonalMovieGenre2, False),
-            (self.PersonalMovieGenre3, self.PersonalMovieGenre3, False),
-            (self.PersonalMovieGenre4, self.PersonalMovieGenre4, False),
-            (self.PersonalMovieGenre5, self.PersonalMovieGenre5, False)
-            ]
-            for i in genres: self.list.append(
-            {
-                'name': cleangenre.lang(i[0], self.lang),
-                'url': self.genre_link % i[1] if i[2] else self.keyword_link % i[1],
-                'image': 'genres.png',
-                'action': 'movies'
-            })
-            
-        else:
-            genres = [
+
+        genre = [
             ('Adventure', 'adventure', True),
             ('Action', 'action', True),
             ('Animation', 'animation', True),
@@ -342,14 +296,24 @@ class movies:
             ('Superhelden', 'superhero', False),
             ('Thriller', 'thriller', True),
             ('Western', 'western', True)
-            ]
-            for i in genres: self.list.append(
-            {
-                'name': cleangenre.lang(i[0], self.lang),
-                'url': self.genre_link % i[1] if i[2] else self.keyword_link % i[1],
-                'image': 'genres.png',
-                'action': 'movies'
-            })
+        ]
+
+        self.PersonalMovieGenre = control.setting('PersonalMovieGenre')
+        if self.PersonalMovieGenre == "true":
+            genre.append((control.setting('PersonalMovieGenre1'),control.setting('PersonalMovieGenre1'),False))
+            genre.append((control.setting('PersonalMovieGenre2'),control.setting('PersonalMovieGenre2'),False))
+            genre.append((control.setting('PersonalMovieGenre3'),control.setting('PersonalMovieGenre3'),False))
+            genre.append((control.setting('PersonalMovieGenre4'),control.setting('PersonalMovieGenre4'),False))
+            genre.append((control.setting('PersonalMovieGenre5'),control.setting('PersonalMovieGenre5'),False))
+
+
+        for i in genre: self.list.append(
+        {
+            'name': cleangenre.lang(i[0], self.lang),
+            'url': self.genre_link % i[1] if i[2] else self.keyword_link % i[1],
+            'image': 'genres.png',
+            'action': 'movies'
+        })
 
         self.addDirectory(self.list)
         return self.list

@@ -35,6 +35,7 @@ from resources.lib.modules import client
 from resources.lib.modules import directstream
 from resources.lib.modules import source_utils
 from resources.lib.modules import dom_parser
+from resources.lib.modules import cfscrape
 from resources.lib.modules import source_faultlog
 
 class source:
@@ -42,9 +43,10 @@ class source:
         self.priority = 1
         self.language = ['de']
         self.domains = ['hdfilme.net']
-        self.base_link = 'http://hdfilme.net'
+        self.base_link = 'https://hdfilme.net'
         self.search_link = '/movie-search?key=%s'
-        self.get_link = '/movie/getlink/%s/%s'
+        self.get_link = 'movie/load-stream/%s/%s?server=1'
+        self.scraper = cfscrape.scraper
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
@@ -74,22 +76,14 @@ class source:
             data = urlparse.parse_qs(url)
             data = dict([(i, data[i][0]) if data[i] else (i, '') for i in data])
             tvshowtitle = data['tvshowtitle']
-            localtvshowtitle = data['localtvshowtitle']
             aliases = source_utils.aliases_to_array(eval(data['aliases']))
+            aliases.append(data['localtvshowtitle'])
 
-            url = self.__search([localtvshowtitle] + aliases, data['year'], season)
-            if not url and tvshowtitle != localtvshowtitle: url = self.__search([tvshowtitle] + aliases, data['year'], season)
+            url = self.__search([tvshowtitle] + aliases, data['year'], season)
             if not url: return
 
-            r = cache.get(client.request, 4, urlparse.urljoin(self.base_link, url), timeout='40')
-            r = dom_parser.parse_dom(r, 'ul', attrs={'class': ['list-inline', 'list-film']})
-            r = dom_parser.parse_dom(r, 'li')
-            r = dom_parser.parse_dom(r, 'a', req='href')
-            r = [(i.attrs['href'], i.content) for i in r if i]
-            r = [(i[0], i[1] if re.compile("^(\d+)$").match(i[1]) else '0') for i in r]
-            r = [i[0] for i in r if int(i[1]) == int(episode)][0]
-
-            return source_utils.strip_domain(r)
+            urlWithEpisode = url+"?episode="+str(episode)
+            return source_utils.strip_domain(urlWithEpisode)
         except:
             return
 
@@ -100,33 +94,36 @@ class source:
             if not url:
                 return sources
 
-            url = url.replace('-info', '-stream')
+            moviecontent = cache.get(self.scraper.get, 4, urlparse.urljoin(self.base_link, url))
 
+            url = url.replace('-info', '-stream')
             r = re.findall('(\d+)-stream(?:\?episode=(\d+))?', url)
             r = [(i[0], i[1] if i[1] else '1') for i in r][0]
-            r = cache.get(client.request, 4, urlparse.urljoin(self.base_link, self.get_link % r), output='extended', timeout='40')
 
-            headers = r[3]
-            headers.update({'Cookie': r[2].get('Set-Cookie'), 'Referer': self.base_link,'Origin': self.base_link})
-            r = r[0]
+            if "episode" in url:
+                #we want the current link
+                streamlink = dom_parser.parse_dom(moviecontent.content, 'a', attrs={'class': 'current'})
+                r = (r[0],streamlink[0].attrs['_episode'])
+            else:
+                streamlink = dom_parser.parse_dom(moviecontent.content, 'a', attrs={'class': 'new'})
+                r = (r[0],streamlink[int(r[1])-1].attrs['_episode'])
 
-            r += '=' * (-len(r) % 4)
-            r = base64.b64decode(r)
-            r = json.loads(r)
-            r = r['playinfo'][0]['file']
+            moviesource = cache.get(self.scraper.get, 4, urlparse.urljoin(self.base_link, self.get_link % r))
 
-            links = cache.get(requests.get, 4, r, headers=headers).content
-            links = re.findall('RESOLUTION=\d+x(\d+)\n(.*)', links)
+            foundsource = re.findall('var sources = (\[.*?\]);', moviesource.content)
+            sourcejson = json.loads(foundsource[0])
 
-            links = [(r.replace('playlist.m3u8', x[1]), source_utils.label_to_quality(x[0])) for x in links]
-
-            for url, quality in links:
+            for sourcelink in sourcejson:
                 try:
-                    tag = directstream.googletag(url)
+                    tag = directstream.googletag(sourcelink['file'])
                     if tag:
-                        sources.append({'source': 'gvideo', 'quality': tag[0].get('quality', 'SD'), 'language': 'de', 'url': url, 'direct': True, 'debridonly': False})
+                        sources.append({'source': 'gvideo', 'quality': tag[0].get('quality', 'SD'), 'language': 'de', 'url': sourcelink['file'], 'direct': True, 'debridonly': False})
                     else:
-                        sources.append({'source': 'CDN', 'quality': quality, 'language': 'de', 'url': url + '|%s' % urllib.urlencode(headers), 'direct': True, 'debridonly': False})
+                        if sourcelink['label'] == 'VIP':
+                            quality = "HD"
+                        else:
+                            quality = sourcelink['label']
+                        sources.append({'source': 'GoogleFile', 'quality': quality, 'language': 'de', 'url': sourcelink['file'], 'direct': True, 'debridonly': False})
                 except:
                     pass
             return sources
@@ -142,33 +139,26 @@ class source:
             query = self.search_link % (urllib.quote_plus(cleantitle.query(titles[0])))
             query = urlparse.urljoin(self.base_link, query)
 
-            t = [cleantitle.get(i) for i in set(titles) if i]
-            y = ['%s' % str(year), '%s' % str(int(year) + 1), '%s' % str(int(year) - 1), '0']
+            titles = [cleantitle.get(i) for i in set(titles) if i]
 
-            r = cache.get(client.request, 4, query, timeout='40')
+            searchResult = cache.get(self.scraper.get, 4, query).content
 
-            r = dom_parser.parse_dom(r, 'ul', attrs={'class': ['products', 'row']})
-            r = dom_parser.parse_dom(r, 'div', attrs={'class': ['box-product', 'clearfix']})
-            if int(season) > 0:
-                r = [i for i in r if dom_parser.parse_dom(i, 'div', attrs={'class': 'episode'})]
-            else:
-                r = [i for i in r if not dom_parser.parse_dom(i, 'div', attrs={'class': 'episode'})]
-            r = dom_parser.parse_dom(r, 'h3', attrs={'class': 'title-product'})
-            r = dom_parser.parse_dom(r, 'a', req='href')
-            r = [(i.attrs['href'], i.content.lower()) for i in r if i]
-            r = [(i[0], i[1], re.findall('(.+?) \(*(\d{4})', i[1])) for i in r]
-            r = [(i[0], i[2][0][0] if len(i[2]) > 0 else i[1], i[2][0][1] if len(i[2]) > 0 else '0') for i in r]
-            r = [(i[0], i[1], i[2], re.findall('(.+?)\s+(?:staf+el|s)\s+(\d+)', i[1])) for i in r]
-            r = [(i[0], i[3][0][0] if len(i[3]) > 0 else i[1], i[2], i[3][0][1] if len(i[3]) > 0 else '0') for i in r]
-            r = [(i[0], i[1].replace(' hd', ''), i[2], '1' if int(season) > 0 and i[3] == '0' else i[3]) for i in r]
-            r = sorted(r, key=lambda i: int(i[2]), reverse=True)  # with year > no year
-            r = [i[0]for i in r if any(a in cleantitle.get(i[1]) for a in t) and i[2] in y and int(i[3]) == int(season)]
-            if len(r) > 0:
-                r = r[0]
-            else:
-                return
-            url = source_utils.strip_domain(r)
-            return url
+            resultTitles = dom_parser.parse_dom(searchResult, 'div', attrs={'class': 'popover-title'})
+            resultTitles = dom_parser.parse_dom(resultTitles, 'span', attrs={'class': 'name'})
+            resultLinks = dom_parser.parse_dom(searchResult, 'div', attrs={'class': 'box-product'})
+
+            usedIndex = 0
+            #Find result with matching name and season
+            for resulttitle in resultTitles:
+                title = cleantitle.get(resulttitle.content)
+                if any(i in title for i in titles):
+                    if season == "0" or ("staffel" in title and ("0"+str(season) in title or str(season) in title)):
+                        #We have the suspected link!
+                        link = dom_parser.parse_dom(resultLinks[usedIndex], 'a')
+                        return source_utils.strip_domain(link[0].attrs["href"])
+                usedIndex += 1
+
+            return
         except:
             try:
                 source_faultlog.logFault(__name__, source_faultlog.tagSearch, titles[0])

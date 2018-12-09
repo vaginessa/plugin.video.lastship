@@ -263,11 +263,11 @@ class tvshows:
 
         self.PersonalTVShowGenre = control.setting('PersonalTVShowGenre')
         if self.PersonalTVShowGenre == "true":
-            genres.appen((control.setting('PersonalTVShowGenre1'),control.setting('PersonalTVShowGenre1'),False))
-            genres.appen((control.setting('PersonalTVShowGenre2'),control.setting('PersonalTVShowGenre2'),False))
-            genres.appen((control.setting('PersonalTVShowGenre3'),control.setting('PersonalTVShowGenre3'),False))
-            genres.appen((control.setting('PersonalTVShowGenre4'),control.setting('PersonalTVShowGenre4'),False))
-            genres.appen((control.setting('PersonalTVShowGenre5'),control.setting('PersonalTVShowGenre5'),False))
+            genres.append((control.setting('PersonalTVShowGenre1'),control.setting('PersonalTVShowGenre1'),False))
+            genres.append((control.setting('PersonalTVShowGenre2'),control.setting('PersonalTVShowGenre2'),False))
+            genres.append((control.setting('PersonalTVShowGenre3'),control.setting('PersonalTVShowGenre3'),False))
+            genres.append((control.setting('PersonalTVShowGenre4'),control.setting('PersonalTVShowGenre4'),False))
+            genres.append((control.setting('PersonalTVShowGenre5'),control.setting('PersonalTVShowGenre5'),False))
 
         for i in genres: self.list.append(
         {

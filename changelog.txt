@@ -1,3 +1,6 @@
+[B]3.0.2.8~nightly18[/B]
+- Personal Generes Code Optimierung
+
 [B]3.0.2.8~nightly17[/B]
 - [watchbox] Serien werden jetzt auch gefunden
 

@@ -772,7 +772,20 @@ class tvshows:
             items = [i[0] for i in items if len(i) > 0]
             items = [re.findall('/(\d+)/', i) for i in items]
             items = [i[0] for i in items if len(i) > 0]
-            items = items[:50]
+
+            if "&next=" in url:
+                r = re.findall('&next=(\d+)', url)
+                offset = int(r[0])
+                url = url.replace("&next="+str(offset),"")
+            else:
+                offset = 0
+
+            if len(items) > offset+40:
+                next = url + "&next=" + str(offset+40)
+            else:
+                next = ""
+
+            items = items[offset:offset+40]
         except:
             return
 
@@ -851,7 +864,7 @@ class tvshows:
                 if content == None or content == '': content = '0'
                 content = content.encode('utf-8')
 
-                self.list.append({'title': title, 'originaltitle': title, 'year': year, 'premiered': premiered, 'studio': studio, 'genre': genre, 'duration': duration, 'rating': rating, 'plot': plot, 'imdb': imdb, 'tvdb': tvdb, 'poster': poster, 'content': content})
+                self.list.append({'title': title, 'originaltitle': title, 'year': year, 'premiered': premiered, 'studio': studio, 'genre': genre, 'duration': duration, 'rating': rating, 'plot': plot, 'imdb': imdb, 'tvdb': tvdb, 'poster': poster, 'content': content, 'next' : next})
             except:
                 pass
 

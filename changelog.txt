@@ -1,48 +1,36 @@
-[B]3.0.2.8~nightly19[/B]
+[B]3.0.2.8[/B]
+  09.12.2018
 - Fix TV Sender (nächste Seite)
 - DuckDuckgo als Fallback Suche entfernt
-
-[B]3.0.2.8~nightly18[/B]
 - Personal Generes Code Optimierung
 - Fix HDFilme
-
-[B]3.0.2.8~nightly17[/B]
 - [watchbox] Serien werden jetzt auch gefunden
-
-[B]3.0.2.8~nightly16[/B]
 - Update Icons Verweis für Studio und Auszeichnungen
   [settings.xml], [movies.py], [navigator.py]
-
-[B]3.0.2.8~nightly15[/B]
-- Update cinemaxx.to (erste Staffel fix)
+- Update cinemaxx.to (Staffel fix)
 - Update foxx
 - Update serienstream.to (Suche angepasst)
-
 - Persönliche Genres hinzugefügt:
   - [movies.py], [tvshows.py], [settings.xml]
-
-[B]3.0.2.8~nightly14[/B]
-- [settings.xml] Untertitel Standard Deutsch
-
-[B]3.0.2.8~nightly13[/B]
-- [settings.xml] Menü neu sortiert
+- [settings.xml] Untertitel Standard Deutsch, Menue neu sortiert
 - [HDFilme] Update auf Domain Endung .net
-
-[B]3.0.2.8~nightly12[/B]
 - Watchbox neu hinzugefügt (nur Filme)
-
-[B]3.0.2.8~nightly11[/B]
 - [kinox] Domain Update (kinox.nu)
-
-[B]3.0.2.8~nightly10[/B]
 - kinoking entfernt (Seite gibt es nicht mehr)
 
-[B]3.0.2.8~nightly9[/B]
 - movies.py:
   Kategorie „Herkunftsland“ hinzugefügt (dient als sinnvollerer „Ersatz“ für „Sprachen“)
   Wird von „Filter by Year“ beeinflusst (Anmerkung: Oft gibt es mehrere „Herkunftsländer“ und somit Überschneidungen; Dies ist 
   auf IMDB nicht anders)
   Symbole angepasst
+  
+  Alle IMDB-Links aktualisiert/bereinigt, Moviemeter in Links entfernt da von IMDB nicht mehr unterstützt. Alle IMDB-Links 
+  auf „include=adult“ gesetzt und unnötige Teile entfernt. Nahezu alle Ergebnisse der Kategorien werden jetzt, wie standardmäßig  
+  in IMDB, nach Popularität sortiert
+  
+  Kategorie „Studios“ hinzugefügt (Filterbar mit „Filter by Years“), Code bereinigt/reduziert
+  tvshows.py: Top/Bottom wird zwar von IMDB angeboten aber liefert auch auf der Website keine Ergebnisse
+  Über Alternativen, die über IMDB realisierbar sind, wird nachgedacht. Funktion somit deaktiviert
 
 - tvshows.py:
   Kategorie „Herkunftsland“ hinzugefügt (dient als sinnvollerer „Ersatz“ für „Sprachen“). (Anmerkung: Oft gibt es mehrere „    
@@ -50,39 +38,20 @@
   Emmy und „Golden Globe“ unter „Auszeichnungen & Co“ hinzugefügt. (Anmerkung: Auf Grund der Vielzahl verliehener Preise sehen   
   die Liste auf dem ersten Blick identisch aus, sie sind es aber nicht)
   Symbole angepasst
+  
+  Populär“ wieder hergestellt als Ersatz für IMDB-Top-Listen
 
 - navigator.py:
   Anpassungen für neue Kategorien
   Anzeige der Versionsnummer im Bereich Infos und Updates
+  Punkt „Studios“ hinzugefügt
 
-- settings.xml/lastship.py:
-  Anpassungen
-
-
-[B]3.0.2.8~nightly8[/B]
-- movies.py / tvshows.py:
-  Alle IMDB-Links aktualisiert/bereinigt, Moviemeter in Links entfernt da von IMDB nicht mehr unterstützt. Alle IMDB-Links 
-  auf „include=adult“ gesetzt und unnötige Teile entfernt. Nahezu alle Ergebnisse der Kategorien werden jetzt, wie standardmäßig  
-  in IMDB, nach Popularität sortiert
-- tvshows.py:
-  Populär“ wieder hergestellt als Ersatz für IMDB-Top-Listen
-- movies.py:
-  Kategorie „Studios“ hinzugefügt (Filterbar mit „Filter by Years“), Code bereinigt/reduziert
-  tvshows.py: Top/Bottom wird zwar von IMDB angeboten aber liefert auch auf der Website keine Ergebnisse
-  Über Alternativen, die über IMDB realisierbar sind, wird nachgedacht. Funktion somit deaktiviert
-- navigator.py:
-  Punkt „Studios“ hinzugefügt. Icon für „Infos und Updates“ geändert um auch besser mit dem Exuary-Skin von Lastship zum 
-  harmonieren (vorheriges Logo war störend)
 - lastship.py:
   Anpassung für Kategorie „Studios“
 
 - settings.xml:
   Anpassung des Hinweises für „Filter by Year“
-
-- Weiteres:
-  Kleinigkeiten wie unnötige Zeichen, kleine Fixes...
   
-[B]3.0.2.8~nightly7[/B]
 - Populär aus „Auszeichnungen & Co“ gelöscht da identisch zu „IMDB Top 1000“
   Links bleiben bestehen wegen Movie Widget
 - Aktive Betrachter wird bei Filter by Year nicht gefiltert (wie vorher) und Boxoffice sowie Meistbewertet wird nun auch   
@@ -90,7 +59,6 @@
 - Icons hinzugefügt
 - Schreibweise zu einer optischen schöneren geändert
 
-[B]3.0.2.8~nightly6[/B]
 - Übersicht in movies.py, tvshows.py, navigator.py umsortiert
 - Mehr Auszeichnungen und Bewertungen unter einen Punkt vereint um die Übersichtlichkeit zu steigern
 - Bewertungen/Auszeichnungen ergänzt
@@ -99,7 +67,6 @@
 - https einheitlich (in bearbeiteten Dateien) zu http geändert
 - Cleanup von auskommentierten Funktionen und weitere Kleinigkeiten
 
-[B]3.0.2.8~nightly5[/B]
 - [updatemanager.py] Lizenz Update
 - Update downloader.py und settings.xml:
 	- Benennung der Downloads (Dateien und Ordner) in Deutsch ist nun vollständig für Serien und Filme möglich 
@@ -107,20 +74,15 @@
 	  Code übersichtlicher gestaltet (downloader.py, settings.xml)
 - Fake-Genre Superhelden hinzugefügt (movies.py, tvshows.py, cleangenre.py)
 
-[B]3.0.2.8~nightly4[/B]
-- Update navigator.py
-- settings.xml
 - downloader.py (Filme und Ordner werden beim Download in Deutsch angelegt)
 	Egal ob die Option aktiviert oder deaktiviert ist werden Serien vorerst in Englisch benannt
 	Downloadanzeige gibt vorerst bei Filmen und Serien den englischen Namen aus
 - Update serienstream (Anzeigetext geändert, bei nicht eingetragenem Konto bzw. Recpatcha)
 
-[B]3.0.2.8~nightly3[/B]
 - Option für deutsche Datei- und Ordnerstruktur:
 - settings.xml
 - libtools.py
 
-[B]3.0.2.8~nightly2[/B]
 -Umstellung auf Deutsch:
 	- metacache.py
 	- sources.py
@@ -132,7 +94,6 @@
 	- movies.py
 	- tvshows.py
 
-[B]3.0.2.8~nightly1[/B]
 - [duckduckgo.py] orion header und referer Update
 
 [B]3.0.2.7[/B]

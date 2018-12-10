@@ -1,3 +1,6 @@
+[B]3.0.2.9~nightly1[/B]
+- [movies.py] optische Optimierung
+
 [B]3.0.2.8[/B]
   09.12.2018
 - Fix TV Sender (nächste Seite)

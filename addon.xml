@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.lastship" version="3.0.2.8" name="Lastship" provider-name="Lastship">
+<addon id="plugin.video.lastship" version="3.0.2.9~nightly1" name="Lastship" provider-name="Lastship">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0" />
 		<import addon="repository.lastship" version="1.0.2" />
@@ -29,26 +29,7 @@
     			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
 		<news>
-- Fix TV Sender (next page)
-- DuckDuckgo als Fallback Suche entfernt
-- Personal Generes Code Optimierung
-- Fix HDFilme
-- [watchbox] Serien werden jetzt auch gefunden
-- Update Icons Verweis für Studio und Auszeichnungen
-  [settings.xml], [movies.py], [navigator.py]
-- Update cinemaxx.to (Staffel fix)
-- Update foxx
-- Update serienstream.to (Suche angepasst)
-- Add Personal Genres:
-  - [movies.py], [tvshows.py], [settings.xml]
-- [settings.xml] Untertitel Standard Deutsch, Menue neu sortiert
-- [HDFilme] Update auf Domain Endung .net
-- Add Watchbox (nur Filme)
-- [kinox] Domain Update (kinox.nu)
-- kinoking entfernt (Seite gibt es nicht mehr)
-- Update: movies.py, tvshows.py, navigator.py, lastship.py, settings.xml, downloader.py, libtools.py
-- Add Studios und Auszeichnungen unter Filme
-- weitere Neuerungen siehe Infos und Update oder Changelog
+- [movies.py] optische Optimierung
 		</news>
 	</extension>
 </addon>

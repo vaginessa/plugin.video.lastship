@@ -37,13 +37,13 @@
         <setting id="PersonalMovieGenreTitle1" type="text" label="Titel Genre 1" visible="eq(-1,true)" enable="true" default=""/>
         <setting id="PersonalMovieGenre1" type="text" label="Schlagwörter Genre 1" visible="eq(-2,true)" enable="true" default=""/>
         <setting id="PersonalMovieGenreTitle2" type="text" label="Titel Genre 2" visible="eq(-3,true)" enable="true" default=""/>
-        <setting id="PersonalMovieGenre2" type="text" label="Persönliches Genre 2" visible="eq(-4,true)" enable="true" default=""/>
+        <setting id="PersonalMovieGenre2" type="text" label="Schlagwörter Genre 2" visible="eq(-4,true)" enable="true" default=""/>
         <setting id="PersonalMovieGenreTitle3" type="text" label="Titel Genre 3" visible="eq(-5,true)" enable="true" default=""/>
-        <setting id="PersonalMovieGenre3" type="text" label="Persönliches Genre 3" visible="eq(-6,true)" enable="true" default=""/>
+        <setting id="PersonalMovieGenre3" type="text" label="Schlagwörter Genre 3" visible="eq(-6,true)" enable="true" default=""/>
         <setting id="PersonalMovieGenreTitle4" type="text" label="Titel Genre 4" visible="eq(-7,true)" enable="true" default=""/>
-        <setting id="PersonalMovieGenre4" type="text" label="Persönliches Genre 4" visible="eq(-8,true)" enable="true" default=""/>
+        <setting id="PersonalMovieGenre4" type="text" label="Schlagwörter Genre 4" visible="eq(-8,true)" enable="true" default=""/>
         <setting id="PersonalMovieGenreTitle5" type="text" label="Titel Genre 5" visible="eq(-9,true)" enable="true" default=""/>
-        <setting id="PersonalMovieGenre5" type="text" label="Persönliches Genre 5" visible="eq(-10,true)" enable="true" default=""/>
+        <setting id="PersonalMovieGenre5" type="text" label="Schlagwörter Genre 5" visible="eq(-10,true)" enable="true" default=""/>
         <setting type="text" label="[COLOR blue]Realisiert über Schlagwort-Suche. (Englisch für bessere Ergebnisse)[/COLOR]" visible="eq(-11,true)" />
         <setting type="text" label="[COLOR blue]Schlagwörter aus mehreren Wörtern mit - anstatt Leerzeichen schreiben.[/COLOR]" visible="eq(-12,true)" />
         <setting type="text" label="[COLOR blue]Verschiedene Schlagwörter mit , (ohne Leerzeichen) verbinden.[/COLOR]" visible="eq(-13,true)" />
@@ -51,13 +51,13 @@
         <setting id="PersonalTVShowGenreTitle1" type="text" label="Titel Genre 1" visible="eq(-1,true)" enable="true" default=""/>
         <setting id="PersonalTVShowGenre1" type="text" label="Schlagwörter Genre 1" visible="eq(-2,true)" enable="true" default=""/>
         <setting id="PersonalTVShowGenreTitle2" type="text" label="Titel Genre 2" visible="eq(-3,true)" enable="true" default=""/>
-        <setting id="PersonalTVShowGenre2" type="text" label="Persönliches Genre 2" visible="eq(-4,true)" enable="true" default=""/>
+        <setting id="PersonalTVShowGenre2" type="text" label="Schlagwörter Genre 2" visible="eq(-4,true)" enable="true" default=""/>
         <setting id="PersonalTVShowGenreTitle3" type="text" label="Titel Genre 3" visible="eq(-5,true)" enable="true" default=""/>
-        <setting id="PersonalTVShowGenre3" type="text" label="Persönliches Genre 3" visible="eq(-6,true)" enable="true" default=""/>
+        <setting id="PersonalTVShowGenre3" type="text" label="Schlagwörter Genre 3" visible="eq(-6,true)" enable="true" default=""/>
         <setting id="PersonalTVShowGenreTitle4" type="text" label="Titel Genre 4" visible="eq(-7,true)" enable="true" default=""/>
-        <setting id="PersonalTVShowGenre4" type="text" label="Persönliches Genre 4" visible="eq(-8,true)" enable="true" default=""/>
+        <setting id="PersonalTVShowGenre4" type="text" label="Schlagwörter Genre 4" visible="eq(-8,true)" enable="true" default=""/>
         <setting id="PersonalTVShowGenreTitle5" type="text" label="Titel Genre 5" visible="eq(-9,true)" enable="true" default=""/>
-        <setting id="PersonalTVShowGenre5" type="text" label="Persönliches Genre 5" visible="eq(-10,true)" enable="true" default=""/>
+        <setting id="PersonalTVShowGenre5" type="text" label="Schlagwörter Genre 5" visible="eq(-10,true)" enable="true" default=""/>
         <setting type="text" label="[COLOR blue]Realisiert über Schlagwort-Suche. (Englisch für bessere Ergebnisse)[/COLOR]" visible="eq(-11,true)" />
         <setting type="text" label="[COLOR blue]Schlagwörter aus mehreren Wörtern mit - anstatt Leerzeichen schreiben.[/COLOR]" visible="eq(-12,true)" />
         <setting type="text" label="[COLOR blue]Verschiedene Schlagwörter mit , (ohne Leerzeichen) verbinden.[/COLOR]" visible="eq(-13,true)" />

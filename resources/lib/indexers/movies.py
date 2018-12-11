@@ -300,11 +300,11 @@ class movies:
 
         self.PersonalMovieGenre = control.setting('PersonalMovieGenre')
         if self.PersonalMovieGenre == "true":
-            genre.append((control.setting('PersonalMovieGenre1'),control.setting('PersonalMovieGenre1'),False))
-            genre.append((control.setting('PersonalMovieGenre2'),control.setting('PersonalMovieGenre2'),False))
-            genre.append((control.setting('PersonalMovieGenre3'),control.setting('PersonalMovieGenre3'),False))
-            genre.append((control.setting('PersonalMovieGenre4'),control.setting('PersonalMovieGenre4'),False))
-            genre.append((control.setting('PersonalMovieGenre5'),control.setting('PersonalMovieGenre5'),False))
+            genre.append((control.setting('PersonalMovieGenreTitle1'),control.setting('PersonalMovieGenre1'),False))
+            genre.append((control.setting('PersonalMovieGenreTitle2'),control.setting('PersonalMovieGenre2'),False))
+            genre.append((control.setting('PersonalMovieGenreTitle3'),control.setting('PersonalMovieGenre3'),False))
+            genre.append((control.setting('PersonalMovieGenreTitle4'),control.setting('PersonalMovieGenre4'),False))
+            genre.append((control.setting('PersonalMovieGenreTitle5'),control.setting('PersonalMovieGenre5'),False))
 
 
         for i in genre: self.list.append(

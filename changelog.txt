@@ -1,3 +1,7 @@
+[B]3.0.2.9~nightly2[/B]
+- [tvshows.py] Anpassung der Auszeichnungen Icons
+- [navigator.py] In tvshows Icon Anpassung
+
 [B]3.0.2.9~nightly1[/B]
 - [movies.py] optische Optimierung
 

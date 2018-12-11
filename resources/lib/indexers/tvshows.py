@@ -286,10 +286,10 @@ class tvshows:
             ('Populär', self.popular_link, False, 'featured.png'),
             ('Bestbewertet', self.rating_link, False, 'highly-rated.png'),
             ('Aktive Betrachter', self.trending_link, False, 'people-watching.png'),
-            ('Emmy-Gewinner', 'emmy_winner', True, 'oscar-winners.png'),
-            ('Emmy-Nominierung', 'emmy_nominee', True, 'oscar-winners.png'),
-            ('Golden-Globe-Gewinner', 'golden_globe_winner', True, 'oscar-winners.png'),
-            ('Golden-Globe-Nominierung', 'golden_globe_nominee', True, 'oscar-winners.png')
+            ('Emmy-Gewinner', 'emmy_winner', True, 'emmy.png'),
+            ('Emmy-Nominierung', 'emmy_nominee', True, 'emmy.png'),
+            ('Golden-Globe: Gewinner', 'golden_globe_winner', True, 'globe.png'),
+            ('Golden-Globe: Nominierung', 'golden_globe_nominee', True, 'globe.png')
             ]
         for i in awards: self.list.append(
             {

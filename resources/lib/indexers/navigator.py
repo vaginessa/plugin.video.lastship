@@ -192,7 +192,7 @@ class navigator:
         self.addDirectoryItem("Neue TV-Serien", 'tvshows&url=premiere', 'new-tvshows.png', 'DefaultTVShows.png')
         self.addDirectoryItem("Neue Episoden", 'calendar&url=added', 'latest-episodes.png', 'DefaultRecentlyAddedEpisodes.png', queue=True)
         self.addDirectoryItem("TV-Sender", 'tvNetworks', 'networks.png', 'DefaultTVShows.png')
-        self.addDirectoryItem("Auszeichnungen & Co", 'tvAwards', 'featured.png', 'DefaultTVShows.png')
+        self.addDirectoryItem("Auszeichnungen & Co", 'tvAwards', 'auszeichnungen.png', 'DefaultTVShows.png')
         self.addDirectoryItem("Herkunftsland", 'tvCountryOfOrigin', 'languages.png', 'DefaultTVShows.png')
         self.addDirectoryItem("Heute auf Sendung", 'tvshows&url=airing', 'airing-today.png', 'DefaultTVShows.png')
         self.addDirectoryItem("TV-Kalender", 'calendars', 'calendar.png', 'DefaultRecentlyAddedEpisodes.png')

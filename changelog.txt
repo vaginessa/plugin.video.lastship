@@ -1,3 +1,6 @@
+[B]3.0.2.9~nightly3[/B]
+- Add tmovie
+
 [B]3.0.2.9~nightly2[/B]
 - [tvshows.py] Anpassung der Auszeichnungen Icons
 - [navigator.py] In tvshows Icon Anpassung

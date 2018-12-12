@@ -1,3 +1,8 @@
+[B]3.0.2.9~nightly4[/B]
+- Update movies.py, tvshows.py, settings.xml:
+   Genre kann nun unabhängig von den Schlagwörtern benannt werden
+   Kurze Erklärung zum notwendigen Eintrag eingefügt
+
 [B]3.0.2.9~nightly3[/B]
 - Add tmovie
 

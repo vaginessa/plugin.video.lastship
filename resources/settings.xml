@@ -122,7 +122,6 @@
         <setting id="provider.kinoger" type="bool" label="KINOGER.COM" default="true" />
         <setting id="provider.kino-cx" type="bool" label="KINO.CX" default="true" />
         <setting id="provider.kinox" type="bool" label="KINOX.TO" default="false" />
-        <setting id="provider.moovie" type="bool" label="MOOVIE" default="true" />
         <setting id="provider.movie2k-st" type="bool" label="MOVIE2K.ST" default="true" />
         <setting id="provider.movie2k-ag" type="bool" label="MOVIE2K.AG" default="true" />
         <setting id="provider.movie4k" type="bool" label="MOVIE4K.TO" default="true" />
@@ -137,8 +136,8 @@
         <setting id="provider.streamworld" type="bool" label="STREAMWORLD.TO (ReCaptcha)" default="false" />
         <setting id="provider.stream-to" type="bool" label="STREAM.TO (ReCaptcha)" default="false" />
         <setting id="provider.szene-streamz" type="bool" label="SZENE-STREAMZ.COM" default="true" />
-		<setting id="provider.tmovie" type="bool" label="TMOVIE.TO" default="true" />
-		<setting id="provider.view4u" type="bool" label="VIEW4U.CO" default="true" />
+	<setting id="provider.tmovie" type="bool" label="TMOVIE.TO" default="true" />
+	<setting id="provider.view4u" type="bool" label="VIEW4U.CO" default="true" />
         <setting type="sep" />
     </category>
     <category label="Konten">

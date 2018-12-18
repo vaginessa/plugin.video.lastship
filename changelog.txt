@@ -1,3 +1,6 @@
+[B]3.0.2.9~nightly6[/B]
+- Update sources.py (Openload wird bei Hoster mit Captcha jetzt auch deaktiviert)
+
 [B]3.0.2.9~nightly5[/B]
 -  moovie entfernt (Authentifizierung zum Abspielen der Links notwendig)
 

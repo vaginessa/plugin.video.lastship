@@ -1,6 +1,6 @@
 """
 Read and write ZIP files.
-KODI 18+ ANDROID FIX BY HSK-DE
+HSK ANDROID FIX 30.12.2018 - 08:10
 """
 import struct, os, time, sys, shutil
 import binascii, cStringIO, stat
@@ -147,10 +147,10 @@ def is_zipfile(filename):
     """
     result = False
     try:
-        if hasattr(filename,"read"):
+        if hasattr(filename, "read"):
             result = _check_zipfile(fp=filename)
         else:
-            with io.open(filename,'rb',buffering=1024*8) as fp:
+            with io.open(filename, "rb") as fp:
                 result = _check_zipfile(fp)
     except IOError:
         pass
@@ -754,11 +754,11 @@ class ZipFile(object):
             self.filename = file
             modeDict = {'r' : 'rb', 'w': 'wb', 'a' : 'r+b'}
             try:
-                self.fp = io.open(file, modeDict[mode],buffering=1024*8)
+                self.fp = io.open(file, modeDict[mode])
             except IOError:
                 if mode == 'a':
                     mode = key = 'w'
-                    self.fp = io.open(file, modeDict[mode],buffering=1024*8)
+                    self.fp = io.open(file, modeDict[mode])
                 else:
                     raise
         else:
@@ -899,7 +899,7 @@ class ZipFile(object):
             try:
                 # Read by chunks, to avoid an OverflowError or a
                 # MemoryError with very large embedded files.
-                with self.io.open(zinfo.filename,'r',buffering=1024*8) as f:
+                with self.io.open(zinfo.filename, "r") as f:
                     while f.read(chunk_size):     # Check CRC-32
                         pass
             except BadZipfile:
@@ -936,7 +936,7 @@ class ZipFile(object):
 
     def read(self, name, pwd=None):
         """Return file bytes (as a string) for name."""
-        return self.io.open(name,'r',pwd,buffering=1024*8).read()
+        return self.io.open(name, "r", pwd).read()
 
     def open(self, name, mode="r", pwd=None):
         """Return file-like object for 'name'."""
@@ -952,7 +952,7 @@ class ZipFile(object):
             zef_file = self.fp
             should_close = False
         else:
-            zef_file = io.open(self.filename,'rb',buffering=1024*8)
+            zef_file = io.open(self.filename, 'rb')
             should_close = True
 
         try:
@@ -1084,7 +1084,7 @@ class ZipFile(object):
             return targetpath
 
         with self.open(member, pwd=pwd) as source, \
-            file(targetpath,"wb") as target:
+             file(targetpath, "wb") as target:
             shutil.copyfileobj(source, target)
 
         return targetpath
@@ -1162,7 +1162,7 @@ class ZipFile(object):
             self.fp.write(zinfo.FileHeader(False))
             return
 
-        with io.open(filename,'rb',buffering=1024*8) as fp:
+        with io.open(filename, "rb") as fp:
             # Must overwrite CRC and sizes with correct data later
             zinfo.CRC = CRC = 0
             zinfo.compress_size = compress_size = 0
@@ -1542,4 +1542,3 @@ def main(args = None):
 
 if __name__ == "__main__":
     main()
-### loki1979 - 21.10.2018 - 11:40 ###

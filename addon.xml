@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.lastship" version="3.0.2.9" name="Lastship" provider-name="Lastship">
+<addon id="plugin.video.lastship" version="3.0.3.0~nightly1" name="Lastship" provider-name="Lastship">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0" />
 		<import addon="repository.lastship" version="1.0.2" />
@@ -29,14 +29,7 @@
     			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
 		</assets>
 		<news>
-- Update fixzipfile
-- Update sources.py
-- [movies.py] optische Optimierung
-- [tvshows.py] Anpassung der Auszeichnungen Icons
-- [navigator.py] In tvshows Icon Anpassung
-- add tmovie
-- Update movies.py, tvshows.py, settings.xml
-- moovie entfernt [Authentifizierung zum Abspielen der Links notwendig]
+- Update fixzipfile (damit das nightly Update auf Android funktioniert)
 		</news>
 	</extension>
 </addon>

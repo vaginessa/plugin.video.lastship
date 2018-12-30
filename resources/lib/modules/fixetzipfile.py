@@ -1,6 +1,6 @@
 """
 Read and write ZIP files.
-HSK ANDROID FIX 30.12.2018 - 08:10
+HSK ANDROID FIX 30.12.2018 - 19:30
 """
 import struct, os, time, sys, shutil
 import binascii, cStringIO, stat
@@ -936,7 +936,7 @@ class ZipFile(object):
 
     def read(self, name, pwd=None):
         """Return file bytes (as a string) for name."""
-        return self.io.open(name, "r", pwd).read()
+        return self.open(name, "r", pwd).read()
 
     def open(self, name, mode="r", pwd=None):
         """Return file-like object for 'name'."""

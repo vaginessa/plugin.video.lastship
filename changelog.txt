@@ -1,4 +1,4 @@
-[B]3.0.3.0~nightly1[/B]
+[B]3.0.3.0[/B]
 - Update fixzipfile (damit das nightly Update auf Android funktioniert)
 
 [B]3.0.2.9[/B]

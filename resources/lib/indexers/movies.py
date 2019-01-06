@@ -78,6 +78,7 @@ class movies:
         self.award_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&groups=%s&adult=include'
         self.countryoforigin_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&country_of_origin=%s&adult=include'
         self.studio_link ='http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&companies=%s&adult=include'
+        self.personallist_link = 'http://www.imdb.com/list/%s'
         self.theaters_link = 'http://www.imdb.com/search/title?release_date=date[365],date[0]&num_votes=1000,&groups=now-playing-us&adult=include'
         self.year_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&production_status=released&year=%s,%s&adult=include&start=%s'
         self.boxoffice_link = 'http://www.imdb.com/search/title?title_type=feature,tv_movie,documentary&production_status=released&sort=boxoffice_gross_us,desc'
@@ -312,6 +313,39 @@ class movies:
             'name': cleangenre.lang(i[0], self.lang),
             'url': self.genre_link % i[1] if i[2] else self.keyword_link % i[1],
             'image': 'genres.png',
+            'action': 'movies'
+        })
+
+        self.addDirectory(self.list)
+        return self.list
+
+    def personallist(self):
+        self.PersonalMovieList = control.setting('PersonalMovieList')
+        if self.PersonalMovieList == "true":
+            self.PersonalMovieList1 = control.setting('PersonalMovieList1')
+            self.PersonalMovieList2 = control.setting('PersonalMovieList2')
+            self.PersonalMovieList3 = control.setting('PersonalMovieList3')
+            self.PersonalMovieList4 = control.setting('PersonalMovieList4')
+            self.PersonalMovieList5 = control.setting('PersonalMovieList5')
+            self.PersonalMovieListTitle1 = control.setting('PersonalMovieListTitle1')
+            self.PersonalMovieListTitle2 = control.setting('PersonalMovieListTitle2')
+            self.PersonalMovieListTitle3 = control.setting('PersonalMovieListTitle3')
+            self.PersonalMovieListTitle4 = control.setting('PersonalMovieListTitle4')
+            self.PersonalMovieListTitle5 = control.setting('PersonalMovieListTitle5')
+
+            personallists = [
+            (self.PersonalMovieListTitle1, self.PersonalMovieList1),
+            (self.PersonalMovieListTitle2, self.PersonalMovieList2),
+            (self.PersonalMovieListTitle3, self.PersonalMovieList3),
+            (self.PersonalMovieListTitle4, self.PersonalMovieList4),
+            (self.PersonalMovieListTitle5, self.PersonalMovieList5)
+            ]
+
+        for i in personallists: self.list.append(
+        {
+            'name': str(i[0]),
+            'url': self.personallist_link % i[1],
+            'image': 'imdb.png',
             'action': 'movies'
         })
 

@@ -220,6 +220,10 @@ elif action == 'movieAwards':
 elif action == 'movieCountryOfOrigin':
     from resources.lib.indexers import movies
     movies.movies().countryoforigin()
+    
+elif action == 'moviePersonalList':
+    from resources.lib.indexers import movies
+    movies.movies().personallist()
 
 elif action == 'movieStudios':
     from resources.lib.indexers import movies

@@ -1,3 +1,6 @@
+[B]3.0.4~nightly3[/B]
+- Hompagelink aktualisiert
+
 [B]3.0.4~nightly2[/B]
 - Fix Trailer abspiel Probleme
 

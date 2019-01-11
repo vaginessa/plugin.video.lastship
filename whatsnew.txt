@@ -7,6 +7,9 @@ Unser Chatroom: https://gitter.im/Lastship_Chat/Lobby
 Die Gründer und auch die Entwickler von Lastship sind nur in unserem Lastship Forum anzutreffen
 
 [B][COLOR blue]Aktuelles[/COLOR][/B]
+11.01.2019
+Wir haben eine neue Homepage Adresse
+
 In der nightly ist es möglich, eigene Genres anzulegen und auch fertige IMDB Listen hinzuzufügen
 
 [B]INFO Allgemein:[/B]

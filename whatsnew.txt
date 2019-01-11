@@ -1,13 +1,13 @@
 [B][COLOR red]Lastship Infos und Updates[/COLOR][/B]
 [B]Hier findet Ihr aktuelle Informationen zu Lastship, den Changelog usw.[/B]
 
-FAQ und Hilfe bekommt Ihr in unserem Forum: http://lastship.square7.ch/home
+FAQ und Hilfe bekommt Ihr in unserem Forum: https://lastship.ch
 Unser Chatroom: https://gitter.im/Lastship_Chat/Lobby
 
 Die Gründer und auch die Entwickler von Lastship sind nur in unserem Lastship Forum anzutreffen
 
 [B][COLOR blue]Aktuelles[/COLOR][/B]
-Derzeit keine Neuigkeiten
+In der nightly ist es möglich, eigene Genres anzulegen und auch fertige IMDB Listen hinzuzufügen
 
 [B]INFO Allgemein:[/B]
 Für die Seite Serienstream ist ein Benutzerkonto auf der jeweiligen Betreiberseite erforderlich (kann auch Wegwerf E-Mailadresse sein)
